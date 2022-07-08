@@ -12,11 +12,11 @@ export const Login = () => {
     actions.login(email, password);
   };
   return (
-    <div className="container justify-content-center w-25 rounded-3 bg-light ">
-      <div className="form">
+    <div className="container w-25 h-75 d-flex align-items-center rounded-3">
+      <div className="form h-50 bg-light py-5 px-5">
         <form onSubmit={handlesubmit}>
-          <div className="input-container ">
-            <label> E - mail </label>{" "}
+          <div className="input-container">
+            <p>E - mail</p>{" "}
             <input
               type="text"
               name="uname"
@@ -25,7 +25,7 @@ export const Login = () => {
             />
           </div>{" "}
           <div className="input-container">
-            <label> Password </label>{" "}
+            <p>Password</p>{" "}
             <input
               type="password"
               name="pass"
@@ -33,7 +33,7 @@ export const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>{" "}
-          <div className="button-container">
+          <div className="button-container mt-3">
             <input type="submit" />
           </div>{" "}
         </form>
