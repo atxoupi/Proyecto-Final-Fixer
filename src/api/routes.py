@@ -2,13 +2,14 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Login
+from api.models import db, Login, Worker_signup, User_signup
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 from flask_bcrypt import Bcrypt
 
 api = Blueprint('api', __name__)
-
+app = Flask(__name__)
+bcrypt = Bcrypt(app)
 
 @api.route("/login", methods=["POST"])
 def login():
@@ -17,8 +18,8 @@ def login():
     user = Login.query.filter_by(email=email).first()
     if user is None:
         return jsonify({"msg": "Usuario no existe"}), 404
-    # comprobacion=bcrypt.check_password_hash(user.password, password)
-    if email != user.email or password != user.password:
+    comprobacion=bcrypt.check_password_hash(user.password, password)
+    if email != user.email or comprobacion == False:
         return jsonify({"msg": "Bad username or password"}), 401 
     
     access_token = create_access_token(identity=email)
@@ -30,18 +31,42 @@ def wsignup():
     tlf = request.json.get("tlf_number", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
+    # pw_hash = bcrypt.generate_password_hash(password)
     city = request.json.get("city", None)
-    addres = request.json.get("adress", None)
+    adress = request.json.get("adress", None)
     cp = request.json.get("postcode", None)
     cif = request.json.get("cif", None)
     pictures = request.json.get("pictures", None)
     
-    user = Worker_signup(name=name, tlf_number=tlf, email=email, password=password, city=city, addres=addres, postcode = cp, cif=cif, pictures=pictures)
+    user = Worker_signup(name=name, tlf_number=tlf, email=email, password=password, city=city, adress=adress, postcode = cp, cif=cif, pictures=pictures)
     db.session.add(user)
     db.session.commit()
 
     response_body = {
         "message": "Empresa Añadida"
+    }
+
+    return jsonify(response_body), 200
+
+@api.route("/user_signup", methods=["POST"])
+def usignup():
+    name = request.json.get("name", None)
+    lastname = request.json.get("lastname", None)
+    tlf = request.json.get("tlf_number", None)
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    # pw_hash = bcrypt.generate_password_hash(password)
+    city = request.json.get("city", None)
+    adress = request.json.get("adress", None)
+    cp = request.json.get("postcode", None)
+    pictures = request.json.get("pictures", None)
+    
+    user = User_signup(name=name, lastname=lastname, tlf_number=tlf, email=email, password=password, city=city, adress=adress, postcode = cp, pictures=pictures)
+    db.session.add(user)
+    db.session.commit()
+
+    response_body = {
+        "message": "Usuario Añadido"
     }
 
     return jsonify(response_body), 200
