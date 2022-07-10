@@ -48,7 +48,61 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
-
+            createUser: async (name, lastname, email, password) => {
+                console.log(name, lastname, email, password);
+                try {
+                    // fetching data from the backend
+                    const resp = await fetch(process.env.BACKEND_URL + "/api/signup", {
+                        method: "POST",
+                        body: JSON.stringify({
+                            name: name,
+                            lastname: lastname,
+                            email: email,
+                            password: password,
+                        }),
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    });
+                    const data = await resp.json();
+                    console.log(data);
+                    // setStore({
+                    //     message: data.message,
+                    // });
+                    // don't forget to return something, that is how the async resolves
+                    return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+            createWorker: async (name, lastname, city, email, password) => {
+                console.log(name, lastname, city, email, password);
+                try {
+                    // fetching data from the backend
+                    const resp = await fetch(process.env.BACKEND_URL + "/api/signup", {
+                        method: "POST",
+                        body: JSON.stringify({
+                            name: name,
+                            lastname: lastname,
+                            city: city,
+                            email: email,
+                            password: password,
+                        }),
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    });
+                    const data = await resp.json();
+                    console.log(data);
+                    // setStore({
+                    //     message: data.message,
+                    // });
+                    // don't forget to return something, that is how the async resolves
+                    return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
             getMessage: async () => {
                 try {
                     // fetching data from the backend

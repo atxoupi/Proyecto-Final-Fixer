@@ -1,38 +1,83 @@
-import React from "react";
-
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const SignupForm = () => {
+  const { store, actions } = useContext(Context);
+  
+  // Datos usuario
+  const [username, setUsername] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+
+  // Datos trabajador
+  const [city, setCity] = useState("");
+
+  const handleSubmitUser = (e) => {
+    e.preventDefault();
+    if (
+      username !== "" &&
+      email !== "" &&
+      password1 !== "" &&
+      password2 !== "" &&
+      password1 === password2
+    ) {
+      actions.createUser(username, lastname, email, password1);
+      alert("Your user has been succesfully");
+    } else {
+      alert("Rellena todos los campos");
+    }
+  };
+
+  const handleSubmitWorker = (e) => {
+    e.preventDefault();
+    if (
+      username !== "" &&
+      email !== "" &&
+      password1 !== "" &&
+      password2 !== "" &&
+      password1 === password2
+    ) {
+      actions.createWorker(username, lastname, city, email, password1); //puedo poner username tambien?
+      alert("Your user has been succesfully");
+    } else {
+      alert("Rellena todos los campos");
+    }
+  };
+
   return (
     <>
       {/* Nav bar con botones usuario/profesional */}
       <ul
-        class="nav nav-pills mb-3 mt-3 d-flex justify-content-center"
+        className="nav nav-pills mb-3 mt-3 d-flex justify-content-center"
         id="pills-tab"
         role="tablist"
       >
-        <li class="nav-item" role="presentation">
+        <li className="nav-item" role="presentation">
           <button
-            class="nav-link active"
-            id="pills-home-tab"
+            className="nav-link active"
+            id="pills-user-tab"
             data-bs-toggle="pill"
             data-bs-target="#pills-user"
             type="button"
             role="tab"
-            aria-controls="pills-home"
+            aria-controls="pills-user"
             aria-selected="true"
           >
             Usuario
           </button>
         </li>
-        <li class="nav-item" role="presentation">
+        <li className="nav-item" role="presentation">
           <button
-            class="nav-link"
-            id="pills-profile-tab"
+            className="nav-link"
+            id="pills-worker-tab"
             data-bs-toggle="pill"
             data-bs-target="#pills-worker"
             type="button"
             role="tab"
-            aria-controls="pills-profile"
+            aria-controls="pills-worker"
             aria-selected="false"
           >
             Profesional
@@ -42,14 +87,14 @@ export const SignupForm = () => {
 
       {/* Formulario de usuario */}
 
-      <div class="tab-content" id="pills-tabContent">
+      <div className="tab-content" id="pills-tabContent">
         <div
-          class="tab-pane fade show active"
+          className="tab-pane fade show active"
           id="pills-user"
           role="tabpanel"
           aria-labelledby="pills-home-tab"
         >
-          <div className="container h-60">
+          <div className=" container h-60">
             <div className="row justify-content-center align-items-center h-100">
               <div className="col-12 col-lg-9 col-xl-7">
                 <div
@@ -60,7 +105,7 @@ export const SignupForm = () => {
                     <h3 className="mb-4 pb-2 pb-md-0 mb-md-5 text-center">
                       Para registrarte, rellena los siguientes campos
                     </h3>
-                    <form>
+                    <form onSubmit={handleSubmitUser}>
                       <div className="row">
                         <div className="col-md-6 mb-4">
                           <div className="form-outline">
@@ -69,6 +114,7 @@ export const SignupForm = () => {
                               id="firstName"
                               className="form-control form-control-lg"
                               placeholder="Nombre"
+                              onChange={(e) => setUsername(e.target.value)}
                             />
                           </div>
                         </div>
@@ -79,41 +125,61 @@ export const SignupForm = () => {
                               id="lastName"
                               className="form-control form-control-lg"
                               placeholder="Apellidos"
+                              onChange={(e) => setLastname(e.target.value)}
                             />
                           </div>
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-md-6 mb-4 pb-2">
+                        <div className="col-12 mb-4 pb-2">
                           <div className="form-outline">
                             <input
                               type="email"
-                              id="emailAddress"
+                              id="emailAddress2"
                               className="form-control form-control-lg"
                               placeholder="email@email.com"
+                              onChange={(e) => setEmail(e.target.value)}
                             />
                           </div>
                         </div>
-                        <div className="col-md-6 mb-4 pb-2">
+                      </div>
+                      <div className="row">
+                        <div className="col-12 mb-4 pb-2">
                           <div className="form-outline">
                             <input
                               type="password"
                               id="examplePassword1"
                               className="form-control form-control-lg"
                               placeholder="password"
+                              onChange={(e) => setPassword1(e.target.value)}
                             />
                           </div>
                         </div>
                       </div>
-                      <div class="mb-3 form-check">
+                      <div className="row">
+                        <div className="col-12 mb-4 pb-2">
+                          <div className="form-outline">
+                            <input
+                              type="password"
+                              id="examplePassword2"
+                              className="form-control form-control-lg"
+                              placeholder="Repite el  password"
+                              onChange={(e) => setPassword2(e.target.value)}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mb-3 form-check">
                         <input
                           type="checkbox"
-                          class="form-check-input"
+                          className="form-check-input"
                           id="exampleCheck1"
+                          required ="required"
                         />
                         <label
-                          clasName="form-check-label"
+                          className="form-check-label"
                           htmlFor="exampleCheck1"
+                          
                         >
                           He leído y acepto la política de privacidad bla
                           blablbalblalba
@@ -124,9 +190,16 @@ export const SignupForm = () => {
                         <input
                           className="btn btn-primary btn-lg"
                           type="submit"
-                          value="Submit"
+                          value="Registrarme"
+                          id="submitButton1"
                         />
                       </div>
+                      <p className="text-center text-muted mt-5 mb-0">
+                        ¿Ya tienes una cuenta creada?
+                        <Link to="/login" className="fw-bold text-body">
+                          <u>Entra aquí</u>
+                        </Link>
+                      </p>
                     </form>
                   </div>
                 </div>
@@ -137,7 +210,7 @@ export const SignupForm = () => {
 
         {/* Formulario de trabajador */}
         <div
-          class="tab-pane fade"
+          className="tab-pane fade"
           id="pills-worker"
           role="tabpanel"
           aria-labelledby="pills-profile-tab"
@@ -153,15 +226,16 @@ export const SignupForm = () => {
                     <h3 className="mb-4 pb-2 pb-md-0 mb-md-5 text-center">
                       Para registrarte, rellena los siguientes campos
                     </h3>
-                    <form>
+                    <form onSubmit={handleSubmitWorker}>
                       <div className="row">
                         <div className="col-md-6 mb-4">
                           <div className="form-outline">
                             <input
                               type="text"
-                              id="firstName"
+                              id="firstName2"
                               className="form-control form-control-lg"
                               placeholder="Nombre"
+                              onChange={(e) => setUsername(e.target.value)}
                             />
                           </div>
                         </div>
@@ -169,9 +243,10 @@ export const SignupForm = () => {
                           <div className="form-outline">
                             <input
                               type="text"
-                              id="lastName"
+                              id="lastName2"
                               className="form-control form-control-lg"
                               placeholder="Apellidos"
+                              onChange={(e) => setLastname(e.target.value)}
                             />
                           </div>
                         </div>
@@ -181,58 +256,79 @@ export const SignupForm = () => {
                           <div className="form-outline">
                             <input
                               type="text"
-                              id="lastName"
+                              id="city"
                               className="form-control form-control-lg"
                               placeholder="Ciudad o población"
+                              onChange={(e) => setCity(e.target.value)}
                             />
                           </div>
                         </div>
                         <div className="col-md-6 mb-4 pb-2">
-                           <label className="form-label select-label">
-                            Selecciona tu sector
-                          </label> <select className="select form-control-lg" multiple aria-label="multiple select example">
-                          
-                            <option value="1">Fontanería</option>
-                            <option value="2">Mudanzas</option>
+                          <select className="select form-control-lg">
+                            <option value="1" disabled>
+                              Elije una opción
+                            </option>
+                            <option value="2">Fontanería</option>
                             <option value="3">Carpintería</option>
                             <option value="4">Pintura</option>
                             <option value="4">Electricidad</option>
                             <option value="4">Climatización</option>
+                            <option value="4">Mudanzas</option>
                           </select>
-                          
+                          <label className="form-label select-label">
+                            Selecciona tu sector
+                          </label>
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-md-6 mb-4 pb-2">
+                        <div className="col-12 mb-4 pb-2">
                           <div className="form-outline">
                             <input
                               type="email"
-                              id="emailAddress"
+                              id="emailAddress1"
                               className="form-control form-control-lg"
                               placeholder="email@email.com"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-md-6 mb-4 pb-2">
-                          <div className="form-outline">
-                            <input
-                              type="password"
-                              id="examplePassword1"
-                              className="form-control form-control-lg"
-                              placeholder="password"
+                              onChange={(e) => setEmail(e.target.value)}
                             />
                           </div>
                         </div>
                       </div>
-                      <div class="mb-3 form-check">
+                      <div className="row">
+                        <div className="col-12 mb-4 pb-2">
+                          <div className="form-outline">
+                            <input
+                              type="password"
+                              id="examplePassword3"
+                              className="form-control form-control-lg"
+                              placeholder="password"
+                              onChange={(e) => setPassword1(e.target.value)}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-12 mb-4 pb-2">
+                          <div className="form-outline">
+                            <input
+                              type="password"
+                              id="examplePassword4"
+                              className="form-control form-control-lg"
+                              placeholder="Repite el password"
+                              onChange={(e) => setPassword2(e.target.value)}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mb-3 form-check">
                         <input
                           type="checkbox"
-                          class="form-check-input"
-                          id="exampleCheck1"
+                          className="form-check-input"
+                          id="exampleCheck2"
+                          required ="required"
                         />
                         <label
-                          clasName="form-check-label"
-                          htmlFor="exampleCheck1"
+                          className="form-check-label"
+                          htmlFor="exampleCheck2"
                         >
                           He leído y acepto la política de privacidad bla
                           blablbalblalba
@@ -241,11 +337,18 @@ export const SignupForm = () => {
 
                       <div className="mt-4 pt-2">
                         <input
-                          className="btn btn-primary btn-lg"
+                          className="btn btn-primary btn-lg "
                           type="submit"
-                          value="Submit"
+                          value="Registrarme"
+                          id="submitButton2"
                         />
                       </div>
+                      <p className="text-center text-muted mt-5 mb-0">
+                        ¿Ya tienes una cuenta creada?{" "}
+                        <Link to="/login" className="fw-bold text-body">
+                          <u>Entra aquí</u>
+                        </Link>
+                      </p>
                     </form>
                   </div>
                 </div>
