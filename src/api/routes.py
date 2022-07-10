@@ -11,6 +11,8 @@ api = Blueprint('api', __name__)
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
+#--Login--
+#Comprobación de datos de usuario, recibe mail y pass y comprueba que existan en la BD
 @api.route("/login", methods=["POST"])
 def login():
     email = request.json.get("email", None)
@@ -25,6 +27,8 @@ def login():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token) 
 
+#--SignUp
+#Recibe datos de Usuario o de Worker y los inserta en la BD
 @api.route("/worker_signup", methods=["POST"])
 def wsignup():
     name = request.json.get("name", None)
