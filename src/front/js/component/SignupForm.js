@@ -14,6 +14,9 @@ export const SignupForm = () => {
 
   // Datos trabajador
   const [city, setCity] = useState("");
+  const [sector, setSector] = useState("");
+  
+
 
   const handleSubmitUser = (e) => {
     e.preventDefault();
@@ -40,7 +43,7 @@ export const SignupForm = () => {
       password2 !== "" &&
       password1 === password2
     ) {
-      actions.createWorker(username, lastname, city, email, password1); //puedo poner username tambien?
+      actions.createWorker(username, lastname, city, email, password1,sector); //puedo poner username tambien?
       alert("Your user has been succesfully");
     } else {
       alert("Rellena todos los campos");
@@ -264,16 +267,16 @@ export const SignupForm = () => {
                           </div>
                         </div>
                         <div className="col-md-6 mb-4 pb-2">
-                          <select className="select form-control-lg">
-                            <option value="1" disabled>
+                          <select className="select form-control-lg" onChange={e=>setSector(e.target.value)}>
+                            <option value="1">
                               Elije una opción
                             </option>
-                            <option value="2">Fontanería</option>
-                            <option value="3">Carpintería</option>
+                            <option value="Fontanería">Fontanería</option>
+                            <option value="Carpintería">Carpintería</option>
                             <option value="4">Pintura</option>
-                            <option value="4">Electricidad</option>
-                            <option value="4">Climatización</option>
-                            <option value="4">Mudanzas</option>
+                            <option value="5">Electricidad</option>
+                            <option value="6">Climatización</option>
+                            <option value="7">Mudanzas</option>
                           </select>
                           <label className="form-label select-label">
                             Selecciona tu sector

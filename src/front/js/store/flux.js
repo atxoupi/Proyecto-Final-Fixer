@@ -52,7 +52,7 @@ const getState = ({
                 console.log(name, lastname, email, password);
                 try {
                     // fetching data from the backend
-                    const resp = await fetch(process.env.BACKEND_URL + "/api/signup", {
+                    const resp = await fetch(process.env.BACKEND_URL + "/api/user_signup", {
                         method: "POST",
                         body: JSON.stringify({
                             name: name,
@@ -75,11 +75,11 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
-            createWorker: async (name, lastname, city, email, password) => {
-                console.log(name, lastname, city, email, password);
+            createWorker: async (name, lastname, city, email, password, sector) => {
+                console.log(name, lastname, city, email, password, sector);
                 try {
                     // fetching data from the backend
-                    const resp = await fetch(process.env.BACKEND_URL + "/api/signup", {
+                    const resp = await fetch(process.env.BACKEND_URL + "/api/worker_signup", {
                         method: "POST",
                         body: JSON.stringify({
                             name: name,
