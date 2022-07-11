@@ -18,7 +18,6 @@ gunicorn = "*"
 cloudinary = "*"
 flask-admin = "*"
 flask-jwt-extended = "*"
-py-bcrypt = "*"
 flask-bcrypt = "*"
 
 [requires]
