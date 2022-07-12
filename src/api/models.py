@@ -13,7 +13,7 @@ class User_signup(db.Model):
     lastname = db.Column(db.String(120), unique=False, nullable=False)
     tlf_number = db.Column(db.Integer, unique=True, nullable=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(15), unique=False, nullable=False)
+    password = db.Column(db.String(120), unique=False, nullable=False)
     city = db.Column(db.String(120), unique=False, nullable=True)
     adress = db.Column(db.String(120), unique=False, nullable=True)
     postcode = db.Column(db.Integer, unique=False, nullable=True)
@@ -44,7 +44,7 @@ class Worker_signup(db.Model):
     name = db.Column(db.String(120), unique=False, nullable=False)
     tlf_number = db.Column(db.Integer, unique=True, nullable=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(15), unique=False, nullable=False)
+    password = db.Column(db.String(120), unique=False, nullable=False)
     city = db.Column(db.String(120), unique=False, nullable=True)
     adress = db.Column(db.String(120), unique=False, nullable=True)
     postcode = db.Column(db.Integer, unique=False, nullable=True)
@@ -73,7 +73,7 @@ class Worker_signup(db.Model):
 class Login(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(15), unique=False, nullable=False)
+    password = db.Column(db.String(120), unique=False, nullable=False)
     id_user= db.Column(db.Integer,db.ForeignKey('user_signup.id'), nullable=True)
     worker_id = db.Column(db.Integer, db.ForeignKey('worker_signup.id'), nullable=True)
 
@@ -83,7 +83,9 @@ class Login(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "email": self.email
+            "email": self.email,
+            "id_worker": self.worker_id,
+            "id_user": self.id_user
         }
 
  # Posted works data
