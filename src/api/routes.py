@@ -41,10 +41,13 @@ def wsignup():
     pictures = request.json.get("pictures", None)
 
     pw_hash = current_app.bcrypt.generate_password_hash(password).decode("utf-8")
-    print(pw_hash)
-    # user = Worker_signup(name=name, tlf_number=tlf, email=email, password=pw_hash, city=city, adress=adress, postcode = cp, cif=cif, pictures=pictures)
-    # db.session.add(user)
-    # db.session.commit()
+    user = Worker_signup(name=name, tlf_number=tlf, email=email, password=pw_hash, city=city, adress=adress, postcode = cp, cif=cif, pictures=pictures)
+    db.session.add(user)
+    db.session.commit()
+    
+    login = Login(email=email, password=pw_hash)
+    db.session.add(login)
+    db.session.commit()
 
     response_body = {
         "message": "Empresa Añadida"
@@ -59,16 +62,20 @@ def usignup():
     tlf = request.json.get("tlf_number", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    # pw_hash = bcrypt.generate_password_hash(password)
     city = request.json.get("city", None)
     adress = request.json.get("adress", None)
     cp = request.json.get("postcode", None)
     pictures = request.json.get("pictures", None)
+
+    pw_hash = bcrypt.generate_password_hash(password).decode("utf-8")
     
-    user = User_signup(name=name, lastname=lastname, tlf_number=tlf, email=email, password=password, city=city, adress=adress, postcode = cp, pictures=pictures)
+    user = User_signup(name=name, lastname=lastname, tlf_number=tlf, email=email, password=pw_hash, city=city, adress=adress, postcode = cp, pictures=pictures)
     db.session.add(user)
     db.session.commit()
 
+    login = Login(email=email, password=pw_hash)
+    db.session.add(login)
+    db.session.commit()
     response_body = {
         "message": "Usuario Añadido"
     }
