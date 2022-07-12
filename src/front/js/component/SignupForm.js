@@ -28,10 +28,11 @@ export const SignupForm = () => {
       password1 === password2
     ) {
       actions.createUser(username, lastname, email, password1);
-      alert("Your user has been succesfully");
-    } else {
-      alert("Rellena todos los campos");
-    }
+     console.log("Usuario creado") ;
+
+    } 
+    else if ((password1 !=="" && password2 !=="")&& (password1 !== password2)){console.log("Tus contraseñas no coinciden") } 
+    
   };
 
   const handleSubmitWorker = (e) => {
@@ -117,6 +118,7 @@ export const SignupForm = () => {
                               id="firstName"
                               className="form-control form-control-lg"
                               placeholder="Nombre"
+                              required
                               onChange={(e) => setUsername(e.target.value)}
                             />
                           </div>
@@ -141,6 +143,7 @@ export const SignupForm = () => {
                               id="emailAddress2"
                               className="form-control form-control-lg"
                               placeholder="email@email.com"
+                              required
                               onChange={(e) => setEmail(e.target.value)}
                             />
                           </div>
@@ -154,6 +157,7 @@ export const SignupForm = () => {
                               id="examplePassword1"
                               className="form-control form-control-lg"
                               placeholder="password"
+                              required
                               onChange={(e) => setPassword1(e.target.value)}
                             />
                           </div>
@@ -167,6 +171,7 @@ export const SignupForm = () => {
                               id="examplePassword2"
                               className="form-control form-control-lg"
                               placeholder="Repite el  password"
+                              required
                               onChange={(e) => setPassword2(e.target.value)}
                             />
                           </div>
