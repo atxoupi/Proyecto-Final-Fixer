@@ -1,12 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logoFixer from "../../img/logo-fixer.png";
+import "../../styles/index.css";
 
 export const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg bg-light">
+    <nav className="navbar navbar-expand-lg mx-4 fs-5">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          FIXER
+        <a className="navbar-brand">
+          <img
+            src={logoFixer}
+            style={{ maxHeight: "4rem" }}
+            alt="logo-fixer"
+          ></img>
         </a>
         <button
           className="navbar-toggler"
@@ -23,23 +29,18 @@ export const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           <li className="nav-item">
-            <a className="nav-link active" aria-current="page" href="#">
-              Home
+            <a className="nav-link" href="#">
+              Publica una oferta
             </a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">
-              Profesionales
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              Clientes
+              Ver las ofertas
             </a>
           </li>
           <li className="nav-item">
             <Link className="nav-link active" aria-current="page" to="/login">
-              Login
+              Accede
             </Link>
           </li>
         </ul>
