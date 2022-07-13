@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const SignupForm = () => {
-  const { store, actions } = useContext(Context);
-  
+  const { actions } = useContext(Context);
+
   // Datos usuario
   const [username, setUsername] = useState("");
   const [lastname, setLastname] = useState("");
@@ -15,8 +15,6 @@ export const SignupForm = () => {
   // Datos trabajador
   const [city, setCity] = useState("");
   const [sector, setSector] = useState("");
-  
-
 
   const handleSubmitUser = (e) => {
     e.preventDefault();
@@ -28,11 +26,14 @@ export const SignupForm = () => {
       password1 === password2
     ) {
       actions.createUser(username, lastname, email, password1);
-     console.log("Usuario creado") ;
-
-    } 
-    else if ((password1 !=="" && password2 !=="")&& (password1 !== password2)){console.log("Tus contraseñas no coinciden") } 
-    
+      console.log("Usuario creado");
+    } else if (
+      password1 !== "" &&
+      password2 !== "" &&
+      password1 !== password2
+    ) {
+      console.log("Tus contraseñas no coinciden");
+    }
   };
 
   const handleSubmitWorker = (e) => {
@@ -44,7 +45,7 @@ export const SignupForm = () => {
       password2 !== "" &&
       password1 === password2
     ) {
-      actions.createWorker(username, lastname, city, email, password1,sector); //puedo poner username tambien?
+      actions.createWorker(username, lastname, city, email, password1, sector);
       alert("Your user has been succesfully");
     } else {
       alert("Rellena todos los campos");
@@ -105,13 +106,13 @@ export const SignupForm = () => {
                   className="card shadow-2-strong card-registration"
                   style={{ borderRadius: "15px" }}
                 >
-                  <div className="card-body p-4 p-md-5">
+                  <div className="card-body p-3 p-md-5">
                     <h3 className="mb-4 pb-2 pb-md-0 mb-md-5 text-center">
                       Para registrarte, rellena los siguientes campos
                     </h3>
                     <form onSubmit={handleSubmitUser}>
                       <div className="row">
-                        <div className="col-md-6 mb-4">
+                        <div className="col-md-6 mb-3">
                           <div className="form-outline">
                             <input
                               type="text"
@@ -123,7 +124,7 @@ export const SignupForm = () => {
                             />
                           </div>
                         </div>
-                        <div className="col-md-6 mb-4">
+                        <div className="col-md-6 mb-3">
                           <div className="form-outline">
                             <input
                               type="text"
@@ -136,7 +137,7 @@ export const SignupForm = () => {
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-12 mb-4 pb-2">
+                        <div className="col-12 mb-3 pb-2">
                           <div className="form-outline">
                             <input
                               type="email"
@@ -150,21 +151,22 @@ export const SignupForm = () => {
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-12 mb-4 pb-2">
+                        <div className="col-12 mb-3 pb-2">
                           <div className="form-outline">
                             <input
                               type="password"
                               id="examplePassword1"
                               className="form-control form-control-lg"
-                              placeholder="password"
+                              placeholder="Introduce un password entre 8 y 22 caracteres"
                               required
+                              pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,22}$"
                               onChange={(e) => setPassword1(e.target.value)}
                             />
                           </div>
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-12 mb-4 pb-2">
+                        <div className="col-12 mb-3 pb-2">
                           <div className="form-outline">
                             <input
                               type="password"
@@ -177,35 +179,20 @@ export const SignupForm = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="mb-3 form-check">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="exampleCheck1"
-                          required ="required"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="exampleCheck1"
-                          
-                        >
-                          He leído y acepto la política de privacidad bla
-                          blablbalblalba
-                        </label>
-                      </div>
 
-                      <div className="mt-4 pt-2">
+                      <div className="d-flex justify-content-center pt-2">
                         <input
                           className="btn btn-primary btn-lg"
                           type="submit"
                           value="Registrarme"
-                          id="submitButton1"
+                          id="submitButton"
                         />
                       </div>
-                      <p className="text-center text-muted mt-5 mb-0">
+
+                      <p className="text-center text-muted mt-3 mb-0">
                         ¿Ya tienes una cuenta creada?
                         <Link to="/login" className="fw-bold text-body">
-                          <u>Entra aquí</u>
+                          <u> Entra aquí</u>
                         </Link>
                       </p>
                     </form>
@@ -230,13 +217,13 @@ export const SignupForm = () => {
                   className="card shadow-2-strong card-registration"
                   style={{ borderRadius: "15px" }}
                 >
-                  <div className="card-body p-4 p-md-5">
+                  <div className="card-body p-3 p-md-5">
                     <h3 className="mb-4 pb-2 pb-md-0 mb-md-5 text-center">
                       Para registrarte, rellena los siguientes campos
                     </h3>
                     <form onSubmit={handleSubmitWorker}>
                       <div className="row">
-                        <div className="col-md-6 mb-4">
+                        <div className="col-md-6 mb-3">
                           <div className="form-outline">
                             <input
                               type="text"
@@ -247,7 +234,7 @@ export const SignupForm = () => {
                             />
                           </div>
                         </div>
-                        <div className="col-md-6 mb-4">
+                        <div className="col-md-6 mb-3">
                           <div className="form-outline">
                             <input
                               type="text"
@@ -260,7 +247,7 @@ export const SignupForm = () => {
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-md-6 mb-4">
+                        <div className="col-md-6 mb-3">
                           <div className="form-outline">
                             <input
                               type="text"
@@ -271,17 +258,18 @@ export const SignupForm = () => {
                             />
                           </div>
                         </div>
-                        <div className="col-md-6 mb-4 pb-2">
-                          <select className="select form-control-lg" onChange={e=>setSector(e.target.value)}>
-                            <option value="1">
-                              Elije una opción
-                            </option>
+                        <div className="col-md-6 mb-3 pb-2 ">
+                          <select
+                            className="select w-100 form-control-lg"
+                            onChange={(e) => setSector(e.target.value)}
+                          >
+                            <option value="1">Elije una opción</option>
                             <option value="Fontanería">Fontanería</option>
                             <option value="Carpintería">Carpintería</option>
-                            <option value="4">Pintura</option>
-                            <option value="5">Electricidad</option>
-                            <option value="6">Climatización</option>
-                            <option value="7">Mudanzas</option>
+                            <option value="Pintura">Pintura</option>
+                            <option value="Electricidad">Electricidad</option>
+                            <option value="Climatización">Climatización</option>
+                            <option value="Mudanzas">Mudanzas</option>
                           </select>
                           <label className="form-label select-label">
                             Selecciona tu sector
@@ -289,7 +277,7 @@ export const SignupForm = () => {
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-12 mb-4 pb-2">
+                        <div className="col-12 mb-3 pb-2">
                           <div className="form-outline">
                             <input
                               type="email"
@@ -302,20 +290,22 @@ export const SignupForm = () => {
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-12 mb-4 pb-2">
+                        <div className="col-12 mb-3 pb-2">
                           <div className="form-outline">
                             <input
                               type="password"
                               id="examplePassword3"
                               className="form-control form-control-lg"
-                              placeholder="password"
+                              placeholder="Introduce un password entre 8 y 22 caracteres"
+                              required
+                              pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,22}$"
                               onChange={(e) => setPassword1(e.target.value)}
                             />
                           </div>
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-12 mb-4 pb-2">
+                        <div className="col-12 mb-2 pb-2">
                           <div className="form-outline">
                             <input
                               type="password"
@@ -327,34 +317,19 @@ export const SignupForm = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="mb-3 form-check">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="exampleCheck2"
-                          required ="required"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="exampleCheck2"
-                        >
-                          He leído y acepto la política de privacidad bla
-                          blablbalblalba
-                        </label>
-                      </div>
 
-                      <div className="mt-4 pt-2">
+                      <div className="d-flex justify-content-center pt-2">
                         <input
                           className="btn btn-primary btn-lg "
                           type="submit"
                           value="Registrarme"
-                          id="submitButton2"
+                          id="submitButton"
                         />
                       </div>
-                      <p className="text-center text-muted mt-5 mb-0">
+                      <p className="text-center text-muted mt-3">
                         ¿Ya tienes una cuenta creada?{" "}
                         <Link to="/login" className="fw-bold text-body">
-                          <u>Entra aquí</u>
+                          <u> Entra aquí</u>
                         </Link>
                       </p>
                     </form>
