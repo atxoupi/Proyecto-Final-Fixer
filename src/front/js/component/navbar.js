@@ -42,6 +42,11 @@ export const Navbar = () => {
               Login
             </Link>
           </li>
+          <li className="nav-item">
+            <Link className="nav-link active" aria-current="page" to="/request">
+              Subir Solicitud
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>

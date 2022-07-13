@@ -45,7 +45,8 @@ def wsignup():
     db.session.add(user)
     db.session.commit()
     
-    login = Login(email=email, password=pw_hash)
+    id_worker=Worker_signup.query.filter_by(email=email).first()
+    login = Login(email=email, password=pw_hash,worker_id=id_worker.id)
     db.session.add(login)
     db.session.commit()
 

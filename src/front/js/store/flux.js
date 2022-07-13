@@ -48,6 +48,9 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
+            createRequest: async (city, sector, description) => {
+                console.log(city, sector, description);
+            },
 
             getMessage: async () => {
                 try {
