@@ -74,3 +74,20 @@ def usignup():
     }
 
     return jsonify(response_body), 200
+
+@api.route("/work_request", methods=["POST"])
+def wrequestp():
+    city = request.json.get("city", None)
+    sector = request.json.get("sector", None)
+    description = request.json.get("description", None)
+    
+    work = Work(location=city, sector=sector, description=description)
+    db.session.add(work)
+    db.session.commit()
+    
+
+    response_body = {
+        "message": "Solicitud de trabajo Añadida"
+    }
+
+    return jsonify(response_body), 200
