@@ -31,17 +31,12 @@ def login():
 @api.route("/worker_signup", methods=["POST"])
 def wsignup():
     name = request.json.get("name", None)
-    tlf = request.json.get("tlf_number", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     city = request.json.get("city", None)
-    adress = request.json.get("adress", None)
-    cp = request.json.get("postcode", None)
-    cif = request.json.get("cif", None)
-    pictures = request.json.get("pictures", None)
 
     pw_hash = current_app.bcrypt.generate_password_hash(password).decode("utf-8")
-    user = Worker_signup(name=name, tlf_number=tlf, email=email, password=pw_hash, city=city, adress=adress, postcode = cp, cif=cif, pictures=pictures)
+    user = Worker_signup(name=name, email=email, password=pw_hash, city=city)
     db.session.add(user)
     db.session.commit()
     
@@ -60,17 +55,12 @@ def wsignup():
 def usignup():
     name = request.json.get("name", None)
     lastname = request.json.get("lastname", None)
-    tlf = request.json.get("tlf_number", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    city = request.json.get("city", None)
-    adress = request.json.get("adress", None)
-    cp = request.json.get("postcode", None)
-    pictures = request.json.get("pictures", None)
 
     pw_hash = bcrypt.generate_password_hash(password).decode("utf-8")
     
-    user = User_signup(name=name, lastname=lastname, tlf_number=tlf, email=email, password=pw_hash, city=city, adress=adress, postcode = cp, pictures=pictures)
+    user = User_signup(name=name, lastname=lastname,  email=email, password=pw_hash)
     db.session.add(user)
     db.session.commit()
 

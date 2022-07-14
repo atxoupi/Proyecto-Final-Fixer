@@ -20,7 +20,8 @@ class User_signup(db.Model):
     pictures = db.Column(db.String(500), unique=False, nullable=True)
     works = db.relationship('Work', backref='user_signup', lazy=True)
     ratings = db.relationship('Ratings', backref='user_signup', lazy=True)
-
+    login = db.relationship('Login', backref='user_signup', lazy=True)
+                            
     def __repr__(self):
         return f'<User_signup {self.email}>'
 
@@ -52,6 +53,8 @@ class Worker_signup(db.Model):
     pictures = db.Column(db.String(500), unique=False, nullable=True)
     works = db.relationship('Work', backref='worker_signup', lazy=True)
     ratings = db.relationship('Ratings', backref='worker_signup', lazy=True)
+    login = db.relationship('Login', backref='worker_signup', lazy=True)
+    
 
     def __repr__(self):
         return f'<Worker_signup {self.email}>'

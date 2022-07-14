@@ -52,6 +52,89 @@ const getState = ({
                 console.log(city, sector, description);
             },
 
+            createUser: async (name, lastname, email, password) => {
+                console.log(name, lastname, email, password);
+                try {
+                    // fetching data from the backend
+                    const resp = await fetch(
+                        "https://3001-atxoupi-proyectofinalfi-xu8j8smzvjn.ws-eu54.gitpod.io/api/user_signup", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Accept: "application/json",
+                            },
+                            body: JSON.stringify({
+                                name: name,
+                                lastname: lastname,
+                                email: email,
+                                password: password,
+                            }),
+                        }
+                    );
+                    const data = await resp.text();
+                    console.log(data);
+                    // setStore({
+                    //     message: data.message,
+                    // });
+                    // don't forget to return something, that is how the async resolves
+                    return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+            createWorker: async (name, city, email, password, sector) => {
+                // console.log(name, lastname, city, email, password, sector);
+                // try {
+                //     // fetching data from the backend
+                //     const resp = await fetch(
+                //         process.env.BACKEND_URL + "/api/worker_signup", {
+                //             method: "POST",
+                //             body: JSON.stringify({
+                //                 name: name,
+                //                 lastname: lastname,
+                //                 city: city,
+                //                 email: email,
+                //                 password: password,
+                //             }),
+                //             headers: {
+                //                 "Content-Type": "application/json",
+                //             },
+                //         }
+                //     );
+                //     const data = await resp.json();
+                //     console.log(data);
+                //     // setStore({
+                //     //     message: data.message,
+                //     // });
+                //     // don't forget to return something, that is how the async resolves
+                //     return data;
+                // } catch (error) {
+                //     console.log("Error loading message from backend", error);
+                // }
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+
+                var raw = JSON.stringify({
+                    name: name,
+                    email: email,
+                    password: password,
+                    city: city,
+                });
+
+                var requestOptions = {
+                    method: "POST",
+                    headers: myHeaders,
+                    body: raw,
+                };
+
+                fetch(
+                        "https://3001-atxoupi-proyectofinalfi-xu8j8smzvjn.ws-eu54.gitpod.io/api/worker_signup",
+                        requestOptions
+                    )
+                    .then((response) => response.json())
+                    .then((result) => console.log(result))
+                    .catch((error) => console.log("error", error));
+            },
             getMessage: async () => {
                 try {
                     // fetching data from the backend
