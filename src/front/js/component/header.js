@@ -5,15 +5,15 @@ import imagenHeader from "../../img/set-of-tools-with-copy-space.jpg";
 export const Header = () => {
   return (
     <>
-      <div className="container-header container-fluid d-flex justify-content-center mb-2 px-4">
+      <div className="container-fluid d-flex justify-content-center mb-2 px-4">
         <div className="row">
           <div className="col-5">
-            <button type="button" className="btn btnHeader">
+            <button type="button" className="btn btnHeader mt-2">
               Busca un profesional
             </button>
           </div>
           <div className="col-5">
-            <button type="button" className="btn btnHeader">
+            <button type="button" className="btn btnHeader mt-2">
               Publica un anuncio
             </button>
           </div>

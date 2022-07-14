@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Ms+Madi&family=PT+Sans&family=Poppins:wght@300&family=Roboto:wght@100&family=Square+Peg&display=swap");
+
 .navbar {
     background-color: #ffffff;
     font-family: "PT Sans", sans-serif;
@@ -12,9 +14,44 @@
 }
 
 .container header {
-    background-color: #d4b729;
+    background-color: #29d46d;
 }
 
 .wraper-header {
     background: linear-gradient(to bottom, #f8bf5c, #f7b853);
+}
+
+.form-control {
+    border-color: #ffc300;
+}
+
+.nav-link.active {
+    background-color: #ffd60a !important;
+}
+
+.nav-link {
+    color: #ffc300;
+}
+
+.nav-link:focus,
+.nav-link:hover {
+    color: #ffc300;
+}
+
+.card-registration {
+    border: #ffc300 solid 2px;
+}
+
+#submitButton {
+    background-color: #ffd60a;
+    border-color: #ffc300;
+}
+
+.select {
+    border-color: #ffc300;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    color: #001d3d;
 }
