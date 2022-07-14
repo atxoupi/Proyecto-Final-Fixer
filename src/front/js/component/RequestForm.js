@@ -76,24 +76,11 @@ export const RequestForm = () => {
                       ></textarea>
                     </div>
                   </div>
-                  <div className="mb-3 form-check">
-                    <input
-                      type="checkbox"
-                      className="form-check-input"
-                      id="exampleCheck2"
-                      required="required"
-                    />
-                    <label className="form-check-label" htmlFor="exampleCheck2">
-                      He leído y acepto la política de privacidad bla
-                      blablbalblalba
-                    </label>
-                  </div>
-
-                  <div className="mt-4 pt-2">
+                  <div className="d-flex justify-content-center mt-4 pt-2">
                     <input
                       className="btn btn-primary btn-lg "
                       type="submit"
-                      value="Fix"
+                      value="Subir proyecto"
                       id="submitButton"
                     />
                   </div>

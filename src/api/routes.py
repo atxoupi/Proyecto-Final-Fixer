@@ -34,9 +34,10 @@ def wsignup():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     city = request.json.get("city", None)
+    sector = request.json.get("sector", None)
 
     pw_hash = current_app.bcrypt.generate_password_hash(password).decode("utf-8")
-    user = Worker_signup(name=name, email=email, password=pw_hash, city=city)
+    user = Worker_signup(name=name, email=email, password=pw_hash, city=city, sector=sector)
     db.session.add(user)
     db.session.commit()
     
@@ -58,13 +59,14 @@ def usignup():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
 
-    pw_hash = bcrypt.generate_password_hash(password).decode("utf-8")
+    pw_hash = current_app.bcrypt.generate_password_hash(password).decode("utf-8")
     
     user = User_signup(name=name, lastname=lastname,  email=email, password=pw_hash)
     db.session.add(user)
     db.session.commit()
 
-    login = Login(email=email, password=pw_hash)
+    id_user=User_signup.query.filter_by(email=email).first()
+    login = Login(email=email, password=pw_hash,id_user=id_user.id)
     db.session.add(login)
     db.session.commit()
     response_body = {

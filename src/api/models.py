@@ -47,6 +47,7 @@ class Worker_signup(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), unique=False, nullable=False)
     city = db.Column(db.String(120), unique=False, nullable=True)
+    sector = db.Column(db.String(120), unique=False, nullable=True)
     adress = db.Column(db.String(120), unique=False, nullable=True)
     postcode = db.Column(db.Integer, unique=False, nullable=True)
     cif = db.Column(db.Integer, unique=True, nullable=True)
