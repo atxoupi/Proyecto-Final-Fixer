@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, current_app
-from api.models import db, Login, Worker_signup, User_signup
+from api.models import db, Login, Worker_signup, User_signup, Work
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 from flask_bcrypt import Bcrypt
@@ -80,8 +80,10 @@ def wrequestp():
     city = request.json.get("city", None)
     sector = request.json.get("sector", None)
     description = request.json.get("description", None)
+    mail=request.json.get("mail", None)
     
-    work = Work(location=city, sector=sector, description=description)
+    id_user=User_signup.query.filter_by(email=mail).first()
+    work = Work(location=city, sector=sector, description=description, user_id=id_user.id)
     db.session.add(work)
     db.session.commit()
     
