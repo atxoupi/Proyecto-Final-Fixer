@@ -2,6 +2,7 @@ import React from "react";
 // import "../../img/set-of-tools-with-copy-space.jpg"
 import imagenHeader from "../../img/set-of-tools-with-copy-space.jpg";
 import checked from "../../img/cheque.png";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   return (
@@ -17,9 +18,9 @@ export const Header = () => {
             </button>
           </div>
           <div className="col-5">
-            <button type="button" className="btn btnHeader mt-2">
+            <Link to="/request" type="button" className="btn btnHeader mt-2">
               Publica un anuncio
-            </button>
+            </Link>
           </div>
         </div>
       </div>

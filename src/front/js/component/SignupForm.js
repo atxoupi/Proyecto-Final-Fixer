@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { Navigate } from "react-router-dom";
 
 export const SignupForm = () => {
   const { actions } = useContext(Context);
@@ -26,7 +27,6 @@ export const SignupForm = () => {
       password1 === password2
     ) {
       actions.createUser(username, lastname, email, password1);
-      console.log("Usuario creado");
     } else if (
       password1 !== "" &&
       password2 !== "" &&
@@ -45,7 +45,7 @@ export const SignupForm = () => {
       password2 !== "" &&
       password1 === password2
     ) {
-      actions.createWorker(username, lastname, city, email, password1, sector);
+      actions.createWorker(username, city, email, password1, sector);
       alert("Your user has been succesfully");
     } else {
       alert("Rellena todos los campos");
@@ -159,7 +159,7 @@ export const SignupForm = () => {
                               className="form-control form-control-lg"
                               placeholder="Introduce un password entre 8 y 22 caracteres"
                               required
-                              pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,22}$"
+                              // pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,22}$"
                               onChange={(e) => setPassword1(e.target.value)}
                             />
                           </div>
@@ -181,12 +181,15 @@ export const SignupForm = () => {
                       </div>
 
                       <div className="d-flex justify-content-center pt-2">
-                        <input
+                        <Link
+                          to="/login"
                           className="btn btn-primary btn-lg"
                           type="submit"
                           value="Registrarme"
                           id="submitButton"
-                        />
+                        >
+                          Registrarme
+                        </Link>
                       </div>
 
                       <p className="text-center text-muted mt-3 mb-0">
