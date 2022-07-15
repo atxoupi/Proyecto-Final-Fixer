@@ -5,7 +5,7 @@ import "../../styles/index.css";
 
 export const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg fs-5">
+    <nav className="navbar navbar-expand-lg fs-6">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand">
           <img
