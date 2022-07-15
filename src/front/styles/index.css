@@ -2,10 +2,9 @@
 
 .navbar {
     background-color: #ffffff;
-    font-family: "PT Sans", sans-serif;
 }
 
-.nav-link {
+.nav-link_navbar {
     color: #003566;
 }
 
@@ -54,4 +53,13 @@
 body {
     font-family: "Poppins", sans-serif;
     color: #001d3d;
+}
+
+.check_container_header {
+    left: 80vw;
+    transform: translateX(-50vw);
+    margin-top: 50px;
+    border-radius: 3px;
+    background-color: #d9d7d359;
+    width: 50%;
 }

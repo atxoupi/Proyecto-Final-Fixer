@@ -1,12 +1,16 @@
 import React from "react";
 // import "../../img/set-of-tools-with-copy-space.jpg"
 import imagenHeader from "../../img/set-of-tools-with-copy-space.jpg";
+import checked from "../../img/cheque.png";
 
 export const Header = () => {
   return (
     <>
-      <div className="container-fluid d-flex justify-content-center mb-2 px-4">
-        <div className="row">
+      <div className="header-title text-center my-3">
+        <h1>¿Què necesitas?</h1>
+      </div>
+      <div className="container-fluid d-flex justify-content-center mb-3 px-4">
+        <div className="row d-flex justify-content-between">
           <div className="col-5">
             <button type="button" className="btn btnHeader mt-2">
               Busca un profesional
@@ -23,33 +27,54 @@ export const Header = () => {
         className="container wraper-header position-relative"
         style={{ height: "450", width: "100%" }}
       >
+        <div className="check_container_header d-flex flex-column w-50 position-absolute me-60 p-3 ">
+          <div className="d-inline">
+            <img
+              clasName="checkedIcon"
+              style={{ width: "15px" }}
+              src={checked}
+            ></img>
+            <span class="checkbox-inline ms-2">
+              Encuentra el mejor profesional cerca de ti
+            </span>
+          </div>
+          <div className="d-inline">
+            <img
+              clasName="checkedIcon"
+              style={{ width: "15px" }}
+              src={checked}
+            ></img>
+            <span class="checkbox-inline ms-2">
+              {" "}
+              Más de un millón de usuarios satisfechos
+            </span>
+          </div>
+          <div className="d-inline">
+            <img
+              clasName="checkedIcon"
+              style={{ width: "15px" }}
+              src={checked}
+            ></img>
+            <span class="checkbox-inline ms-2"> Con garantía de calidad</span>
+          </div>
+          <div className="d-inline">
+            <img
+              clasName="checkedIcon"
+              style={{ width: "15px" }}
+              src={checked}
+            ></img>
+            <span class="checkbox-inline ms-2">
+              {" "}
+              Tú mandas, propón tu proyecto y los profesionales te contactaran
+            </span>
+          </div>
+        </div>
         <img
           src={imagenHeader}
           className="img-fluid d-flex justify-content-center"
           alt="..."
           style={{ objectFit: "cover", maxHeight: "400px", width: "800px" }}
         ></img>
-        <div class="row">
-          <div className="check-container position-absolute img-overlay">
-            <h1>Choose expertise</h1>
-            <label class="checkbox-inline">
-              <input type="checkbox" id="Check1" value="PHP" /> PHP
-            </label>
-            <label class="checkbox-inline">
-              <input type="checkbox" id="Check2" value="CSS" /> CSS
-            </label>
-            <label class="checkbox-inline">
-              <input type="checkbox" id="Check3" value="Java" /> Java
-            </label>
-            <label class="checkbox-inline">
-              <input type="checkbox" id="Check4" value="HTML" /> HTML
-            </label>
-            <label class="checkbox-inline">
-              <input type="checkbox" id="Check3" value="Bootstrap" disabled />{" "}
-              Bootstrap
-            </label>
-          </div>
-        </div>
       </div>
     </>
   );

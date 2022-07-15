@@ -5,15 +5,15 @@ import "../../styles/index.css";
 
 export const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg mx-4 fs-5">
+    <nav className="navbar navbar-expand-lg fs-5">
       <div className="container-fluid">
-        <a className="navbar-brand">
+        <Link to="/" className="navbar-brand">
           <img
             src={logoFixer}
             style={{ maxHeight: "4rem" }}
             alt="logo-fixer"
           ></img>
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -26,20 +26,23 @@ export const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
       </div>
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-          <li className="nav-item">
-            <a className="nav-link" href="#">
+      <div
+        className="collapse  navbar-collapse w-75"
+        id="navbarSupportedContent"
+      >
+        <ul className="navbar-nav mb-2 mb-lg-0">
+          <li className="nav-item mx-1">
+            <a className="nav-link_navbar " href="#">
               Publica una oferta
             </a>
           </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              Ver las ofertas
-            </a>
+          <li className="nav-item mx-1">
+            <Link to="/signup" className="nav-link_navbar w-100" href="#">
+              Regístrate
+            </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link active" aria-current="page" to="/login">
+          <li className="nav-item mx-1">
+            <Link className="nav-link_navbar" aria-current="page" to="/login">
               Accede
             </Link>
           </li>
