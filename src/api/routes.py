@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, current_app
-from api.models import db, Login, Worker_signup, User_signup
+from api.models import db, Login, Worker_signup, User_signup, Work
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 from flask_bcrypt import Bcrypt
@@ -31,21 +31,18 @@ def login():
 @api.route("/worker_signup", methods=["POST"])
 def wsignup():
     name = request.json.get("name", None)
-    tlf = request.json.get("tlf_number", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     city = request.json.get("city", None)
-    adress = request.json.get("adress", None)
-    cp = request.json.get("postcode", None)
-    cif = request.json.get("cif", None)
-    pictures = request.json.get("pictures", None)
+    sector = request.json.get("sector", None)
 
     pw_hash = current_app.bcrypt.generate_password_hash(password).decode("utf-8")
-    user = Worker_signup(name=name, tlf_number=tlf, email=email, password=pw_hash, city=city, adress=adress, postcode = cp, cif=cif, pictures=pictures)
+    user = Worker_signup(name=name, email=email, password=pw_hash, city=city, sector=sector)
     db.session.add(user)
     db.session.commit()
     
-    login = Login(email=email, password=pw_hash)
+    id_worker=Worker_signup.query.filter_by(email=email).first()
+    login = Login(email=email, password=pw_hash,worker_id=id_worker.id)
     db.session.add(login)
     db.session.commit()
 
@@ -59,25 +56,40 @@ def wsignup():
 def usignup():
     name = request.json.get("name", None)
     lastname = request.json.get("lastname", None)
-    tlf = request.json.get("tlf_number", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    city = request.json.get("city", None)
-    adress = request.json.get("adress", None)
-    cp = request.json.get("postcode", None)
-    pictures = request.json.get("pictures", None)
 
-    pw_hash = bcrypt.generate_password_hash(password).decode("utf-8")
+    pw_hash = current_app.bcrypt.generate_password_hash(password).decode("utf-8")
     
-    user = User_signup(name=name, lastname=lastname, tlf_number=tlf, email=email, password=pw_hash, city=city, adress=adress, postcode = cp, pictures=pictures)
+    user = User_signup(name=name, lastname=lastname,  email=email, password=pw_hash)
     db.session.add(user)
     db.session.commit()
 
-    login = Login(email=email, password=pw_hash)
+    id_user=User_signup.query.filter_by(email=email).first()
+    login = Login(email=email, password=pw_hash,id_user=id_user.id)
     db.session.add(login)
     db.session.commit()
     response_body = {
         "message": "Usuario Añadido"
+    }
+
+    return jsonify(response_body), 200
+
+@api.route("/work_request", methods=["POST"])
+def wrequestp():
+    city = request.json.get("city", None)
+    sector = request.json.get("sector", None)
+    description = request.json.get("description", None)
+    mail=request.json.get("mail", None)
+    
+    id_user=User_signup.query.filter_by(email=mail).first()
+    work = Work(location=city, sector=sector, description=description, user_id=id_user.id)
+    db.session.add(work)
+    db.session.commit()
+    
+
+    response_body = {
+        "message": "Solicitud de trabajo Añadida"
     }
 
     return jsonify(response_body), 200

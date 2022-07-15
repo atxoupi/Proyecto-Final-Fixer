@@ -20,7 +20,8 @@ class User_signup(db.Model):
     pictures = db.Column(db.String(500), unique=False, nullable=True)
     works = db.relationship('Work', backref='user_signup', lazy=True)
     ratings = db.relationship('Ratings', backref='user_signup', lazy=True)
-
+    login = db.relationship('Login', backref='user_signup', lazy=True)
+                            
     def __repr__(self):
         return f'<User_signup {self.email}>'
 
@@ -46,12 +47,15 @@ class Worker_signup(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), unique=False, nullable=False)
     city = db.Column(db.String(120), unique=False, nullable=True)
+    sector = db.Column(db.String(120), unique=False, nullable=True)
     adress = db.Column(db.String(120), unique=False, nullable=True)
     postcode = db.Column(db.Integer, unique=False, nullable=True)
     cif = db.Column(db.Integer, unique=True, nullable=True)
     pictures = db.Column(db.String(500), unique=False, nullable=True)
     works = db.relationship('Work', backref='worker_signup', lazy=True)
     ratings = db.relationship('Ratings', backref='worker_signup', lazy=True)
+    login = db.relationship('Login', backref='worker_signup', lazy=True)
+    
 
     def __repr__(self):
         return f'<Worker_signup {self.email}>'
@@ -92,8 +96,9 @@ class Login(db.Model):
 class Work(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer,db.ForeignKey('user_signup.id'), nullable=False)
-    worker_id = db.Column(db.Integer, db.ForeignKey('worker_signup.id'), nullable=False)
+    worker_id = db.Column(db.Integer, db.ForeignKey('worker_signup.id'), nullable=True)
     location = db.Column(db.String(15), unique=False, nullable=True)
+    sector = db.Column(db.String(120), unique=False, nullable=True)
     status = db.Column(db.Boolean, unique=False, nullable=True)
     cost = db.Column(db.Float, unique=False, nullable=True)
     term = db.Column(db.Integer, unique=False, nullable=True)
