@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { Navigate } from "react-router-dom";
 
 export const SignupForm = () => {
   const { actions } = useContext(Context);
@@ -181,7 +182,7 @@ export const SignupForm = () => {
 
                       <div className="d-flex justify-content-center pt-2">
                         <input
-                          className="btn btn-primary btn-lg"
+                          className="btn btn-primary btn-lg "
                           type="submit"
                           value="Registrarme"
                           id="submitButton"

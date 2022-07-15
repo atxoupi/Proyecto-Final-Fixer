@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { Navigate } from "react-router-dom";
 
 export const RequestForm = () => {
   const { store, actions } = useContext(Context);
@@ -14,6 +15,7 @@ export const RequestForm = () => {
     if (city !== "" && sector !== "" && description !== "") {
       actions.createRequest(city, sector, description);
       alert("Solicitud creada satisfactoriamente");
+      <Navigate to="/" />;
     } else {
       alert("Rellena todos los campos");
     }
