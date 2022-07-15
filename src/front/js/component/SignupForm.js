@@ -102,7 +102,7 @@ export const SignupForm = () => {
             <div className="row justify-content-center align-items-center h-100">
               <div className="col-12 col-lg-9 col-xl-7">
                 <div
-                  className="card shadow-2-strong card-registration"
+                  className=" card-registration"
                   style={{ borderRadius: "15px" }}
                 >
                   <div className="card-body p-3 p-md-5">
