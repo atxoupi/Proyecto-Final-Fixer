@@ -46,6 +46,11 @@ export const Navbar = () => {
               Accede
             </Link>
           </li>
+          <li className="nav-item">
+            <Link className="nav-link active" aria-current="page" to="/request">
+              Subir Solicitud
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
