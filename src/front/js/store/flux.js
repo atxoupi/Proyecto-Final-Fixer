@@ -81,27 +81,6 @@ const getState = ({
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
-                // var myHeaders = new Headers();
-                // myHeaders.append("Content-Type", "application/json");
-
-                // var raw = JSON.stringify({
-                //     city: city,
-                //     sector: sector,
-                //     description: description,
-                //     mail: localStorage.getItem("mail"),
-                // });
-
-                // var requestOptions = {
-                //     method: "POST",
-                //     headers: myHeaders,
-                //     body: raw,
-                //     redirect: "follow",
-                // };
-
-                // fetch(process.env.BACKEND_URL + "/api/work_request", requestOptions)
-                //     .then((response) => response.text())
-                //     .then((result) => console.log(result))
-                //     .catch((error) => console.log("error", error));
             },
 
             createUser: async (name, lastname, email, password) => {
@@ -132,29 +111,6 @@ const getState = ({
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
-                // var myHeaders = new Headers();
-                // myHeaders.append("Content-Type", "application/json");
-
-                // var raw = JSON.stringify({
-                //     name: name,
-                //     lastname: lastname,
-                //     email: email,
-                //     password: password,
-                // });
-
-                // var requestOptions = {
-                //     method: "POST",
-                //     headers: myHeaders,
-                //     body: raw,
-                // };
-
-                // fetch(
-                //         "https://3001-atxoupi-proyectofinalfi-agxb1yax6uc.ws-eu54.gitpod.io/api/user_signup",
-                //         requestOptions
-                //     )
-                //     .then((response) => response.text())
-                //     .then((result) => console.log(result))
-                //     .catch((error) => console.log("error", error));
             },
             createWorker: async (name, city, email, password, sector) => {
                 try {
@@ -184,30 +140,6 @@ const getState = ({
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
-                //     var myHeaders = new Headers();
-                //     myHeaders.append("Content-Type", "application/json");
-
-                //     var raw = JSON.stringify({
-                //         name: name,
-                //         email: email,
-                //         password: password,
-                //         city: city,
-                //         sector: sector,
-                //     });
-
-                //     var requestOptions = {
-                //         method: "POST",
-                //         headers: myHeaders,
-                //         body: raw,
-                //     };
-
-                //     fetch(
-                //             "https://3001-atxoupi-proyectofinalfi-agxb1yax6uc.ws-eu54.gitpod.io/api/worker_signup",
-                //             requestOptions
-                //         )
-                //         .then((response) => response.text())
-                //         .then((result) => console.log(result))
-                //         .catch((error) => console.log("error", error));
             },
             getMessage: async () => {
                 try {
