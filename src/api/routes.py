@@ -82,8 +82,8 @@ def wrequestp():
     description = request.json.get("description", None)
     mail=request.json.get("mail", None)
     
-    id_user=User_signup.query.filter_by(email=mail).first()
-    work = Work(location=city, sector=sector, description=description, user_id=id_user.id)
+    user=User_signup.query.filter_by(email=mail).first()
+    work = Work(location=city, sector=sector, description=description, user_id=user.id)
     db.session.add(work)
     db.session.commit()
     

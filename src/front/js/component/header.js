@@ -31,40 +31,43 @@ export const Header = () => {
         <div className="check_container_header d-flex flex-column w-50 position-absolute me-60 p-3 ">
           <div className="d-inline">
             <img
-              clasName="checkedIcon"
+              className="checkedIcon"
               style={{ width: "15px" }}
               src={checked}
             ></img>
-            <span class="checkbox-inline ms-2">
+            <span className="checkbox-inline ms-2">
               Encuentra el mejor profesional cerca de ti
             </span>
           </div>
           <div className="d-inline">
             <img
-              clasName="checkedIcon"
+              className="checkedIcon"
               style={{ width: "15px" }}
               src={checked}
             ></img>
-            <span class="checkbox-inline ms-2">
+            <span className="checkbox-inline ms-2">
               {" "}
               Más de un millón de usuarios satisfechos
             </span>
           </div>
           <div className="d-inline">
             <img
-              clasName="checkedIcon"
+              className="checkedIcon"
               style={{ width: "15px" }}
               src={checked}
             ></img>
-            <span class="checkbox-inline ms-2"> Con garantía de calidad</span>
+            <span className="checkbox-inline ms-2">
+              {" "}
+              Con garantía de calidad
+            </span>
           </div>
           <div className="d-inline">
             <img
-              clasName="checkedIcon"
+              className="checkedIcon"
               style={{ width: "15px" }}
               src={checked}
             ></img>
-            <span class="checkbox-inline ms-2">
+            <span className="checkbox-inline ms-2">
               {" "}
               Tú mandas, propón tu proyecto y los profesionales te contactaran
             </span>

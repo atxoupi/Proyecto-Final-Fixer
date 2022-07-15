@@ -181,15 +181,12 @@ export const SignupForm = () => {
                       </div>
 
                       <div className="d-flex justify-content-center pt-2">
-                        <Link
-                          to="/login"
-                          className="btn btn-primary btn-lg"
+                        <input
+                          className="btn btn-primary btn-lg "
                           type="submit"
                           value="Registrarme"
                           id="submitButton"
-                        >
-                          Registrarme
-                        </Link>
+                        />
                       </div>
 
                       <p className="text-center text-muted mt-3 mb-0">
