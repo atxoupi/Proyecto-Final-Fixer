@@ -87,7 +87,7 @@ const getState = ({
                 try {
                     // fetching data from the backend
                     const resp = await fetch(
-                        process.env.BACKEND_URL + "/api/worker_signup", {
+                        process.env.BACKEND_URL + "/api/user_signup", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
