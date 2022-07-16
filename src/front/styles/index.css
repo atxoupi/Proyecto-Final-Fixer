@@ -1,15 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Ms+Madi&family=PT+Sans&family=Poppins:wght@300&family=Roboto:wght@100&family=Square+Peg&display=swap");
+
 #submitButton {
     background-color: #ffd60a;
     border-color: #ffc300;
-    @import url("https://fonts.googleapis.com/css2?family=Ms+Madi&family=PT+Sans&family=Poppins:wght@300&family=Roboto:wght@100&family=Square+Peg&display=swap");
-}
-
-.navbar {
-    background-color: #ffffff;
-}
-
-.nav-link_navbar {
-    color: #003566;
 }
 
 .btnHeader {
