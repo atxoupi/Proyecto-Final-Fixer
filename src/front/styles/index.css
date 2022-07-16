@@ -1,62 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Ms+Madi&family=PT+Sans&family=Poppins:wght@300&family=Roboto:wght@100&family=Square+Peg&display=swap");
 
-#submitButton {
-    background-color: #ffd60a;
-    border-color: #ffc300;
-}
-
-.btnHeader {
-    background-color: #ffd60a;
-}
-
-.container header {
-    background-color: #29d46d;
-}
-
-.wraper-header {
-    background: linear-gradient(to bottom, #f8bf5c, #f7b853);
-}
-
-.form-control {
-    border-color: #ffc300;
-}
-
-.nav-link.active {
-    background-color: #ffd60a !important;
-}
-
-.nav-link {
-    color: #ffc300;
-}
-
-.nav-link:focus,
-.nav-link:hover {
-    color: #ffc300;
-}
-
-.card-registration {
-    border: #ffc300 solid 2px;
-}
-
-#submitButton {
-    background-color: #ffd60a;
-    border-color: #ffc300;
-}
-
-.select {
-    border-color: #ffc300;
-}
-
 body {
     font-family: "Poppins", sans-serif;
     color: #001d3d;
-}
-
-.check_container_header {
-    left: 80vw;
-    transform: translateX(-50vw);
-    margin-top: 50px;
-    border-radius: 3px;
-    background-color: #d9d7d359;
-    width: 50%;
 }

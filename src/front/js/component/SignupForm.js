@@ -62,7 +62,7 @@ export const SignupForm = () => {
       >
         <li className="nav-item" role="presentation">
           <button
-            className="nav-link active"
+            className="nav-link active nav-link-signup"
             id="pills-user-tab"
             data-bs-toggle="pill"
             data-bs-target="#pills-user"
@@ -76,7 +76,7 @@ export const SignupForm = () => {
         </li>
         <li className="nav-item" role="presentation">
           <button
-            className="nav-link"
+            className="nav-link nav-link-signup"
             id="pills-worker-tab"
             data-bs-toggle="pill"
             data-bs-target="#pills-worker"
@@ -117,7 +117,7 @@ export const SignupForm = () => {
                             <input
                               type="text"
                               id="firstName"
-                              className="form-control form-control-lg"
+                              className="form-control form-control-signup form-control-lg"
                               placeholder="Nombre"
                               required
                               onChange={(e) => setUsername(e.target.value)}
@@ -129,7 +129,7 @@ export const SignupForm = () => {
                             <input
                               type="text"
                               id="lastName"
-                              className="form-control form-control-lg"
+                              className="form-control form-control-signup form-control-lg"
                               placeholder="Apellidos"
                               onChange={(e) => setLastname(e.target.value)}
                             />
@@ -142,7 +142,7 @@ export const SignupForm = () => {
                             <input
                               type="email"
                               id="emailAddress2"
-                              className="form-control form-control-lg"
+                              className="form-control form-control-signup form-control-lg"
                               placeholder="email@email.com"
                               required
                               onChange={(e) => setEmail(e.target.value)}
@@ -156,7 +156,7 @@ export const SignupForm = () => {
                             <input
                               type="password"
                               id="examplePassword1"
-                              className="form-control form-control-lg"
+                              className="form-control form-control-signup form-control-lg"
                               placeholder="Introduce un password entre 8 y 22 caracteres"
                               required
                               // pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,22}$"
@@ -171,7 +171,7 @@ export const SignupForm = () => {
                             <input
                               type="password"
                               id="examplePassword2"
-                              className="form-control form-control-lg"
+                              className="form-control form-control-signup form-control-lg"
                               placeholder="Repite el  password"
                               required
                               onChange={(e) => setPassword2(e.target.value)}
@@ -185,7 +185,7 @@ export const SignupForm = () => {
                           className="btn btn-primary btn-lg "
                           type="submit"
                           value="Registrarme"
-                          id="submitButton"
+                          id="submitButton1"
                         />
                       </div>
 
@@ -228,7 +228,7 @@ export const SignupForm = () => {
                             <input
                               type="text"
                               id="firstName2"
-                              className="form-control form-control-lg"
+                              className="form-control  form-control-signup form-control-lg"
                               placeholder="Nombre"
                               onChange={(e) => setUsername(e.target.value)}
                             />
@@ -239,7 +239,7 @@ export const SignupForm = () => {
                             <input
                               type="text"
                               id="lastName2"
-                              className="form-control form-control-lg"
+                              className="form-control form-control-signup form-control-lg"
                               placeholder="Apellidos"
                               onChange={(e) => setLastname(e.target.value)}
                             />
@@ -252,7 +252,7 @@ export const SignupForm = () => {
                             <input
                               type="text"
                               id="city"
-                              className="form-control form-control-lg"
+                              className="form-control  form-control-signup form-control-lg"
                               placeholder="Ciudad o población"
                               onChange={(e) => setCity(e.target.value)}
                             />
@@ -260,7 +260,7 @@ export const SignupForm = () => {
                         </div>
                         <div className="col-md-6 mb-3 pb-2 ">
                           <select
-                            className="select w-100 form-control-lg"
+                            className="select w-100 form-control-signup form-control-lg"
                             onChange={(e) => setSector(e.target.value)}
                           >
                             <option value="1">Elije una opción</option>
@@ -282,7 +282,7 @@ export const SignupForm = () => {
                             <input
                               type="email"
                               id="emailAddress1"
-                              className="form-control form-control-lg"
+                              className="form-control form-control-signup form-control-lg"
                               placeholder="email@email.com"
                               onChange={(e) => setEmail(e.target.value)}
                             />
@@ -295,7 +295,7 @@ export const SignupForm = () => {
                             <input
                               type="password"
                               id="examplePassword3"
-                              className="form-control form-control-lg"
+                              className="form-control  form-control-signup form-control-lg"
                               placeholder="Introduce un password entre 8 y 22 caracteres"
                               required
                               // pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,22}$"
@@ -310,7 +310,7 @@ export const SignupForm = () => {
                             <input
                               type="password"
                               id="examplePassword4"
-                              className="form-control form-control-lg"
+                              className="form-control form-control-signup form-control-lg"
                               placeholder="Repite el password"
                               onChange={(e) => setPassword2(e.target.value)}
                             />
@@ -323,7 +323,7 @@ export const SignupForm = () => {
                           className="btn btn-primary btn-lg "
                           type="submit"
                           value="Registrarme"
-                          id="submitButton"
+                          id="submitButton2"
                         />
                       </div>
                       <p className="text-center text-muted mt-3">
