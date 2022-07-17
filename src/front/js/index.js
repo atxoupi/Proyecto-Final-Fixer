@@ -8,9 +8,10 @@ import "../styles/navbar.css";
 import "../styles/home.css";
 import "../styles/signup.css";
 import "../styles/requestForm.css";
+import "../styles/login.css";
 
 //import your own components
 import Layout from "./layout";
 
 //render your react application
-ReactDOM.render( < Layout / > , document.querySelector("#app"));
+ReactDOM.render(<Layout />, document.querySelector("#app"));

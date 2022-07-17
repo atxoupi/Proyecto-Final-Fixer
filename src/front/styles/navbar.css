@@ -1,7 +1,15 @@
 .nav-link-navbar {
-    color: #003566;
+  color: #003566;
 }
 
 .navbar-collapse-width {
-    width: 40%;
+  width: 40%;
+}
+
+.navbar-collapse-button {
+  background-color: #003566;
+}
+
+.navbar-toggler-icon {
+  color: white !important;
 }

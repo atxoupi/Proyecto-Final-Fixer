@@ -14,7 +14,7 @@ export const Navbar = () => {
           ></img>
         </Link>
         <button
-          className="navbar-toggler"
+          className="navbar-toggler navbar-collapse-button "
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -22,7 +22,7 @@ export const Navbar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon "></span>
         </button>
       </div>
       <div
