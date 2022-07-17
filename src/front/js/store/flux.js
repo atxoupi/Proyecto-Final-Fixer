@@ -18,6 +18,7 @@ const getState = ({
                 },
             ],
             auth: false,
+            works: [],
         },
         actions: {
             // Use getActions to call a function within a fuction
@@ -135,6 +136,34 @@ const getState = ({
                     // setStore({
                     //     message: data.message,
                     // });
+                    // don't forget to return something, that is how the async resolves
+                    return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+            addWork: async (city, sector, description) => {
+                try {
+                    // fetching data from the backend
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + "/api/work_request", {
+                            method: "GET",
+                            body: JSON.stringify({
+                                city: city,
+                                sector: sector,
+                                description: description,
+                            }),
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        }
+                    );
+                    const data = await resp.json();
+                    const store = getStore();
+                    setStore({
+                        ...store.works,
+                        works: store.works.concat(body),
+                    });
                     // don't forget to return something, that is how the async resolves
                     return data;
                 } catch (error) {
