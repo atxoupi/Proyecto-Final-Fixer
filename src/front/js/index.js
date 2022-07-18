@@ -4,6 +4,11 @@ import ReactDOM from "react-dom";
 
 //include your index.scss file into the bundle
 import "../styles/index.css";
+import "../styles/navbar.css";
+import "../styles/home.css";
+import "../styles/signup.css";
+import "../styles/requestForm.css";
+import "../styles/login.css";
 
 //import your own components
 import Layout from "./layout";

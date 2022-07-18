@@ -42,7 +42,7 @@ export const RequestForm = () => {
                         <input
                           type="text"
                           id="city"
-                          className="form-control form-control-lg"
+                          className="form-control  form-control-request form-control-lg"
                           placeholder="Ciudad o población"
                           onChange={(e) => setCity(e.target.value)}
                         />
@@ -50,7 +50,7 @@ export const RequestForm = () => {
                     </div>
                     <div className="col-md-6 mb-4 pb-2">
                       <select
-                        className="select form-control-lg"
+                        className="select w-100 form-control-request form-control-lg"
                         onChange={(e) => setSector(e.target.value)}
                       >
                         <option value="1">Elije una opción</option>
@@ -67,14 +67,13 @@ export const RequestForm = () => {
                     </div>
                   </div>
                   <div className="row">
-                    <div className="input-group">
-                      <span className="input-group-text">
-                        Descripción del trabajo
-                      </span>
+                    <div className="col-12 ">
                       <textarea
-                        className="form-control"
+                        className="form-control form-control-request"
+                        type="text"
                         onChange={(e) => setDescription(e.target.value)}
                         aria-label="Descripción del trabajo"
+                        placeholder="Describe brevemente el trabajo que necesitas "
                       ></textarea>
                     </div>
                   </div>
@@ -83,7 +82,7 @@ export const RequestForm = () => {
                       className="btn btn-primary btn-lg "
                       type="submit"
                       value="Subir proyecto"
-                      id="submitButton"
+                      id="submitButtonRequest"
                     />
                   </div>
                 </form>
