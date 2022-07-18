@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logoFixer from "../../img/logo-fixer.png";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+  const { store, actions } = useContext(Context);
+
   return (
     <nav className="navbar navbar-expand-lg fs-6">
       <div className="container-fluid">
@@ -31,30 +34,59 @@ export const Navbar = () => {
       >
         <ul className="navbar-nav mb-2 mb-lg-0">
           <li className="nav-item mx-1">
-            <Link className="nav-link nav-link-navbar" href="#" to="/request">
-              Publica una oferta
-            </Link>
+            {store.auth === false ? (
+              <Link className="nav-link nav-link-navbar" href="#" to="/request">
+                Publica una oferta
+              </Link>
+            ) : null}
           </li>
           <li className="nav-item mx-1">
-            <Link
-              to="/signup"
-              className="nav-link nav-link-navbar w-100"
-              href="#"
-            >
-              Regístrate
-            </Link>
+            {store.auth === false ? (
+              <Link
+                to="/signup"
+                className="nav-link nav-link-navbar w-100"
+                href="#"
+              >
+                Regístrate
+              </Link>
+            ) : null}
           </li>
           <li className="nav-item mx-1">
-            <Link
-              className="nav-link nav-link-navbar"
-              aria-current="page"
-              to="/login"
-            >
-              Accede
-            </Link>
+            {store.auth === false ? (
+              <Link
+                className="nav-link nav-link-navbar"
+                aria-current="page"
+                to="/login"
+              >
+                Accede
+              </Link>
+            ) : null}
+          </li>
+          <li className="nav-item mx-1">
+            {store.auth === true ? (
+              <spam onClick={() => actions.logout()}>
+                <Link
+                  className="nav-link nav-link-navbar"
+                  aria-current="page"
+                  to="/login"
+                >
+                  cerrar sesión
+                </Link>
+              </spam>
+            ) : null}
           </li>
         </ul>
       </div>
     </nav>
   );
 };
+
+// <Link to="/demo">
+//             {store.auth === true ? (
+//               <spam onClick={() => actions.logout()}>
+//                 <Link to="/" className="btn btn-primary">
+//                   Logout
+//                 </Link>
+//               </spam>
+//             ) : null}
+//           </Link>

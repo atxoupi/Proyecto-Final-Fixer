@@ -73,7 +73,7 @@ class Worker_signup(db.Model):
             "pictures":self.pictures
         }
 
- # Login data 
+ # Login data  
 class Login(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
