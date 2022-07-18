@@ -74,7 +74,9 @@ def usignup():
     }
 
     return jsonify(response_body), 200
-
+##--Work_Request--
+##Recibe por parámetros un objeto Json con la ciudad, el sector, la descripcion y el mail del usuario que realiza la consulta 
+##Introduce los datos en la tabla Work de BBDD
 @api.route("/work_request", methods=["POST"])
 def wrequestp():
     city = request.json.get("city", None)
@@ -93,3 +95,42 @@ def wrequestp():
     }
 
     return jsonify(response_body), 200
+
+##--Profile--
+##No recibe nada por parámetros y devuelve los datos de usuario
+##Ruta sólo accesible si estás logueado
+@api.route("/profile", methods=["GET"])
+@jwt_required()
+def protected():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    missing = User_signup.query.filter_by(email=current_user).first()
+    if (missing is None):
+        user = Worker_signup.query.filter_by(email=current_user).first()
+    else:
+        user = User_signup.query.filter_by(email=current_user).first()
+    
+    
+    return jsonify(user.serialize()), 200
+##--ListWork--
+##No recibe nada por parámetros y devuelve un array con:
+## -las solicitudes de trabajo en caso de ser un usuario
+## -Las ofertas de trabajo en caso de ser una empresa
+##Ruta sólo accesible si estás logueado
+@api.route("/listwork", methods=["GET"])
+@jwt_required()
+def listworks():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    missing = User_signup.query.filter_by(email=current_user).first()
+    if (missing is None):
+        user = Worker_signup.query.filter_by(email=current_user).first()
+        works = Work.query.filter_by(worker_id=user.id).all()
+    else:
+        user = User_signup.query.filter_by(email=current_user).first()
+        works = Work.query.filter_by(user_id=user.id).all()
+
+    result= map(lambda work: work.serialize(),works)
+    
+    return jsonify(list(result)), 200
+

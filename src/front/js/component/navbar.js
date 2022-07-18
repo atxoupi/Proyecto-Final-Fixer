@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logoFixer from "../../img/logo-fixer.png";
-import "../../styles/index.css";
 
 export const Navbar = () => {
   return (
@@ -15,7 +14,7 @@ export const Navbar = () => {
           ></img>
         </Link>
         <button
-          className="navbar-toggler"
+          className="navbar-toggler navbar-collapse-button "
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -23,26 +22,34 @@ export const Navbar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon "></span>
         </button>
       </div>
       <div
-        className="collapse  navbar-collapse w-75"
+        className="collapse navbar-collapse navbar-collapse-width"
         id="navbarSupportedContent"
       >
         <ul className="navbar-nav mb-2 mb-lg-0">
           <li className="nav-item mx-1">
-            <Link className="nav-link_navbar " href="#" to="/request">
+            <Link className="nav-link nav-link-navbar" href="#" to="/request">
               Publica una oferta
             </Link>
           </li>
           <li className="nav-item mx-1">
-            <Link to="/signup" className="nav-link_navbar w-100" href="#">
+            <Link
+              to="/signup"
+              className="nav-link nav-link-navbar w-100"
+              href="#"
+            >
               Regístrate
             </Link>
           </li>
           <li className="nav-item mx-1">
-            <Link className="nav-link_navbar" aria-current="page" to="/login">
+            <Link
+              className="nav-link nav-link-navbar"
+              aria-current="page"
+              to="/login"
+            >
               Accede
             </Link>
           </li>

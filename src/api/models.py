@@ -33,7 +33,7 @@ class User_signup(db.Model):
             "tlf_number":self.tlf_number,
             "email": self.email,
             "city":self.city,
-            "adress":self.address,
+            "adress":self.adress,
             "postcode":self.postcode,
             "pictures":self.pictures
         }

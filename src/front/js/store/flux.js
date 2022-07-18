@@ -5,26 +5,11 @@ const getState = ({
 }) => {
     return {
         store: {
-            message: null,
-            demo: [{
-                    title: "FIRST",
-                    background: "white",
-                    initial: "white",
-                },
-                {
-                    title: "SECOND",
-                    background: "white",
-                    initial: "white",
-                },
-            ],
             auth: false,
-            works: [],
+            register: false,
+            work: [],
         },
         actions: {
-            // Use getActions to call a function within a fuction
-            exampleFunction: () => {
-                getActions().changeColor(0, "green");
-            },
             login: async (email, password) => {
                 try {
                     // fetching data from the backend
@@ -40,10 +25,6 @@ const getState = ({
                         },
                     });
                     const data = await resp.json();
-                    // setStore({
-                    //     message: data.message,
-                    // });
-                    // don't forget to return something, that is how the async resolves
                     localStorage.setItem("token", data.access_token);
                     localStorage.setItem("mail", email);
                     setStore({
@@ -74,10 +55,6 @@ const getState = ({
                     );
                     const data = await resp.json();
                     console.log(data);
-                    // setStore({
-                    //     message: data.message,
-                    // });
-                    // don't forget to return something, that is how the async resolves
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
@@ -103,11 +80,12 @@ const getState = ({
                         }
                     );
                     const data = await resp.text();
+                    if (resp.status == 200) {
+                        setStore({
+                            register: true,
+                        });
+                    }
                     console.log(data);
-                    // setStore({
-                    //     message: data.message,
-                    // });
-                    // don't forget to return something, that is how the async resolves
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);

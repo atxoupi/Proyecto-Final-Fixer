@@ -1,0 +1,22 @@
+/* Header */
+
+.btnHeader {
+    background-color: #ffd60a;
+}
+
+.container header {
+    background-color: #29d46d;
+}
+
+.wraper-header {
+    background: linear-gradient(to bottom, #f8bf5c, #f7b853);
+}
+
+.check_container_header {
+    left: 80vw;
+    transform: translateX(-50vw);
+    margin-top: 50px;
+    border-radius: 3px;
+    background-color: #d9d7d359;
+    width: 50%;
+}
