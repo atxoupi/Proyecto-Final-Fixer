@@ -24,10 +24,11 @@ const getState = ({
             exampleFunction: () => {
                 getActions().changeColor(0, "green");
             },
+
+            // LOGIN
             login: async (email, password) => {
                 try {
-                    // fetching data from the backend
-                    //process.env.BACKEND_URL +
+
                     const resp = await fetch(process.env.BACKEND_URL + "/api/login", {
                         method: "POST",
                         body: JSON.stringify({
@@ -38,22 +39,27 @@ const getState = ({
                             "Content-Type": "application/json",
                         },
                     });
-                    const data = await resp.json();
-                    // setStore({
-                    //     message: data.message,
-                    // });
-                    // don't forget to return something, that is how the async resolves
-                    localStorage.setItem("token", data.access_token);
-                    localStorage.setItem("mail", email);
-                    setStore({
-                        auth: true,
-                    });
+                    if (resp.status === 200) {
+                        const data = await resp.json();
+                        setStore({
+                            auth: true
+                        })
+                        localStorage.setItem("token", data.access_token);
+                        localStorage.setItem("mail", email);
+
+                    } else if (resp.status === 404) {
+                        alert("usuario no existe")
+                    } else {
+                        alert("email o contraseña incorrecta")
+                    }
 
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
             },
+
+            //CREAR SOLICITUD
             createRequest: async (city, sector, description) => {
                 try {
                     const resp = await fetch(
@@ -73,16 +79,14 @@ const getState = ({
                     );
                     const data = await resp.json();
                     console.log(data);
-                    // setStore({
-                    //     message: data.message,
-                    // });
-                    // don't forget to return something, that is how the async resolves
+
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
             },
 
+            // CREAR USUARIO
             createUser: async (name, lastname, email, password) => {
                 try {
                     // fetching data from the backend
@@ -112,6 +116,8 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
+
+            //CREAR USUARIO TRABAJADOR
             createWorker: async (name, city, email, password, sector) => {
                 try {
                     // fetching data from the backend
@@ -141,6 +147,17 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
+
+
+            // LOGOUT
+            logout: () => {
+                localStorage.removeItem("token")
+                setStore({
+                    auth: false
+                })
+            },
+
+
             getMessage: async () => {
                 try {
                     // fetching data from the backend
