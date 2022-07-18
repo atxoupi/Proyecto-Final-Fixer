@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 
 export const WorkPost = () => {
   const { store, actions } = useContext(Context);
-
+  useEffect(() => {
+    actions.showWork();
+  }, []);
+  console.log(store.work);
   return (
     <>
       <div className="row">
@@ -11,9 +14,7 @@ export const WorkPost = () => {
           <div className="post-box">
             <div className="post-card">
               <div className="work-title">Trabajo 1</div>
-              <div className="work-description">
-                Necesito que me corten la higuera
-              </div>
+              <div className="work-description">{store.work.description}</div>
             </div>
           </div>
         </div>
