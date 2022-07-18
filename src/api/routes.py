@@ -92,7 +92,7 @@ def wrequestp():
     db.session.commit()
 
     companys = Worker_signup.query.filter_by(city=work.city).filter_by(sector=work.sector).all()
-    with mail.connect() as conn:
+    with current_app.mail.connect() as conn:
         for company in companys:
             message = 'Hemos detectado que hay ofertas para realizar trabajos en su sector en su área de influencia, acceda a su zona privada en nuestra web para porder revisarlas'
             subject = "Hola, %s. Nueva solicitud de trabajo para un Fixer de su zona" % company.name
@@ -138,16 +138,16 @@ def listworks():
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
     missing = User_signup.query.filter_by(email=current_user).first()
-    if (missing is None):
+    if missing is None:
         user = Worker_signup.query.filter_by(email=current_user).first()
         works = Work.query.filter_by(worker_id=user.id).all()
     else:
         user = User_signup.query.filter_by(email=current_user).first()
         works = Work.query.filter_by(user_id=user.id).all()
 
-    result= map(lambda work: work.serialize(),works)
+    result= list(map(lambda work: work.serialize(),works))
     
-    return jsonify(list(result)), 200
+    return jsonify(result), 200
 
 ##Zone List Work
 ##No recibe nada por parámetros y devuelve un array con:
@@ -161,6 +161,6 @@ def zonelistworks():
     user = Worker_signup.query.filter_by(email=current_user).first()
     works = Work.query.filter_by(city=user.city).filter_by(sector=user.sector).all()
 
-    result= map(lambda work: work.serialize(),works)
+    result= list(map(lambda work: work.serialize(),works))
     
-    return jsonify(list(result)), 200
+    return jsonify(result), 200

@@ -43,8 +43,20 @@ jwt = JWTManager(app)
 bcrypt = Bcrypt(app)
 app.bcrypt=bcrypt
 
-mail = Mail(app)
+#Configuracion Email
+mail_settings={
+    "MAIL_SERVER" : "smtp.gmail.com",
+    "MAIL_PORT" : 465,
+    "MAIL_USE_TLS" : False,
+    "MAIL_USE_SSL" : True,
+    "MAIL_USERNAME" : os.environ.get('MAIL'),
+    "MAIL_PASSWORD" : os.environ.get('PASSWORD'),
+    "MAIL_DEFAULT_SENDER" : os.environ.get('MAIL')
+}
 
+app.config.update(mail_settings)
+mail = Mail(app)
+app.mail=mail
 # add the admin
 setup_admin(app)
 
