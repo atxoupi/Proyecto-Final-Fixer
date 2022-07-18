@@ -6,6 +6,8 @@ from api.models import db, Login, Worker_signup, User_signup, Work
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 from flask_bcrypt import Bcrypt
+from flask_mail import Mail
+from flask_mail import Message
 
 api = Blueprint('api', __name__)
 
@@ -88,6 +90,19 @@ def wrequestp():
     work = Work(location=city, sector=sector, description=description, user_id=user.id)
     db.session.add(work)
     db.session.commit()
+
+    companys = Worker_signup.query.filter_by(city=work.city).filter_by(sector=work.sector).all()
+    with current_app.mail.connect() as conn:
+        for company in companys:
+            message = 'Hemos detectado que hay ofertas para realizar trabajos en su sector en su área de influencia, acceda a su zona privada en nuestra web para porder revisarlas'
+            subject = "Hola, %s. Nueva solicitud de trabajo para un Fixer de su zona" % company.name
+            msg = Message(recipients=[company.email],
+                        body=message,
+                        subject=subject)
+
+            conn.send(msg)
+
+
     
 
     response_body = {
@@ -123,14 +138,29 @@ def listworks():
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
     missing = User_signup.query.filter_by(email=current_user).first()
-    if (missing is None):
+    if missing is None:
         user = Worker_signup.query.filter_by(email=current_user).first()
         works = Work.query.filter_by(worker_id=user.id).all()
     else:
         user = User_signup.query.filter_by(email=current_user).first()
         works = Work.query.filter_by(user_id=user.id).all()
 
-    result= map(lambda work: work.serialize(),works)
+    result= list(map(lambda work: work.serialize(),works))
     
-    return jsonify(list(result)), 200
+    return jsonify(result), 200
 
+##Zone List Work
+##No recibe nada por parámetros y devuelve un array con:
+## -Las ofertas de trabajo en en la zona de la empresa que hace la consulta empresa
+##Ruta sólo accesible si estás logueado
+@api.route("/zone_listwork", methods=["GET"])
+@jwt_required()
+def zonelistworks():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    user = Worker_signup.query.filter_by(email=current_user).first()
+    works = Work.query.filter_by(city=user.city).filter_by(sector=user.sector).all()
+
+    result= list(map(lambda work: work.serialize(),works))
+    
+    return jsonify(result), 200

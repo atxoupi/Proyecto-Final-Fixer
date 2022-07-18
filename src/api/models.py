@@ -101,7 +101,7 @@ class Work(db.Model):
     sector = db.Column(db.String(120), unique=False, nullable=True)
     status = db.Column(db.Boolean, unique=False, nullable=True)
     cost = db.Column(db.Float, unique=False, nullable=True)
-    term = db.Column(db.Integer, unique=False, nullable=True)
+    duration = db.Column(db.Integer, unique=False, nullable=True)
     description = db.Column(db.String(500), unique=False, nullable=False)
     pictures = db.Column(db.String(500), unique=False, nullable=True)
 
@@ -114,6 +114,7 @@ class Work(db.Model):
             "user_id":self.user_id,
             "worker_id":self.worker_id,
             "location": self.location,
+            "sector": self.sector,
             "status":self.status,
             "cost":self.cost,
             "term":self.term,
