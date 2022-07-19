@@ -69,6 +69,7 @@ export const Navbar = () => {
               </Link>
             ) : null}
           </li>
+
           <li className="nav-item mx-1">
             {store.auth === true ? (
               <span onClick={() => actions.logout()}>

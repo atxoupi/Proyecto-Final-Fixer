@@ -8,6 +8,7 @@ export const PostedWorks = () => {
     actions.showWork();
   }, []);
   console.log(store.work);
+  console.log(store.usuario);
   return (
     <>
       <div className="container-works mx-auto">

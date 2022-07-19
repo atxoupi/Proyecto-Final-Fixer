@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 
 export const WorkPost = ({ description, location, worker_id, user_id }) => {
   const { store, actions } = useContext(Context);
-
+  console.log(store.usuario);
   return (
     <>
       <div className="row">
@@ -13,10 +13,10 @@ export const WorkPost = ({ description, location, worker_id, user_id }) => {
               <div className="work-title"> Título</div>
               <div className="work-location"> Ubicación:{location} </div>
               <div className="work-description">Descripción:{description}</div>
-              {worker_id != null ? (
-                <button>Enviar presupuesto</button>
-              ) : (
+              {store.usuario === true ? (
                 <button>Ver presupuesto</button>
+              ) : (
+                <button>Enviar presupuesto</button>
               )}
             </div>{" "}
           </div>{" "}

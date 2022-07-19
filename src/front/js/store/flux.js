@@ -8,7 +8,7 @@ const getState = ({
             auth: false,
             register: false,
             work: [],
-            usuario: true,
+            usuario: null,
         },
         actions: {
             // LOGIN
@@ -30,11 +30,12 @@ const getState = ({
                             auth: true,
                         });
                         console.log(data);
-                        // if (data.tipo === "Usuario") {
-                        //     setStore({
-                        //         usuario: true,
-                        //     });
-                        // }
+                        if (data.tipo === "Usuario") {
+                            console.log(data.tipo);
+                            setStore({
+                                usuario: true,
+                            });
+                        }
                         localStorage.setItem("token", data.access_token);
                         localStorage.setItem("mail", email);
                     } else if (resp.status === 404) {
