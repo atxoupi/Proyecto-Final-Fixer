@@ -64,7 +64,7 @@ export const Navbar = () => {
           </li>
           <li className="nav-item mx-1">
             {store.auth === true ? (
-              <spam onClick={() => actions.logout()}>
+              <span onClick={() => actions.logout()}>
                 <Link
                   className="nav-link nav-link-navbar"
                   aria-current="page"
@@ -72,7 +72,7 @@ export const Navbar = () => {
                 >
                   cerrar sesión
                 </Link>
-              </spam>
+              </span>
             ) : null}
           </li>
         </ul>
