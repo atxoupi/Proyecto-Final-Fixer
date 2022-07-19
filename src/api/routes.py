@@ -22,9 +22,16 @@ def login():
     comprobacion=current_app.bcrypt.check_password_hash(user.password, password)
     if email != user.email or comprobacion == False:
         return jsonify({"msg": "Bad username or password"}), 401 
+
+    missing = User_signup.query.filter_by(email=email).first()
+    if (missing is None):
+        segmento="Empresa"
+    else:
+        segmento="Usuario"
+    
     
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token) 
+    return jsonify(access_token=access_token,tipo=segmento) 
 
 #--SignUp
 #Recibe datos de Usuario o de Worker y los inserta en la BD

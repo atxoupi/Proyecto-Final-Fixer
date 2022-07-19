@@ -8,6 +8,7 @@ const getState = ({
             auth: false,
             register: false,
             work: [],
+            usuario: true,
         },
         actions: {
             // LOGIN
@@ -28,6 +29,12 @@ const getState = ({
                         setStore({
                             auth: true,
                         });
+                        console.log(data);
+                        // if (data.tipo === "Usuario") {
+                        //     setStore({
+                        //         usuario: true,
+                        //     });
+                        // }
                         localStorage.setItem("token", data.access_token);
                         localStorage.setItem("mail", email);
                     } else if (resp.status === 404) {
@@ -143,7 +150,7 @@ const getState = ({
                         work: data,
                     });
                     // // don't forget to return something, that is how the async resolves
-                    // return data;
+                    return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
