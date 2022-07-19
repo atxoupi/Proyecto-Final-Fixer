@@ -164,3 +164,19 @@ def zonelistworks():
     result= list(map(lambda work: work.serialize(),works))
     
     return jsonify(result), 200
+
+##Fixer zone
+##No recibe nada por parámetros y devuelve un array con:
+## los fixers de la zona
+##Ruta sólo accesible si estás logueado
+@api.route("/fixer_zone", methods=["GET"])
+@jwt_required()
+def fixers_zone():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    user = User_signup.query.filter_by(email=current_user).first()
+    fixers = Worker_signup.query.filter_by(city=user.city).all()
+
+    result= list(map(lambda fixer: fixer.serialize(),fixers))
+    
+    return jsonify(result), 200
