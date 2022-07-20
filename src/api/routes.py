@@ -24,9 +24,16 @@ def login():
     comprobacion=current_app.bcrypt.check_password_hash(user.password, password)
     if email != user.email or comprobacion == False:
         return jsonify({"msg": "Bad username or password"}), 401 
+
+    missing = User_signup.query.filter_by(email=email).first()
+    if (missing is None):
+        segmento="Empresa"
+    else:
+        segmento="Usuario"
+    
     
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token) 
+    return jsonify(access_token=access_token,tipo=segmento) 
 
 #--SignUp
 #Recibe datos de Usuario o de Worker y los inserta en la BD
@@ -91,7 +98,7 @@ def wrequestp():
     db.session.add(work)
     db.session.commit()
 
-    companys = Worker_signup.query.filter_by(city=work.city).filter_by(sector=work.sector).all()
+    companys = Worker_signup.query.filter_by(city=work.location).filter_by(sector=work.sector).all()
     with current_app.mail.connect() as conn:
         for company in companys:
             message = 'Hemos detectado que hay ofertas para realizar trabajos en su sector en su área de influencia, acceda a su zona privada en nuestra web para porder revisarlas'
@@ -102,8 +109,6 @@ def wrequestp():
 
             conn.send(msg)
 
-
-    
 
     response_body = {
         "message": "Solicitud de trabajo Añadida"

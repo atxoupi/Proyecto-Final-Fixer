@@ -34,9 +34,16 @@ export const Navbar = () => {
       >
         <ul className="navbar-nav mb-2 mb-lg-0">
           <li className="nav-item mx-1">
-            {store.auth === false ? (
+            {store.usuario ? (
               <Link className="nav-link nav-link-navbar" href="#" to="/request">
                 Publica una oferta
+              </Link>
+            ) : null}
+          </li>
+          <li className="nav-item mx-1">
+            {store.usuario ? (
+              <Link className="nav-link nav-link-navbar" href="#" to="/works">
+                Ofertas publicadas
               </Link>
             ) : null}
           </li>
@@ -62,9 +69,10 @@ export const Navbar = () => {
               </Link>
             ) : null}
           </li>
+
           <li className="nav-item mx-1">
             {store.auth === true ? (
-              <spam onClick={() => actions.logout()}>
+              <span onClick={() => actions.logout()}>
                 <Link
                   className="nav-link nav-link-navbar"
                   aria-current="page"
@@ -72,7 +80,7 @@ export const Navbar = () => {
                 >
                   cerrar sesión
                 </Link>
-              </spam>
+              </span>
             ) : null}
           </li>
         </ul>
