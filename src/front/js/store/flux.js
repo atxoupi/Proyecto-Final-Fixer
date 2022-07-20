@@ -29,15 +29,15 @@ const getState = ({
                         setStore({
                             auth: true,
                         });
-                        console.log(data);
+
                         if (data.tipo === "Usuario") {
-                            console.log(data.tipo);
                             setStore({
                                 usuario: true,
                             });
                         }
                         localStorage.setItem("token", data.access_token);
                         localStorage.setItem("mail", email);
+                        localStorage.setItem("tipo", data.tipo);
                     } else if (resp.status === 404) {
                         alert("usuario no existe");
                     } else {
@@ -160,9 +160,25 @@ const getState = ({
             // LOGOUT
             logout: () => {
                 localStorage.removeItem("token");
+                localStorage.removeItem("mail");
+                localStorage.removeItem("tipo");
                 setStore({
                     auth: false,
                 });
+            },
+            // UPDATE OUT
+
+            updateOut: () => {
+                if (localStorage.getItem("token")) {
+                    setStore({
+                        auth: true
+                    });
+                }
+                if (localStorage.getItem("tipo")) {
+                    setStore({
+                        usuario: true
+                    });
+                }
             },
         },
     };

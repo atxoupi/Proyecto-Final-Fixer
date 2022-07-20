@@ -98,7 +98,7 @@ def wrequestp():
     db.session.add(work)
     db.session.commit()
 
-    companys = Worker_signup.query.filter_by(city=work.city).filter_by(sector=work.sector).all()
+    companys = Worker_signup.query.filter_by(city=work.location).filter_by(sector=work.sector).all()
     with current_app.mail.connect() as conn:
         for company in companys:
             message = 'Hemos detectado que hay ofertas para realizar trabajos en su sector en su área de influencia, acceda a su zona privada en nuestra web para porder revisarlas'
@@ -109,8 +109,6 @@ def wrequestp():
 
             conn.send(msg)
 
-
-    
 
     response_body = {
         "message": "Solicitud de trabajo Añadida"

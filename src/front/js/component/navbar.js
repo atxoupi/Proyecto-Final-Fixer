@@ -34,14 +34,14 @@ export const Navbar = () => {
       >
         <ul className="navbar-nav mb-2 mb-lg-0">
           <li className="nav-item mx-1">
-            {store.usuario === true ? (
+            {store.usuario ? (
               <Link className="nav-link nav-link-navbar" href="#" to="/request">
                 Publica una oferta
               </Link>
             ) : null}
           </li>
           <li className="nav-item mx-1">
-            {store.usuario === true ? (
+            {store.usuario ? (
               <Link className="nav-link nav-link-navbar" href="#" to="/works">
                 Ofertas publicadas
               </Link>

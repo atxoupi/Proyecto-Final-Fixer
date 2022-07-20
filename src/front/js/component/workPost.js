@@ -13,7 +13,7 @@ export const WorkPost = ({ description, location, worker_id, user_id }) => {
               <div className="work-title"> Título</div>
               <div className="work-location"> Ubicación:{location} </div>
               <div className="work-description">Descripción:{description}</div>
-              {store.usuario === true ? (
+              {store.usuario ? (
                 <button>Ver presupuesto</button>
               ) : (
                 <button>Enviar presupuesto</button>
