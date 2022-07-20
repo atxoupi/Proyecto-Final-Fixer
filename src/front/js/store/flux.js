@@ -7,6 +7,7 @@ const getState = ({
         store: {
             auth: false,
             register: false,
+            workers: [],
         },
         actions: {
             // Use getActions to call a function within a fuction
@@ -17,7 +18,6 @@ const getState = ({
             // LOGIN
             login: async (email, password) => {
                 try {
-
                     const resp = await fetch(process.env.BACKEND_URL + "/api/login", {
                         method: "POST",
                         body: JSON.stringify({
@@ -31,15 +31,14 @@ const getState = ({
                     if (resp.status === 200) {
                         const data = await resp.json();
                         setStore({
-                            auth: true
-                        })
+                            auth: true,
+                        });
                         localStorage.setItem("token", data.access_token);
                         localStorage.setItem("mail", email);
-
                     } else if (resp.status === 404) {
-                        alert("usuario no existe")
+                        alert("usuario no existe");
                     } else {
-                        alert("email o contraseña incorrecta")
+                        alert("email o contraseña incorrecta");
                     }
 
                     return data;
@@ -137,15 +136,38 @@ const getState = ({
                 }
             },
 
+            // MUESTRA UN LISTADO DE LOS TRABAJADORES POR ZONA. SÓLO SI ESTAS LOGUEADO
+            ListWorkers: async () => {
+                try {
+                    const token = localStorage.getItem("token");
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + "/api/fixer_zone", {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: "Bearer " + token,
+                            },
+                        }
+                    );
+
+                    const data = await resp.json();
+                    setStore({
+                        workers: data,
+                    });
+
+                    return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
 
             // LOGOUT
             logout: () => {
-                localStorage.removeItem("token")
+                localStorage.removeItem("token");
                 setStore({
-                    auth: false
-                })
+                    auth: false,
+                });
             },
-
 
             getMessage: async () => {
                 try {
