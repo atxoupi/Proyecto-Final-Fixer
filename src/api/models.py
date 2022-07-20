@@ -4,7 +4,6 @@ from flask import Flask
 
 db = SQLAlchemy()
 
-
 # Full user data, from user signup
 class User_signup(db.Model):
     __tablename__='user_signup'
@@ -21,9 +20,9 @@ class User_signup(db.Model):
     works = db.relationship('Work', backref='user_signup', lazy=True)
     ratings = db.relationship('Ratings', backref='user_signup', lazy=True)
     login = db.relationship('Login', backref='user_signup', lazy=True)
-                            
+                             
     def __repr__(self):
-        return f'<User_signup {self.email}>'
+        return f'<User_signup {self.email}>' 
 
     def serialize(self):
         return {

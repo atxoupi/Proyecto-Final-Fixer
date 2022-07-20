@@ -146,6 +146,77 @@ const getState = ({
                 })
             },
 
+            //CODIGO DE CLOUDINARY SUBIDA DE FOTO
+
+            uploadFile: async (uploadImages) => {
+                const cloud_name = "carolinaqotf"; //"pluggedin";
+                const preset = "s5oaavqo"; //"icnpftra";
+                const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
+
+
+                const formData = new FormData();
+                formData.append("file", uploadImages);
+                formData.append("upload_preset", `${preset}`);
+                try {
+                    const response = await fetch(
+                        //process.env.BACKEND_URL + "/api/hello",
+                        url_claudinari, {
+                            method: "POST",
+                            body: formData,
+                        }
+                    );
+                    if (response.ok) {
+                        const data = await response.json();
+                        // actions.putImage(data.secure_url);
+                        console.log(data);
+                    }
+                } catch (error) {
+                    console.log("message", error);
+                }
+            },
+
+            // // DESCARGA DE ARCHIVO CLAUDINARY
+            // // downloadFile: async (downloadImages) => {
+            // //     const cloud_name = "carolinaqotf"; //"pluggedin";
+            // //     const preset = "s5oaavqo"; //"icnpftra";
+            // //     const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image/download`;
+
+            // //     const formData = new FormData();
+            // //     formData.append("file", downloadImages);
+            // //     formData.append("upload_preset", `${preset}`);
+            // //     try {
+            // //         const response = await fetch(
+            // //             //process.env.BACKEND_URL + "/api/hello",
+            // //             url_claudinari, {
+            // //                 method: "POST",
+            // //                 body: formData,
+            // //             }
+            // //         );
+            // //         if (response.ok) {
+            // //             const data = await response.json();
+            // //             // actions.putImage(data.secure_url);
+            // //             console.log(data);
+            // //         }
+            // //     } catch (error) {
+            // //         console.log("message", error);
+            // //     }
+            // // },
+
+            // download: () => {
+            //     // const cloud_name = "carolinaqotf"; //"pluggedin";
+            //     // const preset = "s5oaavqo"; //"icnpftra";
+            //     // const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image`;
+            //     //https://res.cloudinary.com/demo/image/upload/fl_attachment:myPdf/multi_page_pdf.pdf
+
+            //     fetch("https://api.cloudinary.com/v1_1/carolinaqotf/image/upload")
+            //         .then(resp => resp.json())
+            //         .then(data => {
+            //             console.log(data);
+            //             // setStore({
+            //             //     planetas: data.results
+            //             // });
+            //         })
+            // },
 
             getMessage: async () => {
                 try {
