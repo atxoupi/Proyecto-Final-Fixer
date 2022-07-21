@@ -9,7 +9,7 @@ const getState = ({
             register: false,
             work: [],
             usuario: null,
-            workers:[]
+            workers: [],
         },
         actions: {
             // LOGIN
@@ -34,6 +34,10 @@ const getState = ({
                         if (data.tipo === "Usuario") {
                             setStore({
                                 usuario: true,
+                            });
+                        } else {
+                            setStore({
+                                usuario: false,
                             });
                         }
                         localStorage.setItem("token", data.access_token);
@@ -188,6 +192,7 @@ const getState = ({
                 localStorage.removeItem("tipo");
                 setStore({
                     auth: false,
+                    usuario: null,
                 });
             },
             // UPDATE OUT
@@ -195,12 +200,16 @@ const getState = ({
             updateOut: () => {
                 if (localStorage.getItem("token")) {
                     setStore({
-                        auth: true
+                        auth: true,
                     });
                 }
-                if (localStorage.getItem("tipo")) {
+                if (localStorage.getItem("tipo") === "Usuario") {
                     setStore({
-                        usuario: true
+                        usuario: true,
+                    });
+                } else {
+                    setStore({
+                        usuario: false
                     });
                 }
             },

@@ -41,11 +41,9 @@ export const Navbar = () => {
             ) : null}
           </li>
           <li className="nav-item mx-1">
-            {store.usuario ? (
-              <Link className="nav-link nav-link-navbar" href="#" to="/works">
-                Ofertas publicadas
-              </Link>
-            ) : null}
+            <Link className="nav-link nav-link-navbar" href="#" to="/works">
+              Ofertas publicadas
+            </Link>
           </li>
           <li className="nav-item mx-1">
             {store.auth === false ? (
