@@ -180,3 +180,15 @@ def fixers_zone():
     result= list(map(lambda fixer: fixer.serialize(),fixers))
     
     return jsonify(result), 200
+
+@api.route("/workers", methods=["GET"])
+# @jwt_required()
+def get_workers():
+    # Access the identity of the current user with get_jwt_identity
+    # current_user = get_jwt_identity()
+    
+    fixers = Worker_signup.query.order_by(Worker_signup.name).all()
+
+    result= list(map(lambda fixer: fixer.serialize(),fixers))
+    
+    return jsonify(result), 200
