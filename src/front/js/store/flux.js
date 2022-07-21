@@ -9,6 +9,7 @@ const getState = ({
             register: false,
             work: [],
             usuario: null,
+            workers:[]
         },
         actions: {
             // LOGIN
@@ -151,6 +152,29 @@ const getState = ({
                         work: data,
                     });
                     // // don't forget to return something, that is how the async resolves
+                    return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+            listWorkers: async () => {
+                try {
+                    const token = localStorage.getItem("token");
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + "/api/fixer_zone", {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: "Bearer " + token,
+                            },
+                        }
+                    );
+
+                    const data = await resp.json();
+                    setStore({
+                        workers: data,
+                    });
+
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
