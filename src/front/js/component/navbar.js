@@ -46,6 +46,15 @@ export const Navbar = () => {
             </Link>
           </li>
           <li className="nav-item mx-1">
+            <Link
+              className="nav-link nav-link-navbar"
+              href="#"
+              to="/workers-list"
+            >
+              Buscar profesionales
+            </Link>
+          </li>
+          <li className="nav-item mx-1">
             {store.auth === false ? (
               <Link
                 to="/signup"

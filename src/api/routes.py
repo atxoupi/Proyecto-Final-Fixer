@@ -101,14 +101,19 @@ def wrequestp():
     companys = Worker_signup.query.filter_by(city=work.location).filter_by(sector=work.sector).all()
     with current_app.mail.connect() as conn:
         for company in companys:
-            message = 'Hemos detectado que hay ofertas para realizar trabajos en su sector en su área de influencia, acceda a su zona privada en nuestra web para porder revisarlas'
+            message = 'Hemos detectado que hay ofertas para realizar trabajos en su sector en su área de influencia, acceda a su zona privada en nuestra web para porder revisarlas.'
             subject = "Hola, %s. Nueva solicitud de trabajo para un Fixer de su zona" % company.name
             msg = Message(recipients=[company.email],
                         body=message,
                         subject=subject)
 
             conn.send(msg)
-
+    # msg = Message("Hello",
+    #               sender="fixer4geeks@gmail.com",
+    #               recipients=["andres.hermelo@gmail.com"])
+    
+    # current_app.mail.send(msg)
+    
 
     response_body = {
         "message": "Solicitud de trabajo Añadida"
@@ -187,7 +192,6 @@ def fixers_zone():
     return jsonify(result), 200
 
 @api.route("/workers", methods=["GET"])
-# @jwt_required()
 def get_workers():
     # Access the identity of the current user with get_jwt_identity
     # current_user = get_jwt_identity()
