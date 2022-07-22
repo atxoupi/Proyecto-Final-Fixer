@@ -66,7 +66,8 @@ class Worker_signup(db.Model):
             "tlf_number":self.tlf_number,
             "email": self.email,
             "city":self.city,
-            "adress":self.address,
+            "sector": self.sector,
+            "adress":self.adress,
             "postcode":self.postcode,
             "cif":self.cif,
             "pictures":self.pictures
