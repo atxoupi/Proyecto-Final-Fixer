@@ -17,7 +17,6 @@ const getState = ({
             // LOGIN
             login: async (email, password) => {
                 try {
-
                     const resp = await fetch(process.env.BACKEND_URL + "/api/login", {
                         method: "POST",
                         body: JSON.stringify({
@@ -31,15 +30,14 @@ const getState = ({
                     if (resp.status === 200) {
                         const data = await resp.json();
                         setStore({
-                            auth: true
-                        })
+                            auth: true,
+                        });
                         localStorage.setItem("token", data.access_token);
                         localStorage.setItem("mail", email);
-
                     } else if (resp.status === 404) {
-                        alert("usuario no existe")
+                        alert("usuario no existe");
                     } else {
-                        alert("email o contraseña incorrecta")
+                        alert("email o contraseña incorrecta");
                     }
 
                     return data;
@@ -79,7 +77,7 @@ const getState = ({
                 try {
                     // fetching data from the backend
                     const resp = await fetch(
-                        process.env.BACKEND_URL + "/api/worker_signup", {
+                        process.env.BACKEND_URL + "/api/user_signup", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
@@ -137,15 +135,13 @@ const getState = ({
                 }
             },
 
-
             // LOGOUT
             logout: () => {
-                localStorage.removeItem("token")
+                localStorage.removeItem("token");
                 setStore({
-                    auth: false
-                })
+                    auth: false,
+                });
             },
-
 
             getMessage: async () => {
                 try {

@@ -91,18 +91,21 @@ def wrequestp():
     db.session.add(work)
     db.session.commit()
 
-    companys = Worker_signup.query.filter_by(city=work.city).filter_by(sector=work.sector).all()
+    companys = Worker_signup.query.filter_by(city=work.location).filter_by(sector=work.sector).all()
     with current_app.mail.connect() as conn:
         for company in companys:
-            message = 'Hemos detectado que hay ofertas para realizar trabajos en su sector en su área de influencia, acceda a su zona privada en nuestra web para porder revisarlas'
+            message = 'Hemos detectado que hay ofertas para realizar trabajos en su sector en su área de influencia, acceda a su zona privada en nuestra web para porder revisarlas.'
             subject = "Hola, %s. Nueva solicitud de trabajo para un Fixer de su zona" % company.name
             msg = Message(recipients=[company.email],
                         body=message,
                         subject=subject)
 
             conn.send(msg)
-
-
+    # msg = Message("Hello",
+    #               sender="fixer4geeks@gmail.com",
+    #               recipients=["andres.hermelo@gmail.com"])
+    
+    # current_app.mail.send(msg)
     
 
     response_body = {
