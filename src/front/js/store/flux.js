@@ -9,6 +9,7 @@ const getState = ({
             register: false,
             work: [],
             usuario: null,
+            workers: [],
         },
         actions: {
             // LOGIN
@@ -33,6 +34,10 @@ const getState = ({
                         if (data.tipo === "Usuario") {
                             setStore({
                                 usuario: true,
+                            });
+                        } else {
+                            setStore({
+                                usuario: false,
                             });
                         }
                         localStorage.setItem("token", data.access_token);
@@ -134,6 +139,7 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
+
             //MUESTRA LISTADO DE TRABAJOS OFERTADOS. LA MISMA RUTA PARA TRABAJADOR Y USUARIO
             showWork: async () => {
                 try {
@@ -157,6 +163,29 @@ const getState = ({
                 }
             },
 
+            // Función que nos devuelve un listado con todos los trabajadores de la base de datos
+            listWorkers: async () => {
+                try {
+                    const token = localStorage.getItem("token");
+                    const resp = await fetch(process.env.BACKEND_URL + "/api/workers", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    });
+
+                    const data = await resp.json();
+                    setStore({
+                        workers: data,
+                    });
+
+                    return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+
             // LOGOUT
             logout: () => {
                 localStorage.removeItem("token");
@@ -164,6 +193,7 @@ const getState = ({
                 localStorage.removeItem("tipo");
                 setStore({
                     auth: false,
+                    usuario: null,
                 });
             },
             // UPDATE OUT
@@ -174,9 +204,13 @@ const getState = ({
                         auth: true,
                     });
                 }
-                if (localStorage.getItem("tipo")) {
+                if (localStorage.getItem("tipo") === "Usuario") {
                     setStore({
                         usuario: true,
+                    });
+                } else {
+                    setStore({
+                        usuario: false,
                     });
                 }
             },

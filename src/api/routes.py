@@ -150,7 +150,7 @@ def listworks():
     missing = User_signup.query.filter_by(email=current_user).first()
     if missing is None:
         user = Worker_signup.query.filter_by(email=current_user).first()
-        works = Work.query.filter_by(worker_id=user.id).all()
+        works = Work.query.filter_by(location=user.city).filter_by(sector=user.sector).all()
     else:
         user = User_signup.query.filter_by(email=current_user).first()
         works = Work.query.filter_by(user_id=user.id).all()
