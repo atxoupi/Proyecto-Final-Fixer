@@ -7,17 +7,13 @@ const getState = ({
         store: {
             auth: false,
             register: false,
+            work: [],
+            usuario: null,
         },
         actions: {
-            // Use getActions to call a function within a fuction
-            exampleFunction: () => {
-                getActions().changeColor(0, "green");
-            },
-
             // LOGIN
             login: async (email, password) => {
                 try {
-
                     const resp = await fetch(process.env.BACKEND_URL + "/api/login", {
                         method: "POST",
                         body: JSON.stringify({
@@ -31,15 +27,21 @@ const getState = ({
                     if (resp.status === 200) {
                         const data = await resp.json();
                         setStore({
-                            auth: true
-                        })
+                            auth: true,
+                        });
+
+                        if (data.tipo === "Usuario") {
+                            setStore({
+                                usuario: true,
+                            });
+                        }
                         localStorage.setItem("token", data.access_token);
                         localStorage.setItem("mail", email);
-
+                        localStorage.setItem("tipo", data.tipo);
                     } else if (resp.status === 404) {
-                        alert("usuario no existe")
+                        alert("usuario no existe");
                     } else {
-                        alert("email o contraseña incorrecta")
+                        alert("email o contraseña incorrecta");
                     }
 
                     return data;
@@ -79,7 +81,7 @@ const getState = ({
                 try {
                     // fetching data from the backend
                     const resp = await fetch(
-                        process.env.BACKEND_URL + "/api/worker_signup", {
+                        process.env.BACKEND_URL + "/api/user_signup", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
@@ -127,23 +129,55 @@ const getState = ({
                     );
                     const data = await resp.text();
                     console.log(data);
-                    // setStore({
-                    //     message: data.message,
-                    // });
-                    // don't forget to return something, that is how the async resolves
+                    return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+            //MUESTRA LISTADO DE TRABAJOS OFERTADOS. LA MISMA RUTA PARA TRABAJADOR Y USUARIO
+            showWork: async () => {
+                try {
+                    const token = localStorage.getItem("token");
+                    const resp = await fetch(process.env.BACKEND_URL + "/api/listwork", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    });
+
+                    const data = await resp.json();
+                    setStore({
+                        work: data,
+                    });
+                    // // don't forget to return something, that is how the async resolves
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
             },
 
-
             // LOGOUT
             logout: () => {
-                localStorage.removeItem("token")
+                localStorage.removeItem("token");
+                localStorage.removeItem("mail");
+                localStorage.removeItem("tipo");
                 setStore({
-                    auth: false
-                })
+                    auth: false,
+                });
+            },
+            // UPDATE OUT
+            updateOut: () => {
+                if (localStorage.getItem("token")) {
+                    setStore({
+                        auth: true,
+                    });
+                }
+                if (localStorage.getItem("tipo")) {
+                    setStore({
+                        usuario: true,
+                    });
+                }
             },
 
             //CODIGO DE CLOUDINARY SUBIDA DE FOTO
@@ -167,6 +201,18 @@ const getState = ({
                     );
                     if (response.ok) {
                         const data = await response.json();
+                        // const response2 = await fetch(
+                        //     process.env.BACKEND_URL + "/api/save_budget", {
+                        //         method: "POST",
+                        //         body: JSON.stringify({
+                        //             url: data.url,
+                        //         }),
+                        //         headers: {
+                        //             "Content-Type": "application/json",
+                        //         },
+                        //     }
+
+                        // );
                         // actions.putImage(data.secure_url);
                         console.log(data);
                     }
@@ -175,79 +221,7 @@ const getState = ({
                 }
             },
 
-            // // DESCARGA DE ARCHIVO CLAUDINARY
-            // // downloadFile: async (downloadImages) => {
-            // //     const cloud_name = "carolinaqotf"; //"pluggedin";
-            // //     const preset = "s5oaavqo"; //"icnpftra";
-            // //     const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image/download`;
 
-            // //     const formData = new FormData();
-            // //     formData.append("file", downloadImages);
-            // //     formData.append("upload_preset", `${preset}`);
-            // //     try {
-            // //         const response = await fetch(
-            // //             //process.env.BACKEND_URL + "/api/hello",
-            // //             url_claudinari, {
-            // //                 method: "POST",
-            // //                 body: formData,
-            // //             }
-            // //         );
-            // //         if (response.ok) {
-            // //             const data = await response.json();
-            // //             // actions.putImage(data.secure_url);
-            // //             console.log(data);
-            // //         }
-            // //     } catch (error) {
-            // //         console.log("message", error);
-            // //     }
-            // // },
-
-            // download: () => {
-            //     // const cloud_name = "carolinaqotf"; //"pluggedin";
-            //     // const preset = "s5oaavqo"; //"icnpftra";
-            //     // const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image`;
-            //     //https://res.cloudinary.com/demo/image/upload/fl_attachment:myPdf/multi_page_pdf.pdf
-
-            //     fetch("https://api.cloudinary.com/v1_1/carolinaqotf/image/upload")
-            //         .then(resp => resp.json())
-            //         .then(data => {
-            //             console.log(data);
-            //             // setStore({
-            //             //     planetas: data.results
-            //             // });
-            //         })
-            // },
-
-            getMessage: async () => {
-                try {
-                    // fetching data from the backend
-                    const resp = await fetch(process.env.BACKEND_URL + "/api/hello");
-                    const data = await resp.json();
-                    setStore({
-                        message: data.message,
-                    });
-                    // don't forget to return something, that is how the async resolves
-                    return data;
-                } catch (error) {
-                    console.log("Error loading message from backend", error);
-                }
-            },
-            changeColor: (index, color) => {
-                //get the store
-                const store = getStore();
-
-                //we have to loop the entire demo array to look for the respective index
-                //and change its color
-                const demo = store.demo.map((elm, i) => {
-                    if (i === index) elm.background = color;
-                    return elm;
-                });
-
-                //reset the global store
-                setStore({
-                    demo: demo,
-                });
-            },
         },
     };
 };
