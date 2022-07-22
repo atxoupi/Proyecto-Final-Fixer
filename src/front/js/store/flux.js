@@ -171,12 +171,12 @@ const getState = ({
             updateOut: () => {
                 if (localStorage.getItem("token")) {
                     setStore({
-                        auth: true
+                        auth: true,
                     });
                 }
                 if (localStorage.getItem("tipo")) {
                     setStore({
-                        usuario: true
+                        usuario: true,
                     });
                 }
             },

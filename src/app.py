@@ -45,10 +45,10 @@ app.bcrypt=bcrypt
 
 #Configuracion Email
 mail_settings={
-    "MAIL_SERVER" : "smtp.gmail.com",
-    "MAIL_PORT" : 465,
-    "MAIL_USE_TLS" : False,
-    "MAIL_USE_SSL" : True,
+    "MAIL_SERVER" : "smtp.mailtrap.io",
+    "MAIL_PORT" : 2525,
+    "MAIL_USE_TLS" : True,
+    "MAIL_USE_SSL" : False,
     "MAIL_USERNAME" : os.environ.get('MAIL'),
     "MAIL_PASSWORD" : os.environ.get('PASSWORD'),
     "MAIL_DEFAULT_SENDER" : os.environ.get('MAIL')
