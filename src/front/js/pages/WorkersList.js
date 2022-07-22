@@ -1,21 +1,37 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { CardWorker } from "../component/cardWorker";
 import { Context } from "../store/appContext";
 
 export const WorkersList = () => {
   const { store, actions } = useContext(Context);
+  const [filterItems, setFilterItems] = useState([]);
   useEffect(() => {
     actions.listWorkers();
   }, []);
-  console.log(store.workers);
+  const workers = store.workers;
+  console.log(workers);
+  const showFilteredItems = (workers) => {
+    return workers.filter((item) => {
+      if (item.sector === filterItems) {
+        console.log(filterItems);
+      }
+    });
+  };
   return (
     <>
       <div className="title-workersList text-center my-5">
         <h4>Selecciona un sector y una ciudad para tu búsqueda</h4>
       </div>
       <div className="input-group my-3 mx-auto w-50 ">
-        <select className="form-select" id="inputGroupSelect02">
+        <select
+          className="form-select"
+          id="inputGroupSelect02"
+          onChange={(e) => {
+            setFilterItems(e.target.value);
+          }}
+        >
           <option defaultValue>Elige un sector...</option>
-          {store.workers.map((item, index) => (
+          {workers.map((item, index) => (
             <option value={item.sector} key={index}>
               {item.sector}
             </option>
@@ -29,6 +45,16 @@ export const WorkersList = () => {
             </option>
           ))}
         </select>
+      </div>
+      <div>
+        <ul className="card-grid">
+          {/* {workers.map((item, index) => (
+            <li key={index}>
+              <CardWorker name={item.name} sector={item.sector} />
+            </li>
+          ))} */}
+          {showFilteredItems(workers)}
+        </ul>
       </div>
     </>
   );
