@@ -24,9 +24,16 @@ def login():
     comprobacion=current_app.bcrypt.check_password_hash(user.password, password)
     if email != user.email or comprobacion == False:
         return jsonify({"msg": "Bad username or password"}), 401 
+
+    missing = User_signup.query.filter_by(email=email).first()
+    if (missing is None):
+        segmento="Empresa"
+    else:
+        segmento="Usuario"
+    
     
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token) 
+    return jsonify(access_token=access_token,tipo=segmento) 
 
 #--SignUp
 #Recibe datos de Usuario o de Worker y los inserta en la BD
@@ -179,6 +186,17 @@ def fixers_zone():
     current_user = get_jwt_identity()
     user = User_signup.query.filter_by(email=current_user).first()
     fixers = Worker_signup.query.filter_by(city=user.city).all()
+
+    result= list(map(lambda fixer: fixer.serialize(),fixers))
+    
+    return jsonify(result), 200
+
+@api.route("/workers", methods=["GET"])
+def get_workers():
+    # Access the identity of the current user with get_jwt_identity
+    # current_user = get_jwt_identity()
+    
+    fixers = Worker_signup.query.order_by(Worker_signup.name).all()
 
     result= list(map(lambda fixer: fixer.serialize(),fixers))
     

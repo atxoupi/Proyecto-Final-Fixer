@@ -7,13 +7,10 @@ const getState = ({
         store: {
             auth: false,
             register: false,
+            work: [],
+            usuario: null,
         },
         actions: {
-            // Use getActions to call a function within a fuction
-            exampleFunction: () => {
-                getActions().changeColor(0, "green");
-            },
-
             // LOGIN
             login: async (email, password) => {
                 try {
@@ -32,8 +29,15 @@ const getState = ({
                         setStore({
                             auth: true,
                         });
+
+                        if (data.tipo === "Usuario") {
+                            setStore({
+                                usuario: true,
+                            });
+                        }
                         localStorage.setItem("token", data.access_token);
                         localStorage.setItem("mail", email);
+                        localStorage.setItem("tipo", data.tipo);
                     } else if (resp.status === 404) {
                         alert("usuario no existe");
                     } else {
@@ -125,10 +129,28 @@ const getState = ({
                     );
                     const data = await resp.text();
                     console.log(data);
-                    // setStore({
-                    //     message: data.message,
-                    // });
-                    // don't forget to return something, that is how the async resolves
+                    return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+            //MUESTRA LISTADO DE TRABAJOS OFERTADOS. LA MISMA RUTA PARA TRABAJADOR Y USUARIO
+            showWork: async () => {
+                try {
+                    const token = localStorage.getItem("token");
+                    const resp = await fetch(process.env.BACKEND_URL + "/api/listwork", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    });
+
+                    const data = await resp.json();
+                    setStore({
+                        work: data,
+                    });
+                    // // don't forget to return something, that is how the async resolves
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
@@ -138,40 +160,25 @@ const getState = ({
             // LOGOUT
             logout: () => {
                 localStorage.removeItem("token");
+                localStorage.removeItem("mail");
+                localStorage.removeItem("tipo");
                 setStore({
                     auth: false,
                 });
             },
+            // UPDATE OUT
 
-            getMessage: async () => {
-                try {
-                    // fetching data from the backend
-                    const resp = await fetch(process.env.BACKEND_URL + "/api/hello");
-                    const data = await resp.json();
+            updateOut: () => {
+                if (localStorage.getItem("token")) {
                     setStore({
-                        message: data.message,
+                        auth: true,
                     });
-                    // don't forget to return something, that is how the async resolves
-                    return data;
-                } catch (error) {
-                    console.log("Error loading message from backend", error);
                 }
-            },
-            changeColor: (index, color) => {
-                //get the store
-                const store = getStore();
-
-                //we have to loop the entire demo array to look for the respective index
-                //and change its color
-                const demo = store.demo.map((elm, i) => {
-                    if (i === index) elm.background = color;
-                    return elm;
-                });
-
-                //reset the global store
-                setStore({
-                    demo: demo,
-                });
+                if (localStorage.getItem("tipo")) {
+                    setStore({
+                        usuario: true,
+                    });
+                }
             },
         },
     };
