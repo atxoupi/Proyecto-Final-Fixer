@@ -139,6 +139,7 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
+
             //MUESTRA LISTADO DE TRABAJOS OFERTADOS. LA MISMA RUTA PARA TRABAJADOR Y USUARIO
             showWork: async () => {
                 try {
@@ -161,18 +162,18 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
+
+            // Función que nos devuelve un listado con todos los trabajadores de la base de datos
             listWorkers: async () => {
                 try {
                     const token = localStorage.getItem("token");
-                    const resp = await fetch(
-                        process.env.BACKEND_URL + "/api/fixer_zone", {
-                            method: "GET",
-                            headers: {
-                                "Content-Type": "application/json",
-                                Authorization: "Bearer " + token,
-                            },
-                        }
-                    );
+                    const resp = await fetch(process.env.BACKEND_URL + "/api/workers", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    });
 
                     const data = await resp.json();
                     setStore({
@@ -209,7 +210,7 @@ const getState = ({
                     });
                 } else {
                     setStore({
-                        usuario: false
+                        usuario: false,
                     });
                 }
             },
