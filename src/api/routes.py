@@ -220,3 +220,17 @@ def sbudget():
         }
 
     return jsonify(response_body), 200
+
+
+
+@api.route("/getbudget", methods=["GET"])
+@jwt_required()
+def budgets():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    id_work = request.json.get("work", None)
+    my_budgets =Budget.query.filter_by(work_id=id_work).all()
+
+    result= list(map(lambda budget: budget.serialize(),my_budgets))
+    
+    return jsonify(result), 200
