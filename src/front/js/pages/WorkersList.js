@@ -1,21 +1,44 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useMemo } from "react";
 import { CardWorker } from "../component/cardWorker";
 import { Context } from "../store/appContext";
 
 export const WorkersList = () => {
   const { store, actions } = useContext(Context);
-  const [filterItems, setFilterItems] = useState([]);
-
-  useEffect(() => {
-    actions.listWorkers();
-  }, []);
 
   const workers = store.workers;
   console.log(workers);
-
-  // const showFilteredItems = (par) => {
-  //   const filteredWorkers = workers.filter((item) => item.sector === par);
-  //   console.log(filteredWorkers);
+  const [filterItems, setFilterItems] = useState([]);
+  const [selectedCity, setSelectedCity] = useState([]);
+  const [selectedSector, setSelectedSector] = useState([]);
+  useEffect(() => {
+    actions.listWorkers();
+  }, []);
+  // Filtrar elementos por ciudad
+  // getFilteredItems();
+  setFilterItems([...workers]);
+  console.log(filterItems);
+  // const getFilteredItems = () => {
+  //   if (!selectedCity) {
+  //     return filterItems;
+  //   } else {
+  //     workers.filter((item) => item.city === selectedCity);
+  //     console.log(filterItems);
+  //     setFilterItems(filterItems);
+  //   }
+  // };
+  // getFilteredItems();
+  // console.log(filterItems);
+  // let filteredItems = useMemo(getFilteredItems[(selectedCity, filterItems)]);
+  // console.log(filteredItems);
+  //     filterItems.filter((item) => {
+  //       if (selectedCity !== item.city) {
+  //        ([...filterItems, ...item]);
+  //         //       setFilterItems([...filterItems, filterItems.concat(item)]);
+  //       }
+  //       console.log(filterItems);
+  //       return filterItems;
+  //     });
+  //   }
   // };
 
   return (
@@ -27,34 +50,41 @@ export const WorkersList = () => {
         <select
           className="form-select"
           id="inputGroupSelect02"
-          // onChange={(e) => {
-          //   showFilteredItems(e.target.value);
-          // }}
+          onChange={(e) => {
+            setSelectedSector(e.target.value);
+          }}
         >
-          <option defaultValue>Elige un sector...</option>
-          {workers.map((item, index) => (
-            <option value={item.sector} key={index}>
-              {item.sector}
-            </option>
-          ))}
+          <option value="Todos">Elige un sector...</option>
+          <option value="Carpintería">Carpintería</option>
+          <option value="Fontanería">Fontanería</option>
+          <option value="Pintura">Pintura</option>
+          <option value="Electricidad">Electricidad</option>
         </select>
-        <select className="form-select" id="inputGroupSelect02">
-          <option defaultValue>Elige una ciudad...</option>
-          {store.workers.map((item, index) => (
-            <option value={item.city} key={index}>
-              {item.city}
-            </option>
-          ))}
+        <select
+          className="form-select"
+          id="inputGroupSelect02"
+          onChange={(e) => {
+            setSelectedCity(e.target.value);
+          }}
+        >
+          <option defaultValue>Elige una provincia...</option>
+          <option value="Madrid">Madrid</option>
+          <option value="Gava">Gava</option>
+          <option value="Guadalajara">Guadalajara</option>
+          <option value="Sevilla">Sevilla</option>
         </select>
       </div>
       <div>
         <ul className="card-grid">
-          {workers.map((item, index) => (
-            <li key={index}>
-              <CardWorker name={item.name} sector={item.sector} />
-            </li>
-          ))}
-          {/* {showFilteredItems(workers)} */}
+          {/* {filteredListByCity.length === 0 ? (
+            <p>No se han encontrado coincidencias</p>
+          ) : (
+            filteredListByCity.map((element, index) => (
+              <li key={index}>
+                <CardWorker {...element} key={index} />{" "}
+              </li>
+            ))
+          )} */}
         </ul>
       </div>
     </>
