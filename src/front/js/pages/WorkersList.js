@@ -7,39 +7,30 @@ export const WorkersList = () => {
 
   const workers = store.workers;
   console.log(workers);
+
   const [filterItems, setFilterItems] = useState([]);
-  const [selectedCity, setSelectedCity] = useState([]);
-  const [selectedSector, setSelectedSector] = useState([]);
+  const [selectedCity, setSelectedCity] = useState();
+  const [selectedSector, setSelectedSector] = useState();
   useEffect(() => {
     actions.listWorkers();
   }, []);
-  // Filtrar elementos por ciudad
-  // getFilteredItems();
-  setFilterItems([...workers]);
-  console.log(filterItems);
-  // const getFilteredItems = () => {
-  //   if (!selectedCity) {
-  //     return filterItems;
-  //   } else {
-  //     workers.filter((item) => item.city === selectedCity);
-  //     console.log(filterItems);
-  //     setFilterItems(filterItems);
-  //   }
-  // };
-  // getFilteredItems();
-  // console.log(filterItems);
-  // let filteredItems = useMemo(getFilteredItems[(selectedCity, filterItems)]);
-  // console.log(filteredItems);
-  //     filterItems.filter((item) => {
-  //       if (selectedCity !== item.city) {
-  //        ([...filterItems, ...item]);
-  //         //       setFilterItems([...filterItems, filterItems.concat(item)]);
-  //       }
-  //       console.log(filterItems);
-  //       return filterItems;
-  //     });
-  //   }
-  // };
+
+  useEffect(() => {
+    if (!selectedCity && !selectedSector) {
+      setFilterItems(workers);
+      console.log(filterItems);
+    } else if (selectedCity) {
+      const filteredWorkersByCity = workers.filter((item) => {
+        selectedCity === item.city;
+        setFilterItems(filteredWorkersByCity);
+      });
+    } else if (selectedSector) {
+      const filteredWorkersBySector = workers.filter((item) => {
+        selectedSector === item.sector;
+        setFilterItems(filteredWorkersBySector);
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -54,7 +45,7 @@ export const WorkersList = () => {
             setSelectedSector(e.target.value);
           }}
         >
-          <option value="Todos">Elige un sector...</option>
+          <option value="">Elige un sector...</option>
           <option value="Carpintería">Carpintería</option>
           <option value="Fontanería">Fontanería</option>
           <option value="Pintura">Pintura</option>
@@ -67,7 +58,7 @@ export const WorkersList = () => {
             setSelectedCity(e.target.value);
           }}
         >
-          <option defaultValue>Elige una provincia...</option>
+          <option value="">Elige una provincia...</option>
           <option value="Madrid">Madrid</option>
           <option value="Gava">Gava</option>
           <option value="Guadalajara">Guadalajara</option>
@@ -76,17 +67,40 @@ export const WorkersList = () => {
       </div>
       <div>
         <ul className="card-grid">
-          {/* {filteredListByCity.length === 0 ? (
-            <p>No se han encontrado coincidencias</p>
-          ) : (
-            filteredListByCity.map((element, index) => (
-              <li key={index}>
-                <CardWorker {...element} key={index} />{" "}
-              </li>
-            ))
-          )} */}
+          {filterItems.map((item, index) => (
+            <li key={index}>
+              <CardWorker name={item.name} sector={item.sector} />
+            </li>
+          ))}
         </ul>
       </div>
     </>
   );
 };
+
+// getFilteredItems();
+// setFilterItems([...workers]);
+// console.log(filterItems);
+// const getFilteredItems = () => {
+//   if (!selectedCity) {
+//     return workers;
+//   } else {
+//     workers.filter((item) => item.city === selectedCity);
+//     //     console.log(filterItems);
+//     //     setFilterItems(filterItems);
+//   }
+// };
+// getFilteredItems();
+// console.log(filterItems);
+// let filteredItems = useMemo(getFilteredItems[(selectedCity, filterItems)]);
+// console.log(filteredItems);
+//     filterItems.filter((item) => {
+//       if (selectedCity !== item.city) {
+//        ([...filterItems, ...item]);
+//         //       setFilterItems([...filterItems, filterItems.concat(item)]);
+//       }
+//       console.log(filterItems);
+//       return filterItems;
+//     });
+//   }
+// };
