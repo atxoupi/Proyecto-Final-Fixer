@@ -224,7 +224,10 @@ def sbudget():
 
     return jsonify(response_body), 200
 
-
+##getbudget
+##Recibe el id de la propuesta,
+##Devuelve todos los presupuestos para esa propuesta
+##Ruta sólo accesible si estás logueado
 
 @api.route("/getbudget", methods=["GET"])
 @jwt_required()
