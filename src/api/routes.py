@@ -25,15 +25,8 @@ def login():
     if email != user.email or comprobacion == False:
         return jsonify({"msg": "Bad username or password"}), 401 
 
-    missing = User_signup.query.filter_by(email=email).first()
-    if (missing is None):
-        segmento="Empresa"
-    else:
-        segmento="Usuario"
-    
-    
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token,tipo=segmento) 
+    return jsonify(access_token=access_token) 
 
 #--SignUp
 #Recibe datos de Usuario o de Worker y los inserta en la BD
@@ -98,7 +91,7 @@ def wrequestp():
     db.session.add(work)
     db.session.commit()
 
-    companys = Worker_signup.query.filter_by(city=work.location).filter_by(sector=work.sector).all()
+    companys = Worker_signup.query.filter_by(city=work.city).filter_by(sector=work.sector).all()
     with current_app.mail.connect() as conn:
         for company in companys:
             message = 'Hemos detectado que hay ofertas para realizar trabajos en su sector en su área de influencia, acceda a su zona privada en nuestra web para porder revisarlas'
@@ -108,7 +101,9 @@ def wrequestp():
                         subject=subject)
 
             conn.send(msg)
+    
 
+    
 
     response_body = {
         "message": "Solicitud de trabajo Añadida"
@@ -145,7 +140,7 @@ def listworks():
     missing = User_signup.query.filter_by(email=current_user).first()
     if missing is None:
         user = Worker_signup.query.filter_by(email=current_user).first()
-        works = Work.query.filter_by(city=user.city).filter_by(sector=user.sector).all()
+        works = Work.query.filter_by(worker_id=user.id).all()
     else:
         user = User_signup.query.filter_by(email=current_user).first()
         works = Work.query.filter_by(user_id=user.id).all()
@@ -197,3 +192,5 @@ def get_workers():
     result= list(map(lambda fixer: fixer.serialize(),fixers))
     
     return jsonify(result), 200
+
+

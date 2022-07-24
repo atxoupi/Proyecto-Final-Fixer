@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "../../styles/home.css";
 import { Header } from "../component/header";
 import ModalForm from "../component/modalForm";
+import VerPresupuesto from "../component/verPresupuesto";
 
 export const Home = () => {
   return (
@@ -9,6 +10,7 @@ export const Home = () => {
       <Header />
       <div>
         <ModalForm />
+        <VerPresupuesto />
       </div>
     </div>
   );

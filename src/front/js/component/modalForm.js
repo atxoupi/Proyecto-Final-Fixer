@@ -15,16 +15,16 @@ const ModalForm = () => {
         data-bs-target="#exampleModal"
         data-bs-whatever="@mdo"
       >
-        Probando modal
+        Enviar Presupuesto
       </button>
       <div
-        className="modal fade"
+        className="modal fade modal-dialog-scrollable"
         id="exampleModal"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-scrollable">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
@@ -50,13 +50,24 @@ const ModalForm = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label for="message-text" className="col-form-label">
-                    Mensaje
+                  <label for="recipient-name" className="col-form-label">
+                    Precio
                   </label>
-                  <textarea
+                  <input
+                    type="text"
                     className="form-control"
-                    id="message-text"
-                  ></textarea>
+                    id="recipient-name"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label for="recipient-name" className="col-form-label">
+                    Tiempo estimado
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="recipient-name"
+                  />
                 </div>
                 <div className="mb-3">
                   <input
@@ -83,29 +94,6 @@ const ModalForm = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div>
-        <div>
-          <a
-            href="https://res.cloudinary.com/demo/image/upload/fl_attachment:myPdf/multi_page_pdf.pdf"
-            download
-          >
-            {" "}
-            <button
-              type="button"
-              className="btn btnHeader mt-3"
-              // onClick={(e) => actions.download(downloadImages)}
-            >
-              descarga claudinary
-            </button>
-          </a>
-        </div>
-        {/* <a // atributo target= "_blank"href>
-         <button className=" btn"  >
-          decarga
-
-        </button> 
-        </a> */}
       </div>
     </div>
   );
