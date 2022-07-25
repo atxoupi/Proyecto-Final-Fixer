@@ -98,7 +98,7 @@ def wrequestp():
     db.session.add(work)
     db.session.commit()
 
-    companys = Worker_signup.query.filter_by(city=work.city).filter_by(sector=work.sector).all()
+    companys = Worker_signup.query.filter_by(city=work.location).filter_by(sector=work.sector).all()
     with current_app.mail.connect() as conn:
         for company in companys:
             message = 'Hemos detectado que hay ofertas para realizar trabajos en su sector en su área de influencia, acceda a su zona privada en nuestra web para porder revisarlas'
@@ -144,7 +144,7 @@ def listworks():
     missing = User_signup.query.filter_by(email=current_user).first()
     if missing is None:
         user = Worker_signup.query.filter_by(email=current_user).first()
-        works = Work.query.all()
+        works = Work.query.filter_by(location=user.city).filter_by(sector=user.sector).all()
     else:
         user = User_signup.query.filter_by(email=current_user).first()
         works = Work.query.filter_by(user_id=user.id).all()
