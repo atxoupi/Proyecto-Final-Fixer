@@ -21,6 +21,7 @@ class User_signup(db.Model):
     works = db.relationship('Work', backref='user_signup', lazy=True)
     ratings = db.relationship('Ratings', backref='user_signup', lazy=True)
     login = db.relationship('Login', backref='user_signup', lazy=True)
+    budget = db.relationship('Budget', backref='user_signup', lazy=True)
                             
     def __repr__(self):
         return f'<User_signup {self.email}>'
@@ -55,6 +56,7 @@ class Worker_signup(db.Model):
     works = db.relationship('Work', backref='worker_signup', lazy=True)
     ratings = db.relationship('Ratings', backref='worker_signup', lazy=True)
     login = db.relationship('Login', backref='worker_signup', lazy=True)
+    budget = db.relationship('Budget', backref='worker_signup', lazy=True)
     
 
     def __repr__(self):
@@ -95,6 +97,7 @@ class Login(db.Model):
 
  # Posted works data
 class Work(db.Model):
+    __tablename__='work'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer,db.ForeignKey('user_signup.id'), nullable=False)
     worker_id = db.Column(db.Integer, db.ForeignKey('worker_signup.id'), nullable=True)
@@ -105,6 +108,7 @@ class Work(db.Model):
     duration = db.Column(db.Integer, unique=False, nullable=True)
     description = db.Column(db.String(500), unique=False, nullable=False)
     pictures = db.Column(db.String(500), unique=False, nullable=True)
+    budget = db.relationship('Budget', backref='work', lazy=True)
 
     def __repr__(self):
         return f'<Work {self.id}>'
@@ -140,5 +144,29 @@ class Ratings(db.Model):
             "worker_id":self.worker_id,
             "rating":self.rating,
             "description":self.description,
+        }
+
+class Budget(db.Model):
+    __tablename__='budget'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('user_signup.id'), nullable=False)
+    worker_id = db.Column(db.Integer, db.ForeignKey('worker_signup.id'), nullable=False)
+    work_id = db.Column(db.Integer, db.ForeignKey('work.id'), nullable=False)
+    url = db.Column(db.String(120), unique=False, nullable=False)
+    duration = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Float, unique=False, nullable=True)
+
+    def __repr__(self):
+        return f'<Budget {self.id}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id":self.user_id,
+            "worker_id":self.worker_id,
+            "work_id":self.work_id,
+            "url":self.url,
+            "duration":self.duration,
+            "price":self.price,
         }
 
