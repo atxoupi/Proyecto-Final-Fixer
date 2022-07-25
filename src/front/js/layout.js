@@ -7,7 +7,7 @@ import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { Request } from "./pages/request";
 import { PostedWorks } from "./pages/postedWorks";
-
+import { PostedPresupuestos } from "./pages/postedPresupuestos";
 
 import injectContext from "./store/appContext";
 
@@ -36,6 +36,7 @@ const Layout = () => {
           <Route element={<Request />} path="/request" />
           <Route element={<PostedWorks />} path="/works" />
           <Route element={<WorkersList />} path="/workers-list" />
+          <Route element={<PostedPresupuestos />} path="/posted-presupuestos" />
           <Route element={<h1>Not found!</h1>} />
         </Routes>
         <Footer />

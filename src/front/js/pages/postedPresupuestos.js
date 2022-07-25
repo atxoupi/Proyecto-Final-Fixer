@@ -2,10 +2,10 @@ import React, { useEffect, useContext } from "react";
 import { WorkPost } from "../component/workPost";
 import { Context } from "../store/appContext";
 
-export const PostedWorks = () => {
+export const PostedPresupuestos = () => {
   const { store, actions } = useContext(Context);
   useEffect(() => {
-    actions.showWork();
+    actions.showbudget();
   }, []);
   console.log(store.work);
   console.log(store.usuario);
@@ -13,15 +13,16 @@ export const PostedWorks = () => {
     <>
       <div className="container-works mx-auto">
         <h3 className="text-center mb-3">
-          Estas són las ofertas disponibles de tu sector
+          Estos són los preupuestos que has recibido
         </h3>
-        {store.work.map((item, index) => (
+        {store.budget.map((item, index) => (
           <WorkPost
             key={index}
-            description={item.description}
-            location={item.location}
+            description={item.work.description}
+            location={item.work.location}
             user_id={item.user_id}
-            worker_id={item.id}
+            worker_id={item.worker_id}
+            url={item.url}
           />
         ))}
       </div>
