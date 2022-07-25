@@ -23,11 +23,12 @@ export const WorkersList = () => {
       console.log(filteredWorkersByCity);
       setFilterItems(filteredWorkersByCity);
     } else if (selectedSector) {
-      const filteredWorkersBySector = store.workers.filter((item) => {
-        item.sector === selectedSector;
-        setFilterItems(filteredWorkersBySector);
-        console.log(filteredWorkersBySector);
-      });
+      console.log(store.workers);
+      const filteredWorkersBySector = store.workers.filter(
+        (item) => item.sector === selectedSector
+      );
+      setFilterItems(filteredWorkersBySector);
+      console.log(filteredWorkersBySector);
     }
   }, [selectedCity, selectedSector]);
 
@@ -66,12 +67,17 @@ export const WorkersList = () => {
       </div>
       <div>
         <ul className="card-grid">
-          {filterItems.length > 0 &&
+          {!filterItems.length > 0 ? (
+            <p className="text-filter text-center">
+              No se han encontrado coincidencias{" "}
+            </p>
+          ) : (
             filterItems.map((item, index) => (
               <li key={index}>
                 <CardWorker name={item.name} sector={item.sector} />
               </li>
-            ))}
+            ))
+          )}
         </ul>
       </div>
     </>
