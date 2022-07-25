@@ -4,33 +4,32 @@ import { Context } from "../store/appContext";
 
 export const WorkersList = () => {
   const { store, actions } = useContext(Context);
-
-  const workers = store.workers;
-  console.log(workers);
-
-  const [filterItems, setFilterItems] = useState([]);
-  const [selectedCity, setSelectedCity] = useState();
-  const [selectedSector, setSelectedSector] = useState();
   useEffect(() => {
     actions.listWorkers();
   }, []);
 
   useEffect(() => {
-    if (!selectedCity && !selectedSector) {
-      setFilterItems(workers);
-      console.log(filterItems);
-    } else if (selectedCity) {
-      const filteredWorkersByCity = workers.filter((item) => {
-        selectedCity === item.city;
-        setFilterItems(filteredWorkersByCity);
-      });
+    setFilterItems(store.workers);
+  }, [store.workers]);
+  const [filterItems, setFilterItems] = useState([]);
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedSector, setSelectedSector] = useState("");
+
+  useEffect(() => {
+    if (selectedCity) {
+      const filteredWorkersByCity = store.workers.filter(
+        (item) => item.city === selectedCity
+      );
+      console.log(filteredWorkersByCity);
+      setFilterItems(filteredWorkersByCity);
     } else if (selectedSector) {
-      const filteredWorkersBySector = workers.filter((item) => {
-        selectedSector === item.sector;
+      const filteredWorkersBySector = store.workers.filter((item) => {
+        item.sector === selectedSector;
         setFilterItems(filteredWorkersBySector);
+        console.log(filteredWorkersBySector);
       });
     }
-  }, []);
+  }, [selectedCity, selectedSector]);
 
   return (
     <>
@@ -67,11 +66,12 @@ export const WorkersList = () => {
       </div>
       <div>
         <ul className="card-grid">
-          {filterItems.map((item, index) => (
-            <li key={index}>
-              <CardWorker name={item.name} sector={item.sector} />
-            </li>
-          ))}
+          {filterItems.length > 0 &&
+            filterItems.map((item, index) => (
+              <li key={index}>
+                <CardWorker name={item.name} sector={item.sector} />
+              </li>
+            ))}
         </ul>
       </div>
     </>
