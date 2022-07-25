@@ -208,15 +208,35 @@ def sbudget():
     id_work = request.json.get("id_work", None)
     duration = request.json.get("duration", None)
     price = request.json.get("price", None)
-    worker =Worker_signup.query.filter_by(email=current_user).first()
-    work =Work.query.filter_by(id=id_work).first() 
+    worker = Worker_signup.query.filter_by(email=current_user).first()
+    tarea = Work.query.filter_by(id=id_work).first() 
 
-    budget = Budget(user_id=work.user_id , worker_id=worker.id, work_id=work.id, url=url, duration=duration, price=price)
+    print("El id del trtabajador:  ")
+    print(worker.id)
+    budget = Budget(user_id=tarea.user_id , worker_id=worker.id, work_id=tarea.id, url=url, duration=duration, price=price)
     db.session.add(budget)
     db.session.commit()
+    print(budget.id)
 
     response_body = {
             "message": "Presupuesto Almacenado"
         }
 
     return jsonify(response_body), 200
+
+##getbudget
+##Recibe el id de la propuesta,
+##Devuelve todos los presupuestos para esa propuesta
+##Ruta sólo accesible si estás logueado
+
+@api.route("/getbudget", methods=["GET"])
+@jwt_required()
+def budgets():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    id_work = request.json.get("work", None)
+    my_budgets =Budget.query.filter_by(work_id=id_work).all()
+
+    result= list(map(lambda budget: budget.serialize(),my_budgets))
+    
+    return jsonify(result), 200

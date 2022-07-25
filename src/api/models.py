@@ -97,6 +97,7 @@ class Login(db.Model):
 
  # Posted works data
 class Work(db.Model):
+    __tablename__='work'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer,db.ForeignKey('user_signup.id'), nullable=False)
     worker_id = db.Column(db.Integer, db.ForeignKey('worker_signup.id'), nullable=True)
@@ -165,7 +166,7 @@ class Budget(db.Model):
             "worker_id":self.worker_id,
             "work_id":self.work_id,
             "url":self.url,
-            "duration":self.duration_id,
-            "price":self.price_id,
+            "duration":self.duration,
+            "price":self.price,
         }
 
