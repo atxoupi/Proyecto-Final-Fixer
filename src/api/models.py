@@ -107,6 +107,7 @@ class Work(db.Model):
     duration = db.Column(db.Integer, unique=False, nullable=True)
     description = db.Column(db.String(500), unique=False, nullable=False)
     pictures = db.Column(db.String(500), unique=False, nullable=True)
+    title=db.Column(db.String(180), unique=False, nullable=True)
     budget = db.relationship('Budget', backref='work', lazy=True)
 
     def __repr__(self):
@@ -122,6 +123,7 @@ class Work(db.Model):
             "status":self.status,
             "cost":self.cost,
             "description":self.description,
+            "title":self.title,
             "pictures":self.pictures
         }
 
