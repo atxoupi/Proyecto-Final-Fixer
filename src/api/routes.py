@@ -209,12 +209,15 @@ def sbudget():
     id_work = request.json.get("id_work", None)
     duration = request.json.get("duration", None)
     price = request.json.get("price", None)
-    worker =Worker_signup.query.filter_by(email=current_user).first()
-    work =Work.query.filter_by(id=id_work).first() 
+    worker = Worker_signup.query.filter_by(email=current_user).first()
+    tarea = Work.query.filter_by(id=id_work).first() 
 
-    budget = Budget(user_id=work.user_id , worker_id=worker.id, work_id=work.id, url=url, duration=duration, price=price)
+    print("El id del trtabajador:  ")
+    print(worker.id)
+    budget = Budget(user_id=tarea.user_id , worker_id=worker.id, work_id=tarea.id, url=url, duration=duration, price=price)
     db.session.add(budget)
     db.session.commit()
+    print(budget.id)
 
     response_body = {
             "message": "Presupuesto Almacenado"

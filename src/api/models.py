@@ -96,6 +96,7 @@ class Login(db.Model):
 
  # Posted works data
 class Work(db.Model):
+    __tablename__='work'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer,db.ForeignKey('user_signup.id'), nullable=False)
     worker_id = db.Column(db.Integer, db.ForeignKey('worker_signup.id'), nullable=True)
