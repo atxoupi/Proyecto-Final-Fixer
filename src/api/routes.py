@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, current_app
-from api.models import db, Login, Worker_signup, User_signup, Work
+from api.models import db, Login, Worker_signup, User_signup, Work, Budget
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 from flask_bcrypt import Bcrypt
@@ -100,10 +100,7 @@ def wrequestp():
                         body=message,
                         subject=subject)
 
-            conn.send(msg)
-    
-
-    
+            conn.send(msg)    
 
     response_body = {
         "message": "Solicitud de trabajo Añadida"
@@ -140,7 +137,7 @@ def listworks():
     missing = User_signup.query.filter_by(email=current_user).first()
     if missing is None:
         user = Worker_signup.query.filter_by(email=current_user).first()
-        works = Work.query.filter_by(worker_id=user.id).all()
+        works = Work.query.all()
     else:
         user = User_signup.query.filter_by(email=current_user).first()
         works = Work.query.filter_by(user_id=user.id).all()
@@ -193,4 +190,27 @@ def get_workers():
     
     return jsonify(result), 200
 
+##save_budget
+##Recibe el id de la propuesta, la url del archivo PDF y los datos para mostrar sin abrir el presupuesto detallado como el precio y la duración en días de la reforma
+##toda esta información la guarda en la tabla Budget de BBDD
+##Ruta sólo accesible si estás logueado
+@api.route("/save_budget", methods=["POST"])
+@jwt_required()
+def sbudget():
+    current_user = get_jwt_identity()
+    url = request.json.get("url", None)
+    id_work = request.json.get("id_work", None)
+    duration = request.json.get("duration", None)
+    price = request.json.get("price", None)
+    worker =Worker_signup.query.filter_by(email=current_user).first()
+    work =Work.query.filter_by(id=id_work).first() 
 
+    budget = Budget(user_id=work.user_id , worker_id=worker.id, work_id=work.id, url=url, duration=duration, price=price)
+    db.session.add(budget)
+    db.session.commit()
+
+    response_body = {
+            "message": "Presupuesto Almacenado"
+        }
+
+    return jsonify(response_body), 200

@@ -34,3 +34,8 @@ const VerPresupuesto = () => {
 };
 
 export default VerPresupuesto;
+/* 1 para ver los trabajos q ofertan 
+1 para ver los trabajos en los q te has inscrito estas dos para empresas (esta hacerlo a traves de budget)
+
+3ra vista para clientes para ver las ofertas q el ha creado
+4ta para ver los presupuestos q les han enviado(esta hacerlo a traves de budget)*/

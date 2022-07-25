@@ -8,10 +8,6 @@ export const Home = () => {
   return (
     <div className="container">
       <Header />
-      <div>
-        <ModalForm />
-        <VerPresupuesto />
-      </div>
     </div>
   );
 };

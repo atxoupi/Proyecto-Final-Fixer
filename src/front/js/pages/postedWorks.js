@@ -21,7 +21,7 @@ export const PostedWorks = () => {
             description={item.description}
             location={item.location}
             user_id={item.user_id}
-            worker_id={item.worker_id}
+            worker_id={item.id}
           />
         ))}
       </div>

@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import ModalForm from "./modalForm";
 
 export const WorkPost = ({ description, location, worker_id, user_id }) => {
   const { store, actions } = useContext(Context);
-  console.log(store.usuario);
+  // console.log(url);
   return (
     <>
       <div className="row">
@@ -16,7 +17,7 @@ export const WorkPost = ({ description, location, worker_id, user_id }) => {
               {store.usuario ? (
                 <button>Ver presupuesto</button>
               ) : (
-                <button>Enviar presupuesto</button>
+                <ModalForm id={worker_id} />
               )}
             </div>{" "}
           </div>{" "}
