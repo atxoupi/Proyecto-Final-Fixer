@@ -8,7 +8,6 @@ import { Single } from "./pages/single";
 import { Request } from "./pages/request";
 import { PostedWorks } from "./pages/postedWorks";
 
-
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -16,6 +15,7 @@ import { Footer } from "./component/footer";
 import { Login } from "./component/login";
 import { Signup } from "./pages/signup";
 import { WorkersList } from "./pages/WorkersList";
+import { BudgetsView } from "./pages/budgetsView";
 
 //create your first component
 const Layout = () => {
@@ -36,6 +36,7 @@ const Layout = () => {
           <Route element={<Request />} path="/request" />
           <Route element={<PostedWorks />} path="/works" />
           <Route element={<WorkersList />} path="/workers-list" />
+          <Route element={<BudgetsView />} path="/budgets-view" />
           <Route element={<h1>Not found!</h1>} />
         </Routes>
         <Footer />
