@@ -1,16 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import ModalForm from "./modalForm";
 import VerPresupuesto from "./verPresupuesto";
 
-export const WorkPost = ({
-  description,
-  location,
-  worker_id,
-  user_id,
-  url,
-}) => {
+export const WorkPost = ({ description, location, worker_id, user_id }) => {
   const { store, actions } = useContext(Context);
   // console.log(url);
   return (
@@ -22,11 +14,11 @@ export const WorkPost = ({
               <div className="work-title"> Título</div>
               <div className="work-location"> Ubicación:{location} </div>
               <div className="work-description">Descripción:{description}</div>
-              {store.usuario ? (
-                <VerPresupuesto url={url} />
+              {/* {!store.usuario ? (
+                <VerPresupuesto />
               ) : (
-                <ModalForm id={worker_id} />
-              )}
+                <button>Ver presupuesto</button>
+              )} */}
             </div>{" "}
           </div>{" "}
         </div>{" "}

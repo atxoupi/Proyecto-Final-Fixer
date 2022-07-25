@@ -4,7 +4,6 @@ from flask import Flask
 
 db = SQLAlchemy()
 
-
 # Full user data, from user signup
 class User_signup(db.Model):
     __tablename__='user_signup'
@@ -24,7 +23,7 @@ class User_signup(db.Model):
     budget = db.relationship('Budget', backref='user_signup', lazy=True)
                             
     def __repr__(self):
-        return f'<User_signup {self.email}>'
+        return f'<User_signup {self.email}>' 
 
     def serialize(self):
         return {
@@ -108,6 +107,7 @@ class Work(db.Model):
     duration = db.Column(db.Integer, unique=False, nullable=True)
     description = db.Column(db.String(500), unique=False, nullable=False)
     pictures = db.Column(db.String(500), unique=False, nullable=True)
+    title=db.Column(db.String(180), unique=False, nullable=True)
     budget = db.relationship('Budget', backref='work', lazy=True)
 
     def __repr__(self):
@@ -123,6 +123,7 @@ class Work(db.Model):
             "status":self.status,
             "cost":self.cost,
             "description":self.description,
+            "title":self.title,
             "pictures":self.pictures
         }
 
@@ -155,7 +156,7 @@ class Budget(db.Model):
     url = db.Column(db.String(120), unique=False, nullable=False)
     duration = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, unique=False, nullable=True)
-
+#  tener dos servicios uno de work(empresarios miran las ofertas ) y otro de budget(para personas q vean los presupuestos q le han enviado)
     def __repr__(self):
         return f'<Budget {self.id}>'
 
@@ -168,5 +169,6 @@ class Budget(db.Model):
             "url":self.url,
             "duration":self.duration,
             "price":self.price,
+            "work": self.work.serialize()
         }
 

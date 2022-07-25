@@ -20,8 +20,9 @@ def login():
     password = request.json.get("password", None)
     user = Login.query.filter_by(email=email).first()
     if user is None:
-        return jsonify({"msg": "Usuario no existe"}), 404
+        return jsonify({"msg": "Usuario no existe"}), 404 
     comprobacion=current_app.bcrypt.check_password_hash(user.password, password)
+    
     if email != user.email or comprobacion == False:
         return jsonify({"msg": "Bad username or password"}), 401 
 
@@ -34,7 +35,6 @@ def login():
     
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token,tipo=segmento) 
-
 #--SignUp
 #Recibe datos de Usuario o de Worker y los inserta en la BD
 @api.route("/worker_signup", methods=["POST"])
@@ -92,16 +92,17 @@ def wrequestp():
     sector = request.json.get("sector", None)
     description = request.json.get("description", None)
     mail=request.json.get("mail", None)
+    title=request.json.get("title", None)
     
     user=User_signup.query.filter_by(email=mail).first()
-    work = Work(location=city, sector=sector, description=description, user_id=user.id)
+    work = Work(location=city, sector=sector, description=description, user_id=user.id, title=title)
     db.session.add(work)
     db.session.commit()
 
     companys = Worker_signup.query.filter_by(city=work.location).filter_by(sector=work.sector).all()
     with current_app.mail.connect() as conn:
         for company in companys:
-            message = 'Hemos detectado que hay ofertas para realizar trabajos en su sector en su área de influencia, acceda a su zona privada en nuestra web para porder revisarlas.'
+            message = 'Hemos detectado que hay ofertas para realizar trabajos en su sector en su área de influencia, acceda a su zona privada en nuestra web para porder revisarlas'
             subject = "Hola, %s. Nueva solicitud de trabajo para un Fixer de su zona" % company.name
             msg = Message(recipients=[company.email],
                         body=message,
@@ -186,6 +187,7 @@ def fixers_zone():
     return jsonify(result), 200
 
 @api.route("/workers", methods=["GET"])
+# @jwt_required()
 def get_workers():
     # Access the identity of the current user with get_jwt_identity
     # current_user = get_jwt_identity()
@@ -224,19 +226,55 @@ def sbudget():
 
     return jsonify(response_body), 200
 
-##getbudget
-##Recibe el id de la propuesta,
-##Devuelve todos los presupuestos para esa propuesta
-##Ruta sólo accesible si estás logueado
-
-@api.route("/getbudget", methods=["GET"])
+    
+@api.route("/listbudget", methods=["GET"])
 @jwt_required()
-def budgets():
+def listbudgets():
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
-    id_work = request.json.get("work", None)
-    my_budgets =Budget.query.filter_by(work_id=id_work).all()
-
-    result= list(map(lambda budget: budget.serialize(),my_budgets))
+    user = User_signup.query.filter_by(email=current_user).first()
+    budgets = Budget.query.filter_by(user_id=user.id)
+    
+    result= list(map(lambda budget: budget.serialize(),budgets))
     
     return jsonify(result), 200
+
+#--Updateworker
+#Recibe datos de Usuario o de Worker y los actualiza en la BD
+@api.route("/update_worker", methods=["POST"])
+@jwt_required()
+def updateworker():
+    current_user = get_jwt_identity()
+    name = request.json.get("name", None)
+    email = request.json.get("email", None)
+    city = request.json.get("city", None)
+    sector = request.json.get("sector", None)
+    tlf_number=request.json.get("tlf_number", None)
+    adress=request.json.get("adress", None)
+    postcode=request.json.get("postcode", None)
+    cif=request.json.get("cif", None)
+
+    worker=Worker_signup.query.filter_by(email=current_user).first()
+
+    worker.name=name
+    worker.email=email
+    worker.city=city
+    worker.sector=sector
+    worker.tlf_number=tlf_number
+    worker.adress=adress
+    worker.postcode=postcode
+    worker.cif=cif
+
+    db.session.add(worker)
+    db.session.commit()
+    
+    login=Login.query.filter_by(email=current_user).first()
+    login.email=email
+    db.session.add(login)
+    db.session.commit()
+
+    response_body = {
+        "message": "Datos Actualizados"
+    }
+
+    return jsonify(response_body), 200

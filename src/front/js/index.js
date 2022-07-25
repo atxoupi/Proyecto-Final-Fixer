@@ -10,6 +10,7 @@ import "../styles/home.css";
 import "../styles/signup.css";
 import "../styles/requestForm.css";
 import "../styles/login.css";
+import "../styles/modalForm.css"
 
 //import your own components
 import Layout from "./layout";
