@@ -20,14 +20,21 @@ def login():
     password = request.json.get("password", None)
     user = Login.query.filter_by(email=email).first()
     if user is None:
-        return jsonify({"msg": "Usuario no existe"}), 404
+        return jsonify({"msg": "Usuario no existe"}), 404 
     comprobacion=current_app.bcrypt.check_password_hash(user.password, password)
+    
     if email != user.email or comprobacion == False:
         return jsonify({"msg": "Bad username or password"}), 401 
 
+    missing = User_signup.query.filter_by(email=email).first()
+    if (missing is None):
+        segmento="Empresa"
+    else:
+        segmento="Usuario"
+    
+    
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token) 
-
+    return jsonify(access_token=access_token,tipo=segmento) 
 #--SignUp
 #Recibe datos de Usuario o de Worker y los inserta en la BD
 @api.route("/worker_signup", methods=["POST"])
@@ -214,3 +221,16 @@ def sbudget():
         }
 
     return jsonify(response_body), 200
+
+    
+@api.route("/listbudget", methods=["GET"])
+@jwt_required()
+def listbudgets():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    user = User_signup.query.filter_by(email=current_user).first()
+    budgets = Budget.query.filter_by(user_id=user.id)
+    
+    result= list(map(lambda budget: budget.serialize(),budgets))
+    
+    return jsonify(result), 200

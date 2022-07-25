@@ -10,6 +10,7 @@ const getState = ({
             work: [],
             usuario: null,
             workers: [],
+            budget: []
         },
         actions: {
             // LOGIN
@@ -33,7 +34,7 @@ const getState = ({
 
                         if (data.tipo === "Usuario") {
                             setStore({
-                                usuario: true,
+                                usuario: true, //esto lo viejo true y false invertidos probando lo antiguo
                             });
                         } else {
                             setStore({
@@ -254,6 +255,28 @@ const getState = ({
                     }
                 } catch (error) {
                     console.log("message", error);
+                }
+            },
+
+            showbudget: async () => {
+                try {
+                    const token = localStorage.getItem("token");
+                    const resp = await fetch(process.env.BACKEND_URL + "/api/listbudget", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    });
+
+                    const data = await resp.json();
+                    setStore({
+                        budget: data,
+                    });
+                    // // don't forget to return something, that is how the async resolves
+                    return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
                 }
             },
 

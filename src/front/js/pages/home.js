@@ -7,7 +7,12 @@ import VerPresupuesto from "../component/verPresupuesto";
 export const Home = () => {
   return (
     <div className="container">
-      <Header />
+      <div>
+        <Header />
+      </div>
+      <div>
+        <VerPresupuesto />
+      </div>
     </div>
   );
 };

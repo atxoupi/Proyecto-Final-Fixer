@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 
-const VerPresupuesto = () => {
+const VerPresupuesto = ({ url }) => {
   const [uploadImages, setUploadImages] = useState("");
   const [downloadImages, setDownloadImages] = useState("");
   const { actions } = useContext(Context);
@@ -9,10 +9,7 @@ const VerPresupuesto = () => {
   return (
     <div className=" container text-center mt-5">
       <div>
-        <a
-          href="https://res.cloudinary.com/demo/image/upload/fl_attachment:myPdf/multi_page_pdf.pdf"
-          download
-        >
+        <a href={url} download>
           {" "}
           <button
             type="button"

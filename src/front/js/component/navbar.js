@@ -33,18 +33,40 @@ export const Navbar = () => {
         id="navbarSupportedContent"
       >
         <ul className="navbar-nav mb-2 mb-lg-0">
-          <li className="nav-item mx-1">
-            {store.usuario ? (
+          {store.usuario ? (
+            <li className="nav-item mx-1">
               <Link className="nav-link nav-link-navbar" href="#" to="/request">
                 Publica una oferta
               </Link>
-            ) : null}
-          </li>
-          <li className="nav-item mx-1">
-            <Link className="nav-link nav-link-navbar" href="#" to="/works">
-              Ofertas publicadas
-            </Link>
-          </li>
+            </li>
+          ) : (
+            ""
+          )}
+
+          {store.usuario ? (
+            <li className="nav-item mx-1">
+              <Link
+                className="nav-link nav-link-navbar"
+                href="#"
+                to="/posted-presupuestos"
+              >
+                Ver Presupuesto
+              </Link>
+            </li>
+          ) : (
+            ""
+          )}
+
+          {!store.usuario && store.auth == true ? (
+            <li className="nav-item mx-1">
+              <Link className="nav-link nav-link-navbar" href="#" to="/works">
+                Ofertas publicadas
+              </Link>
+            </li>
+          ) : (
+            ""
+          )}
+
           <li className="nav-item mx-1">
             <Link
               className="nav-link nav-link-navbar"

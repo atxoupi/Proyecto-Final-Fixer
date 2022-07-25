@@ -164,7 +164,8 @@ class Budget(db.Model):
             "worker_id":self.worker_id,
             "work_id":self.work_id,
             "url":self.url,
-            "duration":self.duration_id,
-            "price":self.price_id,
+            "duration":self.duration,
+            "price":self.price,
+            "work": self.work.serialize()
         }
 
