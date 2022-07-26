@@ -3,8 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
+
 import { Request } from "./pages/request";
 import { PostedWorks } from "./pages/postedWorks";
 
@@ -29,8 +28,6 @@ const Layout = () => {
         <Navbar />
         <Routes>
           <Route element={<Home />} path="/" />
-          <Route element={<Demo />} path="/demo" />
-          <Route element={<Single />} path="/single/:theid" />
           <Route element={<Signup />} path="/signup" />
           <Route element={<Login />} path="/login" />
           <Route element={<Request />} path="/request" />

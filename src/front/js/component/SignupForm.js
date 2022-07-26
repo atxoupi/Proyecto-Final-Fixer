@@ -287,6 +287,7 @@ export const SignupForm = () => {
                               <option value="Carpintería">Carpintería</option>
                               <option value="Pintura">Pintura</option>
                               <option value="Electricidad">Electricidad</option>
+                              <option value="Albañilería">Albañilería</option>
                               <option value="Climatización">
                                 Climatización
                               </option>
