@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 
@@ -9,12 +8,13 @@ export const RequestForm = () => {
 
   const [city, setCity] = useState("");
   const [sector, setSector] = useState("");
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const handleSubmitRequest = (e) => {
     e.preventDefault();
-    if (city !== "" && sector !== "" && description !== "") {
-      actions.createRequest(city, sector, description);
+    if (city !== "" && sector !== "" && description !== "" && title !== "") {
+      actions.createRequest(city, sector, description, title);
       alert("Solicitud creada satisfactoriamente");
       navigate("/works");
     } else {
@@ -68,13 +68,25 @@ export const RequestForm = () => {
                     </div>
                   </div>
                   <div className="row">
-                    <div className="col-12 ">
+                    <div className="col-md-12 mb-4 pb-2 ">
                       <textarea
                         className="form-control form-control-request"
                         type="text"
+                        onChange={(e) => setTitle(e.target.value)}
+                        aria-label="Título del trabajo"
+                        placeholder="Describe brevemente el trabajo que necesitas "
+                      ></textarea>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-12 ">
+                      <textarea
+                        className="form-control form-control-request"
+                        style={{ height: "8rem" }}
+                        type="text"
                         onChange={(e) => setDescription(e.target.value)}
                         aria-label="Descripción del trabajo"
-                        placeholder="Describe brevemente el trabajo que necesitas "
+                        placeholder="Por favor, facilita al trabajador más detalles de tu oferta: dimensiones, plazo,..."
                       ></textarea>
                     </div>
                   </div>
