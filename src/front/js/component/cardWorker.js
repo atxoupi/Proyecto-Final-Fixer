@@ -9,9 +9,11 @@ export const CardWorker = ({ name, sector }) => {
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
           <p className="card-text">{sector}</p>
-          <a href="#" className="btn btn-primary">
-            Leer más
-          </a>
+          <button>
+            <a href="#" className="btn btn-primary">
+              Leer más
+            </a>
+          </button>
         </div>
       </div>
     </>

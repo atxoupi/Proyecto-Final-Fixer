@@ -9,6 +9,7 @@ export const PostedWorks = () => {
   }, []);
   console.log(store.work);
   console.log(store.usuario);
+  console.log(store.icons);
   return (
     <>
       <div className="container-works mx-auto">
@@ -20,8 +21,9 @@ export const PostedWorks = () => {
             key={index}
             description={item.description}
             location={item.location}
+            sector={item.sector}
             user_id={item.user_id}
-            worker_id={item.id}
+            worker_id={item.worker_id}
           />
         ))}
       </div>

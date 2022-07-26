@@ -48,7 +48,7 @@ export const Navbar = () => {
               <Link
                 className="nav-link nav-link-navbar"
                 href="#"
-                to="/posted-presupuestos"
+                to="/my-budgets"
               >
                 Ver Presupuesto
               </Link>

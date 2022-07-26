@@ -1,3 +1,4 @@
+import aireAcondicionado from "../../img/icons/aire-acondicionado.png";
 const getState = ({
     getStore,
     getActions,
@@ -65,6 +66,9 @@ const getState = ({
                 "Ceuta",
                 "Melilla",
             ],
+            icons: [{
+                aireAcondicionado
+            }],
         },
         actions: {
             // LOGIN
