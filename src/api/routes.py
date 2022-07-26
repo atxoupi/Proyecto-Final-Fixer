@@ -320,3 +320,16 @@ def updateuser():
     }
 
     return jsonify(response_body), 200
+
+##WorkerProfile
+##Recibe el mail del worker y devuelve un array con los datos del trabajador
+
+@api.route("/worker_profile", methods=["GET"])
+
+def workerprofile():
+    # Access the identity of the current user with get_jwt_identity
+    email = request.json.get("email", None)
+
+    worker = Worker_signup.query.filter_by(email=email).first()
+    
+    return jsonify(worker.serialize()), 200
