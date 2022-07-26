@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 export const SignupForm = () => {
   const { store, actions } = useContext(Context);
   let navigate = useNavigate();
+  const regions = store.regions;
 
   // Datos usuario
   const [username, setUsername] = useState("");
@@ -262,15 +263,15 @@ export const SignupForm = () => {
                         </div>
                         <div className="row">
                           <div className="col-md-6 mb-3">
-                            <div className="form-outline">
-                              <input
-                                type="text"
-                                id="city"
-                                className="form-control  form-control-signup form-control-lg"
-                                placeholder="Ciudad o población"
-                                onChange={(e) => setCity(e.target.value)}
-                              />
-                            </div>
+                            <select
+                              className="select w-100 form-control-request form-control-lg"
+                              onChange={(e) => setCity(e.target.value)}
+                            >
+                              <option value="1">Provincia</option>
+                              {regions.map((item) => (
+                                <option value={item}>{item}</option>
+                              ))}
+                            </select>
                           </div>
                           <div className="col-md-6 mb-3 pb-2 ">
                             <select

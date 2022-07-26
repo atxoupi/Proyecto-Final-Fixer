@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const RequestForm = () => {
   const { store, actions } = useContext(Context);
   let navigate = useNavigate();
-
+  const regions = store.regions;
   const [city, setCity] = useState("");
   const [sector, setSector] = useState("");
   const [title, setTitle] = useState("");
@@ -38,23 +38,32 @@ export const RequestForm = () => {
                 </h3>
                 <form onSubmit={handleSubmitRequest}>
                   <div className="row">
-                    <div className="col-md-6 mb-4">
-                      <div className="form-outline">
-                        <input
-                          type="text"
-                          id="city"
-                          className="form-control  form-control-request form-control-lg"
-                          placeholder="Ciudad o población"
-                          onChange={(e) => setCity(e.target.value)}
-                        />
-                      </div>
-                    </div>
                     <div className="col-md-6 mb-4 pb-2">
+                      <label className="form-label select-label">
+                        Selecciona una provincia
+                      </label>
+
+                      <select
+                        className="select w-100 form-control-request form-control-lg"
+                        onChange={(e) => setCity(e.target.value)}
+                      >
+                        <option value="1">Elige una opción</option>
+                        {regions.map((item) => (
+                          <option value={item}>{item}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="col-md-6 mb-4 pb-2">
+                      <label className="form-label select-label">
+                        ¿Que tipo de trabajo buscar?
+                      </label>
                       <select
                         className="select w-100 form-control-request form-control-lg"
                         onChange={(e) => setSector(e.target.value)}
                       >
-                        <option value="1">Elije una opción</option>
+                        {" "}
+                        <option value="1">Elige una opción</option>
                         <option value="Fontanería">Fontanería</option>
                         <option value="Carpintería">Carpintería</option>
                         <option value="Pintura">Pintura</option>
@@ -62,9 +71,6 @@ export const RequestForm = () => {
                         <option value="Climatización">Climatización</option>
                         <option value="Mudanzas">Mudanzas</option>
                       </select>
-                      <label className="form-label select-label">
-                        ¿Que tipo de trabajo estás buscando?
-                      </label>
                     </div>
                   </div>
                   <div className="row">
