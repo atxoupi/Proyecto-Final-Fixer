@@ -62,7 +62,6 @@ export const RequestForm = () => {
                         className="select w-100 form-control-request form-control-lg"
                         onChange={(e) => setSector(e.target.value)}
                       >
-                        {" "}
                         <option value="1">Elige una opción</option>
                         <option value="Fontanería">Fontanería</option>
                         <option value="Carpintería">Carpintería</option>

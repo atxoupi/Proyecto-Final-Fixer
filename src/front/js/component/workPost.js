@@ -50,20 +50,6 @@ export const WorkPost = ({
                   style={{ width: "50px" }}
                 ></img>
               </span>
-              <span>
-                {" "}
-                <img
-                  className="sector-icon"
-                  src={bombilla}
-                  style={{ width: "50px" }}
-                ></img>
-              </span>
-
-              {/* {store.usuario ? (
-                <VerPresupuesto url={url} />
-              ) : (
-                <ModalForm id={worker_id} />
-              )} */}
               <div>
                 <Link to="/my-budgets">
                   <button type="button" className="btn btnHeader mt-3">

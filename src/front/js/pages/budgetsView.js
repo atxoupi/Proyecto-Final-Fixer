@@ -13,7 +13,6 @@ export const BudgetsView = () => {
     <>
       <div className="work-sentBudgets">
         <WorkPost />
-        {/* No reutilizar el componente */}
       </div>
       <div
         className="budget-container mx-auto border border-warning"

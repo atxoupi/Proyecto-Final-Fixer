@@ -13,7 +13,7 @@ export const SentBudgets = ({ url }) => {
           <div className="price-budget">20 €</div>
           <a href={url} download>
             <button type="button" className="btn btnHeader mt-3">
-              Ver presupuesto
+              Descargar presupuesto
             </button>
           </a>
         </div>
