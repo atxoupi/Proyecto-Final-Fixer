@@ -246,6 +246,7 @@ export const SignupForm = () => {
                                 className="form-control  form-control-signup form-control-lg"
                                 placeholder="Nombre"
                                 onChange={(e) => setUsername(e.target.value)}
+                                required
                               />
                             </div>
                           </div>
@@ -257,6 +258,7 @@ export const SignupForm = () => {
                                 className="form-control form-control-signup form-control-lg"
                                 placeholder="Apellidos"
                                 onChange={(e) => setLastname(e.target.value)}
+                                required
                               />
                             </div>
                           </div>
@@ -266,6 +268,7 @@ export const SignupForm = () => {
                             <select
                               className="select w-100 form-control-request form-control-lg"
                               onChange={(e) => setCity(e.target.value)}
+                              required
                             >
                               <option value="1">Provincia</option>
                               {regions.map((item) => (
@@ -277,6 +280,7 @@ export const SignupForm = () => {
                             <select
                               className="select w-100 form-control-signup form-control-lg"
                               onChange={(e) => setSector(e.target.value)}
+                              required
                             >
                               <option value="1">Elije una opción</option>
                               <option value="Fontanería">Fontanería</option>
@@ -302,6 +306,7 @@ export const SignupForm = () => {
                                 className="form-control form-control-signup form-control-lg"
                                 placeholder="email@email.com"
                                 onChange={(e) => setEmail(e.target.value)}
+                                required
                               />
                             </div>
                           </div>
@@ -330,6 +335,7 @@ export const SignupForm = () => {
                                 className="form-control form-control-signup form-control-lg"
                                 placeholder="Repite el password"
                                 onChange={(e) => setPassword2(e.target.value)}
+                                required
                               />
                             </div>
                           </div>

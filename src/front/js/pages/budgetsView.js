@@ -19,20 +19,18 @@ export const BudgetsView = () => {
         className="budget-container mx-auto border border-warning"
         style={{ width: "80%" }}
       >
-        {
-          (store.budget.length = 0 ? (
-            <p>No hay coincidencias</p>
-          ) : (
-            store.budget.map((item, index) => (
-              <SentBudgets
-                key={index}
-                user_id={item.user_id}
-                worker_id={item.worker_id}
-                url={item.url}
-              />
-            ))
+        {store.budget.length === 0 ? (
+          <p>No hay coincidencias</p>
+        ) : (
+          store.budget.map((item, index) => (
+            <SentBudgets
+              key={index}
+              user_id={item.user_id}
+              worker_id={item.worker_id}
+              url={item.url}
+            />
           ))
-        }
+        )}
       </div>
     </>
   );

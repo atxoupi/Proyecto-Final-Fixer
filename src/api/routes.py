@@ -215,10 +215,12 @@ def sbudget():
 
     print("El id del trtabajador:  ")
     print(worker.id)
+    print(id_work)
     budget = Budget(user_id=tarea.user_id , worker_id=worker.id, work_id=tarea.id, url=url, duration=duration, price=price)
     db.session.add(budget)
     db.session.commit()
     print(budget.id)
+    
 
     response_body = {
             "message": "Presupuesto Almacenado"

@@ -1,19 +1,34 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import ModalForm from "./modalForm";
-
+import bombilla from "../../img/icons/bombilla.png";
 import houseIcon from "../../img/icons/hogar.png";
+import aire from "../../img/icons/aire-acondicionado.png";
+import grifo from "../../img/icons/grifo-de-agua.png";
+import rodillo from "../../img/icons/rodillo.png";
+import aserradura from "../../img/icons/aserradura.png";
 
 export const WorkPost = ({
   description,
   location,
   title,
+  sector,
   worker_id,
   user_id,
   url,
 }) => {
   const { store, actions } = useContext(Context);
+  const showIcons = () => {
+    if (sector === "Fontanería") {
+      return grifo;
+    } else if (sector === "Climatización") {
+      return aire;
+    } else if (sector === "Pintura") {
+      return rodillo;
+    } else {
+      return aserradura;
+    }
+  };
 
   return (
     <>
@@ -25,7 +40,23 @@ export const WorkPost = ({
               <div className="work-description">Descripción:{description}</div>
               <div className="work-location"> Ubicación:{location} </div>
               <span>
-                <img className="sector-icon" src={houseIcon}></img>
+                <img className="house-icon" src={houseIcon}></img>
+              </span>
+              <span>
+                {" "}
+                <img
+                  className="sector-icon"
+                  src={showIcons()}
+                  style={{ width: "50px" }}
+                ></img>
+              </span>
+              <span>
+                {" "}
+                <img
+                  className="sector-icon"
+                  src={bombilla}
+                  style={{ width: "50px" }}
+                ></img>
               </span>
 
               {/* {store.usuario ? (
@@ -34,11 +65,11 @@ export const WorkPost = ({
                 <ModalForm id={worker_id} />
               )} */}
               <div>
-                <a href={url} download>
+                <Link to="/my-budgets">
                   <button type="button" className="btn btnHeader mt-3">
                     Ver presupuesto
                   </button>
-                </a>
+                </Link>
               </div>
             </div>{" "}
           </div>{" "}

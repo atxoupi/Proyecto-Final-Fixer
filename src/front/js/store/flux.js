@@ -67,8 +67,8 @@ const getState = ({
                 "Melilla",
             ],
             icons: [{
-                aireAcondicionado
-            }],
+                aireAcondicionado,
+            }, ],
         },
         actions: {
             // LOGIN
@@ -274,7 +274,7 @@ const getState = ({
 
             //CODIGO DE CLOUDINARY SUBIDA DE FOTO
 
-            uploadFile: async (uploadImages, worker_id, price, duracion) => {
+            uploadFile: async (uploadImages, id, price, duracion) => {
                 const cloud_name = "carolinaqotf"; //"pluggedin";
                 const preset = "s5oaavqo"; //"icnpftra";
                 const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
@@ -300,7 +300,7 @@ const getState = ({
                                     url: data.url,
                                     price: price,
                                     duration: duracion,
-                                    id_work: worker_id,
+                                    id_work: id,
                                 }),
                                 headers: {
                                     "Content-Type": "application/json",
