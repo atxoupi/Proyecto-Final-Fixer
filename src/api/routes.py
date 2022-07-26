@@ -241,7 +241,7 @@ def listbudgets():
 
 #--Updateworker
 #Recibe datos de Usuario o de Worker y los actualiza en la BD
-@api.route("/update_worker", methods=["POST"])
+@api.route("/update_worker", methods=["PUT"])
 @jwt_required()
 def updateworker():
     current_user = get_jwt_identity()
