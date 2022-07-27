@@ -4,7 +4,10 @@ import { Context } from "../store/appContext";
 
 export const Workerprofile = ({ id }) => {
   const { store, actions } = useContext(Context);
-  profile = store.workers.filter((worker) => worker.is === id);
+  let profile = store.workers.filter((worker) => worker.id === id);
+  console.log(typeof id);
+  console.log(store.workers);
+  console.log(profile[0]);
 
   return (
     <>
@@ -12,16 +15,16 @@ export const Workerprofile = ({ id }) => {
         <div className="col-lg-6 col-md-8 col-sm-12 mx-auto">
           <div className="post-box">
             <div className="post-photo">
-              <img src={pictures}></img>
+              <img src={profile.pictures}></img>
             </div>
             <div className="post-card">
-              <div className="worker-name"> Nombre: {profile.name}</div>
-              <div className="worker-email"> Email: {profile.email} </div>
-              <div className="worker-city">Ciudad :{profile.city}</div>
-              <div className="worker-sector"> Sector: {profile.sector}</div>
+              <div className="worker-name"> Nombre: {profile[0].name}</div>
+              <div className="worker-email"> Email: {profile[0].email} </div>
+              <div className="worker-city">Ciudad :{profile[0].city}</div>
+              <div className="worker-sector"> Sector: {profile[0].sector}</div>
               <div className="worker-tlf">
                 {" "}
-                Número Tlf: {profile.tlf_numberl}
+                Número Tlf: {profile[0].tlf_numberl}
               </div>
             </div>
           </div>
