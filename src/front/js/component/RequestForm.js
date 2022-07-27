@@ -48,8 +48,10 @@ export const RequestForm = () => {
                         onChange={(e) => setCity(e.target.value)}
                       >
                         <option value="1">Elige una opción</option>
-                        {regions.map((item) => (
-                          <option value={item}>{item}</option>
+                        {regions.map((item, index) => (
+                          <option key={index} value={item}>
+                            {item}
+                          </option>
                         ))}
                       </select>
                     </div>
@@ -70,6 +72,7 @@ export const RequestForm = () => {
                         <option value="Albañilería">Albañilería</option>
                         <option value="Climatización">Climatización</option>
                         <option value="Mudanzas">Mudanzas</option>
+                        <option value="Jardinería">Jardinería</option>
                       </select>
                     </div>
                   </div>

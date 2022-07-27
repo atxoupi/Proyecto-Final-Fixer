@@ -271,8 +271,10 @@ export const SignupForm = () => {
                               required
                             >
                               <option value="1">Provincia</option>
-                              {regions.map((item) => (
-                                <option value={item}>{item}</option>
+                              {regions.map((item, index) => (
+                                <option key={index} value={item}>
+                                  {item}
+                                </option>
                               ))}
                             </select>
                           </div>
@@ -292,6 +294,7 @@ export const SignupForm = () => {
                                 Climatización
                               </option>
                               <option value="Mudanzas">Mudanzas</option>
+                              <option value="Jardinería">Jardinería</option>
                             </select>
                             <label className="form-label select-label">
                               Selecciona tu sector

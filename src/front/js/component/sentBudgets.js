@@ -6,12 +6,12 @@ export const SentBudgets = ({ url }) => {
   const budgets = store.budgets;
   return (
     <>
-      <div class="row d-flex justify-content-evenly">
-        <img src="..." class="col-3 rounded float-start " alt="..." />
+      <div className="row d-flex justify-content-evenly">
+        <img src="..." className="col-3 rounded float-start " alt="..." />
         <div className="col-3 text-center">
           <div className="price-budget-title">Presupuesto</div>
           <div className="price-budget">20 €</div>
-          <a href={url} download>
+          <a href={url} download target="_blank" rel="noopener noreferrer">
             <button type="button" className="btn btnHeader mt-3">
               Descargar presupuesto
             </button>

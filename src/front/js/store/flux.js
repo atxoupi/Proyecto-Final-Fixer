@@ -170,7 +170,6 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
-
             //CREAR USUARIO TRABAJADOR
             createWorker: async (name, city, email, password, sector) => {
                 try {

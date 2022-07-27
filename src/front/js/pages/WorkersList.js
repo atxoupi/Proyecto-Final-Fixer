@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useContext, useMemo } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { CardWorker } from "../component/cardWorker";
 import { Context } from "../store/appContext";
 
 export const WorkersList = () => {
   const { store, actions } = useContext(Context);
+  const regions = store.regions;
   useEffect(() => {
     actions.listWorkers();
   }, []);
@@ -46,10 +47,14 @@ export const WorkersList = () => {
           }}
         >
           <option value="">Elige un sector...</option>
-          <option value="Carpintería">Carpintería</option>
           <option value="Fontanería">Fontanería</option>
+          <option value="Carpintería">Carpintería</option>
           <option value="Pintura">Pintura</option>
           <option value="Electricidad">Electricidad</option>
+          <option value="Albañilería">Albañilería</option>
+          <option value="Climatización">Climatización</option>
+          <option value="Mudanzas">Mudanzas</option>
+          <option value="Jardinería">Jardinería</option>
         </select>
         <select
           className="form-select"
@@ -59,14 +64,15 @@ export const WorkersList = () => {
           }}
         >
           <option value="">Elige una provincia...</option>
-          <option value="Madrid">Madrid</option>
-          <option value="Gava">Gava</option>
-          <option value="Guadalajara">Guadalajara</option>
-          <option value="Sevilla">Sevilla</option>
+          {regions.map((item, index) => (
+            <option key={index} value={item}>
+              {item}
+            </option>
+          ))}
         </select>
       </div>
       <div>
-        <ul className="card-grid">
+        <ul className="card-grid list-unstyled">
           {!filterItems.length > 0 ? (
             <p className="text-filter text-center">
               No se han encontrado coincidencias{" "}
@@ -74,7 +80,11 @@ export const WorkersList = () => {
           ) : (
             filterItems.map((item, index) => (
               <li key={index}>
-                <CardWorker name={item.name} sector={item.sector} />
+                <CardWorker
+                  name={item.name}
+                  sector={item.sector}
+                  image={item.pictures}
+                />
               </li>
             ))
           )}
@@ -83,30 +93,3 @@ export const WorkersList = () => {
     </>
   );
 };
-
-// getFilteredItems();
-// setFilterItems([...workers]);
-// console.log(filterItems);
-// const getFilteredItems = () => {
-//   if (!selectedCity) {
-//     return workers;
-//   } else {
-//     workers.filter((item) => item.city === selectedCity);
-//     //     console.log(filterItems);
-//     //     setFilterItems(filterItems);
-//   }
-// };
-// getFilteredItems();
-// console.log(filterItems);
-// let filteredItems = useMemo(getFilteredItems[(selectedCity, filterItems)]);
-// console.log(filteredItems);
-//     filterItems.filter((item) => {
-//       if (selectedCity !== item.city) {
-//        ([...filterItems, ...item]);
-//         //       setFilterItems([...filterItems, filterItems.concat(item)]);
-//       }
-//       console.log(filterItems);
-//       return filterItems;
-//     });
-//   }
-// };

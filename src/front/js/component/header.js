@@ -8,22 +8,26 @@ export const Header = () => {
   return (
     <>
       <div className="header-title text-center my-3">
-        <h1> ¿Qué necesitas ? </h1>{" "}
-      </div>{" "}
+        <h1> ¿Qué necesitas ? </h1>
+      </div>
       <div className="container-fluid d-flex justify-content-center mb-3 px-4">
         <div className="row d-flex justify-content-between">
           <div className="col-5">
-            <button type="button" className="btn btnHeader mt-2">
-              Busca un profesional{" "}
-            </button>{" "}
-          </div>{" "}
+            <Link
+              to="workers-list"
+              type="button"
+              className="btn btnHeader mt-2"
+            >
+              Busca un profesional
+            </Link>
+          </div>
           <div className="col-5">
             <Link to="/request" type="button" className="btn btnHeader mt-2">
-              Publica un anuncio{" "}
-            </Link>{" "}
-          </div>{" "}
-        </div>{" "}
-      </div>{" "}
+              Publica un anuncio
+            </Link>
+          </div>
+        </div>
+      </div>
       <div
         className="container wraper-header position-relative"
         style={{
@@ -39,11 +43,11 @@ export const Header = () => {
                 width: "15px",
               }}
               src={checked}
-            ></img>{" "}
+            ></img>
             <span className="checkbox-inline ms-2">
-              Encuentra el mejor profesional cerca de ti{" "}
-            </span>{" "}
-          </div>{" "}
+              Encuentra el mejor profesional cerca de ti
+            </span>
+          </div>
           <div className="d-inline">
             <img
               className="checkedIcon"
@@ -51,12 +55,11 @@ export const Header = () => {
                 width: "15px",
               }}
               src={checked}
-            ></img>{" "}
+            ></img>
             <span className="checkbox-inline ms-2">
-              {" "}
-              Más de un millón de usuarios satisfechos{" "}
-            </span>{" "}
-          </div>{" "}
+              Más de un millón de usuarios satisfechos
+            </span>
+          </div>
           <div className="d-inline">
             <img
               className="checkedIcon"
@@ -64,12 +67,11 @@ export const Header = () => {
                 width: "15px",
               }}
               src={checked}
-            ></img>{" "}
+            ></img>
             <span className="checkbox-inline ms-2">
-              {" "}
-              Con garantía de calidad{" "}
-            </span>{" "}
-          </div>{" "}
+              Con garantía de calidad
+            </span>
+          </div>
           <div className="d-inline">
             <img
               className="checkedIcon"
@@ -77,13 +79,12 @@ export const Header = () => {
                 width: "15px",
               }}
               src={checked}
-            ></img>{" "}
+            ></img>
             <span className="checkbox-inline ms-2">
-              {" "}
-              Tú mandas, propón tu proyecto y los profesionales te contactaran{" "}
-            </span>{" "}
-          </div>{" "}
-        </div>{" "}
+              Tú mandas, propón tu proyecto y los profesionales te contactaran
+            </span>
+          </div>
+        </div>
         <img
           src={imagenHeader}
           className="img-fluid d-flex justify-content-center"
@@ -93,8 +94,8 @@ export const Header = () => {
             maxHeight: "400px",
             width: "800px",
           }}
-        ></img>{" "}
-      </div>{" "}
+        ></img>
+      </div>
     </>
   );
 };
