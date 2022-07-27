@@ -116,13 +116,3 @@ export const Navbar = () => {
     </nav>
   );
 };
-
-// <Link to="/demo">
-//             {store.auth === true ? (
-//               <spam onClick={() => actions.logout()}>
-//                 <Link to="/" className="btn btn-primary">
-//                   Logout
-//                 </Link>
-//               </spam>
-//             ) : null}
-//           </Link>

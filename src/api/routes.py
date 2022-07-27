@@ -249,7 +249,7 @@ def listbudgets():
 def listbudgetsForWork(id):
     # Access the identity of the current user with get_jwt_identity
     budgets_obj= Budget.query.filter_by(work_id=id).all()
-
+    print(id)
     budgets=[budget.serialize() for budget in budgets_obj]
     
     return jsonify(budgets), 200
