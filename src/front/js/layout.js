@@ -3,11 +3,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
+
 import { Request } from "./pages/request";
 import { PostedWorks } from "./pages/postedWorks";
-import { PostedPresupuestos } from "./pages/postedPresupuestos";
 
 import injectContext from "./store/appContext";
 
@@ -16,6 +14,7 @@ import { Footer } from "./component/footer";
 import { Login } from "./component/login";
 import { Signup } from "./pages/signup";
 import { WorkersList } from "./pages/WorkersList";
+import { BudgetsView } from "./pages/budgetsView";
 
 //create your first component
 const Layout = () => {
@@ -29,14 +28,12 @@ const Layout = () => {
         <Navbar />
         <Routes>
           <Route element={<Home />} path="/" />
-          <Route element={<Demo />} path="/demo" />
-          <Route element={<Single />} path="/single/:theid" />
           <Route element={<Signup />} path="/signup" />
           <Route element={<Login />} path="/login" />
           <Route element={<Request />} path="/request" />
           <Route element={<PostedWorks />} path="/works" />
           <Route element={<WorkersList />} path="/workers-list" />
-          <Route element={<PostedPresupuestos />} path="/posted-presupuestos" />
+          <Route element={<BudgetsView />} path="/my-budget/:id" />
           <Route element={<h1>Not found!</h1>} />
         </Routes>
         <Footer />

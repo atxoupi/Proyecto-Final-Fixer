@@ -45,12 +45,8 @@ export const Navbar = () => {
 
           {store.usuario ? (
             <li className="nav-item mx-1">
-              <Link
-                className="nav-link nav-link-navbar"
-                href="#"
-                to="/posted-presupuestos"
-              >
-                Ver Presupuesto
+              <Link className="nav-link nav-link-navbar" href="#" to="/works">
+                Mis ofertas
               </Link>
             </li>
           ) : (
@@ -66,16 +62,19 @@ export const Navbar = () => {
           ) : (
             ""
           )}
-
-          <li className="nav-item mx-1">
-            <Link
-              className="nav-link nav-link-navbar"
-              href="#"
-              to="/workers-list"
-            >
-              Buscar profesionales
-            </Link>
-          </li>
+          {store.usuario ? (
+            <li className="nav-item mx-1">
+              <Link
+                className="nav-link nav-link-navbar"
+                href="#"
+                to="/workers-list"
+              >
+                Buscar profesionales
+              </Link>
+            </li>
+          ) : (
+            ""
+          )}
           <li className="nav-item mx-1">
             {store.auth === false ? (
               <Link
@@ -107,7 +106,7 @@ export const Navbar = () => {
                   aria-current="page"
                   to="/login"
                 >
-                  cerrar sesión
+                  Cerrar sesión
                 </Link>
               </span>
             ) : null}
