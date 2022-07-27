@@ -2,15 +2,10 @@ import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Workerprofile = ({
-  name,
-  email,
-  city,
-  tlf_number,
-  sector,
-  pictures,
-}) => {
+export const Workerprofile = ({ id }) => {
   const { store, actions } = useContext(Context);
+  profile = store.workers.filter((worker) => worker.is === id);
+
   return (
     <>
       <div className="row">
@@ -20,11 +15,14 @@ export const Workerprofile = ({
               <img src={pictures}></img>
             </div>
             <div className="post-card">
-              <div className="worker-name"> Nombre: {name}</div>
-              <div className="worker-email"> Email: {email} </div>
-              <div className="worker-city">Ciudad :{city}</div>
-              <div className="worker-sector"> Sector: {sector}</div>
-              <div className="worker-tlf"> Número Tlf: {tlf_numberl} </div>
+              <div className="worker-name"> Nombre: {profile.name}</div>
+              <div className="worker-email"> Email: {profile.email} </div>
+              <div className="worker-city">Ciudad :{profile.city}</div>
+              <div className="worker-sector"> Sector: {profile.sector}</div>
+              <div className="worker-tlf">
+                {" "}
+                Número Tlf: {profile.tlf_numberl}
+              </div>
             </div>
           </div>
         </div>

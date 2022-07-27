@@ -22,7 +22,7 @@ const ModalForm = ({ id }) => {
       <div
         className="modal fade modal-dialog-scrollable"
         id={"exampleModal" + id}
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
         data-backdrop="false"
@@ -43,7 +43,7 @@ const ModalForm = ({ id }) => {
             <div className="modal-body">
               <form>
                 <div className="mb-3">
-                  <label for="recipient-name" className="col-form-label">
+                  <label htmlFor="recipient-name" className="col-form-label">
                     Precio
                   </label>
                   <input
@@ -56,7 +56,7 @@ const ModalForm = ({ id }) => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label for="recipient-name" className="col-form-label">
+                  <label htmlFor="recipient-name" className="col-form-label">
                     Tiempo estimado
                   </label>
                   <input

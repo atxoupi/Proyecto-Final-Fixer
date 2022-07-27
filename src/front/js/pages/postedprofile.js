@@ -1,27 +1,17 @@
 import React, { useEffect, useContext } from "react";
 import { Workerprofile } from "../component/workerprofile";
 import { Context } from "../store/appContext";
+import { useParams } from "react-router-dom";
 
-export const Postedprofile = (email) => {
+export const Postedprofile = () => {
   const { store, actions } = useContext(Context);
-  useEffect(() => {
-    actions.GetWorkerProfile(email);
-  }, []);
-  let workerp = store.workerProfile;
+  const params = useParams();
+
   return (
     <>
       <div className="container-works mx-auto">
-        <h3 className="text-center mb-3">
-          Estas són las ofertas disponibles de tu sector
-        </h3>
-        <Workerprofile
-          name={workerp.name}
-          email={workerp.email}
-          city={workerp.city}
-          tlf_number={workerp.tlf_number}
-          sector={workerp.sector}
-          pictures={workerp.pictures}
-        />
+        <h3 className="text-center mb-3">Perfil de Empresa</h3>
+        <Workerprofile id={params.id} />
       </div>
     </>
   );
