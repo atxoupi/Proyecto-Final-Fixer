@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 // import PropTypes from "prop-types";
 
@@ -31,7 +31,7 @@ const PerfilUser = () => {
       password2 !== "" &&
       password1 === password2
     ) {
-      actions.userEdit(
+      actions.editUser(
         username,
         lastname,
         email,
@@ -49,7 +49,7 @@ const PerfilUser = () => {
       console.log("Tus contraseñas no coinciden");
     }
   };
-  //   console.log(user);
+  console.log(store.consultUser);
   return (
     <div id="perfil1" className="border border-warning border-2 rounded-3 mt-5">
       <div className="container p-3 text-center">
@@ -77,7 +77,7 @@ const PerfilUser = () => {
           <div className="row g-3 align-items-center">
             <div className="col-auto">
               <label
-                for="inputPassword6"
+                for="recipient-name"
                 className="col-form-label fw-bold mt-2"
               >
                 Nombres:
@@ -89,7 +89,7 @@ const PerfilUser = () => {
                 type="text"
                 id="basic-addon1"
                 className="form-control"
-                // defaultValue={user.user.name}
+                defaultValue={store.consultUser.name}
                 aria-describedby="basic-addon1"
               />
             </div>
@@ -98,7 +98,7 @@ const PerfilUser = () => {
           <div className="row g-3 align-items-center">
             <div className="col-auto">
               <label
-                for="inputPassword6"
+                htmlFor="recipient-name"
                 className="col-form-label fw-bold mt-2"
               >
                 Apellidos:
@@ -111,7 +111,7 @@ const PerfilUser = () => {
                 id="inputPassword6"
                 className="form-control"
                 aria-describedby="passwordHelpInline"
-                // defaultValue={user.user.lastname}
+                defaultValue={store.consultUser.lastname}
               />
             </div>
           </div>
@@ -119,7 +119,7 @@ const PerfilUser = () => {
           <div className="row g-3 align-items-center">
             <div className="col-auto">
               <label
-                for="inputPassword6"
+                htmlFor="recipient-name"
                 className="col-form-label fw-bold mt-2"
               >
                 Ciudad:
@@ -132,7 +132,7 @@ const PerfilUser = () => {
                 id="inputPassword6"
                 className="form-control"
                 aria-describedby="passwordHelpInline"
-                // defaultValue={user.user.city}
+                defaultValue={store.consultUser.city}
               />
             </div>
           </div>
@@ -140,7 +140,7 @@ const PerfilUser = () => {
           <div className="row g-3 align-items-center">
             <div className="col-auto">
               <label
-                for="inputPassword6"
+                htmlFor="inputPassword6"
                 className="col-form-label fw-bold mt-2"
               >
                 Direccion:
@@ -153,6 +153,7 @@ const PerfilUser = () => {
                 id="inputPassword6"
                 className="form-control"
                 aria-describedby="passwordHelpInline"
+                defaultValue={store.consultUser.adress}
                 // placeholder={user.user.adress}
                 // aria-label={user.user.adress}
               />
@@ -162,7 +163,7 @@ const PerfilUser = () => {
           <div className="row g-3 align-items-center">
             <div className="col-auto">
               <label
-                for="inputPassword6"
+                htmlFor="recipient-name"
                 className="col-form-label fw-bold mt-2"
               >
                 Codigo Postal:
@@ -175,6 +176,7 @@ const PerfilUser = () => {
                 id="inputPassword6"
                 className="form-control"
                 aria-describedby="passwordHelpInline"
+                defaultValue={store.consultUser.postCode}
                 // defaultValue={user.user.postCode}
               />
             </div>
@@ -183,7 +185,7 @@ const PerfilUser = () => {
           <div className="row g-3 align-items-center">
             <div className="col-auto">
               <label
-                for="inputPassword6"
+                htmlFor="recipient-name"
                 className="col-form-label fw-bold mt-2"
               >
                 email:
@@ -196,6 +198,7 @@ const PerfilUser = () => {
                 id="inputPassword6"
                 className="form-control"
                 aria-describedby="passwordHelpInline"
+                defaultValue={store.consultUser.email}
                 // defaultValue={user.user.email}
               />
             </div>
@@ -204,7 +207,7 @@ const PerfilUser = () => {
           <div className="row g-3 align-items-center">
             <div className="col-auto">
               <label
-                for="inputPassword6"
+                htmlFor="inputPassword6"
                 className="col-form-label fw-bold mt-2"
               >
                 Numero de contacto:
@@ -217,7 +220,7 @@ const PerfilUser = () => {
                 id="inputPassword6"
                 className="form-control"
                 aria-describedby="passwordHelpInline"
-                // defaultValue={user.user.tlf_number}
+                defaultValue={store.consultUser.tlf}
               />
             </div>
           </div>
@@ -256,84 +259,99 @@ const PerfilUser = () => {
               <div className="modal-body">
                 <form>
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
+                    <label htmlFor="recipient-name" className="col-form-label">
                       Nombre:
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      //   onChange={(e) => setUsername(e.target.value)}
+                      defaultValue={store.editUser.name}
+                      onChange={(e) => setUsername(e.target.value)}
                     />
                   </div>
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
+                    <label htmlFor="recipient-name" className="col-form-label">
                       Apellidos:
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="recipient-name"
+                      defaultValue={store.editUser.lastname}
+                      onChange={(e) => setLastname(e.target.value)}
                     />
                   </div>
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
+                    <label htmlFor="recipient-name" className="col-form-label">
                       Ciudad:
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="recipient-name"
+                      defaultValue={store.editUser.city}
+                      onChange={(e) => setCity(e.target.value)}
                     />
                   </div>
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
+                    <label htmlFor="recipient-name" className="col-form-label">
                       Dirección:
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="recipient-name"
+                      defaultValue={store.editUser.adress}
+                      onChange={(e) => setAdress(e.target.value)}
                     />
                   </div>
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
+                    <label htmlFor="recipient-name" className="col-form-label">
                       Codigo Postal:
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="recipient-name"
+                      defaultValue={store.editUser.postCode}
+                      onChange={(e) => setPostCode(e.target.value)}
                     />
                   </div>
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
+                    <label htmlFor="recipient-name" className="col-form-label">
                       email:
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="recipient-name"
+                      defaultValue={store.editUser.email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
+                    <label htmlFor="recipient-name" className="col-form-label">
                       Numero de contacto:
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="recipient-name"
+                      defaultValue={store.editUser.tlf}
+                      onChange={(e) => setTlf(e.target.value)}
                     />
                   </div>
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
+                    <label htmlFor="recipient-name" className="col-form-label">
                       Password 1:
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="recipient-name"
+                      defaultValue={store.editUser.password1}
+                      onChange={(e) => setPassword1(e.target.value)}
                     />
                   </div>
                   <div className="mb-3">
@@ -344,12 +362,18 @@ const PerfilUser = () => {
                       type="text"
                       className="form-control"
                       id="recipient-name"
+                      defaultValue={store.editUser.password2}
+                      onChange={(e) => setPassword2(e.target.value)}
                     />
                   </div>
                 </form>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btnHeader">
+                <button
+                  type="button"
+                  className="btn btnHeader"
+                  onClick={(e) => handleSubmitEditUser()}
+                >
                   aceptar
                 </button>
               </div>

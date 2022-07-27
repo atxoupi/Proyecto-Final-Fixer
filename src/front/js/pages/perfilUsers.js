@@ -4,9 +4,9 @@ import PerfilUser from "../component/perfilUser";
 
 export const PerfilUsers = () => {
   const { store, actions } = useContext(Context);
-  //   useEffect(() => {
-  //     actions.listUser();
-  //   }, []);
+  useEffect(() => {
+    actions.consultUserProfile();
+  }, []);
 
   return (
     <div className="container">

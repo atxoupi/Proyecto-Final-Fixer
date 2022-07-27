@@ -12,7 +12,9 @@ const getState = ({
             workers: [],
             budget: [],
             editWorker: [],
-            editWorkerGet: {}
+            editWorkerGet: {},
+            editUser: [],
+            consultUser: {},
         },
         actions: {
             // LOGIN
@@ -28,8 +30,9 @@ const getState = ({
                             "Content-Type": "application/json",
                         },
                     });
+                    const data = await resp.json();
                     if (resp.status === 200) {
-                        const data = await resp.json();
+
                         setStore({
                             auth: true,
                         });
@@ -53,6 +56,7 @@ const getState = ({
                     }
 
                     return data;
+
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
@@ -281,17 +285,18 @@ const getState = ({
                 }
             },
 
-            //CONSULTAR Y EDITAR DATOS DE USUARIO EMPRESA
-            editWorkerProfile: async (name, city, email, sector, tlf_number, password) => {
+            //EDITAR DATOS DE USUARIO EMPRESA
+            editWorkerProfile: async (name, email, city, sector, direccion, tlf, password) => {
                 try {
                     const token = localStorage.getItem("token");
-                    const resp = await fetch(process.env.BACKEND_URL + "/update_worker", {
+                    const resp = await fetch(process.env.BACKEND_URL + "/api/update_worker", {
                         method: "PUT",
                         body: JSON.stringify({
                             name: name,
-                            email: price,
-                            city: duracion,
+                            email: email,
+                            city: city,
                             sector: sector,
+                            adress: direccion,
                             tlf_number: tlf,
                             password: password,
 
@@ -314,7 +319,7 @@ const getState = ({
                 }
             },
 
-            //CONSULTAR Y EDITAR DATOS DE USUARIO EMPRESA
+            //CONSULTAR DATOS DE USUARIO EMPRESA
             consultWorkerProfile: async (name, city, email, sector, tlf_number, password) => {
                 try {
                     const token = localStorage.getItem("token");
@@ -331,6 +336,67 @@ const getState = ({
                         editWorkerGet: data,
                     });
                     console.log(data);
+
+                    // return data;
+                    // console.log(data);
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+
+            //EDITAR DATOS DE USUARIO
+            editUserProfile: async (name, lastname, email, city, sector, tlf, adress, postcode, password) => {
+                try {
+                    const token = localStorage.getItem("token");
+                    const resp = await fetch(process.env.BACKEND_URL + "/api/update_user", {
+                        method: "PUT",
+                        body: JSON.stringify({
+                            name: name,
+                            lastname: lastname,
+                            email: email,
+                            city: city,
+                            sector: sector,
+                            tlf_number: tlf,
+                            adress: adress,
+                            postcode: postcode,
+                            password: password,
+
+                        }),
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    });
+
+                    const data = await resp.json();
+                    setStore({
+                        editUser: data,
+                    });
+
+                    return data;
+                    // console.log(data);
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+
+            //CONSULTAR DATOS DE USUARIO
+            consultUserProfile: async (name, lastname, city, email, tlf_number, adress, postcode) => {
+                try {
+                    const token = localStorage.getItem("token");
+                    const resp = await fetch(process.env.BACKEND_URL + "/api/profile", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    });
+
+                    const data = await resp.json();
+                    setStore({
+                        consultUser: data,
+                    });
+
 
                     return data;
                     // console.log(data);

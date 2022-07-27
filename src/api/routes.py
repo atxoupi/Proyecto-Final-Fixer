@@ -129,7 +129,7 @@ def protected():
         user = Worker_signup.query.filter_by(email=current_user).first()
     else:
         user = User_signup.query.filter_by(email=current_user).first()
-    
+        print(user)
     
     return jsonify(user.serialize()), 200
 ##--ListWork--
@@ -266,6 +266,48 @@ def updateworker():
     worker.cif=cif
 
     db.session.add(worker)
+    db.session.commit()
+    
+    login=Login.query.filter_by(email=current_user).first()
+    login.email=email
+    db.session.add(login)
+    db.session.commit()
+
+    response_body = {
+        "message": "Datos Actualizados"
+    }
+
+    return jsonify(response_body), 200
+
+#--UpdateUser
+#Recibe datos de Usuario y los actualiza en la BD
+@api.route("/update_user", methods=["PUT"])
+@jwt_required()
+def updateuser():
+    current_user = get_jwt_identity()
+    name = request.json.get("name", None)
+    lastname = request.json.get("lastname", None)
+    email = request.json.get("email", None)
+    city = request.json.get("city", None)
+    sector = request.json.get("sector", None)
+    tlf_number=request.json.get("tlf_number", None)
+    adress=request.json.get("adress", None)
+    postcode=request.json.get("postcode", None)
+    cif=request.json.get("cif", None)
+
+    user=User_signup.query.filter_by(email=current_user).first()
+
+    user.name=name
+    user.lastname=lastname
+    user.email=email
+    user.city=city
+    user.sector=sector
+    user.tlf_number=tlf_number
+    user.adress=adress
+    user.postcode=postcode
+    user.cif=cif
+
+    db.session.add(user)
     db.session.commit()
     
     login=Login.query.filter_by(email=current_user).first()

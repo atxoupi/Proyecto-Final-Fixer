@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 // import PropTypes from "prop-types";
 
@@ -14,11 +14,11 @@ const PerfilWorker = () => {
   const [tlf, setTlf] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
-  const [editUser, seteditUser] = useState("");
-  console.log(store.editWorkerGet);
+
+  // console.log(store.editWorkerGet);
   //Funcion
   const handleSubmitEditWorker = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (
       username !== "" &&
       email !== "" &&
@@ -27,9 +27,17 @@ const PerfilWorker = () => {
       adress === "" &&
       tlf === "" &&
       password1 !== "" &&
-      password2 === password2
+      password2 === password1
     ) {
-      actions.WorEdit(username, email, city, sector, adress, tlf, password1);
+      actions.editWorkerGet(
+        username,
+        email,
+        city,
+        sector,
+        adress,
+        tlf,
+        password1
+      );
     } else if (
       password1 !== "" &&
       password2 !== "" &&
@@ -331,7 +339,17 @@ const PerfilWorker = () => {
                 <button
                   type="button"
                   className="btn btnHeader"
-                  onClick={(e) => handleSubmitEditWorker()}
+                  onClick={() =>
+                    actions.editWorkerProfile(
+                      username,
+                      email,
+                      city,
+                      sector,
+                      adress,
+                      tlf,
+                      password1
+                    )
+                  }
                 >
                   aceptar
                 </button>
