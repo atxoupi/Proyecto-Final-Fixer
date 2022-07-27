@@ -311,11 +311,11 @@ const getState = ({
                 }
             },
             // Función que devuelve los presupuestos que hay en la base de datos y los añade al store.budgets
-            showbudget: async () => {
+            showbudget: async (id) => {
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(
-                        process.env.BACKEND_URL + "/api/listbudget", {
+                        process.env.BACKEND_URL + `/api/listbudget/${id}`, {
                             method: "GET",
                             headers: {
                                 "Content-Type": "application/json",

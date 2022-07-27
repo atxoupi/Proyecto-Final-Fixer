@@ -26,6 +26,7 @@ export const PostedWorks = () => {
               user_id={item.user_id}
               worker_id={item.worker_id}
               work_id={item.id}
+              showButton={true}
             />
           ))}
         </div>

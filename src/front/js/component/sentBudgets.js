@@ -1,16 +1,16 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 
-export const SentBudgets = ({ url }) => {
+export const SentBudgets = ({ url, price, duration }) => {
   const { store, actions } = useContext(Context);
-  const budgets = store.budgets;
+
   return (
     <>
       <div className="row d-flex justify-content-evenly">
         <img src="..." className="col-3 rounded float-start " alt="..." />
         <div className="col-3 text-center">
           <div className="price-budget-title">Presupuesto</div>
-          <div className="price-budget">20 €</div>
+          <div className="price-budget">{price}</div>
           <a href={url} download target="_blank" rel="noopener noreferrer">
             <button type="button" className="btn btnHeader mt-3">
               Descargar presupuesto
@@ -19,7 +19,7 @@ export const SentBudgets = ({ url }) => {
         </div>
         <div className="col-3 text-center">
           <div className="price-budget-title">Duración</div>
-          <div className="price-budget">10 días</div>
+          <div className="price-budget">{duration}</div>
         </div>
         <div className="col-3 text-center">
           <button>Aceptar</button>

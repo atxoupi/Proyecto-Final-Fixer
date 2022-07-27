@@ -19,6 +19,8 @@ export const WorkPost = ({
   worker_id,
   user_id,
   url,
+  work_id,
+  showButton,
 }) => {
   const { store, actions } = useContext(Context);
   const showIcons = () => {
@@ -62,11 +64,15 @@ export const WorkPost = ({
                 ></img>
               </span>
               <div>
-                <Link to="/my-budgets">
-                  <button type="button" className="btn btnHeader mt-3">
-                    Ver presupuesto
-                  </button>
-                </Link>
+                {showButton ? (
+                  <Link to={`/my-budget/${work_id}`}>
+                    <button type="button" className="btn btnHeader mt-3">
+                      Ver presupuesto
+                    </button>
+                  </Link>
+                ) : (
+                  ""
+                )}
               </div>
             </div>{" "}
           </div>{" "}

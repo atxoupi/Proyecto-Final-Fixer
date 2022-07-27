@@ -241,6 +241,19 @@ def listbudgets():
     
     return jsonify(result), 200
 
+
+# Nos devuelve el listado de presupuestos referentes a una oferta concreta, 
+# le pasamos el id como parámetro
+@api.route("/listbudget/<int:id>", methods=["GET"])
+@jwt_required()
+def listbudgetsForWork(id):
+    # Access the identity of the current user with get_jwt_identity
+    budgets_obj= Budget.query.filter_by(work_id=id).all()
+
+    budgets=[budget.serialize() for budget in budgets_obj]
+    
+    return jsonify(budgets), 200
+
 #--Updateworker
 #Recibe datos de Worker y los actualiza en la BD
 @api.route("/update_worker", methods=["POST"])

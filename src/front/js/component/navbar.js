@@ -45,12 +45,8 @@ export const Navbar = () => {
 
           {store.usuario ? (
             <li className="nav-item mx-1">
-              <Link
-                className="nav-link nav-link-navbar"
-                href="#"
-                to="/my-budgets"
-              >
-                Ver Presupuesto
+              <Link className="nav-link nav-link-navbar" href="#" to="/works">
+                Mis ofertas
               </Link>
             </li>
           ) : (
