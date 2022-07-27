@@ -15,7 +15,7 @@ import { Login } from "./component/login";
 import { Signup } from "./pages/signup";
 import { WorkersList } from "./pages/WorkersList";
 import { BudgetsView } from "./pages/budgetsView";
-import { Postedprofile } from "./pages/postedprofile";
+import { Workerprofile } from "./component/workerprofile";
 
 //create your first component
 const Layout = () => {
@@ -35,7 +35,7 @@ const Layout = () => {
           <Route element={<PostedWorks />} path="/works" />
           <Route element={<WorkersList />} path="/workers-list" />
           <Route element={<BudgetsView />} path="/my-budget/:id" />
-          <Route element={<Postedprofile />} path="/workerprofile/:id" />
+          <Route element={<Workerprofile />} path="/workerprofile/:id" />
           <Route element={<h1>Not found!</h1>} />
         </Routes>
         <Footer />

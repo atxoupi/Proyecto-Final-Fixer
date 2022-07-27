@@ -23,10 +23,8 @@ export const CardWorker = ({ name, sector, image, id }) => {
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
           <p className="card-text">{sector}</p>
-          <Link to={`/workerprofile/${id}`}>
-            <a href="#" className="btn btn-primary">
-              Leer más
-            </a>
+          <Link to={`/workerprofile/${id}`} className="btn btnHeader">
+            Leer más
           </Link>
         </div>
       </div>

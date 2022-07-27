@@ -8,6 +8,7 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_requir
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail
 from flask_mail import Message
+import datetime 
 
 api = Blueprint('api', __name__)
 
@@ -33,7 +34,7 @@ def login():
         segmento="Usuario"
     
     
-    access_token = create_access_token(identity=email)
+    access_token = create_access_token(identity=email, expires_delta=datetime.timedelta(minutes=60))
     return jsonify(access_token=access_token,tipo=segmento) 
 #--SignUp
 #Recibe datos de Usuario o de Worker y los inserta en la BD
@@ -337,14 +338,13 @@ def updateuser():
     return jsonify(response_body), 200
 
 ##WorkerProfile
-##Recibe el mail del worker y devuelve un array con los datos del trabajador
+##Recibe el id del worker y devuelve un array con los datos del trabajador
 
-@api.route("/worker_profile", methods=["GET"])
+@api.route("/worker_profile/<int:id>", methods=["GET"])
 
-def workerprofile():
+def workerprofile(id):
     # Access the identity of the current user with get_jwt_identity
-    email = request.json.get("email", None)
 
-    worker = Worker_signup.query.filter_by(email=email).first()
+    worker = Worker_signup.query.filter_by(id=id).first()
     
     return jsonify(worker.serialize()), 200
