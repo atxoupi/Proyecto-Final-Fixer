@@ -32,6 +32,12 @@ export const WorkPostForWorker = ({
                 <a href={url} download className="btn-enviar-presupuesto mt-2">
                   <ModalForm id={work_id} />
                 </a>
+                <button
+                  type="button"
+                  onClick={() => actions.deleteWork(work_id)}
+                >
+                  Borrar oferta
+                </button>
               </div>
             </div>
           </div>

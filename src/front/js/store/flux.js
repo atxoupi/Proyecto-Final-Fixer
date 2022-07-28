@@ -333,6 +333,15 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
+            deleteWork: (work_id) => {
+                const store = getStore();
+                const work = store.work;
+                let newListOfWorks = work.filter((item) => item.id !== work_id);
+                setStore({
+                    work: newListOfWorks,
+                });
+                console.log(newListOfWorks);
+            },
         },
     };
 };

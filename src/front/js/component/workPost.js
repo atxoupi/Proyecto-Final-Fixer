@@ -19,6 +19,8 @@ export const WorkPost = ({
   work_id,
   showButton,
 }) => {
+  const { actions } = useContext(Context);
+
   const showIcons = () => {
     if (sector === "Fontanería") {
       return grifo;
@@ -70,6 +72,12 @@ export const WorkPost = ({
                     <Link to={`/work/${work_id}/budgets`}>
                       <button type="button" className="btn btnHeader mt-2 ">
                         Ver presupuesto
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => actions.deleteWork(work_id)}
+                      >
+                        Borrar oferta
                       </button>
                     </Link>
                   </div>
