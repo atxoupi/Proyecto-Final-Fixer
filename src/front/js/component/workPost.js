@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import bombilla from "../../img/icons/bombilla.png";
@@ -16,13 +16,9 @@ export const WorkPost = ({
   location,
   title,
   sector,
-  worker_id,
-  user_id,
-  url,
   work_id,
   showButton,
 }) => {
-  const { store, actions } = useContext(Context);
   const showIcons = () => {
     if (sector === "Fontanería") {
       return grifo;
@@ -56,7 +52,6 @@ export const WorkPost = ({
                 <img className="house-icon" src={houseIcon}></img>
               </span>
               <span>
-                {" "}
                 <img
                   className="sector-icon"
                   src={showIcons()}
@@ -65,7 +60,7 @@ export const WorkPost = ({
               </span>
               <div>
                 {showButton ? (
-                  <Link to={`/my-budget/${work_id}`}>
+                  <Link to={`/work/${work_id}/budgets`}>
                     <button type="button" className="btn btnHeader mt-3">
                       Ver presupuesto
                     </button>
