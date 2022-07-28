@@ -66,7 +66,7 @@ export const WorkersList = () => {
       </div>
       <div>
         <ul className="card-grid mx-3 list-unstyled">
-          {!filterItems.length > 0 ? (
+          {!filteredWorkers.length > 0 ? (
             <p className="text-filter text-center">
               No se han encontrado coincidencias
             </p>
