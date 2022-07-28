@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 export const SignupForm = () => {
   const { store, actions } = useContext(Context);
   let navigate = useNavigate();
+  const regions = store.regions;
 
   // Datos usuario
   const [username, setUsername] = useState("");
@@ -245,6 +246,7 @@ export const SignupForm = () => {
                                 className="form-control  form-control-signup form-control-lg"
                                 placeholder="Nombre"
                                 onChange={(e) => setUsername(e.target.value)}
+                                required
                               />
                             </div>
                           </div>
@@ -256,36 +258,43 @@ export const SignupForm = () => {
                                 className="form-control form-control-signup form-control-lg"
                                 placeholder="Apellidos"
                                 onChange={(e) => setLastname(e.target.value)}
+                                required
                               />
                             </div>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-6 mb-3">
-                            <div className="form-outline">
-                              <input
-                                type="text"
-                                id="city"
-                                className="form-control  form-control-signup form-control-lg"
-                                placeholder="Ciudad o población"
-                                onChange={(e) => setCity(e.target.value)}
-                              />
-                            </div>
+                            <select
+                              className="select w-100 form-control-request form-control-lg"
+                              onChange={(e) => setCity(e.target.value)}
+                              required
+                            >
+                              <option value="1">Provincia</option>
+                              {regions.map((item, index) => (
+                                <option key={index} value={item}>
+                                  {item}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                           <div className="col-md-6 mb-3 pb-2 ">
                             <select
                               className="select w-100 form-control-signup form-control-lg"
                               onChange={(e) => setSector(e.target.value)}
+                              required
                             >
                               <option value="1">Elije una opción</option>
                               <option value="Fontanería">Fontanería</option>
                               <option value="Carpintería">Carpintería</option>
                               <option value="Pintura">Pintura</option>
                               <option value="Electricidad">Electricidad</option>
+                              <option value="Albañilería">Albañilería</option>
                               <option value="Climatización">
                                 Climatización
                               </option>
                               <option value="Mudanzas">Mudanzas</option>
+                              <option value="Jardinería">Jardinería</option>
                             </select>
                             <label className="form-label select-label">
                               Selecciona tu sector
@@ -301,6 +310,7 @@ export const SignupForm = () => {
                                 className="form-control form-control-signup form-control-lg"
                                 placeholder="email@email.com"
                                 onChange={(e) => setEmail(e.target.value)}
+                                required
                               />
                             </div>
                           </div>
@@ -329,6 +339,7 @@ export const SignupForm = () => {
                                 className="form-control form-control-signup form-control-lg"
                                 placeholder="Repite el password"
                                 onChange={(e) => setPassword2(e.target.value)}
+                                required
                               />
                             </div>
                           </div>

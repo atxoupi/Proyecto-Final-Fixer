@@ -215,10 +215,12 @@ def sbudget():
 
     print("El id del trtabajador:  ")
     print(worker.id)
+    print(id_work)
     budget = Budget(user_id=tarea.user_id , worker_id=worker.id, work_id=tarea.id, url=url, duration=duration, price=price)
     db.session.add(budget)
     db.session.commit()
     print(budget.id)
+    
 
     response_body = {
             "message": "Presupuesto Almacenado"
@@ -238,6 +240,19 @@ def listbudgets():
     result= list(map(lambda budget: budget.serialize(),budgets))
     
     return jsonify(result), 200
+
+
+# Nos devuelve el listado de presupuestos referentes a una oferta concreta, 
+# le pasamos el id como parámetro
+@api.route("/listbudget/<int:id>", methods=["GET"])
+@jwt_required()
+def listbudgetsForWork(id):
+    # Access the identity of the current user with get_jwt_identity
+    budgets_obj= Budget.query.filter_by(work_id=id).all()
+
+    budgets=[budget.serialize() for budget in budgets_obj]
+    
+    return jsonify(budgets), 200
 
 #--Updateworker
 #Recibe datos de Usuario o de Worker y los actualiza en la BD

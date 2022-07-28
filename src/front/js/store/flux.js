@@ -15,6 +15,60 @@ const getState = ({
             editWorkerGet: {},
             editUser: [],
             consultUser: {},
+            regions: [
+                "Albacete",
+                "Alicante/Alacant",
+                "Almería",
+                " Álava/Araba",
+                "Asturias",
+                "Ávila",
+                "Badajoz",
+                "Balears, Illes",
+                "Barcelona",
+                "Bizkaia",
+                "Burgos",
+                "Cáceres",
+                "Cádiz",
+                "Cantabria",
+                "Castellón/Castelló",
+                "Ciudad Real",
+                "Córdoba",
+                "Coruña, A",
+                "Cuenca",
+                "Gipuzkoa",
+                "Girona",
+                "Granada",
+                "Guadalajara",
+                "Huelva",
+                "Huesca",
+                "Jaén",
+                "León",
+                "Lleida",
+                "Lugo",
+                "Madrid",
+                "Málaga",
+                "Murcia",
+                "Navarra",
+                "Ourense",
+                "Palencia",
+                "Palmas, Las",
+                "Pontevedra",
+                "Rioja, La",
+                "Salamanca",
+                "Santa Cruz de Tenerife",
+                "Segovia",
+                "Sevilla",
+                "Soria",
+                "Tarragona",
+                "Teruel",
+                "Toledo",
+                "Valencia/València",
+                "Valladolid",
+                "Zamora",
+                "Zaragoza",
+                "Ceuta",
+                "Melilla",
+            ],
         },
         actions: {
             // LOGIN
@@ -30,16 +84,16 @@ const getState = ({
                             "Content-Type": "application/json",
                         },
                     });
-                    const data = await resp.json();
+                    // si el status es correcto nos setea a auth true y esto nos servirá para renderizar condicionalmente si se está logueado
                     if (resp.status === 200) {
-
+                        const data = await resp.json();
                         setStore({
                             auth: true,
                         });
-
+                        // según el tipo de usuario nos cambia el store.usuario, para renderizado condicional usuario-empresa
                         if (data.tipo === "Usuario") {
                             setStore({
-                                usuario: true, //esto lo viejo true y false invertidos probando lo antiguo
+                                usuario: true,
                             });
                         } else {
                             setStore({
@@ -56,14 +110,14 @@ const getState = ({
                     }
 
                     return data;
-
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
             },
 
-            //CREAR SOLICITUD
-            createRequest: async (city, sector, description) => {
+            //Crea una solicitud de trabajo y envía al backend información de ciudad, sector, título y descripción.
+            // También email que coge del localStorage
+            createRequest: async (city, sector, description, title) => {
                 try {
                     const resp = await fetch(
                         process.env.BACKEND_URL + "/api/work_request", {
@@ -76,6 +130,7 @@ const getState = ({
                                 city: city,
                                 sector: sector,
                                 description: description,
+                                title: title,
                                 mail: localStorage.getItem("mail"),
                             }),
                         }
@@ -119,7 +174,6 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
-
             //CREAR USUARIO TRABAJADOR
             createWorker: async (name, city, email, password, sector) => {
                 try {
@@ -147,7 +201,7 @@ const getState = ({
                 }
             },
 
-            //MUESTRA LISTADO DE TRABAJOS OFERTADOS. LA MISMA RUTA PARA TRABAJADOR Y USUARIO
+            //Trae del backend el listado de trabajos ofertados y los añade al store.work
             showWork: async () => {
                 try {
                     const token = localStorage.getItem("token");
@@ -170,7 +224,7 @@ const getState = ({
                 }
             },
 
-            // Función que nos devuelve un listado con todos los trabajadores de la base de datos
+            // Función que nos devuelve un listado con todos los trabajadores de la base de datos y los añade al store.workers
             listWorkers: async () => {
                 try {
                     const token = localStorage.getItem("token");
@@ -203,7 +257,7 @@ const getState = ({
                     usuario: null,
                 });
             },
-            // UPDATE OUT
+            // UPDATE OUT. Función que nos mantiene el store aunque refresquemos la página
             updateOut: () => {
                 if (localStorage.getItem("token")) {
                     setStore({
@@ -219,7 +273,7 @@ const getState = ({
 
             //CODIGO DE CLOUDINARY SUBIDA DE FOTO
 
-            uploadFile: async (uploadImages, worker_id, price, duracion) => {
+            uploadFile: async (uploadImages, id, price, duracion) => {
                 const cloud_name = "carolinaqotf"; //"pluggedin";
                 const preset = "s5oaavqo"; //"icnpftra";
                 const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
@@ -245,7 +299,7 @@ const getState = ({
                                     url: data.url,
                                     price: price,
                                     duration: duracion,
-                                    id_work: worker_id,
+                                    id_work: id,
                                 }),
                                 headers: {
                                     "Content-Type": "application/json",
@@ -260,12 +314,12 @@ const getState = ({
                     console.log("message", error);
                 }
             },
-
-            showbudget: async () => {
+            // Función que devuelve los presupuestos que hay en la base de datos y los añade al store.budgets
+            showbudget: async (id) => {
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(
-                        process.env.BACKEND_URL + "/api/listbudget", {
+                        process.env.BACKEND_URL + `/api/listbudget/${id}`, {
                             method: "GET",
                             headers: {
                                 "Content-Type": "application/json",
@@ -278,7 +332,6 @@ const getState = ({
                     setStore({
                         budget: data,
                     });
-                    // // don't forget to return something, that is how the async resolves
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
@@ -287,6 +340,7 @@ const getState = ({
 
             //EDITAR DATOS DE USUARIO EMPRESA
             editWorkerProfile: async (name, email, city, sector, direccion, tlf, password) => {
+                console.log(name, email, city, sector);
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(process.env.BACKEND_URL + "/api/update_worker", {

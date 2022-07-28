@@ -4,14 +4,15 @@ import { Context } from "../store/appContext";
 
 const PerfilWorker = () => {
   const { store, actions } = useContext(Context);
+  const regions = store.regions;
 
   //DATOS A EDITAR DE USUARIO TRABAJADOR
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [city, setCity] = useState("");
-  const [sector, setSector] = useState("");
-  const [adress, setAdress] = useState("");
-  const [tlf, setTlf] = useState("");
+  const [username, setUsername] = useState(store.editWorkerGet.name);
+  const [email, setEmail] = useState(store.editWorkerGet?.email);
+  const [city, setCity] = useState(store.editWorkerGet?.city);
+  const [sector, setSector] = useState(store.editWorkerGet?.sector);
+  const [adress, setAdress] = useState(store.editWorkerGet?.adress);
+  const [tlf, setTlf] = useState(store.editWorkerGet?.tlf);
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
 
@@ -19,6 +20,7 @@ const PerfilWorker = () => {
   //Funcion
   const handleSubmitEditWorker = (e) => {
     // e.preventDefault();
+    console.log(username);
     if (
       username !== "" &&
       email !== "" &&
@@ -29,15 +31,16 @@ const PerfilWorker = () => {
       password1 !== "" &&
       password2 === password1
     ) {
-      actions.editWorkerGet(
-        username,
-        email,
-        city,
-        sector,
-        adress,
-        tlf,
-        password1
-      );
+      // console.log(username);
+      // actions.editWorkerGet(
+      //   username,
+      //   email,
+      //   city,
+      //   sector,
+      //   adress,
+      //   tlf,
+      //   password1
+      // );
     } else if (
       password1 !== "" &&
       password2 !== "" &&
@@ -73,7 +76,7 @@ const PerfilWorker = () => {
           <div className="row g-3 align-items-center">
             <div className="col-auto">
               <label
-                for="inputPassword6"
+                htmlFor="recipient-name"
                 className="col-form-label fw-bold mt-2"
               >
                 Nombres:
@@ -92,12 +95,7 @@ const PerfilWorker = () => {
           </div>
           <div className="row g-3 align-items-center">
             <div className="col-auto">
-              <label
-                for="inputPassword6"
-                className="col-form-label fw-bold mt-2"
-              >
-                email:
-              </label>
+              <label className="col-form-label fw-bold mt-2">email:</label>
             </div>
             <div className="col-auto">
               <input
@@ -105,7 +103,6 @@ const PerfilWorker = () => {
                 type="text"
                 id="inputPassword6"
                 className="form-control"
-                aria-describedby="passwordHelpInline"
                 defaultValue={store.editWorkerGet.email}
               />
             </div>
@@ -113,12 +110,7 @@ const PerfilWorker = () => {
 
           <div className="row g-3 align-items-center">
             <div className="col-auto">
-              <label
-                for="inputPassword6"
-                className="col-form-label fw-bold mt-2"
-              >
-                Ciudad:
-              </label>
+              <label className="col-form-label fw-bold mt-2">Ciudad:</label>
             </div>
             <div className="col-auto">
               <input
@@ -126,7 +118,6 @@ const PerfilWorker = () => {
                 type="text"
                 id="inputPassword6"
                 className="form-control"
-                aria-describedby="passwordHelpInline"
                 defaultValue={store.editWorkerGet.city}
               />
             </div>
@@ -134,7 +125,7 @@ const PerfilWorker = () => {
           <div className="row g-3 align-items-center">
             <div className="col-auto">
               <label
-                for="inputPassword6"
+                htmlFor="inputPassword6"
                 className="col-form-label fw-bold mt-2"
               >
                 Sector:
@@ -146,7 +137,6 @@ const PerfilWorker = () => {
                 type="text"
                 id="inputPassword6"
                 className="form-control"
-                aria-describedby="passwordHelpInline"
                 defaultValue={store.editWorkerGet.sector}
               />
             </div>
@@ -154,12 +144,7 @@ const PerfilWorker = () => {
 
           <div className="row g-3 align-items-center">
             <div className="col-auto">
-              <label
-                for="inputPassword6"
-                className="col-form-label fw-bold mt-2"
-              >
-                Direccion:
-              </label>
+              <label className="col-form-label fw-bold mt-2">Direccion:</label>
             </div>
             <div className="col-auto">
               <input
@@ -167,20 +152,14 @@ const PerfilWorker = () => {
                 type="text"
                 id="inputPassword6"
                 className="form-control"
-                aria-describedby="passwordHelpInline"
                 defaultValue={store.editWorkerGet.adress}
-                // placeholder={user.user.adress}
-                // aria-label={user.user.adress}
               />
             </div>
           </div>
 
           <div className="row g-3 align-items-center">
             <div className="col-auto">
-              <label
-                for="inputPassword6"
-                className="col-form-label fw-bold mt-2"
-              >
+              <label className="col-form-label fw-bold mt-2">
                 Numero de contacto:
               </label>
             </div>
@@ -190,7 +169,6 @@ const PerfilWorker = () => {
                 type="text"
                 id="inputPassword6"
                 className="form-control"
-                aria-describedby="passwordHelpInline"
                 defaultValue={store.editWorkerGet.tlf}
               />
             </div>
@@ -210,10 +188,11 @@ const PerfilWorker = () => {
         <div
           className="modal fade"
           id="exampleModal"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
+          {/* //MODAL */}
           <div className="modal-dialog modal-dialog-scrollable">
             <div className="modal-content">
               <div className="modal-header">
@@ -230,49 +209,48 @@ const PerfilWorker = () => {
               <div className="modal-body">
                 <form>
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
+                    <label htmlFor="recipient-name" className="col-form-label">
                       Nombre:
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editWorkerGet.name}
+                      defaultValue={store.editWorkerGet.name || ""}
                       onChange={(e) => setUsername(e.target.value)}
                     />
                   </div>
 
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
-                      email:
-                    </label>
+                    <label className="col-form-label">email:</label>
                     <input
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editWorkerGet.email}
+                      defaultValue={store.editWorkerGet.email || ""}
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
-                      ciudad:
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      defaultValue={store.editWorkerGet.city}
+                    <label className="col-form-label">ciudad:</label>
+                    <select
+                      className="select w-100 form-control-request form-control-lg"
                       onChange={(e) => setCity(e.target.value)}
-                    />
+                      required
+                    >
+                      <option value="1">Provincia</option>
+                      {regions.map((item, index) => (
+                        <option key={index} value={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
-                      sector:
-                    </label>
+                    <label className="col-form-label">sector:</label>
                     <select
                       className="form-control"
-                      defaultValue={store.editWorkerGet.sector}
+                      defaultValue={store.editWorkerGet.sector || ""}
                       onChange={(e) => setSector(e.target.value)}
                     >
                       <option value="1">Elije una opción</option>
@@ -285,74 +263,60 @@ const PerfilWorker = () => {
                     </select>
                   </div>
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
-                      Dirección:
-                    </label>
+                    <label className="col-form-label">Dirección:</label>
                     <input
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editWorkerGet.adress}
+                      defaultValue={store.editWorkerGet.adress || ""}
                       onChange={(e) => setAdress(e.target.value)}
                     />
                   </div>
 
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
+                    <label className="col-form-label">
                       Numero de contacto:
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editWorkerGet.tlf}
+                      value={store.editWorkerGet.tlf}
                       onChange={(e) => setTlf(e.target.value)}
                     />
                   </div>
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
-                      Password:
-                    </label>
+                    <label className="col-form-label">Password:</label>
                     <input
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editWorkerGet.password1}
+                      value={store.editWorkerGet.password1}
                       onChange={(e) => setPassword1(e.target.value)}
                     />
                   </div>
                   <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
+                    <label className="col-form-label">
                       Repite el password:
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editWorkerGet.password2}
+                      value={store.editWorkerGet.password2}
                       onChange={(e) => setPassword2(e.target.value)}
                     />
                   </div>
                 </form>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btnHeader"
-                  onClick={() =>
-                    actions.editWorkerProfile(
-                      username,
-                      email,
-                      city,
-                      sector,
-                      adress,
-                      tlf,
-                      password1
-                    )
-                  }
-                >
-                  aceptar
-                </button>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btnHeader"
+                    onClick={handleSubmitEditWorker}
+                  >
+                    aceptar
+                  </button>
+                </div>
               </div>
             </div>
           </div>
