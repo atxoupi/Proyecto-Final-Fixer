@@ -13,7 +13,7 @@ export const PostedWorks = () => {
     <>
       {store.usuario ? (
         <div className="container-works mx-auto">
-          <h3 className="text-center mb-3">Estas son tus ofertas publicadas</h3>
+          <h3 className="text-center mb-3">Estas son tus ofertas publicadas</h3>{" "}
           {store.work.length > 0
             ? store.work.map((item, index) => (
                 <WorkPost
@@ -33,10 +33,12 @@ export const PostedWorks = () => {
       ) : (
         <div className="container-works mx-auto">
           <h3 className="text-center mb-3"> Estas las ofertas en tu sector </h3>
+
           {store.work.length > 0
             ? store.work.map((item, index) => (
                 <WorkPostForWorker
                   key={index}
+                  title={item.title}
                   description={item.description}
                   location={item.location}
                   sector={item.sector}

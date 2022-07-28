@@ -8,7 +8,7 @@ const ModalForm = ({ id }) => {
   const { actions } = useContext(Context);
 
   return (
-    <div className=" container text-center mt-5">
+    <div className=" container text-center mt-2">
       <button
         type="button"
         className="btn btnHeader"
