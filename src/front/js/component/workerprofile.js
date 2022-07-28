@@ -19,7 +19,7 @@ export const Workerprofile = () => {
         <div className="row">
           <div className="col-lg-6 col-md-8 col-sm-12 mx-auto">
             <div className="post-box">
-              <div className="post-photo">
+              <div className="post-photo d-flex justify-content-center ">
                 {store.workerprofile.pictures === null ? (
                   <img
                     src={obrero}
@@ -35,7 +35,7 @@ export const Workerprofile = () => {
                   />
                 )}
               </div>
-              <div className="post-card">
+              <div className="post-card m-2 pt-3 mt-3">
                 <div className="worker-name">
                   {" "}
                   Nombre: {store.workerprofile.name}
@@ -55,22 +55,25 @@ export const Workerprofile = () => {
                   {" "}
                   Número Tlf: {store.workerprofile.tlf_number}
                 </div>
-
-                <a
-                  className="ancorforbuttoncontact btn btnHeader"
-                  type="button"
-                  href={`https://wa.me/${store.workerprofile.tlf_number}`}
-                  target="_blank"
-                >
-                  Contacto via Whatsapp
-                </a>
-                <a
-                  className="ancorforbuttoncontact"
-                  href={`mailto:${store.workerprofile.email}?subject=Muy buenas ${store.workerprofile.name}!`}
-                >
-                  {" "}
-                  Contacto via email
-                </a>
+                <div className="d-flex justify-content-between mt-3">
+                  <a
+                    className="ancorforbuttoncontact btn whatsapp-button "
+                    type="button"
+                    href={`https://wa.me/${store.workerprofile.tlf_number}`}
+                    target="_blank"
+                  >
+                    WhatsApp
+                  </a>
+                  <a
+                    className="ancorforbuttoncontact mail-button"
+                    role="button"
+                    type="button"
+                    href={`mailto:${store.workerprofile.email}?subject=Muy buenas ${store.workerprofile.name}!`}
+                  >
+                    {" "}
+                    Email
+                  </a>
+                </div>
               </div>
             </div>
           </div>
