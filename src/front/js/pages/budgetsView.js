@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { SentBudgets } from "../component/sentBudgets";
 import { WorkPost } from "../component/workPost";
 import { Context } from "../store/appContext";
+import notFoundBudget from "../../img/icons/rejected.png";
 
 export const BudgetsView = () => {
   const { store, actions } = useContext(Context);
@@ -15,7 +16,19 @@ export const BudgetsView = () => {
   return (
     <>
       {oneBudget.length === 0 ? (
-        <p>No se han encontrado presupuestos para esta oferta</p>
+        <div
+          className="not-found-document text-center mt-5"
+          style={{ minHeigth: "600px" }}
+        >
+          <span>
+            <img
+              src={notFoundBudget}
+              alt="not-found-budget"
+              style={{ width: "3rem" }}
+            />
+          </span>
+          <p>No se han encontrado presupuestos para esta oferta</p>
+        </div>
       ) : (
         <>
           <div className="work-sentBudgets mb-4">

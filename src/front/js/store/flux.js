@@ -11,10 +11,6 @@ const getState = ({
             usuario: null,
             workers: [],
             budget: [],
-            editWorker: [],
-            editWorkerGet: {},
-            editUser: [],
-            consultUser: {},
             regions: [
                 "Albacete",
                 "Alicante/Alacant",
@@ -69,6 +65,7 @@ const getState = ({
                 "Ceuta",
                 "Melilla",
             ],
+            workerprofile: {},
         },
         actions: {
             // LOGIN
@@ -348,7 +345,6 @@ const getState = ({
                             },
                         }
                     );
-
                     const data = await resp.json();
                     setStore({
                         workerprofile: data,
@@ -359,28 +355,38 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
+
+            deleteWork: (work_id) => {
+                const store = getStore();
+                const work = store.work;
+                let newListOfWorks = work.filter((item) => item.id !== work_id);
+                setStore({
+                    work: newListOfWorks,
+                });
+                console.log(newListOfWorks);
+            },
             //EDITAR DATOS DE USUARIO EMPRESA
             editWorkerProfile: async (name, email, city, sector, direccion, tlf) => {
                 console.log("flux " + name, email, city, sector, direccion, tlf);
                 try {
                     const token = localStorage.getItem("token");
-                    const resp = await fetch(process.env.BACKEND_URL + "/api/update_worker", {
-                        method: "PUT",
-                        body: JSON.stringify({
-                            name: name,
-                            email: email,
-                            city: city,
-                            sector: sector,
-                            adress: direccion,
-                            tlf_number: tlf,
-
-
-                        }),
-                        headers: {
-                            "Content-Type": "application/json",
-                            Authorization: "Bearer " + token,
-                        },
-                    });
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + "/api/update_worker", {
+                            method: "PUT",
+                            body: JSON.stringify({
+                                name: name,
+                                email: email,
+                                city: city,
+                                sector: sector,
+                                adress: direccion,
+                                tlf_number: tlf,
+                            }),
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: "Bearer " + token,
+                            },
+                        }
+                    );
 
                     const data = await resp.json();
                     setStore({
@@ -395,8 +401,14 @@ const getState = ({
             },
 
             //CONSULTAR DATOS DE USUARIO EMPRESA
-            consultWorkerProfile: async (name, city, email, sector, tlf_number, password) => {
-
+            consultWorkerProfile: async (
+                name,
+                city,
+                email,
+                sector,
+                tlf_number,
+                password
+            ) => {
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(process.env.BACKEND_URL + "/api/profile", {
@@ -421,29 +433,46 @@ const getState = ({
             },
 
             //EDITAR DATOS DE USUARIO
-            editUserProfile: async (name, lastname, email, city, tlf, adress, postcode) => {
-                console.log("flux " + name, lastname, email, city, tlf, adress, postcode)
+            editUserProfile: async (
+                name,
+                lastname,
+                email,
+                city,
+                tlf,
+                adress,
+                postcode
+            ) => {
+                console.log(
+                    "flux " + name,
+                    lastname,
+                    email,
+                    city,
+                    tlf,
+                    adress,
+                    postcode
+                );
                 try {
                     const token = localStorage.getItem("token");
-                    const resp = await fetch(process.env.BACKEND_URL + "/api/update_user", {
-                        method: "PUT",
-                        body: JSON.stringify({
-                            name: name,
-                            lastname: lastname,
-                            email: email,
-                            city: city,
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + "/api/update_user", {
+                            method: "PUT",
+                            body: JSON.stringify({
+                                name: name,
+                                lastname: lastname,
+                                email: email,
+                                city: city,
 
-                            tlf_number: tlf,
-                            adress: adress,
-                            postcode: postcode,
-                            // password: password,
-
-                        }),
-                        headers: {
-                            "Content-Type": "application/json",
-                            Authorization: "Bearer " + token,
-                        },
-                    });
+                                tlf_number: tlf,
+                                adress: adress,
+                                postcode: postcode,
+                                // password: password,
+                            }),
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: "Bearer " + token,
+                            },
+                        }
+                    );
 
                     const data = await resp.json();
                     setStore({
@@ -451,14 +480,21 @@ const getState = ({
                     });
                     console.log(data);
                     return data;
-
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
             },
 
             //CONSULTAR DATOS DE USUARIO
-            consultUserProfile: async (name, lastname, city, email, tlf_number, adress, postcode) => {
+            consultUserProfile: async (
+                name,
+                lastname,
+                city,
+                email,
+                tlf_number,
+                adress,
+                postcode
+            ) => {
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(process.env.BACKEND_URL + "/api/profile", {
@@ -474,7 +510,6 @@ const getState = ({
                         consultUser: data,
                     });
 
-
                     return data;
                     // console.log(data);
                 } catch (error) {
@@ -484,6 +519,5 @@ const getState = ({
         },
     };
 };
-
 
 export default getState;
