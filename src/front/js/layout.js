@@ -6,6 +6,8 @@ import { Home } from "./pages/home";
 
 import { Request } from "./pages/request";
 import { PostedWorks } from "./pages/postedWorks";
+import { PerfilWorkers } from "./pages/perfilWorkers";
+import { PerfilUsers } from "./pages/perfilUsers";
 
 import injectContext from "./store/appContext";
 
@@ -34,6 +36,9 @@ const Layout = () => {
           <Route element={<Request />} path="/request" />
           <Route element={<PostedWorks />} path="/works" />
           <Route element={<WorkersList />} path="/workers-list" />
+          <Route element={<PerfilUsers />} path="/perfil-user" />
+          <Route element={<PerfilWorkers />} path="/perfil-worker" />
+          <Route element={<BudgetsView />} path="/my-budget/:id" />
           <Route element={<Workerprofile />} path="/workerprofile/:id" />
           <Route element={<BudgetsView />} path="/work/:id/budgets" />
           <Route element={<h1>Not found!</h1>} />

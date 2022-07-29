@@ -24,7 +24,7 @@ class User_signup(db.Model):
                             
     def __repr__(self):
         return f'<User_signup {self.email}>' 
-
+ 
     def serialize(self):
         return {
             "id": self.id,
