@@ -339,8 +339,8 @@ const getState = ({
             },
 
             //EDITAR DATOS DE USUARIO EMPRESA
-            editWorkerProfile: async (name, email, city, sector, direccion, tlf) => {
-                console.log("flux " + name, email, city, sector, direccion, tlf);
+            editWorkerProfile: async (name, email, city, sector, direccion, tlf, postcode) => {
+                console.log("flux " + name, email, city, sector, direccion, tlf, postcode);
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(process.env.BACKEND_URL + "/api/update_worker", {
@@ -352,6 +352,7 @@ const getState = ({
                             sector: sector,
                             adress: direccion,
                             tlf_number: tlf,
+                            postcode: postcode,
 
 
                         }),
@@ -365,6 +366,7 @@ const getState = ({
                     setStore({
                         editWorker: data,
                     });
+                    getActions().consultWorkerProfile()
 
                     return data;
                     console.log(data);
@@ -374,7 +376,7 @@ const getState = ({
             },
 
             //CONSULTAR DATOS DE USUARIO EMPRESA
-            consultWorkerProfile: async (name, city, email, sector, tlf_number, password) => {
+            consultWorkerProfile: async (name, city, email, sector, tlf_number, password, postcode) => {
 
                 try {
                     const token = localStorage.getItem("token");

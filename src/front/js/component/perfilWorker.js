@@ -12,6 +12,7 @@ const PerfilWorker = () => {
   const [city, setCity] = useState("");
   const [sector, setSector] = useState("");
   const [adress, setAdress] = useState("");
+  const [postcode, setPostcode] = useState("");
   const [tlf, setTlf] = useState("");
 
   console.log("username " + username);
@@ -20,7 +21,15 @@ const PerfilWorker = () => {
   const handleSubmitEditWorker = (e) => {
     // e.preventDefault();
 
-    actions.editWorkerProfile(username, email, city, sector, adress, tlf);
+    actions.editWorkerProfile(
+      username,
+      email,
+      city,
+      sector,
+      adress,
+      tlf,
+      postcode
+    );
   };
   useEffect(() => {
     setUsername(store.editWorkerGet.name);
@@ -28,6 +37,7 @@ const PerfilWorker = () => {
     setCity(store.editWorkerGet.city);
     setSector(store.editWorkerGet.sector);
     setAdress(store.editWorkerGet.adress);
+    setPostcode(store.editWorkerGet.postcode);
     setTlf(store.editWorkerGet.tlf);
   }, [store.editWorkerGet]);
 
@@ -138,6 +148,22 @@ const PerfilWorker = () => {
               />
             </div>
           </div>
+          <div className="row g-3 align-items-center">
+            <div className="col-auto">
+              <label className="col-form-label fw-bold mt-2">
+                Codigo Postal:
+              </label>
+            </div>
+            <div className="col-auto">
+              <input
+                disabled
+                type="text"
+                id="inputPassword6"
+                className="form-control"
+                defaultValue={store.editWorkerGet.postcode}
+              />
+            </div>
+          </div>
 
           <div className="row g-3 align-items-center">
             <div className="col-auto">
@@ -151,7 +177,7 @@ const PerfilWorker = () => {
                 type="text"
                 id="inputPassword6"
                 className="form-control"
-                defaultValue={store.editWorkerGet.tlf}
+                defaultValue={store.editWorkerGet.tlf_number}
               />
             </div>
           </div>
@@ -274,6 +300,16 @@ const PerfilWorker = () => {
                       id="recipient-name"
                       defaultValue={tlf ? tlf : ""}
                       onChange={(e) => setTlf(e.target.value)}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="col-form-label">Codigo Postal:</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="recipient-name"
+                      defaultValue={postcode ? postcode : ""}
+                      onChange={(e) => setPostcode(e.target.value)}
                     />
                   </div>
                 </form>

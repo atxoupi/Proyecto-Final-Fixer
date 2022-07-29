@@ -266,7 +266,7 @@ def updateworker():
     sector = request.json.get("sector", None)
     tlf_number=request.json.get("tlf_number", None)
     adress=request.json.get("adress", None)
-    # postcode=request.json.get("postcode", None)
+    postcode=request.json.get("postcode", None)
     # cif=request.json.get("cif", None)
     worker=Worker_signup.query.filter_by(email=current_user).first()
     
@@ -278,6 +278,7 @@ def updateworker():
     worker.email=email
     worker.city=city
     worker.sector=sector
+    worker.postcode=postcode
 
     #actualizando worker
     # db.session.add(worker) adios
@@ -304,8 +305,7 @@ def updateuser():
     name = request.json.get("name", None)
     lastname = request.json.get("lastname", None)
     email = request.json.get("email", None)
-    city = request.json.get("city", None)
-    
+    city = request.json.get("city", None)    
     tlf_number=request.json.get("tlf_number", None)
     adress=request.json.get("adress", None)
     postcode=request.json.get("postcode", None)
@@ -317,6 +317,7 @@ def updateuser():
     user.lastname=lastname
     user.email=email
     user.city=city
+    user.tlf_number=tlf_number
     user.postcode=postcode
     # user.cif=cif
 
