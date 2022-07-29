@@ -65,6 +65,7 @@ const getState = ({
                 "Ceuta",
                 "Melilla",
             ],
+            workerprofile: {},
         },
         actions: {
             // LOGIN
@@ -328,11 +329,33 @@ const getState = ({
                     setStore({
                         budget: data,
                     });
+                    // // don't forget to return something, that is how the async resolves
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
             },
+            getworker: async (id) => {
+                try {
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + "/api/worker_profile/" + id, {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        }
+                    );
+                    const data = await resp.json();
+                    setStore({
+                        workerprofile: data,
+                    });
+                    console.log(data);
+                    return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+
             deleteWork: (work_id) => {
                 const store = getStore();
                 const work = store.work;

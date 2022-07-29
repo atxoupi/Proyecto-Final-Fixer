@@ -77,6 +77,7 @@ export const WorkersList = () => {
                   name={item.name}
                   sector={item.sector}
                   image={item.pictures}
+                  id={item.id}
                 />
               </li>
             ))
