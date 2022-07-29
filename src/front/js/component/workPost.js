@@ -44,7 +44,7 @@ export const WorkPost = ({
   return (
     <>
       <div className="row">
-        <div className="col-lg-6 col-md-8 col-sm-10 mx-auto">
+        <div className="col-10 col-lg-6 col-md-8 col-sm-10 mx-auto">
           <div className="post-box">
             <div className="post-card">
               <div className="row">
@@ -63,7 +63,7 @@ export const WorkPost = ({
               </div>
               <div className="work-location">
                 <img className="sector-icon me-2" src={houseIcon}></img>
-                <span className="location-span">{location}</span>
+                <span className="location-span align-bottom">{location}</span>
               </div>
 
               <div>

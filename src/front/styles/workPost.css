@@ -5,3 +5,7 @@
     position: relative;
     overflow: hidden;
 }
+
+.post-box:hover {
+    transform: scale(1.05);
+}
