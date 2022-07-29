@@ -3,45 +3,59 @@ import { useParams } from "react-router-dom";
 import { SentBudgets } from "../component/sentBudgets";
 import { WorkPost } from "../component/workPost";
 import { Context } from "../store/appContext";
+import notFoundBudget from "../../img/icons/rejected.png";
 
 export const BudgetsView = () => {
   const { store, actions } = useContext(Context);
-  const params = useParams();
+  const { id } = useParams();
   useEffect(() => {
-    actions.showbudget(params.id);
+    actions.showbudget(id);
   }, []);
-  console.log(store.budget);
-  // console.log(store.budget[0].work);
+  const oneBudget = store?.budget.filter((value) => value.id === parseInt(id)); //para solucionar cuando me lee con un undefined sabiendo que no lo es, el ?
+
   return (
     <>
-      <div className="work-sentBudgets mb-4">
-        <WorkPost
-        // description={store.budget.work.description}
-        // location={store.budget.work.location}
-        // sector={store.budget.work.sector}
-        // title={store.budget.work.title}
-        // showButton={false}
-        />
-      </div>
-
-      {store.budget.length === 0 ? (
-        <p>No hay coincidencias</p>
+      {oneBudget.length === 0 ? (
+        <div
+          className="not-found-document text-center mt-5"
+          style={{ minHeigth: "600px" }}
+        >
+          <span>
+            <img
+              src={notFoundBudget}
+              alt="not-found-budget"
+              style={{ width: "3rem" }}
+            />
+          </span>
+          <p>No se han encontrado presupuestos para esta oferta</p>
+        </div>
       ) : (
-        store.budget.map((item, index) => (
-          <div
-            className="budget-container mx-auto mb-2 border-bottom border-warning"
-            style={{ width: "80%" }}
-            key={index}
-          >
-            <SentBudgets
-              user_id={item.user_id}
-              worker_id={item.worker_id}
-              url={item.url}
-              duration={item.duration}
-              price={item.price}
+        <>
+          <div className="work-sentBudgets mb-4">
+            <WorkPost
+              description={oneBudget[0]?.work.description}
+              location={oneBudget[0]?.work.location}
+              sector={oneBudget[0]?.work.sector}
+              title={oneBudget[0]?.work.title}
+              showButton={false}
             />
           </div>
-        ))
+          {store.budget.map((item, index) => (
+            <div
+              className="budget-container mx-auto mb-2 border-bottom border-warning"
+              style={{ width: "80%" }}
+              key={index}
+            >
+              <SentBudgets
+                user_id={item.user_id}
+                worker_id={item.worker_id}
+                url={item.url}
+                duration={item.duration}
+                price={item.price}
+              />
+            </div>
+          ))}
+        </>
       )}
     </>
   );

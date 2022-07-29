@@ -16,22 +16,15 @@ export const WorkersList = () => {
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedSector, setSelectedSector] = useState("");
 
-  useEffect(() => {
-    if (selectedCity) {
-      const filteredWorkersByCity = store.workers.filter(
-        (item) => item.city === selectedCity
+  const filterWorkers = (list) => {
+    return store.workers.filter((item) => {
+      return (
+        item.city.includes(selectedCity) && item.sector.includes(selectedSector)
       );
-      console.log(filteredWorkersByCity);
-      setFilterItems(filteredWorkersByCity);
-    } else if (selectedSector) {
-      console.log(store.workers);
-      const filteredWorkersBySector = store.workers.filter(
-        (item) => item.sector === selectedSector
-      );
-      setFilterItems(filteredWorkersBySector);
-      console.log(filteredWorkersBySector);
-    }
-  }, [selectedCity, selectedSector]);
+    });
+  };
+
+  const filteredWorkers = filterWorkers(filterItems);
 
   return (
     <>
@@ -72,18 +65,19 @@ export const WorkersList = () => {
         </select>
       </div>
       <div>
-        <ul className="card-grid list-unstyled">
-          {!filterItems.length > 0 ? (
+        <ul className="card-grid mx-3 list-unstyled">
+          {!filteredWorkers.length > 0 ? (
             <p className="text-filter text-center">
-              No se han encontrado coincidencias{" "}
+              No se han encontrado coincidencias
             </p>
           ) : (
-            filterItems.map((item, index) => (
+            filteredWorkers.map((item, index) => (
               <li key={index}>
                 <CardWorker
                   name={item.name}
                   sector={item.sector}
                   image={item.pictures}
+                  id={item.id}
                 />
               </li>
             ))

@@ -80,7 +80,7 @@ const PerfilWorker = () => {
                 type="text"
                 id="basic-addon1"
                 className="form-control"
-                defaultValue={store.editWorkerGet.name}
+                // defaultValue={store.editWorkerGet.name}
                 aria-describedby="basic-addon1"
               />
             </div>

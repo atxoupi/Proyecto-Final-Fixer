@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import bombilla from "../../img/icons/bombilla.png";
@@ -16,13 +16,11 @@ export const WorkPost = ({
   location,
   title,
   sector,
-  worker_id,
-  user_id,
-  url,
   work_id,
   showButton,
 }) => {
-  const { store, actions } = useContext(Context);
+  const { actions } = useContext(Context);
+
   const showIcons = () => {
     if (sector === "Fontanería") {
       return grifo;
@@ -46,30 +44,43 @@ export const WorkPost = ({
   return (
     <>
       <div className="row">
-        <div className="col-lg-6 col-md-8 col-sm-12 mx-auto">
+        <div className="col-10 col-lg-6 col-md-8 col-sm-10 mx-auto">
           <div className="post-box">
             <div className="post-card">
-              <div className="work-title"> Título:{title}</div>
-              <div className="work-description">Descripción:{description}</div>
-              <div className="work-location"> Ubicación:{location} </div>
-              <span>
-                <img className="house-icon" src={houseIcon}></img>
-              </span>
-              <span>
-                {" "}
-                <img
-                  className="sector-icon"
-                  src={showIcons()}
-                  style={{ width: "50px" }}
-                ></img>
-              </span>
+              <div className="row">
+                <div className="work-header d-flex justify-content-between">
+                  <h3 className="work-title text-center mb-3">{title}</h3>
+                  <img
+                    className="sector-icon"
+                    src={showIcons()}
+                    style={{ width: "50px" }}
+                  ></img>
+                </div>
+              </div>
+
+              <div className="work-description mb-3">
+                Descripción:{description}
+              </div>
+              <div className="work-location">
+                <img className="sector-icon me-2" src={houseIcon}></img>
+                <span className="location-span align-bottom">{location}</span>
+              </div>
+
               <div>
                 {showButton ? (
-                  <Link to={`/my-budget/${work_id}`}>
-                    <button type="button" className="btn btnHeader mt-3">
-                      Ver presupuesto
-                    </button>
-                  </Link>
+                  <div className="d-flex justify-content-center">
+                    <Link to={`/work/${work_id}/budgets`}>
+                      <button type="button" className="btn btnHeader mt-2 ">
+                        Ver presupuesto
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => actions.deleteWork(work_id)}
+                      >
+                        Borrar oferta
+                      </button>
+                    </Link>
+                  </div>
                 ) : (
                   ""
                 )}
