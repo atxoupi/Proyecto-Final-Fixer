@@ -89,9 +89,6 @@ const ModalForm = ({ id }) => {
               >
                 Cargar archivo
               </button>
-              <button type="button" className="btn btnHeader">
-                Enviar mensaje
-              </button>
             </div>
           </div>
         </div>
