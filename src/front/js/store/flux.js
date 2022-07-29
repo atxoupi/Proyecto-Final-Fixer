@@ -66,6 +66,10 @@ const getState = ({
                 "Melilla",
             ],
             workerprofile: {},
+            editWorker: [],
+            editWorkerGet: {},
+            editUser: [],
+            consultUser: {},
         },
         actions: {
             // LOGIN
