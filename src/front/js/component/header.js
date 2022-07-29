@@ -36,11 +36,11 @@ export const Header = () => {
         }}
       >
         <div
-          className="check_container_header flex-column w-50 position-absolute me-60 p-3 "
+          className="check_container_header hidden-xs flex-column w-50 position-absolute me-60 p-3 "
           style={{ maxHeight: "60%" }}
         >
           <div className="text-container">
-            <div className="d-inline">
+            <div>
               <img
                 className="checkedIcon"
                 style={{
@@ -52,7 +52,7 @@ export const Header = () => {
                 Encuentra el mejor profesional cerca de ti
               </span>
             </div>
-            <div className="d-inline">
+            <div>
               <img
                 className="checkedIcon"
                 style={{
@@ -64,7 +64,7 @@ export const Header = () => {
                 Más de un millón de usuarios satisfechos
               </span>
             </div>
-            <div className="d-inline">
+            <div>
               <img
                 className="checkedIcon"
                 style={{
@@ -76,7 +76,7 @@ export const Header = () => {
                 Con garantía de calidad
               </span>
             </div>
-            <div className="d-inline">
+            <div>
               <img
                 className="checkedIcon"
                 style={{
