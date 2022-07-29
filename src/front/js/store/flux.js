@@ -339,8 +339,8 @@ const getState = ({
             },
 
             //EDITAR DATOS DE USUARIO EMPRESA
-            editWorkerProfile: async (name, email, city, sector, direccion, tlf, password) => {
-                console.log(name, email, city, sector);
+            editWorkerProfile: async (name, email, city, sector, direccion, tlf) => {
+                console.log("flux " + name, email, city, sector, direccion, tlf);
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(process.env.BACKEND_URL + "/api/update_worker", {
@@ -352,7 +352,7 @@ const getState = ({
                             sector: sector,
                             adress: direccion,
                             tlf_number: tlf,
-                            password: password,
+
 
                         }),
                         headers: {
@@ -367,7 +367,7 @@ const getState = ({
                     });
 
                     return data;
-                    // console.log(data);
+                    console.log(data);
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
@@ -375,6 +375,7 @@ const getState = ({
 
             //CONSULTAR DATOS DE USUARIO EMPRESA
             consultWorkerProfile: async (name, city, email, sector, tlf_number, password) => {
+
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(process.env.BACKEND_URL + "/api/profile", {
@@ -399,7 +400,8 @@ const getState = ({
             },
 
             //EDITAR DATOS DE USUARIO
-            editUserProfile: async (name, lastname, email, city, sector, tlf, adress, postcode, password) => {
+            editUserProfile: async (name, lastname, email, city, tlf, adress, postcode) => {
+                console.log("flux " + name, lastname, email, city, tlf, adress, postcode)
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(process.env.BACKEND_URL + "/api/update_user", {
@@ -409,11 +411,11 @@ const getState = ({
                             lastname: lastname,
                             email: email,
                             city: city,
-                            sector: sector,
+
                             tlf_number: tlf,
                             adress: adress,
                             postcode: postcode,
-                            password: password,
+                            // password: password,
 
                         }),
                         headers: {
@@ -426,9 +428,9 @@ const getState = ({
                     setStore({
                         editUser: data,
                     });
-
+                    console.log(data);
                     return data;
-                    // console.log(data);
+
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }

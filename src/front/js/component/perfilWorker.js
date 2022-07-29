@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 // import PropTypes from "prop-types";
 
@@ -7,48 +7,30 @@ const PerfilWorker = () => {
   const regions = store.regions;
 
   //DATOS A EDITAR DE USUARIO TRABAJADOR
-  const [username, setUsername] = useState(store.editWorkerGet.name);
-  const [email, setEmail] = useState(store.editWorkerGet?.email);
-  const [city, setCity] = useState(store.editWorkerGet?.city);
-  const [sector, setSector] = useState(store.editWorkerGet?.sector);
-  const [adress, setAdress] = useState(store.editWorkerGet?.adress);
-  const [tlf, setTlf] = useState(store.editWorkerGet?.tlf);
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
+  const [sector, setSector] = useState("");
+  const [adress, setAdress] = useState("");
+  const [tlf, setTlf] = useState("");
 
-  // console.log(store.editWorkerGet);
+  console.log("username " + username);
+  console.log(store.editWorkerGet);
   //Funcion
   const handleSubmitEditWorker = (e) => {
     // e.preventDefault();
-    console.log(username);
-    if (
-      username !== "" &&
-      email !== "" &&
-      city !== "" &&
-      sector !== "" &&
-      adress === "" &&
-      tlf === "" &&
-      password1 !== "" &&
-      password2 === password1
-    ) {
-      // console.log(username);
-      // actions.editWorkerGet(
-      //   username,
-      //   email,
-      //   city,
-      //   sector,
-      //   adress,
-      //   tlf,
-      //   password1
-      // );
-    } else if (
-      password1 !== "" &&
-      password2 !== "" &&
-      password1 !== password2
-    ) {
-      console.log("Tus contraseñas no coinciden");
-    }
+
+    actions.editWorkerProfile(username, email, city, sector, adress, tlf);
   };
+  useEffect(() => {
+    setUsername(store.editWorkerGet.name);
+    setEmail(store.editWorkerGet.email);
+    setCity(store.editWorkerGet.city);
+    setSector(store.editWorkerGet.sector);
+    setAdress(store.editWorkerGet.adress);
+    setTlf(store.editWorkerGet.tlf);
+  }, [store.editWorkerGet]);
+
   return (
     <div id="perfil1" className="border border-warning border-2 rounded-3 mt-5">
       <div className="container p-3 text-center">
@@ -216,7 +198,7 @@ const PerfilWorker = () => {
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editWorkerGet.name || ""}
+                      defaultValue={username ? username : ""}
                       onChange={(e) => setUsername(e.target.value)}
                     />
                   </div>
@@ -227,8 +209,9 @@ const PerfilWorker = () => {
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editWorkerGet.email || ""}
+                      defaultValue={email ? email : ""}
                       onChange={(e) => setEmail(e.target.value)}
+                      disabled
                     />
                   </div>
                   <div className="mb-3">
@@ -238,7 +221,11 @@ const PerfilWorker = () => {
                       onChange={(e) => setCity(e.target.value)}
                       required
                     >
-                      <option value="1">Provincia</option>
+                      <option value="1">
+                        {store.editWorkerGet.city
+                          ? store.editWorkerGet.city
+                          : "Provincia"}
+                      </option>
                       {regions.map((item, index) => (
                         <option key={index} value={item}>
                           {item}
@@ -253,7 +240,11 @@ const PerfilWorker = () => {
                       defaultValue={store.editWorkerGet.sector || ""}
                       onChange={(e) => setSector(e.target.value)}
                     >
-                      <option value="1">Elije una opción</option>
+                      <option value="1">
+                        {store.editWorkerGet.sector
+                          ? store.editWorkerGet.sector
+                          : "Elije una opción"}
+                      </option>
                       <option value="Fontanería">Fontanería</option>
                       <option value="Carpintería">Carpintería</option>
                       <option value="Pintura">Pintura</option>
@@ -268,7 +259,7 @@ const PerfilWorker = () => {
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editWorkerGet.adress || ""}
+                      defaultValue={adress ? adress : ""}
                       onChange={(e) => setAdress(e.target.value)}
                     />
                   </div>
@@ -281,30 +272,8 @@ const PerfilWorker = () => {
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      value={store.editWorkerGet.tlf}
+                      defaultValue={tlf ? tlf : ""}
                       onChange={(e) => setTlf(e.target.value)}
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label className="col-form-label">Password:</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      value={store.editWorkerGet.password1}
-                      onChange={(e) => setPassword1(e.target.value)}
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label className="col-form-label">
-                      Repite el password:
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      value={store.editWorkerGet.password2}
-                      onChange={(e) => setPassword2(e.target.value)}
                     />
                   </div>
                 </form>
@@ -312,6 +281,7 @@ const PerfilWorker = () => {
                   <button
                     type="button"
                     className="btn btnHeader"
+                    data-bs-dismiss="modal"
                     onClick={handleSubmitEditWorker}
                   >
                     aceptar
@@ -327,7 +297,3 @@ const PerfilWorker = () => {
 };
 
 export default PerfilWorker;
-
-// PerfilWorker.propTypes = {
-//   user: PropTypes.any,
-// };

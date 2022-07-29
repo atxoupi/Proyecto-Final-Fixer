@@ -244,7 +244,7 @@ def listbudgets():
 
 # Nos devuelve el listado de presupuestos referentes a una oferta concreta, 
 # le pasamos el id como parámetro
-@api.route("/listbudget/<int:id>", methods=["GET"])
+@api.route("/listbudget/<int:id>", methods= ["GET"])
 @jwt_required()
 def listbudgetsForWork(id):
     # Access the identity of the current user with get_jwt_identity
@@ -266,33 +266,34 @@ def updateworker():
     sector = request.json.get("sector", None)
     tlf_number=request.json.get("tlf_number", None)
     adress=request.json.get("adress", None)
-    postcode=request.json.get("postcode", None)
-    cif=request.json.get("cif", None)
-
+    # postcode=request.json.get("postcode", None)
+    # cif=request.json.get("cif", None)
     worker=Worker_signup.query.filter_by(email=current_user).first()
+    
 
+    
     worker.name=name
+    worker.tlf_number=tlf_number
+    worker.adress=adress
     worker.email=email
     worker.city=city
     worker.sector=sector
-    worker.tlf_number=tlf_number
-    worker.adress=adress
-    worker.postcode=postcode
-    worker.cif=cif
 
-    db.session.add(worker)
+    #actualizando worker
+    # db.session.add(worker) adios
     db.session.commit()
-    
+
     login=Login.query.filter_by(email=current_user).first()
     login.email=email
-    db.session.add(login)
+    # db.session.add(login) adios
     db.session.commit()
 
     response_body = {
         "message": "Datos Actualizados"
-    }
-
+        }
+ 
     return jsonify(response_body), 200
+   
 
 #--UpdateUser
 #Recibe datos de Usuario y los actualiza en la BD
@@ -304,11 +305,11 @@ def updateuser():
     lastname = request.json.get("lastname", None)
     email = request.json.get("email", None)
     city = request.json.get("city", None)
-    sector = request.json.get("sector", None)
+    
     tlf_number=request.json.get("tlf_number", None)
     adress=request.json.get("adress", None)
     postcode=request.json.get("postcode", None)
-    cif=request.json.get("cif", None)
+    
 
     user=User_signup.query.filter_by(email=current_user).first()
 
@@ -316,18 +317,14 @@ def updateuser():
     user.lastname=lastname
     user.email=email
     user.city=city
-    user.sector=sector
-    user.tlf_number=tlf_number
-    user.adress=adress
     user.postcode=postcode
-    user.cif=cif
+    # user.cif=cif
 
-    db.session.add(user)
-    db.session.commit()
-    
+    #el add se vuela xq se hace solo cuando se registra
+    db.session.commit()  
     login=Login.query.filter_by(email=current_user).first()
     login.email=email
-    db.session.add(login)
+    # db.session.add(login) comente porq se voló arriba
     db.session.commit()
 
     response_body = {

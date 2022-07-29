@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 // import PropTypes from "prop-types";
 
@@ -6,50 +6,34 @@ const PerfilUser = () => {
   const { store, actions } = useContext(Context);
 
   //DATOS A EDITAR DE USUARIO
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
-  const [postCode, setPostCode] = useState("");
+  const [postcode, setPostCode] = useState("");
   const [adress, setAdress] = useState("");
   const [tlf, setTlf] = useState("");
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
-  const [editUser, seteditUser] = useState("");
 
+  console.log("username " + name);
+  console.log(store.consultUser);
   //Funcion
   const handleSubmitEditUser = (e) => {
-    e.preventDefault();
-    if (
-      username !== "" &&
-      lastname !== "" &&
-      email !== "" &&
-      city !== "" &&
-      postCode !== "" &&
-      adress === "" &&
-      tlf === "" &&
-      password2 !== "" &&
-      password1 === password2
-    ) {
-      actions.editUser(
-        username,
-        lastname,
-        email,
-        city,
-        adress,
-        postCode,
-        tlf,
-        password1
-      );
-    } else if (
-      password1 !== "" &&
-      password2 !== "" &&
-      password1 !== password2
-    ) {
-      console.log("Tus contraseñas no coinciden");
-    }
+    // if (password1 !== "" && password2 !== "" && password1 !== password2) {
+    //   console.log("Tus contraseñas no coinciden");
+    // } else {
+    actions.editUserProfile(name, lastname, email, city, adress, postcode, tlf);
   };
-  console.log(store.consultUser);
+  useEffect(() => {
+    setName(store.consultUser.name);
+    setLastname(store.consultUser.lastname);
+    setEmail(store.consultUser.email);
+    setAdress(store.consultUser.adress);
+    setCity(store.consultUser.city);
+    setTlf(store.consultUser.tlf);
+    setPostCode(store.consultUser.postcode);
+  }, [store.consultUser]);
+  // console.log(store.consultUser);
+
   return (
     <div id="perfil1" className="border border-warning border-2 rounded-3 mt-5">
       <div className="container p-3 text-center">
@@ -77,7 +61,7 @@ const PerfilUser = () => {
           <div className="row g-3 align-items-center">
             <div className="col-auto">
               <label
-                for="recipient-name"
+                htmlFor="recipient-name"
                 className="col-form-label fw-bold mt-2"
               >
                 Nombres:
@@ -154,8 +138,6 @@ const PerfilUser = () => {
                 className="form-control"
                 aria-describedby="passwordHelpInline"
                 defaultValue={store.consultUser.adress}
-                // placeholder={user.user.adress}
-                // aria-label={user.user.adress}
               />
             </div>
           </div>
@@ -173,11 +155,8 @@ const PerfilUser = () => {
               <input
                 disabled
                 type="text"
-                id="inputPassword6"
                 className="form-control"
-                aria-describedby="passwordHelpInline"
-                defaultValue={store.consultUser.postCode}
-                // defaultValue={user.user.postCode}
+                defaultValue={store.consultUser.postcode}
               />
             </div>
           </div>
@@ -195,9 +174,7 @@ const PerfilUser = () => {
               <input
                 disabled
                 type="text"
-                id="inputPassword6"
                 className="form-control"
-                aria-describedby="passwordHelpInline"
                 defaultValue={store.consultUser.email}
                 // defaultValue={user.user.email}
               />
@@ -206,10 +183,7 @@ const PerfilUser = () => {
 
           <div className="row g-3 align-items-center">
             <div className="col-auto">
-              <label
-                htmlFor="inputPassword6"
-                className="col-form-label fw-bold mt-2"
-              >
+              <label className="col-form-label fw-bold mt-2">
                 Numero de contacto:
               </label>
             </div>
@@ -217,9 +191,7 @@ const PerfilUser = () => {
               <input
                 disabled
                 type="text"
-                id="inputPassword6"
                 className="form-control"
-                aria-describedby="passwordHelpInline"
                 defaultValue={store.consultUser.tlf}
               />
             </div>
@@ -236,10 +208,11 @@ const PerfilUser = () => {
         >
           Editar datos
         </button>
+        {/* MODAL */}
         <div
           className="modal fade"
           id="exampleModal"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
@@ -266,8 +239,8 @@ const PerfilUser = () => {
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editUser.name}
-                      onChange={(e) => setUsername(e.target.value)}
+                      value={name ? name : ""}
+                      onChange={(e) => setName(e.target.value)}
                     />
                   </div>
                   <div className="mb-3">
@@ -278,7 +251,7 @@ const PerfilUser = () => {
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editUser.lastname}
+                      value={lastname ? lastname : ""}
                       onChange={(e) => setLastname(e.target.value)}
                     />
                   </div>
@@ -290,7 +263,7 @@ const PerfilUser = () => {
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editUser.city}
+                      value={city ? city : "No hay datos"}
                       onChange={(e) => setCity(e.target.value)}
                     />
                   </div>
@@ -302,7 +275,7 @@ const PerfilUser = () => {
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editUser.adress}
+                      value={adress ? adress : "No hay datos"}
                       onChange={(e) => setAdress(e.target.value)}
                     />
                   </div>
@@ -314,22 +287,23 @@ const PerfilUser = () => {
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editUser.postCode}
+                      value={postcode ? postcode : "No hay datos"}
                       onChange={(e) => setPostCode(e.target.value)}
                     />
                   </div>
-                  <div className="mb-3">
+                  {/* <div className="mb-3">
                     <label htmlFor="recipient-name" className="col-form-label">
                       email:
                     </label>
                     <input
+                      disable
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editUser.email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      defaultValue={store.consultUser.email || ""}
+                      // onChange={(e) => setEmail(e.target.value)}
                     />
-                  </div>
+                  </div> */}
                   <div className="mb-3">
                     <label htmlFor="recipient-name" className="col-form-label">
                       Numero de contacto:
@@ -338,41 +312,18 @@ const PerfilUser = () => {
                       type="text"
                       className="form-control"
                       id="recipient-name"
-                      defaultValue={store.editUser.tlf}
+                      value={tlf ? tlf : "No hay datos"}
                       onChange={(e) => setTlf(e.target.value)}
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="recipient-name" className="col-form-label">
-                      Password 1:
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      defaultValue={store.editUser.password1}
-                      onChange={(e) => setPassword1(e.target.value)}
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label for="recipient-name" className="col-form-label">
-                      Password 2:
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      defaultValue={store.editUser.password2}
-                      onChange={(e) => setPassword2(e.target.value)}
                     />
                   </div>
                 </form>
               </div>
               <div className="modal-footer">
                 <button
+                  data-bs-dismiss="modal"
                   type="button"
                   className="btn btnHeader"
-                  onClick={(e) => handleSubmitEditUser()}
+                  onClick={handleSubmitEditUser}
                 >
                   aceptar
                 </button>
@@ -386,7 +337,3 @@ const PerfilUser = () => {
 };
 
 export default PerfilUser;
-
-// PerfilUser.propTypes = {
-//   user: PropTypes.any,
-// };
