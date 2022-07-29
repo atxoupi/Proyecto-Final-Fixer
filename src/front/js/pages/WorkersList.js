@@ -72,10 +72,10 @@ export const WorkersList = () => {
         </select>
       </div>
       <div>
-        <ul className="card-grid list-unstyled">
+        <ul className="card-grid mx-3 list-unstyled">
           {!filterItems.length > 0 ? (
             <p className="text-filter text-center">
-              No se han encontrado coincidencias{" "}
+              No se han encontrado coincidencias
             </p>
           ) : (
             filterItems.map((item, index) => (
@@ -84,6 +84,7 @@ export const WorkersList = () => {
                   name={item.name}
                   sector={item.sector}
                   image={item.pictures}
+                  id={item.id}
                 />
               </li>
             ))
