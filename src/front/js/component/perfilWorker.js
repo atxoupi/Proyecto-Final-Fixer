@@ -12,6 +12,7 @@ const PerfilWorker = () => {
   const [city, setCity] = useState("");
   const [sector, setSector] = useState("");
   const [adress, setAdress] = useState("");
+  const [postcode, setPostcode] = useState("");
   const [tlf, setTlf] = useState("");
 
   console.log("username " + username);
@@ -20,7 +21,15 @@ const PerfilWorker = () => {
   const handleSubmitEditWorker = (e) => {
     // e.preventDefault();
 
-    actions.editWorkerProfile(username, email, city, sector, adress, tlf);
+    actions.editWorkerProfile(
+      username,
+      email,
+      city,
+      sector,
+      adress,
+      tlf,
+      postcode
+    );
   };
   useEffect(() => {
     setUsername(store.editWorkerGet.name);
@@ -28,6 +37,7 @@ const PerfilWorker = () => {
     setCity(store.editWorkerGet.city);
     setSector(store.editWorkerGet.sector);
     setAdress(store.editWorkerGet.adress);
+    setPostcode(store.editWorkerGet.postcode);
     setTlf(store.editWorkerGet.tlf);
   }, [store.editWorkerGet]);
 
@@ -45,7 +55,7 @@ const PerfilWorker = () => {
           className="container mt-2 ms-1 fw-bold
         "
         >
-          Hola,
+          Hola, {store.editWorkerGet.name}
         </div>
       </div>
 
@@ -55,112 +65,84 @@ const PerfilWorker = () => {
 
       <div>
         <ul>
-          <div className="row g-3 align-items-center">
-            <div className="col-auto">
-              <label
-                htmlFor="recipient-name"
-                className="col-form-label fw-bold mt-2"
-              >
-                Nombres:
-              </label>
-            </div>
-            <div className="col-auto">
-              <input
-                disabled
-                type="text"
-                id="basic-addon1"
-                className="form-control"
-                // defaultValue={store.editWorkerGet.name}
-                aria-describedby="basic-addon1"
-              />
+          <div className="container">
+            <div className=" row">
+              <div className=" col-4">
+                <p className="text-start fw-bold">Nombre:</p>{" "}
+              </div>
+              <div className="col mb-3">
+                <p className=" text-start">{store.editWorkerGet.name}</p>
+              </div>
             </div>
           </div>
-          <div className="row g-3 align-items-center">
-            <div className="col-auto">
-              <label className="col-form-label fw-bold mt-2">email:</label>
-            </div>
-            <div className="col-auto">
-              <input
-                disabled
-                type="text"
-                id="inputPassword6"
-                className="form-control"
-                defaultValue={store.editWorkerGet.email}
-              />
+          <div className="container">
+            <div className=" row">
+              <div className=" col-4">
+                <p className="text-start fw-bold">Correo electrónico:</p>{" "}
+              </div>
+              <div className="col mb-3">
+                <p className=" text-start">{store.editWorkerGet.email}</p>
+              </div>
             </div>
           </div>
-
-          <div className="row g-3 align-items-center">
-            <div className="col-auto">
-              <label className="col-form-label fw-bold mt-2">Ciudad:</label>
-            </div>
-            <div className="col-auto">
-              <input
-                disabled
-                type="text"
-                id="inputPassword6"
-                className="form-control"
-                defaultValue={store.editWorkerGet.city}
-              />
+          <div className="container">
+            <div className=" row">
+              <div className=" col-4">
+                <p className="text-start fw-bold">Ciudad:</p>{" "}
+              </div>
+              <div className="col mb-3">
+                <p className=" text-start">{store.editWorkerGet.city}</p>
+              </div>
             </div>
           </div>
-          <div className="row g-3 align-items-center">
-            <div className="col-auto">
-              <label
-                htmlFor="inputPassword6"
-                className="col-form-label fw-bold mt-2"
-              >
-                Sector:
-              </label>
-            </div>
-            <div className="col-auto">
-              <input
-                disabled
-                type="text"
-                id="inputPassword6"
-                className="form-control"
-                defaultValue={store.editWorkerGet.sector}
-              />
+          <div className="container">
+            <div className=" row">
+              <div className=" col-4">
+                <p className="text-start fw-bold">Sector:</p>{" "}
+              </div>
+              <div className="col mb-3">
+                <p className=" text-start">{store.editWorkerGet.sector}</p>
+              </div>
             </div>
           </div>
 
-          <div className="row g-3 align-items-center">
-            <div className="col-auto">
-              <label className="col-form-label fw-bold mt-2">Direccion:</label>
+          <div className="container">
+            <div className=" row">
+              <div className=" col-4">
+                <p className="text-start fw-bold">Dirección:</p>{" "}
+              </div>
+              <div className="col mb-3">
+                <p className=" text-start">{store.editWorkerGet.adress}</p>
+              </div>
             </div>
-            <div className="col-auto">
-              <input
-                disabled
-                type="text"
-                id="inputPassword6"
-                className="form-control"
-                defaultValue={store.editWorkerGet.adress}
-              />
+          </div>
+          <div className="container">
+            <div className=" row">
+              <div className=" col-4">
+                <p className="text-start fw-bold">Código Postal:</p>{" "}
+              </div>
+              <div className="col mb-3">
+                <p className=" text-start">{store.editWorkerGet.postcode}</p>
+              </div>
             </div>
           </div>
 
-          <div className="row g-3 align-items-center">
-            <div className="col-auto">
-              <label className="col-form-label fw-bold mt-2">
-                Numero de contacto:
-              </label>
-            </div>
-            <div className="col-auto">
-              <input
-                disabled
-                type="text"
-                id="inputPassword6"
-                className="form-control"
-                defaultValue={store.editWorkerGet.tlf}
-              />
+          <div className="container">
+            <div className=" row">
+              <div className=" col-4">
+                <p className="text-start fw-bold">Número de contacto:</p>{" "}
+              </div>
+              <div className="col mb-3">
+                <p className=" text-start">{store.editWorkerGet.tlf_number}</p>
+              </div>
             </div>
           </div>
         </ul>
       </div>
-      <div className=" container ms-3 mt-4 mb-2">
+      <div className=" container mb-3">
         <button
           type="button"
-          className="btn btnHeader"
+          className="d-grid gap-1 col-4 mx-auto btn btnHeader fw-bold btn btnHeader"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
           data-bs-whatever="@mdo"
@@ -175,10 +157,13 @@ const PerfilWorker = () => {
           aria-hidden="true"
         >
           {/* //MODAL */}
-          <div className="modal-dialog modal-dialog-scrollable">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
+          <div className=" modal-dialog modal-dialog-scrollable ">
+            <div
+              id="ModalWorker"
+              className="modal-content border border-2 border-warning "
+            >
+              <div className="modal-header  border-1 border-warning ">
+                <h5 className="modal-title fw-bold" id="exampleModalLabel">
                   Mis datos
                 </h5>
                 <button
@@ -191,12 +176,15 @@ const PerfilWorker = () => {
               <div className="modal-body">
                 <form>
                   <div className="mb-3">
-                    <label htmlFor="recipient-name" className="col-form-label">
+                    <label
+                      htmlFor="recipient-name"
+                      className="col-form-label fw-bold"
+                    >
                       Nombre:
                     </label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control form-control-request"
                       id="recipient-name"
                       defaultValue={username ? username : ""}
                       onChange={(e) => setUsername(e.target.value)}
@@ -204,10 +192,10 @@ const PerfilWorker = () => {
                   </div>
 
                   <div className="mb-3">
-                    <label className="col-form-label">email:</label>
+                    <label className="col-form-label fw-bold">email:</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control form-control-request"
                       id="recipient-name"
                       defaultValue={email ? email : ""}
                       onChange={(e) => setEmail(e.target.value)}
@@ -215,9 +203,9 @@ const PerfilWorker = () => {
                     />
                   </div>
                   <div className="mb-3">
-                    <label className="col-form-label">ciudad:</label>
+                    <label className="col-form-label fw-bold">ciudad:</label>
                     <select
-                      className="select w-100 form-control-request form-control-lg"
+                      className="select w-100 form-control-request form-control"
                       onChange={(e) => setCity(e.target.value)}
                       required
                     >
@@ -234,9 +222,9 @@ const PerfilWorker = () => {
                     </select>
                   </div>
                   <div className="mb-3">
-                    <label className="col-form-label">sector:</label>
+                    <label className="col-form-label fw-bold">sector:</label>
                     <select
-                      className="form-control"
+                      className="select w-100 form-control-request form-control"
                       defaultValue={store.editWorkerGet.sector || ""}
                       onChange={(e) => setSector(e.target.value)}
                     >
@@ -254,10 +242,10 @@ const PerfilWorker = () => {
                     </select>
                   </div>
                   <div className="mb-3">
-                    <label className="col-form-label">Dirección:</label>
+                    <label className="col-form-label fw-bold">Dirección:</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control form-control-request"
                       id="recipient-name"
                       defaultValue={adress ? adress : ""}
                       onChange={(e) => setAdress(e.target.value)}
@@ -265,22 +253,34 @@ const PerfilWorker = () => {
                   </div>
 
                   <div className="mb-3">
-                    <label className="col-form-label">
+                    <label className="col-form-label fw-bold">
                       Numero de contacto:
                     </label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control form-control-request"
                       id="recipient-name"
                       defaultValue={tlf ? tlf : ""}
                       onChange={(e) => setTlf(e.target.value)}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="col-form-label fw-bold">
+                      Codigo Postal:
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control form-control-request"
+                      id="recipient-name"
+                      defaultValue={postcode ? postcode : ""}
+                      onChange={(e) => setPostcode(e.target.value)}
                     />
                   </div>
                 </form>
                 <div className="modal-footer">
                   <button
                     type="button"
-                    className="btn btnHeader"
+                    className="btn btnHeader fw-bold"
                     data-bs-dismiss="modal"
                     onClick={handleSubmitEditWorker}
                   >
