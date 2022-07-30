@@ -343,3 +343,17 @@ def workerprofile(id):
     worker = Worker_signup.query.filter_by(id=id).first()
     
     return jsonify(worker.serialize()), 200
+
+@api.route("/work/delete/<int:id>", methods=["DELETE"])
+
+def delete_work(id):
+
+    work = Work.query.filter_by(id=id).first()
+    print(work)
+    db.session.delete(work)
+    db.session.commit()
+    
+    response_body = {
+        "message": "Tarea eliminada"
+    }
+    return jsonify(response_body), 200

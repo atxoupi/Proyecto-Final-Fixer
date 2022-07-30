@@ -363,14 +363,24 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      deleteWork: (work_id) => {
-        const store = getStore();
-        const work = store.work;
-        let newListOfWorks = work.filter((item) => item.id !== work_id);
-        setStore({
-          work: newListOfWorks,
-        });
-        console.log(newListOfWorks);
+      //DeleteWork recibe el id de la tarea y la elimina de la base de datos, una vez realizado vuelve a cargar todas las tareas y las visualiza
+      deleteWork: async (work_id) => {
+        try {
+          const resp = await fetch(
+            process.env.BACKEND_URL + "/api/work/delete/" + work_id,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          const data = await resp.json();
+          getActions().showWork();
+          return data;
+        } catch (error) {
+          console.log("Error loading message from backend", error);
+        }
       },
       //EDITAR DATOS DE USUARIO EMPRESA
       editWorkerProfile: async (
