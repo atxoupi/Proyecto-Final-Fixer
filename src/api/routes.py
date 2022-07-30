@@ -349,11 +349,39 @@ def workerprofile(id):
 def delete_work(id):
 
     work = Work.query.filter_by(id=id).first()
-    print(work)
-    db.session.delete(work)
-    db.session.commit()
+    if work.worker_id is None:
+        db.session.delete(work)
+        db.session.commit()
+    else:
+        budgets= Budget.query.filter_by(work_id=work.id).all()
+        for budget in budgets:
+            db.session.delete(budget)
+            db.session.commit()
+        db.session.delete(work)
+        db.session.commit()
     
     response_body = {
         "message": "Tarea eliminada"
     }
+    return jsonify(response_body), 200
+
+
+@api.route("aceptbudget/<int:id>", methods=["PUT"])
+@jwt_required()
+def acept_budget(id):
+    current_user = get_jwt_identity()
+    budget = Budget.query.filter_by(id=id).first()
+    print(budget)
+    work = Work.query.filter_by(id=budget.work_id).first()
+    if work.worker_id is None:
+        work.worker_id=budget.worker_id
+        db.session.commit()
+    
+        response_body = {
+           "message": "Presupuesto Aceptado"
+        }
+    else :
+        response_body = {
+           "message": "El presupuesto ya había sido aceptado, no se puede volver a aceptar"
+        }
     return jsonify(response_body), 200
