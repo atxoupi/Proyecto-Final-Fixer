@@ -268,7 +268,6 @@ def updateworker():
     tlf_number=request.json.get("tlf_number", None)
     adress=request.json.get("adress", None)
     postcode=request.json.get("postcode", None)
-    # cif=request.json.get("cif", None)
     worker=Worker_signup.query.filter_by(email=current_user).first()
     
 
@@ -282,12 +281,11 @@ def updateworker():
     worker.postcode=postcode
 
     #actualizando worker
-    # db.session.add(worker) adios
     db.session.commit()
 
     login=Login.query.filter_by(email=current_user).first()
     login.email=email
-    # db.session.add(login) adios
+    
     db.session.commit()
 
     response_body = {
@@ -318,15 +316,14 @@ def updateuser():
     user.lastname=lastname
     user.email=email
     user.city=city
+    user.adress=adress
     user.tlf_number=tlf_number
     user.postcode=postcode
-    # user.cif=cif
-
-    #el add se vuela xq se hace solo cuando se registra
+    
     db.session.commit()  
     login=Login.query.filter_by(email=current_user).first()
     login.email=email
-    # db.session.add(login) comente porq se voló arriba
+    
     db.session.commit()
 
     response_body = {
