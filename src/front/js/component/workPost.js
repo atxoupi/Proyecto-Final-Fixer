@@ -43,7 +43,7 @@ export const WorkPost = ({
 
   return (
     <>
-      <div className="row">
+      <div className="row mt-3">
         <div className="col-10 col-lg-6 col-md-8 col-sm-10 mx-auto">
           <div className="post-box">
             <div className="post-card">
@@ -68,18 +68,19 @@ export const WorkPost = ({
 
               <div>
                 {showButton ? (
-                  <div className="d-flex justify-content-center">
+                  <div className="d-flex justify-content-between mt-3">
                     <Link to={`/work/${work_id}/budgets`}>
-                      <button type="button" className="btn btnHeader mt-2 ">
+                      <button type="button" className="mail-button">
                         Ver presupuesto
                       </button>
-                      <button
-                        type="button"
-                        onClick={() => actions.deleteWork(work_id)}
-                      >
-                        Borrar oferta
-                      </button>
                     </Link>
+                    <button
+                      type="button"
+                      className="mail-button"
+                      onClick={() => actions.deleteWork(work_id)}
+                    >
+                      Borrar oferta
+                    </button>
                   </div>
                 ) : (
                   ""
