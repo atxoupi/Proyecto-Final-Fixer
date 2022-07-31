@@ -36,7 +36,11 @@ export const SentBudgets = ({
           >
             Aceptar
           </button>
-          <button className="mail-button" type="button">
+          <button
+            className="mail-button"
+            type="button"
+            onClick={() => actions.rejectBudget(id)}
+          >
             Rechazar
           </button>
         </div>

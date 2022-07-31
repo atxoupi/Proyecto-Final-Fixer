@@ -11,7 +11,9 @@ export const BudgetsView = () => {
   useEffect(() => {
     actions.showbudget(id);
   }, []);
-  const oneBudget = store?.budget.filter((value) => value.id === parseInt(id)); //para solucionar cuando me lee con un undefined sabiendo que no lo es, el ?
+  const oneBudget = store?.budget.filter(
+    (value) => value.work_id === parseInt(id)
+  ); //para solucionar cuando me lee con un undefined sabiendo que no lo es, el ?
 
   return (
     <>
