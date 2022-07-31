@@ -1,0 +1,20 @@
+.stars {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.star {
+    position: relative;
+    cursor: pointer;
+    color: rgb(230, 178, 22);
+}
+
+.stars_radio-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    clip: rect(1px, 1px, 1px, 1px);
+}

@@ -12,6 +12,7 @@ import "../styles/requestForm.css";
 import "../styles/login.css";
 import "../styles/modalForm.css";
 import "../styles/workerprofile.css";
+import "../styles/star.css";
 
 //import your own components
 import Layout from "./layout";
