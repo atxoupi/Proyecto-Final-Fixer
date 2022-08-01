@@ -12,6 +12,7 @@ export const StarsContainer = () => {
   };
 
   const changeRating = (index, comment) => {
+    e.preventDefault();
     setRating(index);
     setComment(comment);
     actions.addingRating(rating, comment);

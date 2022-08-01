@@ -550,6 +550,7 @@ const getState = ({
                 }
             },
             addingRating: async (ratingNum, worker_id, comment, work_id) => {
+                console.log(ratingNum, worker_id, comment, work_id);
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(
