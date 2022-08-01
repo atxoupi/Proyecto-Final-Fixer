@@ -165,11 +165,12 @@ const getState = ({
                         }
                     );
                     const data = await resp.text();
-                    getActions().login(email, password);
+
                     if (resp.status == 200) {
                         setStore({
                             register: true,
                         });
+                        getActions().login(email, password);
                     }
                     console.log(data);
                     return data;
@@ -551,34 +552,6 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
-            addingRating: async (ratingNum, worker_id, comment, work_id) => {
-                console.log(ratingNum, worker_id, comment, work_id);
-                try {
-                    const token = localStorage.getItem("token");
-                    const resp = await fetch(
-                        process.env.BACKEND_URL + "/api/add_rating", {
-                            method: "POST",
-                            body: JSON.stringify({
-                                ratingNum: ratingNum,
-                                worker_id: worker_id,
-                                comment: comment,
-                                work_id: work_id,
-                            }),
-                            headers: {
-                                "Content-Type": "application/json",
-                                Authorization: "Bearer " + token,
-                            },
-                        }
-                    );
-
-                    const data = await resp.json();
-                    console.log("Valoración guardada");
-                    return data;
-                    // console.log(data);
-                } catch (error) {
-                    console.log("Error loading message from backend", error);
-                }
-            },
 
             aceptBudget: async (id) => {
                 try {
@@ -621,6 +594,36 @@ const getState = ({
                     }
                     getActions().showbudget(id);
                     return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+            addingRating: async (ratingNum, comment, worker_id, work_id) => {
+                console.log(ratingNum, worker_id, comment, work_id);
+                try {
+                    const token = localStorage.getItem("token");
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + "/api/add_rating", {
+                            method: "POST",
+                            body: JSON.stringify({
+                                ratingNum: parseInt(ratingNum),
+                                worker_id: worker_id,
+                                comment: comment,
+                                work_id: work_id,
+                            }),
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: "Bearer " + token,
+                            },
+                        }
+                    );
+
+                    const data = await resp.json();
+                    if (resp.status === 200) {
+                        console.log("Valoración guardada");
+                    }
+                    return data;
+                    // console.log(data);
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }

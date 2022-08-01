@@ -7,7 +7,6 @@ export const PostedWorks = () => {
   const { store, actions } = useContext(Context);
   useEffect(() => {
     actions.showWork();
-    actions.deleteWork();
   }, []);
 
   return (

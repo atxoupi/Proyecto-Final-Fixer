@@ -2,8 +2,9 @@ import React, { useContext, useState } from "react";
 import { Star } from "../component/star.js";
 import { Context } from "../store/appContext";
 
-export const StarsContainer = () => {
+export const StarsContainer = ({ work_id, worker_id }) => {
   const { store, actions } = useContext(Context);
+  console.log(work_id, worker_id);
   const valueRating = [1, 2, 3, 4, 5];
   const [rating, setRating] = useState();
   const [comment, setComment] = useState();
@@ -11,11 +12,9 @@ export const StarsContainer = () => {
     fill: "yellow",
   };
 
-  const changeRating = (index, comment) => {
+  const changeRating = (e) => {
     e.preventDefault();
-    setRating(index);
-    setComment(comment);
-    actions.addingRating(rating, comment);
+    actions.addingRating(rating, comment, worker_id, work_id);
     console.log(rating, comment);
   };
 
@@ -25,17 +24,20 @@ export const StarsContainer = () => {
       <div className="stars">
         {valueRating.map((number, index) => (
           <Star
-            index={index}
-            key={number}
-            changeRating={changeRating}
-            style={rating >= index ? activeStar : {}}
+            number={number}
+            key={index}
+            changeRating={(e) => setRating(e.target.value)}
+            style={rating >= number ? activeStar : {}}
           />
         ))}
 
         <form onSubmit={changeRating}>
           <label> Comment</label>
-          <input className="rating-comment"></input>
-          <button>Enviar</button>
+          <input
+            className="rating-comment"
+            onChange={(e) => setComment(e.target.value)}
+          ></input>
+          <button type="submit">Enviar</button>
         </form>
       </div>
     </div>

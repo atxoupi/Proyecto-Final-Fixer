@@ -1,21 +1,16 @@
 import React from "react";
 
 export const Star = ({ changeRating, number, index, style }) => {
-  const changeGrade = (e) => {
-    changeRating(e.target.value);
-    console.log(e.target.value, index);
-  };
-
   return (
     <>
       <label className="star">
         <input
           type="radio"
           name="rating"
-          id={number}
-          value={index}
+          // id={number}
+          value={number}
           className="stars_radio-input"
-          onClick={changeGrade}
+          onClick={changeRating}
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"

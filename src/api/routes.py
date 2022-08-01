@@ -378,7 +378,8 @@ def addRating():
     comment= request.json.get("comment",None)
     work_id= request.json.get("work_id",None)
 
-    work=Work.query.filter_by(id=work_id)
+    work=Work.query.filter_by(id=work_id).first()
+    print(work)
     user=User_signup.query.filter_by(email=current_user).first()
     if (worker_id==work.worker_id): 
         ratings = Ratings(rating=ratingNum, user_signup_id=user.id, worker_id=worker_id, description=comment,work_id=work_id)
@@ -395,6 +396,7 @@ def addRating():
         }
     return jsonify(response_body), 200
 
+#Trae los ratings de un trabajador, usando worker_id como parámetro
 @api.route("/worker/<int:id>/ratings", methods=["GET"])
 @jwt_required()
 def getRatings(id):
