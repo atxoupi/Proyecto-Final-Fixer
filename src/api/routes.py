@@ -349,9 +349,16 @@ def workerprofile(id):
 def delete_work(id):
 
     work = Work.query.filter_by(id=id).first()
-    print(work)
-    db.session.delete(work)
-    db.session.commit()
+    if work.worker_id is None:
+        db.session.delete(work)
+        db.session.commit()
+    else:
+        budgets= Budget.query.filter_by(work_id=work.id).all()
+        for budget in budgets:
+            db.session.delete(budget)
+            db.session.commit()
+        db.session.delete(work)
+        db.session.commit()
     
     response_body = {
         "message": "Tarea eliminada"
@@ -398,3 +405,56 @@ def getRatings(id):
     result= list(map(lambda rating: rating.serialize(),ratings))
     
     return jsonify(result), 200
+
+@api.route("aceptbudget/<int:id>", methods=["PUT"])
+@jwt_required()
+def acept_budget(id):
+    current_user = get_jwt_identity()
+    budget = Budget.query.filter_by(id=id).first()
+    work = Work.query.filter_by(id=budget.work_id).first()
+    user=User_signup.query.filter_by(id=budget.user_id).first()
+    worker=Worker_signup.query.filter_by(id=budget.worker_id).first()
+    subject="Hola "+worker.name+", su presupuesto ha sido aceptado."
+    body="Hola, su presupuesto ha sido aceptado. Puede ponerse en contacto con "+user.name+" para concretar el trabajo."
+    msg = Message(body=body,
+                  sender="fixer4geeks@gmail.com",
+                  recipients=[worker.email],
+                  subject=subject)
+    if work.worker_id is None:
+        work.worker_id=budget.worker_id
+        db.session.commit()
+        current_app.mail.send(msg)
+        response_body = {
+           "message": "Presupuesto Aceptado"
+        }
+
+    else :
+        response_body = {
+           "message": "El presupuesto ya había sido aceptado, no se puede volver a aceptar"
+        }
+    return jsonify(response_body), 200
+
+
+@api.route("rejectbudget/<int:id>", methods=["DELETE"])
+@jwt_required()
+def reject_budget(id):
+    current_user = get_jwt_identity()
+    budget = Budget.query.filter_by(id=id).first()
+    user=User_signup.query.filter_by(id=budget.user_id).first()
+    worker=Worker_signup.query.filter_by(id=budget.worker_id).first()
+    subject="Hola "+worker.name+", su presupuesto ha sido rechazado."
+    body="Hola, su presupuesto enviado a "+user.name+" ha sido rechazado. Desde Fixer le deseamos más suerte para la próxima vez."
+    msg = Message(body=body,
+                  sender="fixer4geeks@gmail.com",
+                  recipients=[worker.email],
+                  subject=subject)
+    
+    db.session.delete(budget)
+    db.session.commit()
+    current_app.mail.send(msg)
+    response_body = {
+        "message": "Presupuesto Rechazado"
+    }
+
+
+    return jsonify(response_body), 200

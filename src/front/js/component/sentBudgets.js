@@ -1,7 +1,14 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 
-export const SentBudgets = ({ url, price, duration }) => {
+export const SentBudgets = ({
+  user_id,
+  worker_id,
+  url,
+  duration,
+  price,
+  id,
+}) => {
   const { store, actions } = useContext(Context);
 
   return (
@@ -22,8 +29,20 @@ export const SentBudgets = ({ url, price, duration }) => {
           <div className="price-budget">{duration}</div>
         </div>
         <div className="col-3 text-center">
-          <button>Aceptar</button>
-          <button>Rechazar</button>
+          <button
+            className="mail-button"
+            type="button"
+            onClick={() => actions.aceptBudget(id)}
+          >
+            Aceptar
+          </button>
+          <button
+            className="mail-button"
+            type="button"
+            onClick={() => actions.rejectBudget(id)}
+          >
+            Rechazar
+          </button>
         </div>
       </div>
     </>

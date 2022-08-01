@@ -59,7 +59,7 @@ export const WorkPost = ({
               </div>
 
               <div className="work-description mb-3">
-                Descripción:{description}
+                Descripción: {description}
               </div>
               <div className="work-location">
                 <img className="sector-icon me-2" src={houseIcon}></img>

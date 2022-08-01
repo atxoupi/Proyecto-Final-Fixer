@@ -165,6 +165,7 @@ const getState = ({
                         }
                     );
                     const data = await resp.text();
+                    getActions().login(email, password);
                     if (resp.status == 200) {
                         setStore({
                             register: true,
@@ -196,6 +197,7 @@ const getState = ({
                         }
                     );
                     const data = await resp.text();
+                    getActions().login(email, password);
                     console.log(data);
                     return data;
                 } catch (error) {
@@ -573,6 +575,52 @@ const getState = ({
                     console.log("Valoración guardada");
                     return data;
                     // console.log(data);
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+
+            aceptBudget: async (id) => {
+                try {
+                    const token = localStorage.getItem("token");
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + "/api/aceptbudget/" + id, {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: "Bearer " + token,
+                            },
+                        }
+                    );
+
+                    const data = await resp.json();
+                    if (resp.status === 200) {
+                        alert(data.message);
+                    }
+                    return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+            rejectBudget: async (id) => {
+                try {
+                    const token = localStorage.getItem("token");
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + "/api/rejectbudget/" + id, {
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: "Bearer " + token,
+                            },
+                        }
+                    );
+
+                    const data = await resp.json();
+                    if (resp.status === 200) {
+                        alert(data.message);
+                    }
+                    getActions().showbudget(id);
+                    return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
