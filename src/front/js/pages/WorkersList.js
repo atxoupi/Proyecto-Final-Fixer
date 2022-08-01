@@ -65,7 +65,7 @@ export const WorkersList = () => {
         </select>
       </div>
       <div>
-        <ul className="card-grid mx-3 list-unstyled">
+        <ul className="w-50 mx-auto list-unstyled row row-cols-1 row-cols-md-3 g-4">
           {!filteredWorkers.length > 0 ? (
             <p className="text-filter text-center">
               No se han encontrado coincidencias
