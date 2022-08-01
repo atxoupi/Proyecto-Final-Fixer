@@ -206,7 +206,7 @@ export const SignupForm = () => {
 
                         <p className="text-center text-muted mt-3 mb-0">
                           ¿Ya tienes una cuenta creada?
-                          <Link to="/login" className="fw-bold text-body">
+                          <Link to="/" className="fw-bold text-body">
                             <u> Entra aquí</u>
                           </Link>
                         </p>
