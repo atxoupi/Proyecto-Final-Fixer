@@ -29,7 +29,9 @@ export const BudgetsView = () => {
               style={{ width: "3rem" }}
             />
           </span>
-          <p>No se han encontrado presupuestos para esta oferta</p>
+          <p className="fw-bold mt-5">
+            No se han encontrado presupuestos para esta oferta
+          </p>
         </div>
       ) : (
         <>

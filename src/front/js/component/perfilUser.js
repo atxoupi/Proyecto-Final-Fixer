@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import { PhotoProfile } from "./photoProfile";
+
 // import PropTypes from "prop-types";
 
 const PerfilUser = () => {
@@ -13,6 +15,8 @@ const PerfilUser = () => {
   const [tlf, setTlf] = useState("");
   const [adress, setAdress] = useState("");
   const [postcode, setPostCode] = useState("");
+  const [photoProfile, setPhotoProfile] = useState("");
+  const [uploadImages, setUploadImages] = useState("");
 
   console.log("username " + name);
   console.log(store.consultUser);
@@ -28,26 +32,26 @@ const PerfilUser = () => {
     setTlf(store.consultUser.tlf);
     setAdress(store.consultUser.adress);
     setPostCode(store.consultUser.postcode);
+    setPhotoProfile(store.consultUser.pictures);
   }, [store.consultUser]);
   // console.log(store.consultUser);
 
   return (
     <div id="perfil1" className="border border-warning border-2 rounded-3 mt-5">
-      <div className="container p-3 text-center">
-        <div className="ms-4" style={{ width: "50 rem" }}>
+      <div className=" container p-3 d-flex  justify-content-start">
+        <div className="row-3 ">
           <img
-            src="https://picsum.photos/seed/picsum/100/100"
-            className="rounded-3"
+            src={store.consultUser.pictures}
+            style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
+            className="img border-2 border border-warning rounded-3"
             alt="..."
           />
         </div>
-        <div
-          className="container mt-2 ms-1 fw-bold
-        "
-        >
-          Hola, {store.consultUser.name}
+        <div className="ms-3 ">
+          <PhotoProfile />
         </div>
       </div>
+
       <div className="container">
         <p className="mt-3 ms-4 fw-bold text-decoration-underline">
           Datos Personales:
@@ -131,9 +135,10 @@ const PerfilUser = () => {
       <div className=" container mb-3">
         <button
           type="button"
-          className="d-grid gap-1 col-4 mx-auto btn btnHeader fw-bold"
+          id="examplemodal3"
+          className="d-grid gap-1 col-4 mx-auto fw-bold mail-button"
           data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
+          data-bs-target="#exampleModal3"
           data-bs-whatever="@mdo"
         >
           Editar datos
@@ -141,7 +146,7 @@ const PerfilUser = () => {
         {/* MODAL */}
         <div
           className="modal fade"
-          id="exampleModal"
+          id="exampleModal3"
           tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
@@ -154,7 +159,7 @@ const PerfilUser = () => {
                 </h5>
                 <button
                   type="button"
-                  className="btn-close btnHeader"
+                  className="btn-close mail-button"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
@@ -202,7 +207,7 @@ const PerfilUser = () => {
                       type="text"
                       className="form-control form-control-request"
                       id="recipient-name"
-                      value={city ? city : "No hay datos"}
+                      value={city ? city : ""}
                       onChange={(e) => setCity(e.target.value)}
                     />
                   </div>
@@ -258,7 +263,7 @@ const PerfilUser = () => {
                 <button
                   data-bs-dismiss="modal"
                   type="button"
-                  className="btn btnHeader"
+                  className="btn mail-button"
                   onClick={handleSubmitEditUser}
                 >
                   aceptar
