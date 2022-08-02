@@ -70,7 +70,10 @@ const getState = ({
             editWorkerGet: {},
             editUser: [],
             consultUser: {},
+<<<<<<< HEAD
             rating: null,
+=======
+>>>>>>> b57d99b77c4a3ff0a59b259ee9d15b89f36bd971
         },
         actions: {
             // LOGIN
@@ -165,7 +168,10 @@ const getState = ({
                         }
                     );
                     const data = await resp.text();
+<<<<<<< HEAD
 
+=======
+>>>>>>> b57d99b77c4a3ff0a59b259ee9d15b89f36bd971
                     if (resp.status == 200) {
                         setStore({
                             register: true,
@@ -312,7 +318,11 @@ const getState = ({
                                 },
                             }
                         );
+<<<<<<< HEAD
 
+=======
+                        getActions().showWork();
+>>>>>>> b57d99b77c4a3ff0a59b259ee9d15b89f36bd971
                         console.log(data);
                     }
                 } catch (error) {
@@ -552,7 +562,10 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
+<<<<<<< HEAD
 
+=======
+>>>>>>> b57d99b77c4a3ff0a59b259ee9d15b89f36bd971
             aceptBudget: async (id) => {
                 try {
                     const token = localStorage.getItem("token");
@@ -598,6 +611,7 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
+<<<<<<< HEAD
             addingRating: async (ratingNum, comment, worker_id, work_id) => {
                 console.log(ratingNum, worker_id, comment, work_id);
                 try {
@@ -628,6 +642,8 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
+=======
+>>>>>>> b57d99b77c4a3ff0a59b259ee9d15b89f36bd971
         },
     };
 };
