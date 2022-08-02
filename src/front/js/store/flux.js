@@ -311,7 +311,7 @@ const getState = ({
                                 },
                             }
                         );
-
+                        getActions().showWork();
                         console.log(data);
                     }
                 } catch (error) {
@@ -389,8 +389,7 @@ const getState = ({
                 sector,
                 direccion,
                 tlf,
-                postcode,
-
+                postcode
             ) => {
                 console.log(
                     "flux " + name,
@@ -414,7 +413,6 @@ const getState = ({
                                 adress: direccion,
                                 tlf_number: tlf,
                                 postcode: postcode,
-
                             }),
                             headers: {
                                 "Content-Type": "application/json",
@@ -503,7 +501,6 @@ const getState = ({
                                 tlf_number: tlf,
                                 adress: adress,
                                 postcode: postcode,
-
                             }),
                             headers: {
                                 "Content-Type": "application/json",

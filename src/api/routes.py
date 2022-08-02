@@ -146,12 +146,19 @@ def listworks():
     missing = User_signup.query.filter_by(email=current_user).first()
     if missing is None:
         user = Worker_signup.query.filter_by(email=current_user).first()
+        sent_budgets = Budget.query.filter_by(worker_id=user.id).all()
         works = Work.query.filter_by(location=user.city).filter_by(sector=user.sector).all()
+        for budget in sent_budgets:
+            print(budget.worker_id)
+            print(budget.work_id)
+            libres=list(filter(lambda work: work.id != budget.work_id, works))
+        result= list(map(lambda libre: libre.serialize(),libres))
     else:
         user = User_signup.query.filter_by(email=current_user).first()
         works = Work.query.filter_by(user_id=user.id).all()
+        result= list(map(lambda work: work.serialize(),works))
 
-    result= list(map(lambda work: work.serialize(),works))
+    
     
     return jsonify(result), 200
 
@@ -214,13 +221,10 @@ def sbudget():
     worker = Worker_signup.query.filter_by(email=current_user).first()
     tarea = Work.query.filter_by(id=id_work).first() 
 
-    print("El id del trtabajador:  ")
-    print(worker.id)
-    print(id_work)
     budget = Budget(user_id=tarea.user_id , worker_id=worker.id, work_id=tarea.id, url=url, duration=duration, price=price)
     db.session.add(budget)
     db.session.commit()
-    print(budget.id)
+    
     
 
     response_body = {
