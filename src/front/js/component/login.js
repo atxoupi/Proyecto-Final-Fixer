@@ -62,7 +62,7 @@ export const Login = () => {
                     </div>{" "}
                     <div className="d-flex justify-content-center pt-2">
                       <input
-                        className="btn btn-primary btn-lg "
+                        className="btn btn-primary btn-lg mail-button"
                         type="submit"
                         value="Acceder"
                         id="submitButtonLogin"

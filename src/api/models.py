@@ -16,7 +16,7 @@ class User_signup(db.Model):
     city = db.Column(db.String(120), unique=False, nullable=True)
     adress = db.Column(db.String(120), unique=False, nullable=True)
     postcode = db.Column(db.Integer, unique=False, nullable=True)
-    pictures = db.Column(db.String(500), unique=False, nullable=True)
+    pictures = db.Column(db.String(), unique=False, nullable=True)
     works = db.relationship('Work', backref='user_signup', lazy=True)
     ratings = db.relationship('Ratings', backref='user_signup', lazy=True)
     login = db.relationship('Login', backref='user_signup', lazy=True)

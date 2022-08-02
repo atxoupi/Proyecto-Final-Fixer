@@ -101,7 +101,7 @@ export const RequestForm = () => {
                   </div>
                   <div className="d-flex justify-content-center mt-4 pt-2">
                     <input
-                      className="btn btn-primary btn-lg "
+                      className="btn btn-lg mail-button"
                       type="submit"
                       value="Subir proyecto"
                       id="submitButtonRequest"

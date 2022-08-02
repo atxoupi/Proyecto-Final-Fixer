@@ -34,7 +34,7 @@ export const Navbar = () => {
       >
         <ul className="navbar-nav mb-2 mb-lg-0">
           {store.usuario ? (
-            <li className="nav-item mx-1">
+            <li className=" mx-1">
               <Link className="nav-link nav-link-navbar" href="#" to="/request">
                 Publica una oferta
               </Link>
