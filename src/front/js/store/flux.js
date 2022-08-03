@@ -699,7 +699,7 @@ const getState = ({
                 console.log(id);
                 try {
                     const resp = await fetch(
-                        process.env.BACKEND_URL + `/api/${id}/ratings`, {
+                        process.env.BACKEND_URL + `/api/worker/${id}/ratings`, {
                             method: "GET",
                             headers: {
                                 "Content-Type": "application/json",
@@ -707,8 +707,9 @@ const getState = ({
                         }
                     );
                     const data = await resp.json();
+
                     setStore({
-                        ratings: data,
+                        ratings: data.map((number) => (number = number.rating)),
                     });
 
                     return data;

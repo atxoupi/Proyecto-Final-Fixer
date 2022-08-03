@@ -14,7 +14,6 @@ export const SentBudgets = ({
   const [ratingOptions, setRatingOptions] = useState(false);
 
   const viewRatingOption = () => {
-    console.log("hello");
     setRatingOptions(true);
   };
   return (

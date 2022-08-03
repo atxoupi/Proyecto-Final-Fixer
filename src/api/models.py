@@ -52,6 +52,7 @@ class Worker_signup(db.Model):
     postcode = db.Column(db.Integer, unique=False, nullable=True)
     cif = db.Column(db.Integer, unique=True, nullable=True)
     pictures = db.Column(db.String(500), unique=False, nullable=True)
+    description = db.Column(db.String(1000), unique=False, nullable=True)
     works = db.relationship('Work', backref='worker_signup', lazy=True)
     ratings = db.relationship('Ratings', backref='worker_signup', lazy=True)
     login = db.relationship('Login', backref='worker_signup', lazy=True)
@@ -72,7 +73,8 @@ class Worker_signup(db.Model):
             "adress":self.adress,
             "postcode":self.postcode,
             "cif":self.cif,
-            "pictures":self.pictures
+            "pictures":self.pictures,
+            "description":self.description
         }
 
  # Login data  
@@ -160,7 +162,7 @@ class Budget(db.Model):
     worker_id = db.Column(db.Integer, db.ForeignKey('worker_signup.id'), nullable=False)
     work_id = db.Column(db.Integer, db.ForeignKey('work.id'), nullable=False)
     url = db.Column(db.String(120), unique=False, nullable=False)
-    duration = db.Column(db.Integer, nullable=False)
+    duration = db.Column(db.String(120), nullable=False)
     price = db.Column(db.Float, unique=False, nullable=True)
 #  tener dos servicios uno de work(empresarios miran las ofertas ) y otro de budget(para personas q vean los presupuestos q le han enviado)
     def __repr__(self):

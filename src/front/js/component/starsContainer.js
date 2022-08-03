@@ -20,25 +20,27 @@ export const StarsContainer = ({ work_id, worker_id }) => {
   return (
     <div className="container col 3">
       <p>Valora al trabajador</p>
-      <div className="stars d-flex justify-content-center">
-        {/* Mapeamos el array con los números de la valoración y seteamos el valor del input del componente Star */}
-        {valueRating.map((number, index) => (
-          <Star
-            number={number}
-            key={index}
-            changeRating={(e) => setRating(e.target.value)}
-            style={rating >= number ? activeStar : {}}
-          />
-        ))}
-        <div className="mt-2">
-          <form onSubmit={changeRating}>
-            <label> Comment</label>
-            <input
-              className="rating-comment"
-              onChange={(e) => setComment(e.target.value)}
-            ></input>
-            <button type="submit">Enviar</button>
-          </form>
+      <div className="d-grid">
+        <div className="stars d-flex justify-content-center">
+          {/* Mapeamos el array con los números de la valoración y seteamos el valor del input del componente Star */}
+          {valueRating.map((number, index) => (
+            <Star
+              number={number}
+              key={index}
+              changeRating={(e) => setRating(e.target.value)}
+              style={rating >= number ? activeStar : {}}
+            />
+          ))}
+          <div className="mt-2">
+            <form onSubmit={changeRating}>
+              <label> Comment</label>
+              <input
+                className="rating-comment"
+                onChange={(e) => setComment(e.target.value)}
+              ></input>
+              <button type="submit">Enviar</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
