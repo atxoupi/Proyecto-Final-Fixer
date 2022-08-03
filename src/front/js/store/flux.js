@@ -71,6 +71,7 @@ const getState = ({
             editUser: [],
             consultUser: {},
             ratings: [],
+            pictures: {},
         },
         actions: {
             // LOGIN
@@ -499,7 +500,6 @@ const getState = ({
                                 tlf_number: tlf,
                                 adress: adress,
                                 postcode: postcode,
-                                // password: password,
                             }),
                             headers: {
                                 "Content-Type": "application/json",
@@ -617,13 +617,78 @@ const getState = ({
                             },
                         }
                     );
-
                     const data = await resp.json();
                     if (resp.status === 200) {
                         console.log("Valoración guardada");
                     }
                     return data;
                     // console.log(data);
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+
+            //Fetch a Claudinary para subir y descargar la foto de perfil al editarla
+
+            pictureProfile: async (uploadImages) => {
+                const cloud_name = "carolinaqotf"; //"pluggedin";
+                const preset = "s5oaavqo"; //"icnpftra";
+                const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
+
+                const formData = new FormData();
+                formData.append("file", uploadImages);
+                formData.append("upload_preset", `${preset}`);
+
+                try {
+                    const response = await fetch(
+                        //process.env.BACKEND_URL + "/api/hello",
+                        url_claudinari, {
+                            method: "POST",
+                            body: formData,
+                        }
+                    );
+                    if (response.ok) {
+                        const store = getStore();
+                        const data = await response.json();
+                        const token = localStorage.getItem("token");
+                        const response2 = await fetch(
+                            process.env.BACKEND_URL + "/api/profile_user", {
+                                method: "PUT",
+                                body: JSON.stringify({
+                                    pictures: data.url,
+                                    userType: store.usuario ? "user" : "work",
+                                }),
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    Authorization: "Bearer " + token,
+                                },
+                            }
+                        );
+
+                        console.log(data);
+                    }
+                } catch (error) {
+                    console.log("message", error);
+                }
+            },
+
+            //Funcion que muestra la foto de perfil
+            showPicturesProfile: async () => {
+                try {
+                    const token = localStorage.getItem("token");
+                    const resp = await fetch(process.env.BACKEND_URL + `/api/profile`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    });
+                    const data = await resp.json();
+                    setStore({
+                        consultUser: data.pictures,
+                    });
+                    // // don't forget to return something, that is how the async resolves
+                    return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
@@ -645,7 +710,7 @@ const getState = ({
                     setStore({
                         ratings: data,
                     });
-                    // console.log(data);
+
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);

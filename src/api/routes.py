@@ -312,6 +312,8 @@ def updateuser():
     tlf_number=request.json.get("tlf_number", None)
     adress=request.json.get("adress", None)
     postcode=request.json.get("postcode", None)
+    pictures=request.json.get("pictures", None)
+
     
 
     user=User_signup.query.filter_by(email=current_user).first()
@@ -323,6 +325,7 @@ def updateuser():
     user.adress=adress
     user.tlf_number=tlf_number
     user.postcode=postcode
+    # user.pictures=postcode
     
     db.session.commit()  
     login=Login.query.filter_by(email=current_user).first()
@@ -459,5 +462,31 @@ def reject_budget(id):
         "message": "Presupuesto Rechazado"
     }
 
+
+    return jsonify(response_body), 200
+
+@api.route("/profile_user", methods=["PUT"])
+@jwt_required()
+def profileimage():
+    current_user = get_jwt_identity()
+    pictures = request.json.get("pictures", None)
+    user_type = request.json.get("userType", None)
+    if user_type == "user":
+        user = User_signup.query.filter_by(email=current_user).first()
+    else :
+        user = Worker_signup.query.filter_by(email=current_user).first()
+        
+    user.pictures= pictures
+            
+    # user_signup= User_signup(pictures=pictures)
+    
+    db.session.commit()
+    
+    response_body = {
+            "message": "foto Almacenada"
+        }
+
+    # Access the identity of the current user with get_jwt_identity
+    
 
     return jsonify(response_body), 200

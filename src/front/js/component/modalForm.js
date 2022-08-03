@@ -11,7 +11,7 @@ const ModalForm = ({ id }) => {
     <div className=" container text-center mt-2">
       <button
         type="button"
-        className="btn btnHeader"
+        className="btn mail-button"
         data-bs-toggle="modal"
         data-bs-target={"#exampleModal" + id}
         data-bs-whatever="@mdo"
@@ -48,7 +48,7 @@ const ModalForm = ({ id }) => {
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control form-control-request"
                     id="recipient-name"
                     onChange={(e) => {
                       setPrecio(e.target.value);
@@ -61,7 +61,7 @@ const ModalForm = ({ id }) => {
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control form-control-request "
                     id="recipient-name"
                     onChange={(e) => {
                       setDuracion(e.target.value);
@@ -70,7 +70,7 @@ const ModalForm = ({ id }) => {
                 </div>
                 <div className="mb-3">
                   <input
-                    className="form-control input-foto"
+                    className="form-control form-control-request input-foto"
                     type="file"
                     id="formFile"
                     onChange={(e) => setUploadImages(e.target.files[0])}
@@ -81,7 +81,7 @@ const ModalForm = ({ id }) => {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btnHeader"
+                className="btn mail-button"
                 data-bs-dismiss="modal"
                 onClick={(e) =>
                   actions.uploadFile(uploadImages, id, precio, duracion)

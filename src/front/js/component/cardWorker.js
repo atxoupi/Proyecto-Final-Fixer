@@ -8,7 +8,10 @@ export const CardWorker = ({ name, sector, image, id }) => {
 
   return (
     <>
-      <div className="card " style={{ width: "18rem" }}>
+      <div
+        className="card border-warning border-2 rounded-3"
+        style={{ width: "18rem" }}
+      >
         {image === null ? (
           <img
             src={obrero}
@@ -20,10 +23,10 @@ export const CardWorker = ({ name, sector, image, id }) => {
           <img src={image} className="card-img-top" alt="imagen " />
         )}
 
-        <div className="card-body">
-          <h5 className="card-title">{name}</h5>
+        <div className="card-body border-top border-2 border-warning">
+          <h5 className="card-title fw-bold">{name}</h5>
           <p className="card-text">{sector}</p>
-          <Link to={`/workerprofile/${id}`} className="btn btnHeader">
+          <Link to={`/workerprofile/${id}`} className="btn mail-button">
             Leer más
           </Link>
         </div>

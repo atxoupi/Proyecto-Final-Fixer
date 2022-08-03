@@ -21,10 +21,10 @@ export const Workerprofile = () => {
   return (
     <>
       <div className="container-works mx-auto">
-        <h3 className="text-center mb-3">Perfil de Empresa</h3>
+        <h3 className="text-center mb-3 fw-bold">Perfil de Empresa</h3>
 
         <div className="row">
-          <div className="col-lg-6 col-md-8 col-sm-12 mx-auto">
+          <div className="col-lg-4 col-md-4 col-sm-5 mx-auto">
             <div className="post-box">
               <div className="post-photo d-flex justify-content-center ">
                 {store.workerprofile.pictures === null ? (
@@ -32,35 +32,40 @@ export const Workerprofile = () => {
                     src={obrero}
                     className="card-img-top mx-auto mt-2"
                     alt="imagen obrero"
-                    style={{ width: "200px" }}
+                    style={{ width: "150px" }}
                   />
                 ) : (
                   <img
                     src={store.workerprofile.pictures}
-                    className="card-img-top"
+                    className="card-img-top rounded-3"
                     alt="imagen "
                   />
                 )}
               </div>
-              <div className="post-card m-2 pt-3 mt-3">
-                <div className="worker-name">
+              <div className="post-card m-2 pt-2 mt-2">
+                <div className="worker-name d-flex">
                   {" "}
-                  Nombre: {store.workerprofile.name}
+                  <div className="fw-bold">Nombre :</div>{" "}
+                  <div className="ms-3">{store.workerprofile.name}</div>
                 </div>
-                <div className="worker-email">
+                <div className="worker-email d-flex">
                   {" "}
-                  Email: {store.workerprofile.email}{" "}
+                  <div className="fw-bold">Email :</div>
+                  <div className="ms-2"> {store.workerprofile.email}</div>{" "}
                 </div>
-                <div className="worker-city">
-                  Ciudad :{store.workerprofile.city}
+                <div className="worker-city d-flex">
+                  <div className="fw-bold">Ciudad :</div>
+                  <div className="ms-3"> {store.workerprofile.city}</div>
                 </div>
-                <div className="worker-sector">
+                <div className="worker-sector d-flex">
                   {" "}
-                  Sector: {store.workerprofile.sector}
+                  <div className="fw-bold">Sector:</div>
+                  <div className="ms-3"> {store.workerprofile.sector}</div>
                 </div>
-                <div className="worker-tlf">
+                <div className="worker-tlf d-flex">
                   {" "}
-                  Número Tlf: {store.workerprofile.tlf_number}
+                  <div className="fw-bold">Número Tlf :</div>
+                  <div className="ms-3">{store.workerprofile.tlf_number} </div>
                 </div>
 
                 {/* <Star

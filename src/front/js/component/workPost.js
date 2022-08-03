@@ -49,7 +49,9 @@ export const WorkPost = ({
             <div className="post-card">
               <div className="row">
                 <div className="work-header d-flex justify-content-between">
-                  <h3 className="work-title text-center mb-3">{title}</h3>
+                  <h3 className="work-title text-center mb-3 fw-bold">
+                    {title}
+                  </h3>
                   <img
                     className="sector-icon"
                     src={showIcons()}
@@ -59,24 +61,26 @@ export const WorkPost = ({
               </div>
 
               <div className="work-description mb-3">
-                Descripción: {description}
+                <p className="fw-bold">Descripción:</p> {description}
               </div>
               <div className="work-location">
                 <img className="sector-icon me-2" src={houseIcon}></img>
-                <span className="location-span align-bottom">{location}</span>
+                <span className="location-span align-bottom fw-bold">
+                  {location}
+                </span>
               </div>
 
               <div>
                 {showButton ? (
                   <div className="d-flex justify-content-between mt-3">
                     <Link to={`/work/${work_id}/budgets`}>
-                      <button type="button" className="mail-button">
+                      <button type="button" className="mail-button fw-bold">
                         Ver presupuesto
                       </button>
                     </Link>
                     <button
                       type="button"
-                      className="mail-button"
+                      className="mail-button fw-bold"
                       onClick={() => actions.deleteWork(work_id)}
                     >
                       Borrar oferta

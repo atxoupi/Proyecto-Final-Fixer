@@ -16,30 +16,30 @@ export const Header = () => {
             <Link
               to="workers-list"
               type="button"
-              className="btn btnHeader mt-2"
+              className="btn mail-button mt-2"
             >
               Busca un profesional
             </Link>
           </div>
           <div className="col-5">
-            <Link to="/request" type="button" className="btn btnHeader mt-2">
+            <Link to="/request" type="button" className="btn mail-button mt-2">
               Publica un anuncio
             </Link>
           </div>
         </div>
       </div>
       <div
-        className="container wraper-header position-relative"
+        className="container wraper-header position-relative rounded-3"
         style={{
           height: "450",
           width: "100%",
         }}
       >
         <div
-          className="check_container_header hidden-xs flex-column w-50 position-absolute me-60 p-3 "
+          className="check_container_header hidden-xs flex-column w-50 position-absolute me-60 p-3 rounded-3"
           style={{ maxHeight: "60%" }}
         >
-          <div className="text-container">
+          <div className="text-container ">
             <div>
               <img
                 className="checkedIcon"
@@ -49,7 +49,7 @@ export const Header = () => {
                 src={checked}
               ></img>
               <span className="checkbox-inline ms-2">
-                Encuentra el mejor profesional cerca de ti
+                Encuentra el mejor profesional cerca de ti.
               </span>
             </div>
             <div>
@@ -61,7 +61,7 @@ export const Header = () => {
                 src={checked}
               ></img>
               <span className="checkbox-inline ms-2">
-                Más de un millón de usuarios satisfechos
+                Más de un millón de usuarios satisfechos.
               </span>
             </div>
             <div>
@@ -73,7 +73,7 @@ export const Header = () => {
                 src={checked}
               ></img>
               <span className="checkbox-inline ms-2">
-                Con garantía de calidad
+                Con garantía de calidad.
               </span>
             </div>
             <div>
@@ -85,14 +85,15 @@ export const Header = () => {
                 src={checked}
               ></img>
               <span className="checkbox-inline ms-2">
-                Tú mandas, propón tu proyecto y los profesionales te contactaran
+                Tú mandas, propón tu proyecto y los profesionales te
+                contactaran.
               </span>
             </div>
           </div>
         </div>
         <img
           src={imagenHeader}
-          className="img-fluid d-flex justify-content-center"
+          className="img-fluid d-flex justify-content-center rounded-3"
           alt="..."
           style={{
             objectFit: "cover",

@@ -31,9 +31,9 @@ export const WorkersList = () => {
       <div className="title-workersList text-center my-5">
         <h4>Selecciona un sector y una ciudad para tu búsqueda</h4>
       </div>
-      <div className="input-group my-3 mx-auto w-50 ">
+      <div className="input-group my-3 mx-auto w-50 color-warning">
         <select
-          className="form-select"
+          className="form-select form-control-request"
           id="inputGroupSelect02"
           onChange={(e) => {
             setSelectedSector(e.target.value);
@@ -50,7 +50,7 @@ export const WorkersList = () => {
           <option value="Jardinería">Jardinería</option>
         </select>
         <select
-          className="form-select"
+          className="form-select form-control-request"
           id="inputGroupSelect02"
           onChange={(e) => {
             setSelectedCity(e.target.value);

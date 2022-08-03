@@ -25,7 +25,7 @@ export const SentBudgets = ({
           <div className="price-budget-title"> Presupuesto </div>
           <div className="price-budget"> {price} </div>
           <a href={url} download target="_blank" rel="noopener noreferrer">
-            <button type="button" className="btn btnHeader mt-3">
+            <button type="button" className="btn mail-button mt-3">
               Descargar presupuesto
             </button>
           </a>
