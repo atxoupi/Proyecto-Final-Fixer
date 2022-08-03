@@ -70,10 +70,7 @@ const getState = ({
             editWorkerGet: {},
             editUser: [],
             consultUser: {},
-<<<<<<< HEAD
-            rating: null,
-=======
->>>>>>> b57d99b77c4a3ff0a59b259ee9d15b89f36bd971
+            ratings: [],
         },
         actions: {
             // LOGIN
@@ -168,10 +165,6 @@ const getState = ({
                         }
                     );
                     const data = await resp.text();
-<<<<<<< HEAD
-
-=======
->>>>>>> b57d99b77c4a3ff0a59b259ee9d15b89f36bd971
                     if (resp.status == 200) {
                         setStore({
                             register: true,
@@ -318,11 +311,7 @@ const getState = ({
                                 },
                             }
                         );
-<<<<<<< HEAD
-
-=======
                         getActions().showWork();
->>>>>>> b57d99b77c4a3ff0a59b259ee9d15b89f36bd971
                         console.log(data);
                     }
                 } catch (error) {
@@ -562,10 +551,6 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
-<<<<<<< HEAD
-
-=======
->>>>>>> b57d99b77c4a3ff0a59b259ee9d15b89f36bd971
             aceptBudget: async (id) => {
                 try {
                     const token = localStorage.getItem("token");
@@ -611,7 +596,8 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
-<<<<<<< HEAD
+            // Función que añade una valoración en forma numérica y un comentario a un trabajador.
+            // Es necesario estar logueado y haberle aceptado un presupuesto para poder realizar la valoración
             addingRating: async (ratingNum, comment, worker_id, work_id) => {
                 console.log(ratingNum, worker_id, comment, work_id);
                 try {
@@ -642,8 +628,29 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
-=======
->>>>>>> b57d99b77c4a3ff0a59b259ee9d15b89f36bd971
+
+            // Función que devuelve las valoraciones de un trabajador, se pasa el id del trabajador como parámetro
+            getRating: async (id) => {
+                console.log(id);
+                try {
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + `/api/${id}/ratings`, {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        }
+                    );
+                    const data = await resp.json();
+                    setStore({
+                        ratings: data,
+                    });
+                    // console.log(data);
+                    return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
         },
     };
 };

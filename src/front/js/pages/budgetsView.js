@@ -13,7 +13,7 @@ export const BudgetsView = () => {
   }, []);
   const oneBudget = store?.budget.filter(
     (value) => value.work_id === parseInt(id)
-  ); //para solucionar cuando me lee con un undefined sabiendo que no lo es, el ?
+  ); // ponemos ? para solucionar cuando me lee con un undefined sabiendo que no lo es
 
   return (
     <>

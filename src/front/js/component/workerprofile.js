@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import obrero from "../../img/icons/obrero.png";
 import { useParams } from "react-router-dom";
@@ -7,9 +6,17 @@ import { useParams } from "react-router-dom";
 export const Workerprofile = () => {
   const { store, actions } = useContext(Context);
   const { id } = useParams();
+  // const [rating, setRating] = useState();
   useEffect(() => {
     actions.getworker(parseInt(id));
   }, []);
+  // const ratingAverage = (ratings) => {
+  //   let sum = 0;
+  //   for (let rating of ratings) {
+  //     sum += rating;
+  //   }
+  //   return setRating(sum / 2);
+  // };
 
   return (
     <>
@@ -55,6 +62,12 @@ export const Workerprofile = () => {
                   {" "}
                   Número Tlf: {store.workerprofile.tlf_number}
                 </div>
+
+                {/* <Star
+                  rating={number}
+                  style={rating >= number ? activeStar : {}}
+                /> */}
+
                 <div className="d-flex justify-content-between mt-3">
                   <a
                     className="ancorforbuttoncontact btn whatsapp-button "

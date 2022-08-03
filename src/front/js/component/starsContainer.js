@@ -3,25 +3,25 @@ import { Star } from "../component/star.js";
 import { Context } from "../store/appContext";
 
 export const StarsContainer = ({ work_id, worker_id }) => {
-  const { store, actions } = useContext(Context);
-  console.log(work_id, worker_id);
+  const { actions } = useContext(Context);
+
   const valueRating = [1, 2, 3, 4, 5];
   const [rating, setRating] = useState();
   const [comment, setComment] = useState();
   const activeStar = {
     fill: "yellow",
   };
-
+  // La función se activa con el onSubmit pasando el rating y el comment seteados y el worker_id y el work_id en forma de props
   const changeRating = (e) => {
     e.preventDefault();
     actions.addingRating(rating, comment, worker_id, work_id);
-    console.log(rating, comment);
   };
 
   return (
-    <div className="container">
-      <h1 className="result"></h1>
-      <div className="stars">
+    <div className="container col 3">
+      <p>Valora al trabajador</p>
+      <div className="stars d-flex justify-content-center">
+        {/* Mapeamos el array con los números de la valoración y seteamos el valor del input del componente Star */}
         {valueRating.map((number, index) => (
           <Star
             number={number}
@@ -30,15 +30,16 @@ export const StarsContainer = ({ work_id, worker_id }) => {
             style={rating >= number ? activeStar : {}}
           />
         ))}
-
-        <form onSubmit={changeRating}>
-          <label> Comment</label>
-          <input
-            className="rating-comment"
-            onChange={(e) => setComment(e.target.value)}
-          ></input>
-          <button type="submit">Enviar</button>
-        </form>
+        <div className="mt-2">
+          <form onSubmit={changeRating}>
+            <label> Comment</label>
+            <input
+              className="rating-comment"
+              onChange={(e) => setComment(e.target.value)}
+            ></input>
+            <button type="submit">Enviar</button>
+          </form>
+        </div>
       </div>
     </div>
   );

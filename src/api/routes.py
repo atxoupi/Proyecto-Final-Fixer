@@ -402,14 +402,11 @@ def addRating():
 
 #Trae los ratings de un trabajador, usando worker_id como parámetro
 @api.route("/worker/<int:id>/ratings", methods=["GET"])
-@jwt_required()
 def getRatings(id):
-    # Access the identity of the current user with get_jwt_identity
-    current_user = get_jwt_identity()
     ratings = Ratings.query.filter_by(worker_id=id).all()
 
     result= list(map(lambda rating: rating.serialize(),ratings))
-    
+    print(result)
     return jsonify(result), 200
 
 @api.route("aceptbudget/<int:id>", methods=["PUT"])
