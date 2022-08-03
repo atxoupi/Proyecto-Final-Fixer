@@ -88,8 +88,8 @@ const getState = ({
                         },
                     });
                     // si el status es correcto nos setea a auth true y esto nos servirá para renderizar condicionalmente si se está logueado
+                    const data = await resp.json();
                     if (resp.status === 200) {
-                        const data = await resp.json();
                         setStore({
                             auth: true,
                         });
@@ -436,15 +436,7 @@ const getState = ({
             },
 
             //CONSULTAR DATOS DE USUARIO EMPRESA
-            consultWorkerProfile: async (
-                name,
-                city,
-                email,
-                sector,
-                tlf_number,
-                password,
-                postcode
-            ) => {
+            consultWorkerProfile: async () => {
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(process.env.BACKEND_URL + "/api/profile", {
@@ -460,9 +452,6 @@ const getState = ({
                         editWorkerGet: data,
                     });
                     console.log(data);
-
-                    // return data;
-                    // console.log(data);
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
@@ -521,15 +510,7 @@ const getState = ({
             },
 
             //CONSULTAR DATOS DE USUARIO
-            consultUserProfile: async (
-                name,
-                lastname,
-                city,
-                email,
-                tlf_number,
-                adress,
-                postcode
-            ) => {
+            consultUserProfile: async () => {
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(process.env.BACKEND_URL + "/api/profile", {
@@ -707,9 +688,8 @@ const getState = ({
                         }
                     );
                     const data = await resp.json();
-
                     setStore({
-                        ratings: data.map((number) => (number = number.rating)),
+                        ratings: data,
                     });
 
                     return data;

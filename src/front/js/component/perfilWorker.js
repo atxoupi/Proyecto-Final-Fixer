@@ -29,7 +29,7 @@ const PerfilWorker = () => {
       city,
       sector,
       adress,
-      tlf,
+      tlf_number,
       postcode
     );
   };
@@ -41,7 +41,7 @@ const PerfilWorker = () => {
     setAdress(store.editWorkerGet.adress);
     setPostcode(store.editWorkerGet.postcode);
     setPhotoProfile(store.editWorkerGet.pictures);
-    setTlf(store.editWorkerGet.tlf);
+    setTlf(store.editWorkerGet.tlf_number);
   }, [store.editWorkerGet]);
 
   return (

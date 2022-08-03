@@ -2,29 +2,40 @@ import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import obrero from "../../img/icons/obrero.png";
 import { useParams } from "react-router-dom";
-import { Star } from "../component/star.js";
 import { Rating } from "../component/rating.js";
 
 export const Workerprofile = () => {
   const { store, actions } = useContext(Context);
   const { id } = useParams();
-  // const [rating, setRating] = useState();
+
+  // funciones que nos traen los trabajadores y las valoraciones
   useEffect(() => {
     actions.getworker(parseInt(id));
     actions.getRating(parseInt(id));
+    actions.consultUserProfile();
   }, []);
-  // const valueRating = [1, 2, 3, 4, 5];
+  console.log(store.consultUser);
+  // VALORACIONES
+  // calculamos el promedio de las valoraciones
+
   const ratingAverage = (ratings) => {
     let sum = 0;
     for (let rating of ratings) {
       sum += rating;
     }
-    return sum / 2;
+    return sum / ratings.length;
   };
-  let numRating = ratingAverage(store.ratings);
+  let numeros = store.ratings.map((item) => {
+    return item.rating;
+  });
+  console.log(numeros);
+  let numRating = ratingAverage(numeros);
+
+  // creamos una variable con un objeto de estilo
   const activeStar = {
     fill: "yellow",
   };
+  console.log(store.ratings);
   console.log(numRating);
   return (
     <>
@@ -71,12 +82,14 @@ export const Workerprofile = () => {
                   <div className="ms-3"> {store.workerprofile.sector}</div>
                 </div>
                 <div className="worker-tlf d-flex">
-                  {" "}
                   <div className="fw-bold">Número Tlf :</div>
                   <div className="ms-3">{store.workerprofile.tlf_number} </div>
                 </div>
+                {/* Componente con el sistema de valoraciones que tiene dos props: una que pasa el
+                valor promedio de valoraciones y otra el objeto de estilo amarillo */}
 
                 <Rating value={numRating} color={activeStar} />
+                <a>Ver más valoraciones</a>
                 <div className="d-flex justify-content-between mt-3">
                   <a
                     className="ancorforbuttoncontact btn whatsapp-button "
@@ -92,7 +105,6 @@ export const Workerprofile = () => {
                     type="button"
                     href={`mailto:${store.workerprofile.email}?subject=Muy buenas ${store.workerprofile.name}!`}
                   >
-                    {" "}
                     Email
                   </a>
                 </div>
@@ -100,29 +112,34 @@ export const Workerprofile = () => {
             </div>
           </div>
         </div>
+
+        {store.ratings.map((item, index) => (
+          <div className="row mt-3">
+            <div className="col-10 col-lg-6 col-md-8 col-sm-10 mx-auto">
+              <div className="rating-box ">
+                <div
+                  className=" d-flex justify-content-around w-50 mt-4"
+                  key={index}
+                >
+                  <img
+                    src={store.consultUser.pictures}
+                    style={{
+                      width: "4rem",
+                      height: "4rem",
+                      objectFit: "cover",
+                    }}
+                    className="img-rating border-2 border border-warning rounded-circle "
+                    alt="..."
+                  />
+
+                  <Rating value={item.rating} color={activeStar} />
+                </div>
+                <div className="comment d-block ms-6">{item.description}</div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );
 };
-
-// <label className="star">
-//   <input value={number} className="stars-radio-input">
-//     <svg
-//       xmlns="http://www.w3.org/2000/svg"
-//       className="h-6 w-6"
-//       width={40}
-//       height={40}
-//       fill="none"
-//       viewBox="0 0 24 24"
-//       stroke="currentColor"
-//       strokeWidth="2"
-//       style={numRating >= number ? activeStar : {}}
-//     >
-//       <path
-//         strokeLinecap="round"
-//         strokeLinejoin="round"
-//         d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-//       />
-//     </svg>
-//   </input>
-// </label>;

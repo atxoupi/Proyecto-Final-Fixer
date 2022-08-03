@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Rating = ({ value, color }) => {
+export const Rating = ({ value }) => {
   return (
     <div className="star">
       <span>
@@ -27,7 +27,6 @@ export const Rating = ({ value, color }) => {
       </span>
       <span>
         <i
-          style={{ color }}
           className={
             value >= 3
               ? "fas fa-star"
