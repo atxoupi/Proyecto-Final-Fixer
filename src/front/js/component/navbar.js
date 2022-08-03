@@ -25,7 +25,9 @@ export const Navbar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon "></span>
+          <span className="navbar-toggler-icon ">
+            <i className="fas fa-bars"></i>
+          </span>
         </button>
       </div>
       <div
@@ -35,7 +37,11 @@ export const Navbar = () => {
         <ul className="navbar-nav mb-2 mb-lg-0">
           {store.usuario ? (
             <li className="nav-item mx-1">
-              <Link className="nav-link nav-link-navbar" href="#" to="/request">
+              <Link
+                className="nav-link nav-link-navbar "
+                href="#"
+                to="/request"
+              >
                 Publica una oferta
               </Link>
             </li>
@@ -45,7 +51,7 @@ export const Navbar = () => {
 
           {store.usuario ? (
             <li className="nav-item mx-1">
-              <Link className="nav-link nav-link-navbar" href="#" to="/works">
+              <Link className="nav-link nav-link-navbar " href="#" to="/works">
                 Mis ofertas
               </Link>
             </li>

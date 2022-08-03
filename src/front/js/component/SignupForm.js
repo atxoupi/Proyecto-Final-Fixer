@@ -10,6 +10,7 @@ export const SignupForm = () => {
 
   // Datos usuario
   const [username, setUsername] = useState("");
+  const [tlf_number, settlf_number] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
@@ -55,7 +56,8 @@ export const SignupForm = () => {
         city,
         email,
         password1,
-        sector
+        sector,
+        tlf_number
       );
       if (result) {
         navigate("/login");
@@ -256,8 +258,9 @@ export const SignupForm = () => {
                                 type="text"
                                 id="lastName2"
                                 className="form-control form-control-signup form-control-lg"
-                                placeholder="Apellidos"
-                                onChange={(e) => setLastname(e.target.value)}
+                                placeholder="Teléfono"
+                                pattern="^(?=.*?[0-9]).{8,22}$"
+                                onChange={(e) => settlf_number(e.target.value)}
                                 required
                               />
                             </div>

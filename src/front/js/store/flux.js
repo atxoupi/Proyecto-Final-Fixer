@@ -87,8 +87,8 @@ const getState = ({
                         },
                     });
                     // si el status es correcto nos setea a auth true y esto nos servirá para renderizar condicionalmente si se está logueado
+                    const data = await resp.json();
                     if (resp.status === 200) {
-                        const data = await resp.json();
                         setStore({
                             auth: true,
                         });
@@ -178,7 +178,7 @@ const getState = ({
                 }
             },
             //CREAR USUARIO TRABAJADOR
-            createWorker: async (name, city, email, password, sector) => {
+            createWorker: async (name, city, email, password, sector, tlf_number) => {
                 try {
                     // fetching data from the backend
                     const resp = await fetch(
@@ -190,6 +190,7 @@ const getState = ({
                                 email: email,
                                 password: password,
                                 sector: sector,
+                                tlf_number: tlf_number,
                             }),
                             headers: {
                                 "Content-Type": "application/json",
@@ -198,7 +199,6 @@ const getState = ({
                     );
                     const data = await resp.text();
                     getActions().login(email, password);
-                    console.log(data);
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
@@ -442,8 +442,7 @@ const getState = ({
                 sector,
                 tlf_number,
                 password,
-                postcode,
-
+                postcode
             ) => {
                 try {
                     const token = localStorage.getItem("token");
@@ -476,8 +475,7 @@ const getState = ({
                 city,
                 tlf,
                 adress,
-                postcode,
-
+                postcode
             ) => {
                 console.log(
                     "flux " + name,
@@ -618,7 +616,7 @@ const getState = ({
                         }
                     );
                     if (response.ok) {
-                        const store = getStore()
+                        const store = getStore();
                         const data = await response.json();
                         const token = localStorage.getItem("token");
                         const response2 = await fetch(
@@ -627,7 +625,6 @@ const getState = ({
                                 body: JSON.stringify({
                                     pictures: data.url,
                                     userType: store.usuario ? "user" : "work",
-
                                 }),
                                 headers: {
                                     "Content-Type": "application/json",
@@ -638,7 +635,6 @@ const getState = ({
 
                         console.log(data);
                     }
-
                 } catch (error) {
                     console.log("message", error);
                 }
@@ -648,15 +644,13 @@ const getState = ({
             showPicturesProfile: async () => {
                 try {
                     const token = localStorage.getItem("token");
-                    const resp = await fetch(
-                        process.env.BACKEND_URL + `/api/profile`, {
-                            method: "GET",
-                            headers: {
-                                "Content-Type": "application/json",
-                                Authorization: "Bearer " + token,
-                            },
-                        }
-                    );
+                    const resp = await fetch(process.env.BACKEND_URL + `/api/profile`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    });
 
                     const data = await resp.json();
                     setStore({
