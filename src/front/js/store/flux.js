@@ -72,6 +72,7 @@ const getState = ({
             consultUser: {},
             ratings: [],
             pictures: {},
+            viewRatings: false,
         },
         actions: {
             // LOGIN
@@ -547,6 +548,9 @@ const getState = ({
 
                     const data = await resp.json();
                     if (resp.status === 200) {
+                        setStore({
+                            viewRatings: true,
+                        });
                         alert(data.message);
                     }
                     return data;

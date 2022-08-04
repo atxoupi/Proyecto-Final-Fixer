@@ -11,7 +11,7 @@ export const WorkPostForWorker = ({
   work_id,
   url,
 }) => {
-  const { store, actions } = useContext(Context);
+  const { actions } = useContext(Context);
 
   return (
     <>
