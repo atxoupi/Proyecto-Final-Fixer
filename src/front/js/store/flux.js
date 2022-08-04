@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2'
+// import "sweetalert2/src/sweetalert2.scss";
 const getState = ({
     getStore,
     getActions,
@@ -106,9 +108,30 @@ const getState = ({
                         localStorage.setItem("mail", email);
                         localStorage.setItem("tipo", data.tipo);
                     } else if (resp.status === 404) {
-                        alert("usuario no existe");
+                        Swal.fire({
+                            toast: true,
+                            color: "003566",
+                            icon: "error",
+                            position: "top-end",
+                            animation: true,
+                            title: "usuario no existe",
+                            showConfirmButton: false,
+                            timer: 4000,
+
+                        });
+
                     } else {
-                        alert("email o contraseña incorrecta");
+                        Swal.fire({
+                            toast: true,
+                            color: "003566",
+                            icon: "error",
+                            position: "top-end",
+                            animation: true,
+                            title: "email o contraseña incorrecta",
+                            showConfirmButton: false,
+                            timer: 4000,
+
+                        });
                     }
 
                     return data;
@@ -137,8 +160,11 @@ const getState = ({
                             }),
                         }
                     );
+
                     const data = await resp.json();
                     console.log(data);
+
+
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
@@ -168,7 +194,9 @@ const getState = ({
                     if (resp.status == 200) {
                         setStore({
                             register: true,
+
                         });
+
                         getActions().login(email, password);
                     }
                     console.log(data);
@@ -275,7 +303,7 @@ const getState = ({
                 }
             },
 
-            //CODIGO DE CLOUDINARY SUBIDA DE FOTO
+            //CODIGO DE CLOUDINARY SUBIDA DE PRESUPUESTO
 
             uploadFile: async (uploadImages, id, price, duracion) => {
                 const cloud_name = "carolinaqotf"; //"pluggedin";
@@ -311,9 +339,15 @@ const getState = ({
                                 },
                             }
                         );
+
+
                         getActions().showWork();
                         console.log(data);
+
                     }
+
+
+
                 } catch (error) {
                     console.log("message", error);
                 }
@@ -419,13 +453,27 @@ const getState = ({
                                 Authorization: "Bearer " + token,
                             },
                         }
-                    );
 
-                    const data = await resp.json();
-                    setStore({
-                        editWorker: data,
-                    });
-                    getActions().consultWorkerProfile();
+                    );
+                    if (resp.status == 200) {
+                        Swal.fire({
+                            toast: true,
+                            color: '003566',
+                            icon: 'success',
+                            position: 'top-end',
+                            animation: true,
+                            title: 'Datos actualizados',
+                            showConfirmButton: false,
+                            timer: 4000,
+
+                        })
+
+                        const data = await resp.json();
+                        setStore({
+                            editWorker: data,
+                        });
+                        getActions().consultWorkerProfile();
+                    }
 
                     return data;
                     console.log(data);
@@ -508,12 +556,25 @@ const getState = ({
                             },
                         }
                     );
-                    getActions().consultUserProfile();
+                    if (resp.status == 200) {
+                        Swal.fire({
+                            toast: true,
+                            color: '003566',
+                            icon: 'success',
+                            position: 'top-end',
+                            animation: true,
+                            title: 'Datos actualizados',
+                            showConfirmButton: false,
+                            timer: 4000,
 
-                    const data = await resp.json();
-                    setStore({
-                        editUser: data,
-                    });
+                        })
+                        const data = await resp.json();
+                        setStore({
+                            editUser: data,
+                        });
+                        getActions().consultUserProfile();
+                    }
+
                     console.log(data);
                     return data;
                 } catch (error) {
@@ -567,6 +628,7 @@ const getState = ({
 
                     const data = await resp.json();
                     if (resp.status === 200) {
+
                         alert(data.message);
                     }
                     return data;
@@ -589,7 +651,20 @@ const getState = ({
 
                     const data = await resp.json();
                     if (resp.status === 200) {
-                        alert(data.message);
+                        Swal.fire({
+                            toast: true,
+                            color: '003566',
+                            icon: 'info',
+                            position: 'center',
+                            animation: true,
+                            title: 'Presupuesto rechazado',
+                            showConfirmButton: false,
+                            timer: 4000,
+                        }, customClass = {
+                            popup: 'popup-border'
+
+                        })
+                        // alert(data.message);
                     }
                     getActions().showbudget(id);
                     return data;
@@ -635,6 +710,23 @@ const getState = ({
                                 },
                             }
                         );
+                        if (response2.status == 200) {
+                            Swal.fire({
+                                toast: true,
+                                color: '003566',
+                                icon: 'success',
+                                position: 'center',
+                                animation: true,
+                                title: 'Foto actualizada',
+                                showConfirmButton: false,
+                                timer: 4000,
+
+                            }, customClass = {
+                                popup: 'popup-border'
+
+                            })
+                        }
+
 
                         console.log(data);
                     }
@@ -658,6 +750,7 @@ const getState = ({
                         }
                     );
 
+
                     const data = await resp.json();
                     setStore({
                         consultUser: data.pictures,
@@ -668,6 +761,9 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
+
+
+
         },
     };
 };

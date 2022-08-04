@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const RequestForm = () => {
   const { store, actions } = useContext(Context);
@@ -15,10 +16,28 @@ export const RequestForm = () => {
     e.preventDefault();
     if (city !== "" && sector !== "" && description !== "" && title !== "") {
       actions.createRequest(city, sector, description, title);
-      alert("Solicitud creada satisfactoriamente");
+      Swal.fire({
+        toast: true,
+        color: "003566",
+        icon: "success",
+        position: "top-end",
+        animation: true,
+        title: "Oferta creada satisfactoriamente",
+        showConfirmButton: false,
+        timer: 4000,
+      });
       navigate("/works");
     } else {
-      alert("Rellena todos los campos");
+      Swal.fire({
+        toast: true,
+        color: "003566",
+        icon: "warning",
+        position: "top-end",
+        animation: true,
+        title: "Rellena todos los campos",
+        showConfirmButton: false,
+        timer: 4000,
+      });
     }
   };
 
