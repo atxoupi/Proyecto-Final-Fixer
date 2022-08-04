@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import obrero from "../../img/icons/obrero.png";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Rating } from "../component/rating.js";
 
 export const Workerprofile = () => {
@@ -89,7 +89,20 @@ export const Workerprofile = () => {
                 valor promedio de valoraciones y otra el objeto de estilo amarillo */}
 
                 <Rating value={numRating} color={activeStar} />
-                <a>Ver más valoraciones</a>
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                  <a
+                    class="nav-link "
+                    id="ratings-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#ratings"
+                    type="button"
+                    role="tab"
+                    aria-controls="ratings"
+                    aria-selected="true"
+                  >
+                    Ver más valoraciones
+                  </a>
+                </ul>
                 <div className="d-flex justify-content-between mt-3">
                   <a
                     className="ancorforbuttoncontact btn whatsapp-button "
@@ -112,33 +125,41 @@ export const Workerprofile = () => {
             </div>
           </div>
         </div>
+        <div class="tab-content">
+          <div
+            class="tab-pane fade show active"
+            id="ratings"
+            role="tabpanel"
+            aria-labelledby="ratings-tab"
+          >
+            {store.ratings.map((item, index) => (
+              <div className="row mt-3" key={index}>
+                <div className="col-10 col-lg-6 col-md-8 col-sm-10 mx-auto">
+                  <div className="rating-box">
+                    <div className="d-flex justify-content-between p-2 w-100 mt-1">
+                      <img
+                        src={store.consultUser.pictures}
+                        style={{
+                          width: "4rem",
+                          height: "4rem",
+                          objectFit: "cover",
+                          maxWidth: "4rem",
+                        }}
+                        className="img-rating border-2 border border-warning rounded-circle "
+                        alt="..."
+                      />
 
-        {store.ratings.map((item, index) => (
-          <div className="row mt-3">
-            <div className="col-10 col-lg-6 col-md-8 col-sm-10 mx-auto">
-              <div className="rating-box ">
-                <div
-                  className=" d-flex justify-content-around w-50 mt-4"
-                  key={index}
-                >
-                  <img
-                    src={store.consultUser.pictures}
-                    style={{
-                      width: "4rem",
-                      height: "4rem",
-                      objectFit: "cover",
-                    }}
-                    className="img-rating border-2 border border-warning rounded-circle "
-                    alt="..."
-                  />
-
-                  <Rating value={item.rating} color={activeStar} />
+                      <Rating value={item.rating} color={activeStar} />
+                    </div>
+                    <div className="comment d-block" style={{ right: "50px" }}>
+                      {item.description}
+                    </div>
+                  </div>
                 </div>
-                <div className="comment d-block ms-6">{item.description}</div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </>
   );
