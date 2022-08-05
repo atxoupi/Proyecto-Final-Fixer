@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { PhotoProfile } from "./photoProfile";
-// import PropTypes from "prop-types";
+import obrero from "../../img/icons/obrero.png";
 
 const PerfilWorker = () => {
   const { store, actions } = useContext(Context);
@@ -19,10 +19,8 @@ const PerfilWorker = () => {
 
   console.log("username " + username);
   console.log(store.editWorkerGet);
-  //Funcion
-  const handleSubmitEditWorker = (e) => {
-    // e.preventDefault();
 
+  const handleSubmitEditWorker = (e) => {
     actions.editWorkerProfile(
       username,
       email,
@@ -48,12 +46,21 @@ const PerfilWorker = () => {
     <div id="perfil1" className="border border-warning border-2 rounded-3 mt-5">
       <div className="container p-3 d-flex  justify-content-start">
         <div className="row-3">
-          <img
-            src={store.editWorkerGet.pictures}
-            className="ms-2 img border-2 border border-warning rounded-3"
-            style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
-            alt="..."
-          />
+          {store.editWorkerGet.pictures == null ? (
+            <img
+              src={obrero}
+              className="card-img-top mx-auto mt-2"
+              alt="imagen obrero"
+              style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
+            />
+          ) : (
+            <img
+              src={store.editWorkerGet.pictures}
+              className="ms-2 img border-2 border border-warning rounded-3"
+              style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
+              alt="..."
+            />
+          )}
         </div>
 
         <div className="ms-3 ">

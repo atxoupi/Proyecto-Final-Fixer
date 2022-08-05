@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+// import "sweetalert2/src/sweetalert2.scss";
 const getState = ({
     getStore,
     getActions,
@@ -108,9 +110,27 @@ const getState = ({
                         localStorage.setItem("mail", email);
                         localStorage.setItem("tipo", data.tipo);
                     } else if (resp.status === 404) {
-                        alert("usuario no existe");
+                        Swal.fire({
+                            toast: true,
+                            color: "003566",
+                            icon: "error",
+                            position: "top-end",
+                            animation: true,
+                            title: "usuario no existe",
+                            showConfirmButton: false,
+                            timer: 4000,
+                        });
                     } else {
-                        alert("email o contraseña incorrecta");
+                        Swal.fire({
+                            toast: true,
+                            color: "003566",
+                            icon: "error",
+                            position: "top-end",
+                            animation: true,
+                            title: "email o contraseña incorrecta",
+                            showConfirmButton: false,
+                            timer: 4000,
+                        });
                     }
 
                     return data;
@@ -139,8 +159,10 @@ const getState = ({
                             }),
                         }
                     );
+
                     const data = await resp.json();
                     console.log(data);
+
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
@@ -171,6 +193,7 @@ const getState = ({
                         setStore({
                             register: true,
                         });
+
                         getActions().login(email, password);
                     }
                     console.log(data);
@@ -277,7 +300,7 @@ const getState = ({
                 }
             },
 
-            //CODIGO DE CLOUDINARY SUBIDA DE FOTO
+            //CODIGO DE CLOUDINARY SUBIDA DE PRESUPUESTO
 
             uploadFile: async (uploadImages, id, price, duracion) => {
                 const cloud_name = "carolinaqotf"; //"pluggedin";
@@ -313,6 +336,7 @@ const getState = ({
                                 },
                             }
                         );
+
                         getActions().showWork();
                         console.log(data);
                     }
@@ -422,12 +446,24 @@ const getState = ({
                             },
                         }
                     );
+                    if (resp.status == 200) {
+                        Swal.fire({
+                            toast: true,
+                            color: "003566",
+                            icon: "success",
+                            position: "top-end",
+                            animation: true,
+                            title: "Datos actualizados",
+                            showConfirmButton: false,
+                            timer: 4000,
+                        });
 
-                    const data = await resp.json();
-                    setStore({
-                        editWorker: data,
-                    });
-                    getActions().consultWorkerProfile();
+                        const data = await resp.json();
+                        setStore({
+                            editWorker: data,
+                        });
+                        getActions().consultWorkerProfile();
+                    }
 
                     return data;
                     console.log(data);
@@ -497,12 +533,24 @@ const getState = ({
                             },
                         }
                     );
-                    getActions().consultUserProfile();
+                    if (resp.status == 200) {
+                        Swal.fire({
+                            toast: true,
+                            color: "003566",
+                            icon: "success",
+                            position: "top-end",
+                            animation: true,
+                            title: "Datos actualizados",
+                            showConfirmButton: false,
+                            timer: 4000,
+                        });
+                        const data = await resp.json();
+                        setStore({
+                            editUser: data,
+                        });
+                        getActions().consultUserProfile();
+                    }
 
-                    const data = await resp.json();
-                    setStore({
-                        editUser: data,
-                    });
                     console.log(data);
                     return data;
                 } catch (error) {
@@ -551,6 +599,7 @@ const getState = ({
                         setStore({
                             viewRatings: true,
                         });
+
                         alert(data.message);
                     }
                     return data;
@@ -573,41 +622,24 @@ const getState = ({
 
                     const data = await resp.json();
                     if (resp.status === 200) {
-                        alert(data.message);
+                        Swal.fire({
+                                toast: true,
+                                color: "003566",
+                                icon: "info",
+                                position: "center",
+                                animation: true,
+                                title: "Presupuesto rechazado",
+                                showConfirmButton: false,
+                                timer: 4000,
+                            },
+                            (customClass = {
+                                popup: "popup-border",
+                            })
+                        );
+                        // alert(data.message);
                     }
                     getActions().showbudget(id);
                     return data;
-                } catch (error) {
-                    console.log("Error loading message from backend", error);
-                }
-            },
-            // Función que añade una valoración en forma numérica y un comentario a un trabajador.
-            // Es necesario estar logueado y haberle aceptado un presupuesto para poder realizar la valoración
-            addingRating: async (ratingNum, comment, worker_id, work_id) => {
-                console.log(ratingNum, worker_id, comment, work_id);
-                try {
-                    const token = localStorage.getItem("token");
-                    const resp = await fetch(
-                        process.env.BACKEND_URL + "/api/add_rating", {
-                            method: "POST",
-                            body: JSON.stringify({
-                                ratingNum: parseInt(ratingNum),
-                                worker_id: worker_id,
-                                comment: comment,
-                                work_id: work_id,
-                            }),
-                            headers: {
-                                "Content-Type": "application/json",
-                                Authorization: "Bearer " + token,
-                            },
-                        }
-                    );
-                    const data = await resp.json();
-                    if (resp.status === 200) {
-                        console.log("Valoración guardada");
-                    }
-                    return data;
-                    // console.log(data);
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
@@ -649,6 +681,22 @@ const getState = ({
                                 },
                             }
                         );
+                        if (response2.status == 200) {
+                            Swal.fire({
+                                    toast: true,
+                                    color: "003566",
+                                    icon: "success",
+                                    position: "center",
+                                    animation: true,
+                                    title: "Foto actualizada",
+                                    showConfirmButton: false,
+                                    timer: 4000,
+                                },
+                                (customClass = {
+                                    popup: "popup-border",
+                                })
+                            );
+                        }
 
                         console.log(data);
                     }
@@ -674,6 +722,38 @@ const getState = ({
                     });
                     // // don't forget to return something, that is how the async resolves
                     return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+
+            // Función que añade una valoración en forma numérica y un comentario a un trabajador.
+            // Es necesario estar logueado y haberle aceptado un presupuesto para poder realizar la valoración
+            addingRating: async (ratingNum, comment, worker_id, work_id) => {
+                console.log(ratingNum, worker_id, comment, work_id);
+                try {
+                    const token = localStorage.getItem("token");
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + "/api/add_rating", {
+                            method: "POST",
+                            body: JSON.stringify({
+                                ratingNum: parseInt(ratingNum),
+                                worker_id: worker_id,
+                                comment: comment,
+                                work_id: work_id,
+                            }),
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: "Bearer " + token,
+                            },
+                        }
+                    );
+                    const data = await resp.json();
+                    if (resp.status === 200) {
+                        console.log("Valoración guardada");
+                    }
+                    return data;
+                    // console.log(data);
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
