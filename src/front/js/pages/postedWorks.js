@@ -32,10 +32,14 @@ export const PostedWorks = () => {
         </div>
       ) : (
         <div className="container-works mx-auto">
-          <h3 className="text-center mb-3"> Estas las ofertas en tu sector </h3>
-
-          {store.work.length > 0
-            ? store.work.map((item, index) => (
+          {store.work.length > 0 ? (
+            <>
+              {" "}
+              <h3 className="text-center mt-3 mb-3">
+                {" "}
+                Estas las ofertas en tu sector{" "}
+              </h3>
+              {store.work.map((item, index) => (
                 <WorkPostForWorker
                   key={index}
                   title={item.title}
@@ -46,8 +50,14 @@ export const PostedWorks = () => {
                   worker_id={item.worker_id}
                   work_id={item.id}
                 />
-              ))
-            : null}
+              ))}
+            </>
+          ) : (
+            <h3 className="text-center mt-5 mb-3">
+              {" "}
+              No se han encontrado ofertas en tu zona y sector{" "}
+            </h3>
+          )}
         </div>
       )}
     </>

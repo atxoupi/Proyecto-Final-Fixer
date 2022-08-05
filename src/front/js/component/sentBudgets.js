@@ -70,14 +70,18 @@ export const SentBudgets = ({
           </a>
         </div>
 
-        <div className="col-3 text-center">
-          {store.viewRatings === true ? (
+        {store.viewRatings === true ? (
+          <div className="col-3">
             <StarsContainer work_id={work_id} worker_id={worker_id} />
-          ) : (
-            <>
+          </div>
+        ) : (
+          <>
+            {" "}
+            <div className="col-3 text-center gy-4">
               <button
-                className="mail-button d-block"
+                className="mail-button mb-3"
                 type="button"
+                style={{ width: "102px" }}
                 onClick={() => {
                   actions.aceptBudget(id);
                 }}
@@ -85,16 +89,15 @@ export const SentBudgets = ({
                 Aceptar
               </button>
               <button
-                className="mail-button d-block
-                "
+                className="reject-button"
                 type="button"
                 onClick={() => actions.rejectBudget(id)}
               >
                 Rechazar
-              </button>
-            </>
-          )}
-        </div>
+              </button>{" "}
+            </div>
+          </>
+        )}
       </div>
     </>
   );

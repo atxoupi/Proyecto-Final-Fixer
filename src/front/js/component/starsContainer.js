@@ -18,31 +18,40 @@ export const StarsContainer = ({ work_id, worker_id }) => {
   };
 
   return (
-    <div className="container col 3">
-      <p>Valora al trabajador</p>
-      <div className="d-grid">
-        <div className="stars d-flex justify-content-center">
-          {/* Mapeamos el array con los números de la valoración y seteamos el valor del input del componente Star */}
-          {valueRating.map((number, index) => (
-            <Star
-              number={number}
-              key={index}
-              changeRating={(e) => setRating(e.target.value)}
-              style={rating >= number ? activeStar : {}}
-            />
-          ))}
-          <div className="mt-2">
-            <form onSubmit={changeRating}>
-              <label> Comment</label>
-              <input
-                className="rating-comment"
-                onChange={(e) => setComment(e.target.value)}
-              ></input>
-              <button type="submit">Enviar</button>
-            </form>
-          </div>
-        </div>
+    <>
+      <div className="tittle-stars mt-2">Valora al trabajador</div>
+
+      <div className="stars mt-2 d-flex justify-content-center">
+        {/* Mapeamos el array con los números de la valoración y seteamos el valor del input del componente Star */}
+        {valueRating.map((number, index) => (
+          <Star
+            number={number}
+            key={index}
+            changeRating={(e) => setRating(e.target.value)}
+            style={rating >= number ? activeStar : {}}
+          />
+        ))}{" "}
       </div>
-    </div>
+      <div className="mt-2">
+        <form onSubmit={changeRating}>
+          <div className="input-group">
+            <input
+              className="form-control"
+              placeholder="Deja un comentario..."
+              aria-describedby="button-addon2"
+              style={{ minWidth: "250px" }}
+              onChange={(e) => setComment(e.target.value)}
+            ></input>
+            <button
+              type="submit"
+              id="button-addon2"
+              className="btn  btn-outline-secondary btn-send-comment"
+            >
+              <i class="far fa-paper-plane"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };

@@ -93,7 +93,7 @@ export const Navbar = () => {
                 href="#"
                 to="/perfil-user"
               >
-                mi perfil
+                Mi perfil
               </Link>
             </li>
           ) : (
