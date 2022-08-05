@@ -43,7 +43,7 @@ export const Workerprofile = () => {
         <h3 className="text-center mb-3 fw-bold">Perfil de Empresa</h3>
 
         <div className="row">
-          <div className="col-lg-4 col-md-4 col-sm-5 mx-auto">
+          <div className="col-lg-4 col-md-6 col-sm-6 col-8 mx-auto">
             <div className="post-box">
               <div className="post-photo d-flex justify-content-center ">
                 {store.workerprofile.pictures === null ? (
@@ -110,15 +110,15 @@ export const Workerprofile = () => {
                     href={`https://wa.me/${store.workerprofile.tlf_number}`}
                     target="_blank"
                   >
-                    WhatsApp
+                    <i class="fab fa-whatsapp"></i>
                   </a>
                   <a
-                    className="ancorforbuttoncontact mail-button"
+                    className="ancorforbuttoncontact btn mail-button"
                     role="button"
                     type="button"
                     href={`mailto:${store.workerprofile.email}?subject=Muy buenas ${store.workerprofile.name}!`}
                   >
-                    Email
+                    <i class="far fa-envelope"></i>
                   </a>
                 </div>
               </div>

@@ -83,7 +83,7 @@ export const WorkPost = ({
                       className="mail-button fw-bold"
                       onClick={() => actions.deleteWork(work_id)}
                     >
-                      Borrar oferta
+                      <i class="far fa-trash-alt"></i>
                     </button>
                   </div>
                 ) : (

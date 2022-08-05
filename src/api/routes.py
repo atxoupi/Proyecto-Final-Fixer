@@ -490,3 +490,26 @@ def profileimage():
     
 
     return jsonify(response_body), 200
+
+
+@api.route("/work_is_active/<int:id_budget>", methods=["PUT"])
+# @jwt_required()
+def change_status(id_budget):
+    isActive=request.json.get("is_active", None)
+    budget= Budget.query.filter_by(id=id_budget).first()
+    work= Work.query.filter_by(id=budget.work_id).first()
+    
+    if budget==work:
+         work.status=isActive
+         
+    print(budget)
+    print(work)
+    db.session.commit()
+    response_body = {
+            "message": "foto Almacenada"
+        }
+
+    # Access the identity of the current user with get_jwt_identity
+    
+
+    return jsonify(response_body), 200

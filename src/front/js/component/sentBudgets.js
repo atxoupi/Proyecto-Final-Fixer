@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { StarsContainer } from "./starsContainer";
 import obrero from "../../img/icons/obrero.png";
+import download from "../../img/icons/downloads.png";
 
 export const SentBudgets = ({
   worker_id,
@@ -59,15 +60,6 @@ export const SentBudgets = ({
               <div className="price-budget"> {price} € </div>
             </div>
           </div>
-          <a href={url} download target="_blank" rel="noopener noreferrer">
-            <button
-              type="button"
-              className="btn budgetBtn mail-button mt-4"
-              style={{ marginLeft: "5rem" }}
-            >
-              Descargar presupuesto
-            </button>
-          </a>
         </div>
 
         {store.viewRatings === true ? (
@@ -81,20 +73,24 @@ export const SentBudgets = ({
               <button
                 className="mail-button mb-3"
                 type="button"
-                style={{ width: "102px" }}
                 onClick={() => {
                   actions.aceptBudget(id);
                 }}
               >
-                Aceptar
+                <i class="far fa-check-circle"></i>
               </button>
               <button
                 className="reject-button"
                 type="button"
                 onClick={() => actions.rejectBudget(id)}
               >
-                Rechazar
+                <i class="far fa-times-circle"></i>
               </button>{" "}
+              <a href={url} download target="_blank" rel="noopener noreferrer">
+                <button type="button" className=" mail-button">
+                  <img src={download} style={{ width: "16px" }}></img>
+                </button>
+              </a>
             </div>
           </>
         )}

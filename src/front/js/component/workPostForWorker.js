@@ -16,7 +16,7 @@ export const WorkPostForWorker = ({
   return (
     <>
       <div className="row mt-3">
-        <div className="col-10 col-lg-6 col-md-8 col-sm-10 mx-auto">
+        <div className="col-10 col-lg-8 col-md-8 col-sm-10 mx-auto">
           <div className="post-box">
             <div className="post-card">
               <h3 className="work-title text-center mb-3">{title}</h3>
@@ -46,8 +46,9 @@ export const WorkPostForWorker = ({
                     className="mail-button mt-2"
                     onClick={() => actions.deleteWork(work_id)}
                   >
-                    Borrar oferta
-                  </button>
+                    {" "}
+                    <i class="far fa-trash-alt"></i>
+                  </button>{" "}
                 </div>
               </div>
             </div>
