@@ -8,7 +8,7 @@ export const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg fs-6">
-      <div className="container-fluid">
+      <div className="container-fluid w-50">
         <Link to="/" className="navbar-brand">
           <img
             src={logoFixer}
@@ -42,7 +42,7 @@ export const Navbar = () => {
                 href="#"
                 to="/request"
               >
-                Publica una oferta
+                <strong>Publica una oferta</strong>
               </Link>
             </li>
           ) : (
@@ -52,7 +52,7 @@ export const Navbar = () => {
           {store.usuario ? (
             <li className="nav-item mx-1">
               <Link className="nav-link nav-link-navbar " href="#" to="/works">
-                Mis ofertas
+                <strong>Mis ofertas</strong>
               </Link>
             </li>
           ) : (
@@ -62,7 +62,7 @@ export const Navbar = () => {
           {!store.usuario && store.auth == true ? (
             <li className="nav-item mx-1">
               <Link className="nav-link nav-link-navbar" href="#" to="/works">
-                Ofertas publicadas
+                <strong>Ofertas publicadas</strong>
               </Link>
             </li>
           ) : (
@@ -75,7 +75,7 @@ export const Navbar = () => {
                 href="#"
                 to="/workers-list"
               >
-                Buscar profesionales
+                <strong>Buscar profesionales</strong>
               </Link>
             </li>
           ) : (
@@ -88,7 +88,7 @@ export const Navbar = () => {
                 className="nav-link nav-link-navbar w-100"
                 href="#"
               >
-                Regístrate
+                <strong>Regístrate</strong>
               </Link>
             ) : null}
           </li>
@@ -99,7 +99,7 @@ export const Navbar = () => {
                 href="#"
                 to="/perfil-user"
               >
-                mi perfil
+                <strong>Mi perfil</strong>
               </Link>
             </li>
           ) : (
@@ -113,7 +113,7 @@ export const Navbar = () => {
                 href="#"
                 to="/perfil-worker"
               >
-                Mi Perfil
+                <strong>Mi perfil</strong>
               </Link>
             </li>
           ) : (
@@ -126,7 +126,7 @@ export const Navbar = () => {
                 aria-current="page"
                 to="/login"
               >
-                Accede
+                <strong>Accede</strong>
               </Link>
             ) : null}
           </li>
@@ -139,7 +139,7 @@ export const Navbar = () => {
                   aria-current="page"
                   to="/login"
                 >
-                  Cerrar sesión
+                  <strong>Cerrar sesión</strong>
                 </Link>
               </span>
             ) : null}
