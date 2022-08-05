@@ -126,7 +126,7 @@ const PerfilUser = () => {
                 <p className="fw-bold text-start">Numero de contacto:</p>{" "}
               </div>
               <div className="col mb-3">
-                <p className=" text-start">{store.consultUser.tlf}</p>
+                <p className=" text-start">{store.consultUser.tlf_number}</p>
               </div>
             </div>
           </div>
