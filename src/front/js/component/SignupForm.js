@@ -38,7 +38,16 @@ export const SignupForm = () => {
       password2 !== "" &&
       password1 !== password2
     ) {
-      console.log("Tus contraseñas no coinciden");
+      Swal.fire({
+        toast: true,
+        color: "003566",
+        icon: "warning",
+        position: "top-end",
+        animation: true,
+        title: "Tus contraseñas no coinciden",
+        showConfirmButton: false,
+        timer: 4000,
+      });
     }
   };
 
@@ -62,10 +71,17 @@ export const SignupForm = () => {
       if (result) {
         navigate("/login");
       }
-
-      alert("Your user has been succesfully");
     } else {
-      alert("Rellena todos los campos");
+      Swal.fire({
+        toast: true,
+        color: "003566",
+        icon: "warning",
+        position: "top-end",
+        animation: true,
+        title: "Rellena todos los campos",
+        showConfirmButton: false,
+        timer: 4000,
+      });
     }
   };
 
