@@ -43,7 +43,7 @@ export const SentBudgets = ({
             />
           )}{" "}
         </div>
-        <div className="body-budget col-6">
+        <div className="body-budget col-4">
           <div className="h-30 mt-2  d-flex justify-content-evenly">
             <div className="col-3 text-center ">
               <div className="price-budget-title fw-bold border-bottom border-warning">
@@ -69,9 +69,9 @@ export const SentBudgets = ({
         ) : (
           <>
             {" "}
-            <div className="col-3 text-center gy-4">
+            <div className="col-4 text-center gy-4">
               <button
-                className="mail-button mb-3"
+                className="mail-button mb-3 ms-2"
                 type="button"
                 onClick={() => {
                   actions.aceptBudget(id);
@@ -80,14 +80,14 @@ export const SentBudgets = ({
                 <i class="far fa-check-circle"></i>
               </button>
               <button
-                className="reject-button"
+                className="reject-button ms-2"
                 type="button"
                 onClick={() => actions.rejectBudget(id)}
               >
                 <i class="far fa-times-circle"></i>
               </button>{" "}
               <a href={url} download target="_blank" rel="noopener noreferrer">
-                <button type="button" className=" mail-button">
+                <button type="button" className=" mail-button ms-2">
                   <img src={download} style={{ width: "16px" }}></img>
                 </button>
               </a>

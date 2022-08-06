@@ -17,7 +17,7 @@ export const PhotoProfile = () => {
           data-bs-whatever="@mdo"
           data-backdrop="false"
         >
-          Editar Foto
+          <i class="fas fa-edit"></i>
         </button>
         <div
           className="modal fade modal-dialog-scrollable"
@@ -44,7 +44,7 @@ export const PhotoProfile = () => {
                 <form>
                   <div className="mb-3">
                     <input
-                      className="form-control form-control-request input-foto"
+                      className="form-control form form-control-request input-foto"
                       type="file"
                       id="formFile"
                       onChange={(e) => setUploadImages(e.target.files[0])}
