@@ -1,4 +1,4 @@
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 // import "sweetalert2/src/sweetalert2.scss";
 const getState = ({
     getStore,
@@ -72,7 +72,9 @@ const getState = ({
             editWorkerGet: {},
             editUser: [],
             consultUser: {},
+            ratings: [],
             pictures: {},
+            viewRatings: false,
         },
         actions: {
             // LOGIN
@@ -89,8 +91,8 @@ const getState = ({
                         },
                     });
                     // si el status es correcto nos setea a auth true y esto nos servirá para renderizar condicionalmente si se está logueado
+                    const data = await resp.json();
                     if (resp.status === 200) {
-                        const data = await resp.json();
                         setStore({
                             auth: true,
                         });
@@ -117,9 +119,7 @@ const getState = ({
                             title: "usuario no existe",
                             showConfirmButton: false,
                             timer: 4000,
-
                         });
-
                     } else {
                         Swal.fire({
                             toast: true,
@@ -130,7 +130,6 @@ const getState = ({
                             title: "email o contraseña incorrecta",
                             showConfirmButton: false,
                             timer: 4000,
-
                         });
                     }
 
@@ -164,7 +163,6 @@ const getState = ({
                     const data = await resp.json();
                     console.log(data);
 
-
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
@@ -194,7 +192,6 @@ const getState = ({
                     if (resp.status == 200) {
                         setStore({
                             register: true,
-
                         });
 
                         getActions().login(email, password);
@@ -340,14 +337,9 @@ const getState = ({
                             }
                         );
 
-
                         getActions().showWork();
                         console.log(data);
-
                     }
-
-
-
                 } catch (error) {
                     console.log("message", error);
                 }
@@ -453,20 +445,18 @@ const getState = ({
                                 Authorization: "Bearer " + token,
                             },
                         }
-
                     );
                     if (resp.status == 200) {
                         Swal.fire({
                             toast: true,
-                            color: '003566',
-                            icon: 'success',
-                            position: 'top-end',
+                            color: "003566",
+                            icon: "success",
+                            position: "top-end",
                             animation: true,
-                            title: 'Datos actualizados',
+                            title: "Datos actualizados",
                             showConfirmButton: false,
                             timer: 4000,
-
-                        })
+                        });
 
                         const data = await resp.json();
                         setStore({
@@ -483,16 +473,7 @@ const getState = ({
             },
 
             //CONSULTAR DATOS DE USUARIO EMPRESA
-            consultWorkerProfile: async (
-                name,
-                city,
-                email,
-                sector,
-                tlf_number,
-                password,
-                postcode,
-
-            ) => {
+            consultWorkerProfile: async () => {
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(process.env.BACKEND_URL + "/api/profile", {
@@ -508,9 +489,6 @@ const getState = ({
                         editWorkerGet: data,
                     });
                     console.log(data);
-
-                    // return data;
-                    // console.log(data);
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
@@ -524,8 +502,7 @@ const getState = ({
                 city,
                 tlf,
                 adress,
-                postcode,
-
+                postcode
             ) => {
                 console.log(
                     "flux " + name,
@@ -559,15 +536,14 @@ const getState = ({
                     if (resp.status == 200) {
                         Swal.fire({
                             toast: true,
-                            color: '003566',
-                            icon: 'success',
-                            position: 'top-end',
+                            color: "003566",
+                            icon: "success",
+                            position: "top-end",
                             animation: true,
-                            title: 'Datos actualizados',
+                            title: "Datos actualizados",
                             showConfirmButton: false,
                             timer: 4000,
-
-                        })
+                        });
                         const data = await resp.json();
                         setStore({
                             editUser: data,
@@ -583,15 +559,7 @@ const getState = ({
             },
 
             //CONSULTAR DATOS DE USUARIO
-            consultUserProfile: async (
-                name,
-                lastname,
-                city,
-                email,
-                tlf_number,
-                adress,
-                postcode
-            ) => {
+            consultUserProfile: async () => {
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(process.env.BACKEND_URL + "/api/profile", {
@@ -628,6 +596,9 @@ const getState = ({
 
                     const data = await resp.json();
                     if (resp.status === 200) {
+                        setStore({
+                            viewRatings: true,
+                        });
 
                         alert(data.message);
                     }
@@ -652,18 +623,19 @@ const getState = ({
                     const data = await resp.json();
                     if (resp.status === 200) {
                         Swal.fire({
-                            toast: true,
-                            color: '003566',
-                            icon: 'info',
-                            position: 'center',
-                            animation: true,
-                            title: 'Presupuesto rechazado',
-                            showConfirmButton: false,
-                            timer: 4000,
-                        }, customClass = {
-                            popup: 'popup-border'
-
-                        })
+                                toast: true,
+                                color: "003566",
+                                icon: "info",
+                                position: "center",
+                                animation: true,
+                                title: "Presupuesto rechazado",
+                                showConfirmButton: false,
+                                timer: 4000,
+                            },
+                            (customClass = {
+                                popup: "popup-border",
+                            })
+                        );
                         // alert(data.message);
                     }
                     getActions().showbudget(id);
@@ -693,7 +665,7 @@ const getState = ({
                         }
                     );
                     if (response.ok) {
-                        const store = getStore()
+                        const store = getStore();
                         const data = await response.json();
                         const token = localStorage.getItem("token");
                         const response2 = await fetch(
@@ -702,7 +674,6 @@ const getState = ({
                                 body: JSON.stringify({
                                     pictures: data.url,
                                     userType: store.usuario ? "user" : "work",
-
                                 }),
                                 headers: {
                                     "Content-Type": "application/json",
@@ -712,25 +683,23 @@ const getState = ({
                         );
                         if (response2.status == 200) {
                             Swal.fire({
-                                toast: true,
-                                color: '003566',
-                                icon: 'success',
-                                position: 'center',
-                                animation: true,
-                                title: 'Foto actualizada',
-                                showConfirmButton: false,
-                                timer: 4000,
-
-                            }, customClass = {
-                                popup: 'popup-border'
-
-                            })
+                                    toast: true,
+                                    color: "003566",
+                                    icon: "success",
+                                    position: "center",
+                                    animation: true,
+                                    title: "Foto actualizada",
+                                    showConfirmButton: false,
+                                    timer: 4000,
+                                },
+                                (customClass = {
+                                    popup: "popup-border",
+                                })
+                            );
                         }
-
 
                         console.log(data);
                     }
-
                 } catch (error) {
                     console.log("message", error);
                 }
@@ -740,17 +709,13 @@ const getState = ({
             showPicturesProfile: async () => {
                 try {
                     const token = localStorage.getItem("token");
-                    const resp = await fetch(
-                        process.env.BACKEND_URL + `/api/profile`, {
-                            method: "GET",
-                            headers: {
-                                "Content-Type": "application/json",
-                                Authorization: "Bearer " + token,
-                            },
-                        }
-                    );
-
-
+                    const resp = await fetch(process.env.BACKEND_URL + `/api/profile`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    });
                     const data = await resp.json();
                     setStore({
                         consultUser: data.pictures,
@@ -762,8 +727,60 @@ const getState = ({
                 }
             },
 
+            // Función que añade una valoración en forma numérica y un comentario a un trabajador.
+            // Es necesario estar logueado y haberle aceptado un presupuesto para poder realizar la valoración
+            addingRating: async (ratingNum, comment, worker_id, work_id) => {
+                console.log(ratingNum, worker_id, comment, work_id);
+                try {
+                    const token = localStorage.getItem("token");
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + "/api/add_rating", {
+                            method: "POST",
+                            body: JSON.stringify({
+                                ratingNum: parseInt(ratingNum),
+                                worker_id: worker_id,
+                                comment: comment,
+                                work_id: work_id,
+                            }),
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: "Bearer " + token,
+                            },
+                        }
+                    );
+                    const data = await resp.json();
+                    if (resp.status === 200) {
+                        console.log("Valoración guardada");
+                    }
+                    return data;
+                    // console.log(data);
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
 
+            // Función que devuelve las valoraciones de un trabajador, se pasa el id del trabajador como parámetro
+            getRating: async (id) => {
+                console.log(id);
+                try {
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + `/api/worker/${id}/ratings`, {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        }
+                    );
+                    const data = await resp.json();
+                    setStore({
+                        ratings: data,
+                    });
 
+                    return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
         },
     };
 };

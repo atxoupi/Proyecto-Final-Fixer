@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, current_app
-from api.models import db, Login, Worker_signup, User_signup, Work, Budget
+from api.models import db, Login, Worker_signup, User_signup, Work, Budget,Ratings
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 from flask_bcrypt import Bcrypt
@@ -372,6 +372,51 @@ def delete_work(id):
     }
     return jsonify(response_body), 200
 
+#--AddRating
+#Manda la puntuación de la valoración al front, pasa como parámetros:
+# el valor de la valoración
+#el id del trabajador y un comentario
+@api.route("/add_rating", methods=["POST"])
+@jwt_required()
+def addRating():
+    current_user = get_jwt_identity()
+    ratingNum = request.json.get("ratingNum", None)
+    worker_id=request.json.get("worker_id",None)
+    comment= request.json.get("comment",None)
+    work_id= request.json.get("work_id",None)
+
+    work=Work.query.filter_by(id=work_id).first()
+    print(work)
+    user=User_signup.query.filter_by(email=current_user).first()
+    if (worker_id==work.worker_id): 
+        ratings = Ratings(rating=ratingNum, user_signup_id=user.id, worker_id=worker_id, description=comment,work_id=work_id)
+        # print(ratings)
+        db.session.add(ratings)
+        db.session.commit()
+        ratingExist= Ratings.query.filter_by(user_signup_id=user.id,work_id=work_id).first()
+        print(ratingExist)
+        response_body = {
+            "message": "Valoración realizada con éxito",
+            "rating":True
+        }
+
+        return jsonify(response_body),200
+    else:
+        response_body = {
+            "message": "No puedes valorar a este trabajador"
+        }
+    #comprobar el else, si no hay valoracion y si ya existe, condicionar en el front    
+   
+        return jsonify(response_body), 200
+
+#Trae los ratings de un trabajador, usando worker_id como parámetro
+@api.route("/worker/<int:id>/ratings", methods=["GET"])
+def getRatings(id):
+    ratings = Ratings.query.filter_by(worker_id=id).all()
+
+    result= list(map(lambda rating: rating.serialize(),ratings))
+    print(result)
+    return jsonify(result), 200
 
 @api.route("aceptbudget/<int:id>", methods=["PUT"])
 @jwt_required()
@@ -451,3 +496,24 @@ def profileimage():
     
 
     return jsonify(response_body), 200
+
+
+# @api.route("/work_is_active/<int:id_budget>", methods=["PUT"])
+# # @jwt_required()
+# def change_status(id_budget):
+#     isActive=request.json.get("is_active", None)
+#     budget= Budget.query.filter_by(id=id_budget).first()
+#     work= Work.query.filter_by(id=budget.work_id).first()
+    
+#     if budget==work:
+#          work.status=isActive
+         
+#     print(budget.id)
+#     print(work.status)
+#     db.session.commit()
+#     response_body = {
+#             "message": "Status modificado"
+#         }
+    
+
+#     return jsonify(response_body), 200

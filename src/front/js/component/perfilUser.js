@@ -37,7 +37,10 @@ const PerfilUser = () => {
   // console.log(store.consultUser);
 
   return (
-    <div id="perfil1" className="border border-warning border-2 rounded-3 mt-5">
+    <div
+      id="perfil1"
+      className="border border-warning border-2 rounded-3 mt-5 w-50"
+    >
       <div className=" container p-3 d-flex  justify-content-start">
         <div className="row-3 ">
           <img
@@ -61,8 +64,8 @@ const PerfilUser = () => {
       <div className="container">
         <ul>
           <div className="container">
-            <div className=" row">
-              <div className=" col-4">
+            <div className="row">
+              <div className="col-4">
                 <p className="text-start fw-bold">Nombre:</p>{" "}
               </div>
               <div className="col mb-3">

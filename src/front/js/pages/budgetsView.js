@@ -13,14 +13,14 @@ export const BudgetsView = () => {
   }, []);
   const oneBudget = store?.budget.filter(
     (value) => value.work_id === parseInt(id)
-  ); //para solucionar cuando me lee con un undefined sabiendo que no lo es, el ?
+  ); // ponemos ? para solucionar cuando me lee con un undefined sabiendo que no lo es
 
   return (
     <>
       {oneBudget.length === 0 ? (
         <div
-          className="not-found-document text-center mt-5"
-          style={{ minHeigth: "600px" }}
+          className="not-found-document text-center"
+          style={{ marginTop: "80px" }}
         >
           <span>
             <img
@@ -29,9 +29,9 @@ export const BudgetsView = () => {
               style={{ width: "3rem" }}
             />
           </span>
-          <p className="fw-bold mt-5">
+          <h3 className=" mt-5">
             No se han encontrado presupuestos para esta oferta
-          </p>
+          </h3>
         </div>
       ) : (
         <>
@@ -57,6 +57,7 @@ export const BudgetsView = () => {
                 duration={item.duration}
                 price={item.price}
                 id={item.id}
+                work_id={oneBudget[0]?.work.id}
               />
             </div>
           ))}

@@ -213,7 +213,7 @@ export const SignupForm = () => {
 
                         <div className="d-flex justify-content-center pt-2">
                           <input
-                            className="btn btn-primary btn-lg "
+                            className="btn mail-button btn-lg "
                             type="submit"
                             value="Registrarme"
                             id="submitButton1"
@@ -363,7 +363,7 @@ export const SignupForm = () => {
 
                         <div className="d-flex justify-content-center pt-2">
                           <input
-                            className="btn btn-primary btn-lg "
+                            className="btn mail-button btn-lg "
                             type="submit"
                             value="Registrarme"
                             id="submitButton2"

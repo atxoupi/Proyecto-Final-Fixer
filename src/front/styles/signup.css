@@ -1,24 +1,24 @@
-#submitButton1,
-#submitButton2 {
-    background-color: #ffd60a;
-    border-color: #ffc300;
-}
-
 .form-control-signup {
     border-color: #ffc300;
 }
 
-.nav-link-signup.active {
+.nav-link-signup.active,
+.nav-link:active {
     background-color: #ffd60a !important;
+    color: #001d3d !important;
+}
+
+.nav-pills {
+    color: #001d3d;
 }
 
 .nav-link-signup {
-    color: #ffc300;
+    color: #001d3d;
 }
 
 .nav-link-signup:focus,
 .nav-link-signup:hover {
-    color: #ffc300;
+    color: #001d3d;
 }
 
 .card-registration {
