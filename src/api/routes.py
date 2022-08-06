@@ -390,18 +390,24 @@ def addRating():
     user=User_signup.query.filter_by(email=current_user).first()
     if (worker_id==work.worker_id): 
         ratings = Ratings(rating=ratingNum, user_signup_id=user.id, worker_id=worker_id, description=comment,work_id=work_id)
-        print(ratings)
+        # print(ratings)
         db.session.add(ratings)
         db.session.commit()
-
+        ratingExist= Ratings.query.filter_by(user_signup_id=user.id,work_id=work_id).first()
+        print(ratingExist)
         response_body = {
-            "message": "Valoración realizada con éxito"
+            "message": "Valoración realizada con éxito",
+            "rating":True
         }
+
+        return jsonify(response_body),200
     else:
         response_body = {
             "message": "No puedes valorar a este trabajador"
         }
-    return jsonify(response_body), 200
+    #comprobar el else, si no hay valoracion y si ya existe, condicionar en el front    
+   
+        return jsonify(response_body), 200
 
 #Trae los ratings de un trabajador, usando worker_id como parámetro
 @api.route("/worker/<int:id>/ratings", methods=["GET"])
@@ -492,24 +498,22 @@ def profileimage():
     return jsonify(response_body), 200
 
 
-@api.route("/work_is_active/<int:id_budget>", methods=["PUT"])
-# @jwt_required()
-def change_status(id_budget):
-    isActive=request.json.get("is_active", None)
-    budget= Budget.query.filter_by(id=id_budget).first()
-    work= Work.query.filter_by(id=budget.work_id).first()
+# @api.route("/work_is_active/<int:id_budget>", methods=["PUT"])
+# # @jwt_required()
+# def change_status(id_budget):
+#     isActive=request.json.get("is_active", None)
+#     budget= Budget.query.filter_by(id=id_budget).first()
+#     work= Work.query.filter_by(id=budget.work_id).first()
     
-    if budget==work:
-         work.status=isActive
+#     if budget==work:
+#          work.status=isActive
          
-    print(budget)
-    print(work)
-    db.session.commit()
-    response_body = {
-            "message": "foto Almacenada"
-        }
-
-    # Access the identity of the current user with get_jwt_identity
+#     print(budget.id)
+#     print(work.status)
+#     db.session.commit()
+#     response_body = {
+#             "message": "Status modificado"
+#         }
     
 
-    return jsonify(response_body), 200
+#     return jsonify(response_body), 200
