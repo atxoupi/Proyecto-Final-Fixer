@@ -393,7 +393,7 @@ def addRating():
         # print(ratings)
         db.session.add(ratings)
         db.session.commit()
-        ratingExist= Ratings.query.filter_by(user_signup_id=user.id,work_id=work_id).first()
+        # ratingExist= Ratings.query.filter_by(user_signup_id=user.id,work_id=work_id).first()
         print(ratingExist)
         response_body = {
             "message": "Valoración realizada con éxito",

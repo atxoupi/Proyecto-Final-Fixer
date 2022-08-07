@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { StarsContainer } from "./starsContainer";
 import obrero from "../../img/icons/obrero.png";
 import download from "../../img/icons/downloads.png";
+import { Link } from "react-router-dom";
 
 export const SentBudgets = ({
   worker_id,
@@ -28,12 +29,15 @@ export const SentBudgets = ({
         >
           {" "}
           {store.workerprofile.pictures === null ? (
-            <img
-              src={obrero}
-              className="card-img-top mx-auto mt-2"
-              alt="imagen trabajador"
-              style={{ maxWidth: "100%" }}
-            />
+            <Link to={`/workerprofile/${worker_id}`}>
+              {" "}
+              <img
+                src={obrero}
+                className="card-img-top mx-auto mt-2"
+                alt="imagen trabajador"
+                style={{ maxWidth: "100%" }}
+              />
+            </Link>
           ) : (
             <img
               src={store.workerprofile.pictures}

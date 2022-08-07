@@ -34,20 +34,20 @@ export const StarsContainer = ({ work_id, worker_id }) => {
       </div>
       <div className="mt-2">
         <form onSubmit={changeRating}>
-          <div className="input-group">
+          <div className="input-group" style={{ minWidth: "250px" }}>
             <input
+              type="text"
               className="form-control"
               placeholder="Deja un comentario..."
               aria-describedby="button-addon2"
-              style={{ minWidth: "250px" }}
               onChange={(e) => setComment(e.target.value)}
             ></input>
             <button
               type="submit"
               id="button-addon2"
-              className="btn  btn-outline-secondary btn-send-comment"
+              className="btn btn-send-comment"
             >
-              <i class="far fa-paper-plane"></i>
+              <i className="far fa-paper-plane"></i>
             </button>
           </div>
         </form>
