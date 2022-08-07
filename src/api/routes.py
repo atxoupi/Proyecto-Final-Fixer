@@ -382,6 +382,11 @@ def acept_budget(id):
     work = Work.query.filter_by(id=budget.work_id).first()
     user=User_signup.query.filter_by(id=budget.user_id).first()
     worker=Worker_signup.query.filter_by(id=budget.worker_id).first()
+    budgets=Budget.query.filter_by(work_id=budget.work_id).all()
+    for bud in budgets:
+        if bud.id==budget.id:
+            db.session.delete(bud)
+            db.session.commit()
     subject="Hola "+worker.name+", su presupuesto ha sido aceptado."
     body="Hola, su presupuesto ha sido aceptado. Puede ponerse en contacto con "+user.name+" para concretar el trabajo."
     msg = Message(body=body,
