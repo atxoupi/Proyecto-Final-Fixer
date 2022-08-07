@@ -4,8 +4,6 @@ import obrero from "../../img/icons/obrero.png";
 import { Link } from "react-router-dom";
 
 export const CardWorker = ({ name, sector, image, id }) => {
-  const { store, actions } = useContext(Context);
-
   return (
     <>
       <div

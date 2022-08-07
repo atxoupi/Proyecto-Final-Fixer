@@ -23,43 +23,39 @@ export const SentBudgets = ({
   return (
     <>
       <div className="row d-flex justify-content-evenly p-2">
-        <div
-          className="img-profile-container"
-          style={{ objectFit: "contain", width: "10rem", height: "10rem" }}
-        >
-          {" "}
-          {store.workerprofile.pictures === null ? (
-            <Link to={`/workerprofile/${worker_id}`}>
-              {" "}
+        <Link to={`/workerprofile/${worker_id}`}>
+          <div
+            className="img-profile-container"
+            style={{ objectFit: "contain", width: "10rem", height: "10rem" }}
+          >
+            {store.workerprofile.pictures === null ? (
               <img
                 src={obrero}
                 className="card-img-top mx-auto mt-2"
                 alt="imagen trabajador"
                 style={{ maxWidth: "100%" }}
               />
-            </Link>
-          ) : (
-            <img
-              src={store.workerprofile.pictures}
-              className="card-img-top border rounded-3"
-              style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
-              alt="imagen "
-            />
-          )}{" "}
-        </div>
+            ) : (
+              <img
+                src={store.workerprofile.pictures}
+                className="card-img-top border rounded-3"
+                style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
+                alt="imagen "
+              />
+            )}
+          </div>
+        </Link>
         <div className="body-budget col-4">
           <div className="h-30 mt-2  d-flex justify-content-evenly">
             <div className="col-3 text-center ">
               <div className="price-budget-title fw-bold border-bottom border-warning">
-                {" "}
-                Duración{" "}
+                Duración
               </div>
               <div className="price-budget"> {duration} </div>
             </div>
             <div className="col-3 text-center">
               <div className="price-budget-title fw-bold border-bottom border-warning">
-                {" "}
-                Presupuesto{" "}
+                Presupuesto
               </div>
               <div className="price-budget"> {price} € </div>
             </div>
@@ -72,7 +68,6 @@ export const SentBudgets = ({
           </div>
         ) : (
           <>
-            {" "}
             <div className="col-4 text-center gy-4">
               <button
                 className="mail-button mb-3 ms-2"
@@ -89,7 +84,7 @@ export const SentBudgets = ({
                 onClick={() => actions.rejectBudget(id)}
               >
                 <i class="far fa-times-circle"></i>
-              </button>{" "}
+              </button>
               <a href={url} download target="_blank" rel="noopener noreferrer">
                 <button type="button" className=" mail-button ms-2">
                   <img src={download} style={{ width: "16px" }}></img>

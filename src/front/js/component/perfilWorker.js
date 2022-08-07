@@ -58,7 +58,7 @@ const PerfilWorker = () => {
               src={store.editWorkerGet.pictures}
               className="ms-2 img border-2 border border-warning rounded-3"
               style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
-              alt="..."
+              alt="foto trabajador"
             />
           )}
         </div>
