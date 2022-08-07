@@ -336,6 +336,22 @@ const getState = ({
                                 },
                             }
                         );
+                        if (response2.status == 200) {
+                            Swal.fire({
+                                toast: true,
+                                color: "003566",
+                                icon: "success",
+                                position: "top-end",
+                                animation: true,
+                                title: "Datos actualizados",
+                                showConfirmButton: false,
+                                timer: 4000,
+                            });
+
+                            getActions().showWork();
+                            console.log(data);
+                        }
+
 
                         getActions().showWork();
                         console.log(data);
