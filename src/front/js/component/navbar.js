@@ -99,7 +99,7 @@ export const Navbar = () => {
                 href="#"
                 to="/perfil-user"
               >
-                <strong>Mi perfil</strong>
+                <i class="fas fa-user"></i>
               </Link>
             </li>
           ) : (
@@ -113,7 +113,7 @@ export const Navbar = () => {
                 href="#"
                 to="/perfil-worker"
               >
-                <strong>Mi perfil</strong>
+                <i className="fas fa-address-card"></i>
               </Link>
             </li>
           ) : (
@@ -139,7 +139,7 @@ export const Navbar = () => {
                   aria-current="page"
                   to="/login"
                 >
-                  <strong>Cerrar sesión</strong>
+                  <i class="fas fa-sign-out-alt"></i>
                 </Link>
               </span>
             ) : null}
