@@ -8,7 +8,7 @@ import grifo from "../../img/icons/grifo-de-agua.png";
 import rodillo from "../../img/icons/rodillo.png";
 import aserradura from "../../img/icons/aserradura.png";
 import cascoAlbañil from "../../img/icons/casco-de-seguridad.png";
-import camion from "../../img/icons/camion.png";
+import camion from "../../img/icons/camion-en-movimiento.png";
 import regadera from "../../img/icons/jardineria.png";
 
 export const WorkPost = ({
@@ -83,7 +83,7 @@ export const WorkPost = ({
                       className="mail-button fw-bold"
                       onClick={() => actions.deleteWork(work_id)}
                     >
-                      Borrar oferta
+                      <i class="far fa-trash-alt"></i>
                     </button>
                   </div>
                 ) : (

@@ -51,22 +51,22 @@ export const RequestForm = () => {
               style={{ borderRadius: "15px" }}
             >
               <div className="card-body p-4 p-md-5">
-                <h3 className="mb-4 pb-2 pb-md-0 mb-md-5 text-center">
-                  Para poder subir una solicitud de trabajo debes rellenar los
-                  siguientes campos:
-                </h3>
+                <h4 className="mb-4 pb-2 pb-md-0 mb-md-5 text-center">
+                  Para crear una solicitud de trabajo, llene los siguientes
+                  campos:
+                </h4>
                 <form onSubmit={handleSubmitRequest}>
                   <div className="row">
                     <div className="col-md-6 mb-4 pb-2">
-                      <label className="form-label select-label">
+                      {/* <label className="form-label select-label">
                         Selecciona una provincia
-                      </label>
+                      </label> */}
 
                       <select
-                        className="select w-100 form-control-request form-control-lg"
+                        className="select w-100 form-control-request form-select form-control-lg text-muted"
                         onChange={(e) => setCity(e.target.value)}
                       >
-                        <option value="1">Elige una opción</option>
+                        <option selected>Provincia</option>
                         {regions.map((item, index) => (
                           <option key={index} value={item}>
                             {item}
@@ -76,14 +76,14 @@ export const RequestForm = () => {
                     </div>
 
                     <div className="col-md-6 mb-4 pb-2">
-                      <label className="form-label select-label">
+                      {/* <label className="form-label select-label">
                         ¿Que tipo de trabajo buscar?
-                      </label>
+                      </label> */}
                       <select
-                        className="select w-100 form-control-request form-control-lg"
+                        className="select  w-100 form-control-request  form-select form-control-lg text-muted"
                         onChange={(e) => setSector(e.target.value)}
                       >
-                        <option value="1">Elige una opción</option>
+                        <option selected>Sector</option>
                         <option value="Fontanería">Fontanería</option>
                         <option value="Carpintería">Carpintería</option>
                         <option value="Pintura">Pintura</option>
@@ -98,7 +98,7 @@ export const RequestForm = () => {
                   <div className="row">
                     <div className="col-md-12 mb-4 pb-2 ">
                       <textarea
-                        className="form-control form-control-request"
+                        className="form-control form form-control-request"
                         type="text"
                         onChange={(e) => setTitle(e.target.value)}
                         aria-label="Título del trabajo"
@@ -109,7 +109,7 @@ export const RequestForm = () => {
                   <div className="row">
                     <div className="col-12 ">
                       <textarea
-                        className="form-control form-control-request"
+                        className="form-control form form-control-request"
                         style={{ height: "8rem" }}
                         type="text"
                         onChange={(e) => setDescription(e.target.value)}

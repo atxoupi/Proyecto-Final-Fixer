@@ -140,9 +140,9 @@ export const SignupForm = () => {
                     style={{ borderRadius: "15px" }}
                   >
                     <div className="card-body p-3 p-md-5">
-                      <h3 className="mb-4 pb-2 pb-md-0 mb-md-5 text-center">
+                      <h4 className="mb-4 pb-2 pb-md-0 mb-md-5 text-center">
                         Para registrarte, rellena los siguientes campos
-                      </h3>
+                      </h4>
                       <form onSubmit={handleSubmitUser}>
                         <div className="row">
                           <div className="col-md-6 mb-3">
@@ -215,17 +215,17 @@ export const SignupForm = () => {
 
                         <div className="d-flex justify-content-center pt-2">
                           <input
-                            className="btn btn-primary btn-lg "
+                            className="btn mail-button btn-lg "
                             type="submit"
                             value="Registrarme"
                             id="submitButton1"
                           />
                         </div>
 
-                        <p className="text-center text-muted mt-3 mb-0">
+                        <p className="text-center text-muted mt-4 mb-0">
                           ¿Ya tienes una cuenta creada?
                           <Link to="/" className="fw-bold text-body">
-                            <u> Entra aquí</u>
+                            <u className="fs-6 ms-1">Click aquí</u>
                           </Link>
                         </p>
                       </form>
@@ -251,24 +251,24 @@ export const SignupForm = () => {
                     style={{ borderRadius: "15px" }}
                   >
                     <div className="card-body p-3 p-md-5">
-                      <h3 className="mb-4 pb-2 pb-md-0 mb-md-5 text-center">
+                      <h4 className="mb-4 pb-2 pb-md-0 mb-md-5 text-center">
                         Para registrarte, rellena los siguientes campos
-                      </h3>
+                      </h4>
                       <form onSubmit={handleSubmitWorker}>
                         <div className="row">
-                          <div className="col-md-6 mb-3">
-                            <div className="form-outline">
-                              <input
-                                type="text"
-                                id="firstName2"
-                                className="form-control  form-control-signup form-control-lg"
-                                placeholder="Nombre"
-                                onChange={(e) => setUsername(e.target.value)}
-                                required
-                              />
-                            </div>
+                          {/* <div className="col-md-6 mb-3"> */}
+                          <div className="form-outline">
+                            <input
+                              type="text"
+                              id="firstName2"
+                              className="form-control  form-control-signup form-control-lg"
+                              placeholder="Nombre"
+                              onChange={(e) => setUsername(e.target.value)}
+                              required
+                            />
                           </div>
-                          <div className="col-md-6 mb-3">
+                          {/* </div> */}
+                          {/* <div className="col-md-6 mb-3">
                             <div className="form-outline">
                               <input
                                 type="text"
@@ -280,16 +280,16 @@ export const SignupForm = () => {
                                 required
                               />
                             </div>
-                          </div>
+                          </div> */}
                         </div>
-                        <div className="row">
+                        <div className="row mt-3">
                           <div className="col-md-6 mb-3">
                             <select
-                              className="select w-100 form-control-request form-control-lg"
+                              className="select w-100 form-control-request form-control-lg  text-muted"
                               onChange={(e) => setCity(e.target.value)}
                               required
                             >
-                              <option value="1">Provincia</option>
+                              <option selected>Provincia</option>
                               {regions.map((item, index) => (
                                 <option key={index} value={item}>
                                   {item}
@@ -299,11 +299,11 @@ export const SignupForm = () => {
                           </div>
                           <div className="col-md-6 mb-3 pb-2 ">
                             <select
-                              className="select w-100 form-control-signup form-control-lg"
+                              className="select w-100 form-control-signup form-control-lg text-muted"
                               onChange={(e) => setSector(e.target.value)}
                               required
                             >
-                              <option value="1">Elije una opción</option>
+                              <option selected>Sector</option>
                               <option value="Fontanería">Fontanería</option>
                               <option value="Carpintería">Carpintería</option>
                               <option value="Pintura">Pintura</option>
@@ -315,9 +315,9 @@ export const SignupForm = () => {
                               <option value="Mudanzas">Mudanzas</option>
                               <option value="Jardinería">Jardinería</option>
                             </select>
-                            <label className="form-label select-label">
+                            {/* <label className="form-label select-label">
                               Selecciona tu sector
-                            </label>
+                            </label> */}
                           </div>
                         </div>
                         <div className="row">
@@ -366,16 +366,16 @@ export const SignupForm = () => {
 
                         <div className="d-flex justify-content-center pt-2">
                           <input
-                            className="btn btn-primary btn-lg "
+                            className="btn mail-button btn-lg "
                             type="submit"
                             value="Registrarme"
                             id="submitButton2"
                           />
                         </div>
-                        <p className="text-center text-muted mt-3">
+                        <p className="text-center text-muted mt-4">
                           ¿Ya tienes una cuenta creada?{" "}
                           <Link to="/login" className="fw-bold text-body">
-                            <u> Entra aquí</u>
+                            <u className="fs-6 ms-1">Click aquí</u>
                           </Link>
                         </p>
                       </form>

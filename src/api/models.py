@@ -52,6 +52,7 @@ class Worker_signup(db.Model):
     postcode = db.Column(db.Integer, unique=False, nullable=True)
     cif = db.Column(db.Integer, unique=True, nullable=True)
     pictures = db.Column(db.String(500), unique=False, nullable=True)
+    description = db.Column(db.String(1000), unique=False, nullable=True)
     works = db.relationship('Work', backref='worker_signup', lazy=True)
     ratings = db.relationship('Ratings', backref='worker_signup', lazy=True)
     login = db.relationship('Login', backref='worker_signup', lazy=True)
@@ -72,7 +73,8 @@ class Worker_signup(db.Model):
             "adress":self.adress,
             "postcode":self.postcode,
             "cif":self.cif,
-            "pictures":self.pictures
+            "pictures":self.pictures,
+            "description":self.description
         }
 
  # Login data  
@@ -104,11 +106,13 @@ class Work(db.Model):
     sector = db.Column(db.String(120), unique=False, nullable=True)
     status = db.Column(db.Boolean, unique=False, nullable=True)
     cost = db.Column(db.Float, unique=False, nullable=True)
-    duration = db.Column(db.Integer, unique=False, nullable=True)
+    duration = db.Column(db.String(120), unique=False, nullable=True)
     description = db.Column(db.String(500), unique=False, nullable=False)
     pictures = db.Column(db.String(500), unique=False, nullable=True)
     title=db.Column(db.String(180), unique=False, nullable=True)
     budget = db.relationship('Budget', backref='work', lazy=True)
+    rating = db.relationship('Ratings', backref='work', lazy=True)
+    
 
     def __repr__(self):
         return f'<Work {self.id}>'
@@ -125,6 +129,7 @@ class Work(db.Model):
             "description":self.description,
             "title":self.title,
             "pictures":self.pictures
+            
         }
 
  # Ratings data
@@ -132,8 +137,10 @@ class Ratings(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_signup_id = db.Column(db.Integer,db.ForeignKey('user_signup.id'), nullable=False)
     worker_id = db.Column(db.Integer, db.ForeignKey('worker_signup.id'), nullable=False)
+    work_id = db.Column(db.Integer, db.ForeignKey('work.id'), nullable=True)
     rating = db.Column(db.Integer, unique=False, nullable=True)
-    description = db.Column(db.String(500), unique=False, nullable=False)
+    description = db.Column(db.String(500), unique=False, nullable=True)
+    
 
     def __repr__(self):
         return f'<Ratings {self.id}>'
@@ -143,6 +150,7 @@ class Ratings(db.Model):
             "id": self.id,
             "user_signup_id":self.user_signup_id,
             "worker_id":self.worker_id,
+            "work_id":self.work_id,
             "rating":self.rating,
             "description":self.description,
         }
@@ -154,7 +162,7 @@ class Budget(db.Model):
     worker_id = db.Column(db.Integer, db.ForeignKey('worker_signup.id'), nullable=False)
     work_id = db.Column(db.Integer, db.ForeignKey('work.id'), nullable=False)
     url = db.Column(db.String(120), unique=False, nullable=False)
-    duration = db.Column(db.Integer, nullable=False)
+    duration = db.Column(db.String(120), nullable=False)
     price = db.Column(db.Float, unique=False, nullable=True)
 #  tener dos servicios uno de work(empresarios miran las ofertas ) y otro de budget(para personas q vean los presupuestos q le han enviado)
     def __repr__(self):

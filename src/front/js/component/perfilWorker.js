@@ -27,7 +27,7 @@ const PerfilWorker = () => {
       city,
       sector,
       adress,
-      tlf,
+      tlf_number,
       postcode
     );
   };
@@ -39,11 +39,11 @@ const PerfilWorker = () => {
     setAdress(store.editWorkerGet.adress);
     setPostcode(store.editWorkerGet.postcode);
     setPhotoProfile(store.editWorkerGet.pictures);
-    setTlf(store.editWorkerGet.tlf);
+    setTlf(store.editWorkerGet.tlf_number);
   }, [store.editWorkerGet]);
 
   return (
-    <div id="perfil1" className="border border-warning border-2 rounded-3 mt-5">
+    <div className="container border border-warning border-2 rounded-3">
       <div className="container p-3 d-flex  justify-content-start">
         <div className="row-3">
           {store.editWorkerGet.pictures == null ? (
@@ -63,7 +63,7 @@ const PerfilWorker = () => {
           )}
         </div>
 
-        <div className="ms-3 ">
+        <div className="container " style={{ marginTop: "110px" }}>
           <PhotoProfile />
         </div>
       </div>
@@ -193,7 +193,7 @@ const PerfilWorker = () => {
                     </label>
                     <input
                       type="text"
-                      className="form-control form-control-request"
+                      className="form-control form form-control-request"
                       id="recipient-name"
                       defaultValue={username ? username : ""}
                       onChange={(e) => setUsername(e.target.value)}
@@ -204,7 +204,7 @@ const PerfilWorker = () => {
                     <label className="col-form-label fw-bold">email:</label>
                     <input
                       type="text"
-                      className="form-control form-control-request"
+                      className="form-control form form-control-request"
                       id="recipient-name"
                       defaultValue={email ? email : ""}
                       onChange={(e) => setEmail(e.target.value)}
@@ -214,7 +214,7 @@ const PerfilWorker = () => {
                   <div className="mb-3">
                     <label className="col-form-label fw-bold">ciudad:</label>
                     <select
-                      className="select w-100 form-control-request form-control"
+                      className="select w-100 form-control-request form form-control"
                       onChange={(e) => setCity(e.target.value)}
                       required
                     >
@@ -233,11 +233,11 @@ const PerfilWorker = () => {
                   <div className="mb-3">
                     <label className="col-form-label fw-bold">sector:</label>
                     <select
-                      className="select w-100 form-control-request form-control"
+                      className="select w-100 form form-control-request form-control"
                       defaultValue={store.editWorkerGet.sector || ""}
                       onChange={(e) => setSector(e.target.value)}
                     >
-                      <option value="1">
+                      <option selected>
                         {store.editWorkerGet.sector
                           ? store.editWorkerGet.sector
                           : "Elije una opción"}
@@ -254,7 +254,7 @@ const PerfilWorker = () => {
                     <label className="col-form-label fw-bold">Dirección:</label>
                     <input
                       type="text"
-                      className="form-control form-control-request"
+                      className="form-control  form form-control-request"
                       id="recipient-name"
                       defaultValue={adress ? adress : ""}
                       onChange={(e) => setAdress(e.target.value)}
@@ -267,7 +267,7 @@ const PerfilWorker = () => {
                     </label>
                     <input
                       type="text"
-                      className="form-control form-control-request"
+                      className="form-control form form-control-request"
                       id="recipient-name"
                       defaultValue={tlf ? tlf : ""}
                       onChange={(e) => setTlf(e.target.value)}
@@ -279,7 +279,7 @@ const PerfilWorker = () => {
                     </label>
                     <input
                       type="text"
-                      className="form-control form-control-request"
+                      className="form-control form form-control-request"
                       id="recipient-name"
                       defaultValue={postcode ? postcode : ""}
                       onChange={(e) => setPostcode(e.target.value)}

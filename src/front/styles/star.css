@@ -1,0 +1,19 @@
+.star {
+    position: relative;
+    cursor: pointer;
+    color: rgb(230, 178, 22);
+}
+
+.stars-radio-input {
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+.tittle-stars {
+    width: 220px;
+}
+
+.btn-send-comment {
+    background-color: #ffc300;
+    color: #001d3d;
+}
