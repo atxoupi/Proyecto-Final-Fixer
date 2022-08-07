@@ -9,7 +9,7 @@ export const PerfilUsers = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div>
       <PerfilUser />
     </div>
   );

@@ -38,19 +38,19 @@ const PerfilUser = () => {
 
   return (
     <div
-      id="perfil1"
-      className="border border-warning border-2 rounded-3 mt-5 w-50"
+      className=" container border border-warning border-2 rounded-3 "
+      style={{ width: "70%", marginTop: "80px" }}
     >
-      <div className=" container p-3 d-flex  justify-content-start">
+      <div className=" container p-3 d-flex  justify-content-start ">
         <div className="row-3 ">
           <img
             src={store.consultUser.pictures}
             style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
-            className="img border-2 border border-warning rounded-3"
+            className="img rounded-circle border border-warning rounded-3"
             alt="..."
           />
         </div>
-        <div className="ms-3 ">
+        <div className="container " style={{ marginTop: "110px" }}>
           <PhotoProfile />
         </div>
       </div>
@@ -178,7 +178,7 @@ const PerfilUser = () => {
                     </label>
                     <input
                       type="text"
-                      className="form-control form-control-request "
+                      className="form-control form form-control-request "
                       id="recipient-name"
                       value={name ? name : ""}
                       onChange={(e) => setName(e.target.value)}
@@ -193,7 +193,7 @@ const PerfilUser = () => {
                     </label>
                     <input
                       type="text"
-                      className="form-control form-control-request"
+                      className="form-control form form-control-request"
                       id="recipient-name"
                       value={lastname ? lastname : ""}
                       onChange={(e) => setLastname(e.target.value)}
@@ -208,7 +208,7 @@ const PerfilUser = () => {
                     </label>
                     <input
                       type="text"
-                      className="form-control form-control-request"
+                      className="form-control form form-control-request"
                       id="recipient-name"
                       value={city ? city : ""}
                       onChange={(e) => setCity(e.target.value)}
@@ -223,7 +223,7 @@ const PerfilUser = () => {
                     </label>
                     <input
                       type="text"
-                      className="form-control form-control-request"
+                      className="form-control form form-control-request"
                       id="recipient-name"
                       value={adress ? adress : ""}
                       onChange={(e) => setAdress(e.target.value)}
@@ -238,7 +238,7 @@ const PerfilUser = () => {
                     </label>
                     <input
                       type="text"
-                      className="form-control form-control-request"
+                      className="form-control form form-control-request"
                       id="recipient-name"
                       value={postcode ? postcode : ""}
                       onChange={(e) => setPostCode(e.target.value)}
@@ -254,7 +254,7 @@ const PerfilUser = () => {
                     </label>
                     <input
                       type="text"
-                      className="form-control form-control-request"
+                      className="form-control form form-control-request"
                       id="recipient-name"
                       value={tlf ? tlf : ""}
                       onChange={(e) => setTlf(e.target.value)}

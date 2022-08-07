@@ -48,7 +48,7 @@ const ModalForm = ({ id }) => {
                   </label>
                   <input
                     type="text"
-                    className="form-control form-control-request"
+                    className="form-control form form-control-request"
                     id="recipient-name"
                     onChange={(e) => {
                       setPrecio(e.target.value);
@@ -61,7 +61,7 @@ const ModalForm = ({ id }) => {
                   </label>
                   <input
                     type="text"
-                    className="form-control form-control-request "
+                    className="form-control form form-control-request "
                     id="recipient-name"
                     placeholder="Introduce el tiempo estimado en horas,días o semanas"
                     onChange={(e) => {
@@ -71,7 +71,7 @@ const ModalForm = ({ id }) => {
                 </div>
                 <div className="mb-3">
                   <input
-                    className="form-control form-control-request input-foto"
+                    className="form-control form form-control-request input-foto"
                     type="file"
                     id="formFile"
                     onChange={(e) => setUploadImages(e.target.files[0])}
