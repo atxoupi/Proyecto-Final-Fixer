@@ -625,6 +625,7 @@ const getState = ({
 
                         alert(data.message);
                     }
+                    getActions().showbudget(id);
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
@@ -774,7 +775,19 @@ const getState = ({
                     const data = await resp.json();
                     if (resp.status === 200) {
                         console.log("Valoración guardada");
+                    } else if (resp.status === 404) {
+                        Swal.fire({
+                            toast: true,
+                            color: "003566",
+                            icon: "error",
+                            position: "top-end",
+                            animation: true,
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 4000,
+                        });
                     }
+
                     return data;
                     // console.log(data);
                 } catch (error) {

@@ -68,7 +68,6 @@ export const SentBudgets = ({
           </div>
         ) : (
           <>
-            {" "}
             <div className="col-4 text-center gy-4">
               <button
                 className="mail-button mb-3 ms-2"
@@ -77,14 +76,14 @@ export const SentBudgets = ({
                   actions.aceptBudget(id);
                 }}
               >
-                <i class="far fa-check-circle"></i>
+                <i className="far fa-check-circle"></i>
               </button>
               <button
                 className="reject-button ms-2"
                 type="button"
                 onClick={() => actions.rejectBudget(id)}
               >
-                <i class="far fa-times-circle"></i>
+                <i className="far fa-times-circle"></i>
               </button>{" "}
               <a href={url} download target="_blank" rel="noopener noreferrer">
                 <button type="button" className=" mail-button ms-2">

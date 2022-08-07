@@ -8,7 +8,7 @@ export const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg fs-6">
-      <div className="container-fluid w-50">
+      <div className="container-fluid ">
         <Link to="/" className="navbar-brand">
           <img
             src={logoFixer}
@@ -75,7 +75,7 @@ export const Navbar = () => {
                 href="#"
                 to="/workers-list"
               >
-                <strong>Buscar profesionales</strong>
+                <i className="fas fa-search"></i>
               </Link>
             </li>
           ) : (
@@ -99,7 +99,7 @@ export const Navbar = () => {
                 href="#"
                 to="/perfil-user"
               >
-                <i class="fas fa-user"></i>
+                <i className="fas fa-user"></i>
               </Link>
             </li>
           ) : (
@@ -139,7 +139,7 @@ export const Navbar = () => {
                   aria-current="page"
                   to="/login"
                 >
-                  <i class="fas fa-sign-out-alt"></i>
+                  <i className="fas fa-sign-out-alt"></i>
                 </Link>
               </span>
             ) : null}
