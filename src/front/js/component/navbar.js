@@ -8,7 +8,7 @@ export const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg fs-6">
-      <div className="container-fluid">
+      <div className="container-fluid ">
         <Link to="/" className="navbar-brand">
           <img
             src={logoFixer}
@@ -25,7 +25,9 @@ export const Navbar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon "></span>
+          <span className="navbar-toggler-icon ">
+            <i className="fas fa-bars"></i>
+          </span>
         </button>
       </div>
       <div
@@ -35,8 +37,12 @@ export const Navbar = () => {
         <ul className="navbar-nav mb-2 mb-lg-0">
           {store.usuario ? (
             <li className="nav-item mx-1">
-              <Link className="nav-link nav-link-navbar" href="#" to="/request">
-                Publica una oferta
+              <Link
+                className="nav-link nav-link-navbar "
+                href="#"
+                to="/request"
+              >
+                <strong>Publica una oferta</strong>
               </Link>
             </li>
           ) : (
@@ -45,8 +51,8 @@ export const Navbar = () => {
 
           {store.usuario ? (
             <li className="nav-item mx-1">
-              <Link className="nav-link nav-link-navbar" href="#" to="/works">
-                Mis ofertas
+              <Link className="nav-link nav-link-navbar " href="#" to="/works">
+                <strong>Mis ofertas</strong>
               </Link>
             </li>
           ) : (
@@ -56,7 +62,7 @@ export const Navbar = () => {
           {!store.usuario && store.auth == true ? (
             <li className="nav-item mx-1">
               <Link className="nav-link nav-link-navbar" href="#" to="/works">
-                Ofertas publicadas
+                <strong>Ofertas publicadas</strong>
               </Link>
             </li>
           ) : (
@@ -69,7 +75,7 @@ export const Navbar = () => {
                 href="#"
                 to="/workers-list"
               >
-                Buscar profesionales
+                <i className="fas fa-search"></i>
               </Link>
             </li>
           ) : (
@@ -82,7 +88,7 @@ export const Navbar = () => {
                 className="nav-link nav-link-navbar w-100"
                 href="#"
               >
-                Regístrate
+                <strong>Regístrate</strong>
               </Link>
             ) : null}
           </li>
@@ -93,7 +99,7 @@ export const Navbar = () => {
                 href="#"
                 to="/perfil-user"
               >
-                Mi perfil
+                <i className="fas fa-user"></i>
               </Link>
             </li>
           ) : (
@@ -107,7 +113,7 @@ export const Navbar = () => {
                 href="#"
                 to="/perfil-worker"
               >
-                Mi Perfil
+                <i className="fas fa-address-card"></i>
               </Link>
             </li>
           ) : (
@@ -120,7 +126,7 @@ export const Navbar = () => {
                 aria-current="page"
                 to="/login"
               >
-                Accede
+                <strong>Accede</strong>
               </Link>
             ) : null}
           </li>
@@ -133,7 +139,7 @@ export const Navbar = () => {
                   aria-current="page"
                   to="/login"
                 >
-                  Cerrar sesión
+                  <i className="fas fa-sign-out-alt"></i>
                 </Link>
               </span>
             ) : null}

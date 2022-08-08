@@ -45,6 +45,7 @@ def wsignup():
     password = request.json.get("password", None)
     city = request.json.get("city", None)
     sector = request.json.get("sector", None)
+    # tlf_number=request.json.get("tlf_number", None)
 
     pw_hash = current_app.bcrypt.generate_password_hash(password).decode("utf-8")
     user = Worker_signup(name=name, email=email, password=pw_hash, city=city, sector=sector)
@@ -149,8 +150,6 @@ def listworks():
         sent_budgets = Budget.query.filter_by(worker_id=user.id).all()
         works = Work.query.filter_by(location=user.city).filter_by(sector=user.sector).all()
         for budget in sent_budgets:
-            print(budget.worker_id)
-            print(budget.work_id)
             libres=list(filter(lambda work: work.id != budget.work_id, works))
         result= list(map(lambda libre: libre.serialize(),libres))
     else:
@@ -386,28 +385,32 @@ def addRating():
     work_id= request.json.get("work_id",None)
 
     work=Work.query.filter_by(id=work_id).first()
-    print(work)
     user=User_signup.query.filter_by(email=current_user).first()
     if (worker_id==work.worker_id): 
         ratings = Ratings(rating=ratingNum, user_signup_id=user.id, worker_id=worker_id, description=comment,work_id=work_id)
         # print(ratings)
-        db.session.add(ratings)
-        db.session.commit()
         ratingExist= Ratings.query.filter_by(user_signup_id=user.id,work_id=work_id).first()
-        print(ratingExist)
-        response_body = {
-            "message": "Valoración realizada con éxito",
-            "rating":True
-        }
-
-        return jsonify(response_body),200
+        if ratingExist == None :
+            db.session.add(ratings)
+            db.session.commit()
+        
+            response_body = {
+                "message": "Valoración realizada con éxito",
+                "rating":True
+            }
+            return jsonify(response_body),200
+        else:
+            response_body = {
+                "message": "Ya habías valorado este trabajo con anterioridad"
+            }
+            return jsonify(response_body),404
     else:
         response_body = {
             "message": "No puedes valorar a este trabajador"
         }
     #comprobar el else, si no hay valoracion y si ya existe, condicionar en el front    
    
-        return jsonify(response_body), 200
+        return jsonify(response_body), 400
 
 #Trae los ratings de un trabajador, usando worker_id como parámetro
 @api.route("/worker/<int:id>/ratings", methods=["GET"])
@@ -426,6 +429,11 @@ def acept_budget(id):
     work = Work.query.filter_by(id=budget.work_id).first()
     user=User_signup.query.filter_by(id=budget.user_id).first()
     worker=Worker_signup.query.filter_by(id=budget.worker_id).first()
+    budgets=Budget.query.filter_by(work_id=budget.work_id).all()
+    for bud in budgets:
+        if bud.id!=id:
+            db.session.delete(bud)
+            db.session.commit()
     subject="Hola "+worker.name+", su presupuesto ha sido aceptado."
     body="Hola, su presupuesto ha sido aceptado. Puede ponerse en contacto con "+user.name+" para concretar el trabajo."
     msg = Message(body=body,

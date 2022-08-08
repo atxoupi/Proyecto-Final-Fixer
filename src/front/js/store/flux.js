@@ -203,7 +203,7 @@ const getState = ({
                 }
             },
             //CREAR USUARIO TRABAJADOR
-            createWorker: async (name, city, email, password, sector) => {
+            createWorker: async (name, city, email, password, sector, tlf_number) => {
                 try {
                     // fetching data from the backend
                     const resp = await fetch(
@@ -215,6 +215,7 @@ const getState = ({
                                 email: email,
                                 password: password,
                                 sector: sector,
+                                tlf_number: tlf_number,
                             }),
                             headers: {
                                 "Content-Type": "application/json",
@@ -223,7 +224,6 @@ const getState = ({
                     );
                     const data = await resp.text();
                     getActions().login(email, password);
-                    console.log(data);
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
@@ -351,7 +351,6 @@ const getState = ({
                             getActions().showWork();
                             console.log(data);
                         }
-
 
                         getActions().showWork();
                         console.log(data);
@@ -489,7 +488,15 @@ const getState = ({
             },
 
             //CONSULTAR DATOS DE USUARIO EMPRESA
-            consultWorkerProfile: async () => {
+            consultWorkerProfile: async (
+                name,
+                city,
+                email,
+                sector,
+                tlf_number,
+                password,
+                postcode
+            ) => {
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(process.env.BACKEND_URL + "/api/profile", {
@@ -618,6 +625,7 @@ const getState = ({
 
                         alert(data.message);
                     }
+                    getActions().showbudget(id);
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
@@ -767,7 +775,19 @@ const getState = ({
                     const data = await resp.json();
                     if (resp.status === 200) {
                         console.log("Valoración guardada");
+                    } else if (resp.status === 404) {
+                        Swal.fire({
+                            toast: true,
+                            color: "003566",
+                            icon: "error",
+                            position: "top-end",
+                            animation: true,
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 4000,
+                        });
                     }
+
                     return data;
                     // console.log(data);
                 } catch (error) {
