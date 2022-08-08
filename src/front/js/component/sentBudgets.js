@@ -18,7 +18,7 @@ export const SentBudgets = ({
   useEffect(() => {
     actions.getworker(worker_id);
   }, []);
-
+  console.log(store.workerprofile);
   return (
     <>
       <div className="row d-flex justify-content-evenly p-2">
