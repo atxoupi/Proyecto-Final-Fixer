@@ -47,7 +47,7 @@ export const WorkPostForWorker = ({
                     onClick={() => actions.deleteWork(work_id)}
                   >
                     {" "}
-                    <i class="far fa-trash-alt"></i>
+                    <i className="far fa-trash-alt"></i>
                   </button>{" "}
                 </div>
               </div>

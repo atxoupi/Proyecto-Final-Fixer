@@ -58,8 +58,9 @@ export const Workerprofile = () => {
                 ) : (
                   <img
                     src={store.workerprofile.pictures}
-                    className="card-img-top rounded-3"
+                    className="card-img-top mx-auto mt-2 rounded-3"
                     alt="imagen "
+                    style={{ width: "150px" }}
                   />
                 )}
               </div>

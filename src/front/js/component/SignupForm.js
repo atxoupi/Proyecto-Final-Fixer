@@ -286,7 +286,7 @@ export const SignupForm = () => {
                               onChange={(e) => setCity(e.target.value)}
                               required
                             >
-                              <option selected>Provincia</option>
+                              <option defaultValue>Provincia</option>
                               {regions.map((item, index) => (
                                 <option key={index} value={item}>
                                   {item}
@@ -300,7 +300,7 @@ export const SignupForm = () => {
                               onChange={(e) => setSector(e.target.value)}
                               required
                             >
-                              <option selected>Sector</option>
+                              <option defaultValue>Sector</option>
                               <option value="Fontanería">Fontanería</option>
                               <option value="Carpintería">Carpintería</option>
                               <option value="Pintura">Pintura</option>

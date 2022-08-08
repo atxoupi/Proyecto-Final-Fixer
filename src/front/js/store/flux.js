@@ -351,10 +351,6 @@ const getState = ({
                             getActions().showWork();
                             console.log(data);
                         }
-
-
-                        getActions().showWork();
-                        console.log(data);
                     }
                 } catch (error) {
                     console.log("message", error);

@@ -18,7 +18,12 @@ export const CardWorker = ({ name, sector, image, id }) => {
             style={{ width: "200px" }}
           />
         ) : (
-          <img src={image} className="card-img-top" alt="imagen " />
+          <img
+            src={image}
+            className="card-img-top mx-auto mt-2"
+            alt="imagen "
+            style={{ width: "200px" }}
+          />
         )}
 
         <div className="card-body border-top border-2 border-warning">
