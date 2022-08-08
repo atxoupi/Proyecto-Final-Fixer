@@ -85,6 +85,7 @@ export const SentBudgets = ({
               >
                 <i className="far fa-times-circle"></i>
               </button>
+
               <a href={url} download target="_blank" rel="noopener noreferrer">
                 <button type="button" className=" mail-button ms-2">
                   <img src={download} style={{ width: "16px" }}></img>
