@@ -11,6 +11,7 @@ export const SentBudgets = ({
   duration,
   price,
   id,
+  picture,
 }) => {
   const { store, actions } = useContext(Context);
 
@@ -22,26 +23,14 @@ export const SentBudgets = ({
   return (
     <>
       <div className="row d-flex justify-content-evenly p-2">
-        <div
-          className="img-profile-container"
-          style={{ objectFit: "contain", width: "10rem", height: "10rem" }}
-        >
+        <div className="img-profile-container">
           {" "}
-          {store.workerprofile.pictures === null ? (
-            <img
-              src={obrero}
-              className="card-img-top mx-auto mt-2"
-              alt="imagen trabajador"
-              style={{ maxWidth: "100%" }}
-            />
-          ) : (
-            <img
-              src={store.workerprofile.pictures}
-              className="card-img-top border rounded-3"
-              style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
-              alt="imagen "
-            />
-          )}{" "}
+          <img
+            src={picture === null ? obrero : picture}
+            className="card-img-top mx-auto mt-2 rounded-circle"
+            alt="imagen trabajador"
+            style={{ objectFit: "cover", width: "10rem", height: "10rem" }}
+          />
         </div>
         <div className="body-budget col-4">
           <div className="h-30 mt-2  d-flex justify-content-evenly">

@@ -177,6 +177,7 @@ class Budget(db.Model):
             "url":self.url,
             "duration":self.duration,
             "price":self.price,
-            "work": self.work.serialize()
+            "work": self.work.serialize(),
+            "worker": self.worker_signup.serialize()
         }
 
