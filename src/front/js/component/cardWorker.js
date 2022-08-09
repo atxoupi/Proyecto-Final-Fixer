@@ -15,7 +15,7 @@ export const CardWorker = ({ name, sector, image, id }) => {
         {image === null ? (
           <img
             src={obrero}
-            className="card-img-top mx-auto mt-2"
+            className="card-img-top mx-auto "
             alt="imagen obrero"
             style={{
               width: "200px",
@@ -24,12 +24,13 @@ export const CardWorker = ({ name, sector, image, id }) => {
         ) : (
           <img
             src={image}
-            className="card-img-top mx-auto mt-2"
+            className="card-img-top mx-auto "
             alt="imagen "
             style={{
               width: "200px",
+              minHeight: "200px",
               maxHeight: "200px",
-              objectFit: "contain",
+              objectFit: "cover",
             }}
           />
         )}
