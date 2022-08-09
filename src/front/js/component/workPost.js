@@ -43,57 +43,53 @@ export const WorkPost = ({
 
   return (
     <>
-      <div className="row mt-3">
-        <div className="col-10 col-lg-6 col-md-8 col-sm-10 mx-auto">
-          <div className="post-box">
-            <div className="post-card">
-              <div className="row">
-                <div className="work-header d-flex justify-content-between">
-                  <h3 className="work-title text-center mb-3 fw-bold">
-                    {title}
-                  </h3>
-                  <img
-                    className="sector-icon"
-                    src={showIcons()}
-                    style={{ width: "50px" }}
-                  ></img>
-                </div>
+      <div>
+        <div className="post-box">
+          <div className="post-card">
+            <div className="row">
+              <div className="work-header d-flex justify-content-between">
+                <h3 className="work-title text-center mb-3 fw-bold">{title}</h3>
+                <img
+                  className="sector-icon"
+                  src={showIcons()}
+                  style={{ width: "50px" }}
+                ></img>
               </div>
+            </div>
 
-              <div className="work-description mb-3">
-                <p className="fw-bold">Descripción:</p> {description}
-              </div>
-              <div className="work-location">
-                <img className="sector-icon me-2" src={houseIcon}></img>
-                <span className="location-span align-bottom fw-bold">
-                  {location}
-                </span>
-              </div>
+            <div className="work-description mb-3">
+              <p className="fw-bold">Descripción:</p> {description}
+            </div>
+            <div className="work-location">
+              <img className="sector-icon me-2" src={houseIcon}></img>
+              <span className="location-span align-bottom fw-bold">
+                {location}
+              </span>
+            </div>
 
-              <div>
-                {showButton ? (
-                  <div className="d-flex justify-content-between mt-3">
-                    <Link to={`/work/${work_id}/budgets`}>
-                      <button type="button" className="mail-button fw-bold">
-                        Ver presupuesto
-                      </button>
-                    </Link>
-                    <button
-                      type="button"
-                      className="mail-button fw-bold"
-                      onClick={() => actions.deleteWork(work_id)}
-                    >
-                      <i className="far fa-trash-alt"></i>
+            <div>
+              {showButton ? (
+                <div className="d-flex justify-content-between mt-3">
+                  <Link to={`/work/${work_id}/budgets`}>
+                    <button type="button" className="mail-button fw-bold">
+                      Ver presupuesto
                     </button>
-                  </div>
-                ) : (
-                  ""
-                )}
-              </div>
-            </div>{" "}
+                  </Link>
+                  <button
+                    type="button"
+                    className="mail-button fw-bold"
+                    onClick={() => actions.deleteWork(work_id)}
+                  >
+                    <i className="far fa-trash-alt"></i>
+                  </button>
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
           </div>{" "}
         </div>{" "}
-      </div>{" "}
+      </div>
     </>
   );
 };

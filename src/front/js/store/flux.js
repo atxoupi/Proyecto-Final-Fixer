@@ -344,7 +344,7 @@ const getState = ({
                                 icon: "success",
                                 position: "top-end",
                                 animation: true,
-                                title: "Datos actualizados",
+                                title: "Documento cargado con éxito",
                                 showConfirmButton: false,
                                 timer: 4000,
                             });

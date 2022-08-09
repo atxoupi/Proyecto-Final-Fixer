@@ -128,15 +128,28 @@ export const Navbar = () => {
           )}
 
           {!store.usuario && store.auth == true ? (
-            <span onClick={() => actions.logout()}>
-              <Link
-                className="nav-link nav-link-navbar"
-                aria-current="page"
-                to="/login"
-              >
-                <i className="fas fa-sign-out-alt"></i>
-              </Link>
-            </span>
+            <>
+              <li className="nav-item mx-1">
+                <Link
+                  className="nav-link nav-link-navbar"
+                  href="#"
+                  to="/perfil-worker"
+                >
+                  <i className="fas fa-user"></i>
+                </Link>
+              </li>
+              <li className="nav-item mx-1">
+                <span onClick={() => actions.logout()}>
+                  <Link
+                    className="nav-link nav-link-navbar"
+                    aria-current="page"
+                    to="/login"
+                  >
+                    <i className="fas fa-sign-out-alt"></i>
+                  </Link>
+                </span>
+              </li>
+            </>
           ) : (
             ""
           )}
