@@ -35,33 +35,32 @@ export const BudgetsView = () => {
         </div>
       ) : (
         <>
-          <div className="work-sentBudgets mb-4">
-            <WorkPost
-              description={oneBudget[0]?.work.description}
-              location={oneBudget[0]?.work.location}
-              sector={oneBudget[0]?.work.sector}
-              title={oneBudget[0]?.work.title}
-              showButton={false}
-            />
-          </div>
-          {store.budget.map((item, index) => (
-            <div
-              className="budget-container mx-auto mb-2 border-bottom border-warning"
-              style={{ width: "80%" }}
-              key={index}
-            >
-              <SentBudgets
-                user_id={item.user_id}
-                worker_id={item.worker_id}
-                url={item.url}
-                duration={item.duration}
-                price={item.price}
-                id={item.id}
-                work_id={oneBudget[0]?.work.id}
-                picture={item.worker.pictures}
+          <div className="row">
+            <div className="col-lg-4 work-sentBudgets ms-3 my-5">
+              <WorkPost
+                description={oneBudget[0]?.work.description}
+                location={oneBudget[0]?.work.location}
+                sector={oneBudget[0]?.work.sector}
+                title={oneBudget[0]?.work.title}
+                showButton={false}
               />
             </div>
-          ))}
+            <div className="col-lg-6 budget-container mb-2 ">
+              {store.budget.map((item, index) => (
+                <SentBudgets
+                  key={index}
+                  user_id={item.user_id}
+                  worker_id={item.worker_id}
+                  url={item.url}
+                  duration={item.duration}
+                  price={item.price}
+                  id={item.id}
+                  work_id={oneBudget[0]?.work.id}
+                  picture={item.worker.pictures}
+                />
+              ))}{" "}
+            </div>
+          </div>
         </>
       )}
     </>

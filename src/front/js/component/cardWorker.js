@@ -4,8 +4,6 @@ import obrero from "../../img/icons/obrero.png";
 import { Link } from "react-router-dom";
 
 export const CardWorker = ({ name, sector, image, id }) => {
-  const { store, actions } = useContext(Context);
-
   return (
     <>
       <div
@@ -35,7 +33,7 @@ export const CardWorker = ({ name, sector, image, id }) => {
               objectFit: "cover",
             }}
           />
-        )}{" "}
+        )}
         <div className="card-body border-top border-2 border-warning">
           <h5 className="card-title fw-bold"> {name} </h5>{" "}
           <p className="card-text"> {sector} </p>{" "}

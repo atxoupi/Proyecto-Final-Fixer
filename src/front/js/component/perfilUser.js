@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { PhotoProfile } from "./photoProfile";
+import usuario from "../../img/icons/usuario.png";
 
 // import PropTypes from "prop-types";
 
@@ -37,18 +38,24 @@ const PerfilUser = () => {
   // console.log(store.consultUser);
 
   return (
-    <div
-      className=" container border border-warning border-2 rounded-3 "
-      style={{ width: "70%", marginTop: "80px" }}
-    >
+    <div className=" container border border-warning border-2 rounded-3 ">
       <div className=" container p-3 d-flex  justify-content-start ">
         <div className="row-3 ">
-          <img
-            src={store.consultUser.pictures}
-            style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
-            className="img rounded-circle border border-warning rounded-3"
-            alt="..."
-          />
+          {store.consultUser.pictures == null ? (
+            <img
+              src={usuario}
+              className="card-img-top mx-auto mt-2"
+              alt="imagen usuario"
+              style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
+            />
+          ) : (
+            <img
+              src={store.consultUser.pictures}
+              style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
+              className="ms-2 img border-2 border border-warning rounded-3"
+              alt="foto usuario"
+            />
+          )}
         </div>
         <div className="container " style={{ marginTop: "110px" }}>
           <PhotoProfile />
