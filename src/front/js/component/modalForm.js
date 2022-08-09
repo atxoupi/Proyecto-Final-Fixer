@@ -63,6 +63,7 @@ const ModalForm = ({ id }) => {
                     type="text"
                     className="form-control form form-control-request "
                     id="recipient-name"
+                    placeholder="Introduce el tiempo estimado en horas,días o semanas"
                     onChange={(e) => {
                       setDuracion(e.target.value);
                     }}
