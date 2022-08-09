@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { PhotoProfile } from "./photoProfile";
+import imagenUser from "../../img/imagenUser.png";
 
 // import PropTypes from "prop-types";
 
@@ -39,26 +40,36 @@ const PerfilUser = () => {
   return (
     <div
       className=" container border border-warning border-2 rounded-3 "
-      style={{ width: "70%", marginTop: "80px" }}
+      style={{ width: "600px", height: "635px", marginTop: "80px" }}
     >
-      <div className=" container p-3 d-flex  justify-content-start ">
-        <div className="row-3 ">
-          <img
-            src={store.consultUser.pictures}
-            style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
-            className="img rounded-circle border border-warning rounded-3"
-            alt="..."
-          />
+      <div className=" container p-3 d-flex  justify-content-end">
+        <div className="container  d-flex " style={{ marginTop: "110px" }}>
+          <div className="col-10 mt-4">
+            <p className=" ms-4 fw-bold text-decoration-underline">
+              Datos del usuario:
+            </p>
+          </div>
+          <div className="col text-end">
+            <PhotoProfile />
+          </div>
         </div>
-        <div className="container " style={{ marginTop: "110px" }}>
-          <PhotoProfile />
+        <div className="row-3">
+          {store.consultUser.pictures == null ? (
+            <img
+              src={imagenUser}
+              className="card-img-top mx-auto mt-2 "
+              alt="usuario"
+              style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
+            />
+          ) : (
+            <img
+              src={store.consultUser.pictures}
+              className="ms-2 img border-2 border border-warning rounded-circle"
+              style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
+              alt="..."
+            />
+          )}
         </div>
-      </div>
-
-      <div className="container">
-        <p className="mt-3 ms-4 fw-bold text-decoration-underline">
-          Datos Personales:
-        </p>
       </div>
 
       <div className="container">

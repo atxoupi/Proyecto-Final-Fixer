@@ -43,8 +43,18 @@ const PerfilWorker = () => {
   }, [store.editWorkerGet]);
 
   return (
-    <div className="container border border-warning border-2 rounded-3">
-      <div className="container p-3 d-flex  justify-content-start">
+    <div id="container-glass" className="container">
+      <div className="container p-3 d-flex  justify-content-end">
+        <div className="container  d-flex " style={{ marginTop: "110px" }}>
+          <div className="col-10 mt-4">
+            <p className=" ms-4 fw-bold text-decoration-underline">
+              Datos de la empresa:
+            </p>
+          </div>
+          <div className="col text-end">
+            <PhotoProfile />
+          </div>
+        </div>
         <div className="row-3">
           {store.editWorkerGet.pictures == null ? (
             <img
@@ -56,21 +66,13 @@ const PerfilWorker = () => {
           ) : (
             <img
               src={store.editWorkerGet.pictures}
-              className="ms-2 img border-2 border border-warning rounded-3"
+              className="ms-2 img border-2 border border-warning rounded-circle rounded-circle-box"
               style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
               alt="..."
             />
           )}
         </div>
-
-        <div className="container " style={{ marginTop: "110px" }}>
-          <PhotoProfile />
-        </div>
       </div>
-
-      <p className="mt-3 ms-4 fw-bold text-decoration-underline">
-        Datos de la empresa:
-      </p>
 
       <div>
         <ul>
@@ -148,12 +150,13 @@ const PerfilWorker = () => {
           </div>
         </ul>
       </div>
-      <div className="container mb-3">
+      <div className="container mb-1">
         <button
           type="button"
           className="d-grid gap-1 col-4 mx-auto fw-bold mail-button "
           data-bs-toggle="modal"
           data-bs-target="#exampleModal2"
+          data-backdrop="false"
           data-bs-whatever="@mdo"
         >
           Editar datos
@@ -164,12 +167,13 @@ const PerfilWorker = () => {
           tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
+          data-backdrop="false"
         >
           {/* //MODAL */}
           <div className=" modal-dialog modal-dialog-scrollable ">
             <div
-              id="exampleModal2"
-              className="modal-content border border-2 border-warning "
+              // id="exampleModal2"
+              className="modal-content modal-content-user  border-2 border-warning"
             >
               <div className="modal-header  border-1 border-warning ">
                 <h5 className="modal-title fw-bold" id="exampleModalLabel">

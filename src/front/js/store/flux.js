@@ -303,17 +303,13 @@ const getState = ({
             //CODIGO DE CLOUDINARY SUBIDA DE PRESUPUESTO
 
             uploadFile: async (uploadImages, id, price, duracion) => {
-                const cloud_name = "carolinaqotf"; //"pluggedin";
-                const preset = "s5oaavqo"; //"icnpftra";
-                const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
-
                 const formData = new FormData();
                 formData.append("file", uploadImages);
-                formData.append("upload_preset", `${preset}`);
+                formData.append("upload_preset", process.env.PRESET_CLOUDINARI);
+
                 try {
                     const response = await fetch(
-                        //process.env.BACKEND_URL + "/api/hello",
-                        url_claudinari, {
+                        process.env.CLOUDINARY_URL, {
                             method: "POST",
                             body: formData,
                         }
@@ -549,6 +545,7 @@ const getState = ({
                                 tlf_number: tlf,
                                 adress: adress,
                                 postcode: postcode,
+                                pictures: pictures
                             }),
                             headers: {
                                 "Content-Type": "application/json",
@@ -672,18 +669,14 @@ const getState = ({
             //Fetch a Claudinary para subir y descargar la foto de perfil al editarla
 
             pictureProfile: async (uploadImages) => {
-                const cloud_name = "carolinaqotf"; //"pluggedin";
-                const preset = "s5oaavqo"; //"icnpftra";
-                const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
 
                 const formData = new FormData();
                 formData.append("file", uploadImages);
-                formData.append("upload_preset", `${preset}`);
+                formData.append("upload_preset", process.env.PRESET_CLOUDINARI);
 
                 try {
                     const response = await fetch(
-                        //process.env.BACKEND_URL + "/api/hello",
-                        url_claudinari, {
+                        process.env.CLOUDINARY_URL, {
                             method: "POST",
                             body: formData,
                         }
@@ -710,17 +703,20 @@ const getState = ({
                                     toast: true,
                                     color: "003566",
                                     icon: "success",
-                                    position: "center",
+                                    position: "top-end",
                                     animation: true,
                                     title: "Foto actualizada",
                                     showConfirmButton: false,
                                     timer: 4000,
                                 },
-                                (customClass = {
-                                    popup: "popup-border",
-                                })
+
                             );
+                            getActions().consultUserProfile()
+                            getActions().editWorkerGet()
+
+
                         }
+
 
                         console.log(data);
                     }
