@@ -64,25 +64,28 @@ export const WorkersList = () => {
           ))}
         </select>
       </div>
-      <div>
-        <ul className="w-50 mx-auto list-unstyled row row-cols-1 row-cols-md-3 g-4">
-          {!filteredWorkers.length > 0 ? (
-            <p className="text-filter text-center">
-              No se han encontrado coincidencias
-            </p>
-          ) : (
-            filteredWorkers.map((item, index) => (
-              <li key={index}>
-                <CardWorker
-                  name={item.name}
-                  sector={item.sector}
-                  image={item.pictures}
-                  id={item.id}
-                />
-              </li>
-            ))
-          )}
-        </ul>
+      <div className="">
+        {!filteredWorkers.length > 0 ? (
+          <h4 className="text-center">No se han encontrado coincidencias</h4>
+        ) : (
+          <ul
+            className="mx-auto d-flex justify-content-center list-unstyled row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5"
+            style={{ width: "85%" }}
+          >
+            {filteredWorkers.map((item, index) => (
+              <div className="col">
+                <li key={index}>
+                  <CardWorker
+                    name={item.name}
+                    sector={item.sector}
+                    image={item.pictures}
+                    id={item.id}
+                  />
+                </li>
+              </div>
+            ))}
+          </ul>
+        )}
       </div>
     </>
   );

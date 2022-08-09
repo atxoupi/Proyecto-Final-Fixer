@@ -243,6 +243,7 @@ const getState = ({
                     });
 
                     const data = await resp.json();
+                    console.log(data);
                     setStore({
                         work: data,
                     });
@@ -339,15 +340,11 @@ const getState = ({
                                 icon: "success",
                                 position: "top-end",
                                 animation: true,
-                                title: "Datos actualizados",
+                                title: "Documento cargado con éxito",
                                 showConfirmButton: false,
                                 timer: 4000,
                             });
-
-                            getActions().showWork();
-                            console.log(data);
                         }
-
                         getActions().showWork();
                         console.log(data);
                     }

@@ -15,7 +15,7 @@ export const WorkPostForWorker = ({
 
   return (
     <>
-      <div className="row mt-3">
+      <div className="row">
         <div className="col-10 col-lg-8 col-md-8 col-sm-10 mx-auto">
           <div className="post-box">
             <div className="post-card">
@@ -47,7 +47,7 @@ export const WorkPostForWorker = ({
                     onClick={() => actions.deleteWork(work_id)}
                   >
                     {" "}
-                    <i class="far fa-trash-alt"></i>
+                    <i className="far fa-trash-alt"></i>
                   </button>{" "}
                 </div>
               </div>

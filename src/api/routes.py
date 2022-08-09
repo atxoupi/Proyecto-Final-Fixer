@@ -152,16 +152,12 @@ def listworks():
         print(sent_budgets)
         if sent_budgets==[] :
             result= list(map(lambda work: work.serialize(),works)) 
-            print("Budget is none")
-            print(result)
             return jsonify(result), 200  
         libres=[]    
         for budget in sent_budgets:
             libres=list(filter(lambda work: work.id != budget.work_id, works))
         result= list(map(lambda libre: libre.serialize(),libres))
-        print("fuera")
-        print(result)
-        print(libres)
+    
     else:
         user = User_signup.query.filter_by(email=current_user).first()
         works = Work.query.filter_by(user_id=user.id).all()
@@ -414,6 +410,7 @@ def addRating():
                 "message": "Ya habías valorado este trabajo con anterioridad"
             }
             return jsonify(response_body),404
+
     else:
         response_body = {
             "message": "No puedes valorar a este trabajador"
@@ -515,23 +512,3 @@ def profileimage():
 
     return jsonify(response_body), 200
 
-
-# @api.route("/work_is_active/<int:id_budget>", methods=["PUT"])
-# # @jwt_required()
-# def change_status(id_budget):
-#     isActive=request.json.get("is_active", None)
-#     budget= Budget.query.filter_by(id=id_budget).first()
-#     work= Work.query.filter_by(id=budget.work_id).first()
-    
-#     if budget==work:
-#          work.status=isActive
-         
-#     print(budget.id)
-#     print(work.status)
-#     db.session.commit()
-#     response_body = {
-#             "message": "Status modificado"
-#         }
-    
-
-#     return jsonify(response_body), 200

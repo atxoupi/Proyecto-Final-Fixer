@@ -66,7 +66,7 @@ export const RequestForm = () => {
                         className="select w-100 form-control-request form-select form-control-lg text-muted"
                         onChange={(e) => setCity(e.target.value)}
                       >
-                        <option selected>Provincia</option>
+                        <option defaultValue>Provincia</option>
                         {regions.map((item, index) => (
                           <option key={index} value={item}>
                             {item}
@@ -83,7 +83,7 @@ export const RequestForm = () => {
                         className="select  w-100 form-control-request  form-select form-control-lg text-muted"
                         onChange={(e) => setSector(e.target.value)}
                       >
-                        <option selected>Sector</option>
+                        <option defaultValue>Sector</option>
                         <option value="Fontanería">Fontanería</option>
                         <option value="Carpintería">Carpintería</option>
                         <option value="Pintura">Pintura</option>
