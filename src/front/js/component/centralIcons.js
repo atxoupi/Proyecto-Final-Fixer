@@ -5,22 +5,25 @@ import image3 from "../../img/Group 2.png";
 export const CentralIcons = () => {
   return (
     <>
+      <div className="text-center mt-5 mb-2">
+        <h1> ¿Cómo funciona? </h1>
+      </div>
       <div className="row w-90 mt-4 d-flex justify-content-evenly">
-        <div className="col-lg-3 col-md-3 col-6 card-image1">
+        <div className="col-lg-3 col-md-6 col-8 card-image1">
           <img
             src={image1}
             alt="colgar anuncio"
             style={{ width: "300px" }}
           ></img>
         </div>
-        <div className="col-lg-3 col-md-3 col-6 card-image2">
+        <div className="col-lg-3 col-md-6 col-8 card-image2">
           <img
             src={image2}
             alt="seleccionar presupuestos"
             style={{ width: "300px" }}
           ></img>
         </div>
-        <div className="col-lg-3 col-md-3 col-6 card-image3">
+        <div className="col-lg-3 col-md-6 col-8 card-image3">
           <img src={image3} alt="pintor" style={{ width: "300px" }}></img>
         </div>
       </div>

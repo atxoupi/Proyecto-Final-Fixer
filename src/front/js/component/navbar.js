@@ -37,22 +37,8 @@ export const Navbar = () => {
         <ul className="navbar-nav mb-2 mb-lg-0">
           {store.usuario ? (
             <li className="nav-item mx-1">
-              <Link
-                className="nav-link nav-link-navbar "
-                href="#"
-                to="/request"
-              >
-                <strong>Publica una oferta</strong>
-              </Link>
-            </li>
-          ) : (
-            ""
-          )}
-
-          {store.usuario ? (
-            <li className="nav-item mx-1">
-              <Link className="nav-link nav-link-navbar " href="#" to="/works">
-                <strong>Mis ofertas</strong>
+              <Link className="nav-link nav-link-navbar " to="/request">
+                <strong>Nueva oferta </strong>
               </Link>
             </li>
           ) : (
@@ -93,29 +79,64 @@ export const Navbar = () => {
             ) : null}
           </li>
           {store.usuario ? (
-            <li className="nav-item mx-1">
-              <Link
-                className="nav-link nav-link-navbar"
-                href="#"
-                to="/perfil-user"
+            <li className="nav-item dropdown mx-1">
+              <a
+                className="nav-link nav-link-navbar dropdown dropdown-toggle"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
                 <i className="fas fa-user"></i>
-              </Link>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <Link
+                    to="/perfil-user"
+                    className="dropdown-item nav-link-navbar my-1 mx-1"
+                  >
+                    <strong>Mi perfil</strong>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    className="dropdown-item nav-link-navbar my-1 mx-1"
+                    to="/works"
+                  >
+                    <strong>Mis ofertas</strong>
+                  </Link>
+                </li>
+
+                <li>
+                  {store.auth === true ? (
+                    <span onClick={() => actions.logout()}>
+                      <Link
+                        className="dropdown-item nav-link-navbar my-1 mx-1"
+                        aria-current="page"
+                        to="/login"
+                      >
+                        <strong> Cerrar sesión</strong>
+                      </Link>
+                    </span>
+                  ) : null}
+                </li>
+              </ul>
             </li>
           ) : (
             ""
           )}
 
           {!store.usuario && store.auth == true ? (
-            <li className="nav-item mx-1">
+            <span onClick={() => actions.logout()}>
               <Link
                 className="nav-link nav-link-navbar"
-                href="#"
-                to="/perfil-worker"
+                aria-current="page"
+                to="/login"
               >
-                <i className="fas fa-address-card"></i>
+                <i className="fas fa-sign-out-alt"></i>
               </Link>
-            </li>
+            </span>
           ) : (
             ""
           )}
@@ -128,20 +149,6 @@ export const Navbar = () => {
               >
                 <strong>Accede</strong>
               </Link>
-            ) : null}
-          </li>
-
-          <li className="nav-item mx-1">
-            {store.auth === true ? (
-              <span onClick={() => actions.logout()}>
-                <Link
-                  className="nav-link nav-link-navbar"
-                  aria-current="page"
-                  to="/login"
-                >
-                  <i className="fas fa-sign-out-alt"></i>
-                </Link>
-              </span>
             ) : null}
           </li>
         </ul>

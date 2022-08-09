@@ -24,40 +24,16 @@ export const SentBudgets = ({
   return (
     <>
       <div className="row d-flex justify-content-evenly p-2">
-<<<<<<< HEAD
         <Link to={`/workerprofile/${worker_id}`}>
-          <div
-            className="img-profile-container"
-            style={{ objectFit: "contain", width: "10rem", height: "10rem" }}
-          >
-            {store.workerprofile.pictures === null ? (
-              <img
-                src={obrero}
-                className="card-img-top mx-auto mt-2"
-                alt="imagen trabajador"
-                style={{ maxWidth: "100%" }}
-              />
-            ) : (
-              <img
-                src={store.workerprofile.pictures}
-                className="card-img-top border rounded-3"
-                style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
-                alt="imagen "
-              />
-            )}
+          <div className="img-profile-container">
+            <img
+              src={picture === null ? obrero : picture}
+              className="card-img-top mx-auto mt-2 rounded-circle"
+              alt="imagen trabajador"
+              style={{ objectFit: "cover", width: "10rem", height: "10rem" }}
+            />
           </div>
         </Link>
-=======
-        <div className="img-profile-container">
-          {" "}
-          <img
-            src={picture === null ? obrero : picture}
-            className="card-img-top mx-auto mt-2 rounded-circle"
-            alt="imagen trabajador"
-            style={{ objectFit: "cover", width: "10rem", height: "10rem" }}
-          />
-        </div>
->>>>>>> 38d605a16d84e3ec8f54db121823fab57fce3b4c
         <div className="body-budget col-4">
           <div className="h-30 mt-2  d-flex justify-content-evenly">
             <div className="col-3 text-center ">

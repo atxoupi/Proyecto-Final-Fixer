@@ -152,7 +152,6 @@ def listworks():
         print(sent_budgets)
         if sent_budgets==[] :
             result= list(map(lambda work: work.serialize(),works)) 
-          
             return jsonify(result), 200  
         libres=[]    
         for budget in sent_budgets:
