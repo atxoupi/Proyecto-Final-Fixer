@@ -10,27 +10,40 @@ export const CardWorker = ({ name, sector, image, id }) => {
     <>
       <div
         className="card border-warning border-2 rounded-3"
-        style={{ width: "18rem" }}
+        style={{
+          width: "18rem",
+        }}
       >
         {image === null ? (
           <img
             src={obrero}
-            className="card-img-top mx-auto mt-2"
+            className="card-img-top mx-auto "
             alt="imagen obrero"
-            style={{ width: "200px" }}
+            style={{
+              width: "200px",
+            }}
           />
         ) : (
-          <img src={image} className="card-img-top" alt="imagen " />
-        )}
-
+          <img
+            src={image}
+            className="card-img-top mx-auto "
+            alt="imagen "
+            style={{
+              width: "200px",
+              minHeight: "200px",
+              maxHeight: "200px",
+              objectFit: "cover",
+            }}
+          />
+        )}{" "}
         <div className="card-body border-top border-2 border-warning">
-          <h5 className="card-title fw-bold">{name}</h5>
-          <p className="card-text">{sector}</p>
+          <h5 className="card-title fw-bold"> {name} </h5>{" "}
+          <p className="card-text"> {sector} </p>{" "}
           <Link to={`/workerprofile/${id}`} className="btn mail-button">
-            Leer más
-          </Link>
-        </div>
-      </div>
+            Leer más{" "}
+          </Link>{" "}
+        </div>{" "}
+      </div>{" "}
     </>
   );
 };
