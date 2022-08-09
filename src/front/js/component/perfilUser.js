@@ -40,7 +40,7 @@ const PerfilUser = () => {
   return (
     <div
       className=" container border border-profile border-warning border-2 rounded-3 "
-      style={{ width: "600px", height: "645px", marginTop: "80px" }}
+      style={{ width: "600px", height: "650px", marginTop: "80px" }}
     >
       <div className=" container p-3 d-flex  justify-content-end">
         <div className="container  d-flex " style={{ marginTop: "110px" }}>
@@ -137,7 +137,7 @@ const PerfilUser = () => {
           <div className="container">
             <div className=" row">
               <div className=" col-4">
-                <p className="fw-bold text-start">Numero de contacto:</p>{" "}
+                <p className="fw-bold text-start">Contacto:</p>{" "}
               </div>
               <div className="col mb-3">
                 <p className=" text-start">{store.consultUser.tlf_number}</p>

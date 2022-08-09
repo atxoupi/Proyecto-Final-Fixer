@@ -45,7 +45,7 @@ const PerfilWorker = () => {
   return (
     <div
       className=" container border border-profile border-warning border-2 rounded-3 "
-      style={{ width: "610px", height: "645px", marginTop: "80px" }}
+      style={{ width: "610px", height: "650px", marginTop: "80px" }}
     >
       <div className="container p-3 d-flex  justify-content-end">
         <div className="container  d-flex " style={{ marginTop: "110px" }}>
@@ -76,7 +76,6 @@ const PerfilWorker = () => {
           )}
         </div>
       </div>
-
       <div>
         <ul>
           <div className="container">
@@ -119,7 +118,6 @@ const PerfilWorker = () => {
               </div>
             </div>
           </div>
-
           <div className="container">
             <div className=" row">
               <div className=" col-4">
@@ -140,11 +138,10 @@ const PerfilWorker = () => {
               </div>
             </div>
           </div>
-
           <div className="container">
             <div className=" row">
               <div className=" col-4">
-                <p className="text-start fw-bold">Número de contacto:</p>{" "}
+                <p className="text-start fw-bold">Contacto:</p>{" "}
               </div>
               <div className="col mb-3">
                 <p className=" text-start">{store.editWorkerGet.tlf_number}</p>
