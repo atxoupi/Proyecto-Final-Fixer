@@ -9,16 +9,39 @@
 }
 
 .wraper-header {
-    background: linear-gradient(to bottom, #f8bf5c, #f7b853);
+    background: #fac15d rgb(250, 193, 93);
 }
 
 .check_container_header {
     left: 80vw;
     transform: translateX(-50vw);
-    margin-top: 50px;
+    margin-top: 200px;
     border-radius: 4px;
     background-color: #d9d7d359;
-    width: 50%;
+    width: 40%;
+    height: 25%;
+}
+
+.check_container_header_buttom {
+    left: 78vw;
+    transform: translateX(-50vw);
+    margin-left: 0px;
+    border-radius: 4px;
+    height: 20px;
+    margin-top: 90px;
+
+    /* background-color: #d9d7d359; */
+    width: 40%;
+}
+
+.check_container_header_question {
+    left: 80vw;
+    transform: translateX(-50vw);
+    margin-top: 50px;
+    margin-left: 15px;
+    border-radius: 4px;
+    /* background-color: #d9d7d359; */
+    width: 40%;
 }
 
 @media (max-width: 535px) {

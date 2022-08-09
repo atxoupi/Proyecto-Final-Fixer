@@ -39,8 +39,8 @@ const PerfilUser = () => {
 
   return (
     <div
-      className=" container border border-warning border-2 rounded-3 "
-      style={{ width: "600px", height: "635px", marginTop: "80px" }}
+      className=" container border border-profile border-warning border-2 rounded-3 "
+      style={{ width: "600px", height: "645px", marginTop: "80px" }}
     >
       <div className=" container p-3 d-flex  justify-content-end">
         <div className="container  d-flex " style={{ marginTop: "110px" }}>

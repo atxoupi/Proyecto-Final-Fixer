@@ -43,7 +43,10 @@ const PerfilWorker = () => {
   }, [store.editWorkerGet]);
 
   return (
-    <div id="container-glass" className="container">
+    <div
+      className=" container border border-profile border-warning border-2 rounded-3 "
+      style={{ width: "610px", height: "645px", marginTop: "80px" }}
+    >
       <div className="container p-3 d-flex  justify-content-end">
         <div className="container  d-flex " style={{ marginTop: "110px" }}>
           <div className="col-10 mt-4">
@@ -150,7 +153,7 @@ const PerfilWorker = () => {
           </div>
         </ul>
       </div>
-      <div className="container mb-1">
+      <div className="container mb-3 pb-2">
         <button
           type="button"
           className="d-grid gap-1 col-4 mx-auto fw-bold mail-button "
