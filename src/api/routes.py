@@ -149,6 +149,7 @@ def listworks():
         user = Worker_signup.query.filter_by(email=current_user).first()
         sent_budgets = Budget.query.filter_by(worker_id=user.id).all()
         works = Work.query.filter_by(location=user.city).filter_by(sector=user.sector).all()
+        libres=[]
         for budget in sent_budgets:
             libres=list(filter(lambda work: work.id != budget.work_id, works))
         result= list(map(lambda libre: libre.serialize(),libres))
@@ -506,23 +507,3 @@ def profileimage():
 
     return jsonify(response_body), 200
 
-
-# @api.route("/work_is_active/<int:id_budget>", methods=["PUT"])
-# # @jwt_required()
-# def change_status(id_budget):
-#     isActive=request.json.get("is_active", None)
-#     budget= Budget.query.filter_by(id=id_budget).first()
-#     work= Work.query.filter_by(id=budget.work_id).first()
-    
-#     if budget==work:
-#          work.status=isActive
-         
-#     print(budget.id)
-#     print(work.status)
-#     db.session.commit()
-#     response_body = {
-#             "message": "Status modificado"
-#         }
-    
-
-#     return jsonify(response_body), 200

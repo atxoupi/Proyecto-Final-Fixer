@@ -243,6 +243,7 @@ const getState = ({
                     });
 
                     const data = await resp.json();
+                    console.log(data);
                     setStore({
                         work: data,
                     });
