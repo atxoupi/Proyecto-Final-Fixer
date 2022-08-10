@@ -309,12 +309,10 @@ const getState = ({
                 formData.append("upload_preset", process.env.PRESET_CLOUDINARI);
 
                 try {
-                    const response = await fetch(
-                        process.env.CLOUDINARY_URL, {
-                            method: "POST",
-                            body: formData,
-                        }
-                    );
+                    const response = await fetch(process.env.CLOUDINARY_URL, {
+                        method: "POST",
+                        body: formData,
+                    });
                     if (response.ok) {
                         const data = await response.json();
                         const token = localStorage.getItem("token");
@@ -542,7 +540,7 @@ const getState = ({
                                 tlf_number: tlf,
                                 adress: adress,
                                 postcode: postcode,
-                                pictures: pictures
+                                pictures: pictures,
                             }),
                             headers: {
                                 "Content-Type": "application/json",
@@ -619,7 +617,6 @@ const getState = ({
 
                         alert(data.message);
                     }
-                    getActions().showbudget(id);
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
@@ -666,18 +663,15 @@ const getState = ({
             //Fetch a Claudinary para subir y descargar la foto de perfil al editarla
 
             pictureProfile: async (uploadImages) => {
-
                 const formData = new FormData();
                 formData.append("file", uploadImages);
                 formData.append("upload_preset", process.env.PRESET_CLOUDINARI);
 
                 try {
-                    const response = await fetch(
-                        process.env.CLOUDINARY_URL, {
-                            method: "POST",
-                            body: formData,
-                        }
-                    );
+                    const response = await fetch(process.env.CLOUDINARY_URL, {
+                        method: "POST",
+                        body: formData,
+                    });
                     if (response.ok) {
                         const store = getStore();
                         const data = await response.json();
@@ -697,23 +691,18 @@ const getState = ({
                         );
                         if (response2.status == 200) {
                             Swal.fire({
-                                    toast: true,
-                                    color: "003566",
-                                    icon: "success",
-                                    position: "top-end",
-                                    animation: true,
-                                    title: "Foto actualizada",
-                                    showConfirmButton: false,
-                                    timer: 4000,
-                                },
-
-                            );
-                            getActions().consultUserProfile()
-                            getActions().editWorkerGet()
-
-
+                                toast: true,
+                                color: "003566",
+                                icon: "success",
+                                position: "top-end",
+                                animation: true,
+                                title: "Foto actualizada",
+                                showConfirmButton: false,
+                                timer: 4000,
+                            });
+                            getActions().consultUserProfile();
+                            getActions().editWorkerGet();
                         }
-
 
                         console.log(data);
                     }

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { Star } from "../component/star.js";
 import { Context } from "../store/appContext";
 
@@ -42,13 +43,15 @@ export const StarsContainer = ({ work_id, worker_id }) => {
               aria-describedby="button-addon2"
               onChange={(e) => setComment(e.target.value)}
             ></input>
-            <button
-              type="submit"
-              id="button-addon2"
-              className="btn btn-send-comment"
-            >
-              <i className="far fa-paper-plane"></i>
-            </button>
+            <Link to={`/workerprofile/${worker_id}`}>
+              <button
+                type="submit"
+                id="button-addon2"
+                className="btn btn-send-comment"
+              >
+                <i className="far fa-paper-plane"></i>
+              </button>
+            </Link>
           </div>
         </form>
       </div>

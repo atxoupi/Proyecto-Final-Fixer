@@ -24,7 +24,7 @@ export const CardWorker = ({ name, sector, image, id }) => {
         ) : (
           <img
             src={image}
-            className="card-img-top mx-auto "
+            className="card-img-top mx-auto rounded-circle"
             alt="imagen "
             style={{
               width: "200px",

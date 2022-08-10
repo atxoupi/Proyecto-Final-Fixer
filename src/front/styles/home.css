@@ -23,7 +23,7 @@
 }
 
 .check_container_header_buttom {
-    left: 78vw;
+    left: 71vw;
     transform: translateX(-50vw);
     margin-left: 0px;
     border-radius: 4px;
@@ -35,7 +35,7 @@
 }
 
 .check_container_header_question {
-    left: 80vw;
+    left: 70vw;
     transform: translateX(-50vw);
     margin-top: 50px;
     margin-left: 15px;
