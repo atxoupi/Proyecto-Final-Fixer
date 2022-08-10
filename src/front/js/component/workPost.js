@@ -44,7 +44,7 @@ export const WorkPost = ({
   return (
     <>
       <div>
-        <div className="post-box">
+        <div className="post-box w-75 mx-auto">
           <div className="post-card">
             <div className="row">
               <div className="work-header d-flex justify-content-between">

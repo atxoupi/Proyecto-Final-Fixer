@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import obrero from "../../img/icons/obrero.png";
 import { useParams } from "react-router-dom";
 import { Rating } from "../component/rating.js";
+import imagenUser from "../../img/imagenUser.png";
 
 export const Workerprofile = () => {
   const { store, actions } = useContext(Context);
@@ -125,7 +126,11 @@ export const Workerprofile = () => {
                     <div className="rating-box">
                       <div className="d-flex justify-content-between p-2 w-100 mt-1">
                         <img
-                          src={store.consultUser.pictures}
+                          src={
+                            store.consultUser.pictures == null
+                              ? imagenUser
+                              : store.consultUser.pictures
+                          }
                           style={{
                             width: "4rem",
                             height: "4rem",
@@ -135,7 +140,9 @@ export const Workerprofile = () => {
                           className="img-rating border-2 border border-warning rounded-circle "
                           alt="..."
                         />
-
+                        <strong>
+                          <p>{store.consultUser.name}</p>
+                        </strong>
                         <Rating value={item.rating} color={activeStar} />
                       </div>
                       <div

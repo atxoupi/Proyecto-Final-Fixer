@@ -192,7 +192,7 @@ export const SignupForm = () => {
                                 className="form-control form-control-signup form-control-lg"
                                 placeholder="Introduce un password entre 8 y 22 caracteres"
                                 required
-                                // pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,22}$"
+                                pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,22}$"
                                 onChange={(e) => setPassword1(e.target.value)}
                               />
                             </div>
@@ -256,19 +256,19 @@ export const SignupForm = () => {
                       </h4>
                       <form onSubmit={handleSubmitWorker}>
                         <div className="row">
-                          {/* <div className="col-md-6 mb-3"> */}
-                          <div className="form-outline">
-                            <input
-                              type="text"
-                              id="firstName2"
-                              className="form-control  form-control-signup form-control-lg"
-                              placeholder="Nombre"
-                              onChange={(e) => setUsername(e.target.value)}
-                              required
-                            />
+                          <div className="col-md-6 mb-3">
+                            <div className="form-outline">
+                              <input
+                                type="text"
+                                id="firstName2"
+                                className="form-control  form-control-signup form-control-lg"
+                                placeholder="Nombre"
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                              />
+                            </div>
                           </div>
-                          {/* </div> */}
-                          {/* <div className="col-md-6 mb-3">
+                          <div className="col-md-6 mb-3">
                             <div className="form-outline">
                               <input
                                 type="text"
@@ -280,8 +280,9 @@ export const SignupForm = () => {
                                 required
                               />
                             </div>
-                          </div> */}
+                          </div>
                         </div>
+
                         <div className="row mt-3">
                           <div className="col-md-6 mb-3">
                             <select
@@ -343,7 +344,7 @@ export const SignupForm = () => {
                                 className="form-control  form-control-signup form-control-lg"
                                 placeholder="Introduce un password entre 8 y 22 caracteres"
                                 required
-                                // pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,22}$"
+                                pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,22}$"
                                 onChange={(e) => setPassword1(e.target.value)}
                               />
                             </div>

@@ -32,7 +32,8 @@ export const SentBudgets = ({
               alt="imagen trabajador"
               style={{
                 objectFit: "cover",
-                width: "80px",
+                width: "100px",
+                height: "100px",
               }}
             />
           </div>
