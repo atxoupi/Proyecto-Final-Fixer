@@ -51,7 +51,7 @@ export const Workerprofile = () => {
                 {store.workerprofile.pictures === null ? (
                   <img
                     src={obrero}
-                    className="card-img-top mx-auto mt-2"
+                    className="card-img-top mx-auto mt-2 "
                     alt="imagen obrero"
                     style={{ width: "150px" }}
                   />

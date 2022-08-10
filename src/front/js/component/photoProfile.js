@@ -17,7 +17,7 @@ export const PhotoProfile = () => {
           data-bs-whatever="@mdo"
           data-backdrop="false"
         >
-          <i class="fas fa-edit"></i>
+          <i className="fas fa-edit"></i>
         </button>
         <div
           className="modal fade modal-dialog-scrollable"
