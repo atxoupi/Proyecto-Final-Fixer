@@ -48,7 +48,7 @@ export const WorkPost = ({
           <div className="post-card">
             <div className="row">
               <div className="work-header d-flex justify-content-between">
-                <h3 className="work-title text-center mb-3 fw-bold">{title}</h3>
+                <h5 className="work-title text-center mb-3 fw-bold">{title}</h5>
                 <img
                   className="sector-icon"
                   src={showIcons()}
