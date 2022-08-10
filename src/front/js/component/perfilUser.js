@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { PhotoProfile } from "./photoProfile";
-import usuario from "../../img/icons/usuario.png";
+import imagenUser from "../../img/imagenUser.png";
 
 // import PropTypes from "prop-types";
 
@@ -38,34 +38,38 @@ const PerfilUser = () => {
   // console.log(store.consultUser);
 
   return (
-    <div className=" container border border-warning border-2 rounded-3 ">
-      <div className=" container p-3 d-flex  justify-content-start ">
-        <div className="row-3 ">
+    <div
+      className=" container border border-profile border-warning border-2 rounded-3 "
+      style={{ width: "600px", height: "650px", marginTop: "80px" }}
+    >
+      <div className=" container p-3 d-flex  justify-content-end">
+        <div className="container  d-flex " style={{ marginTop: "110px" }}>
+          <div className="col-10 mt-4">
+            <p className=" ms-4 fw-bold text-decoration-underline">
+              Datos del usuario:
+            </p>
+          </div>
+          <div className="col text-end">
+            <PhotoProfile />
+          </div>
+        </div>
+        <div className="row-3">
           {store.consultUser.pictures == null ? (
             <img
-              src={usuario}
-              className="card-img-top mx-auto mt-2"
-              alt="imagen usuario"
+              src={imagenUser}
+              className="card-img-top mx-auto mt-2 "
+              alt="usuario"
               style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
             />
           ) : (
             <img
               src={store.consultUser.pictures}
+              className="ms-2 img border-2 border border-warning rounded-circle"
               style={{ width: "10rem", height: "10rem", objectFit: "cover" }}
-              className="ms-2 img border-2 border border-warning rounded-3"
-              alt="foto usuario"
+              alt="..."
             />
           )}
         </div>
-        <div className="container " style={{ marginTop: "110px" }}>
-          <PhotoProfile />
-        </div>
-      </div>
-
-      <div className="container">
-        <p className="mt-3 ms-4 fw-bold text-decoration-underline">
-          Datos Personales:
-        </p>
       </div>
 
       <div className="container">
@@ -133,7 +137,7 @@ const PerfilUser = () => {
           <div className="container">
             <div className=" row">
               <div className=" col-4">
-                <p className="fw-bold text-start">Numero de contacto:</p>{" "}
+                <p className="fw-bold text-start">Contacto:</p>{" "}
               </div>
               <div className="col mb-3">
                 <p className=" text-start">{store.consultUser.tlf_number}</p>
