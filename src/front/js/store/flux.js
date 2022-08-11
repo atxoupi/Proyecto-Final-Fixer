@@ -610,11 +610,19 @@ const getState = ({
 
                     const data = await resp.json();
                     if (resp.status === 200) {
+                        Swal.fire({
+                            toast: true,
+                            color: "003566",
+                            icon: "info",
+                            position: "top-end",
+                            animation: true,
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 4000,
+                        });
                         setStore({
                             viewRatings: true,
                         });
-
-                        alert(data.message);
                     }
                     return data;
                 } catch (error) {
@@ -754,9 +762,7 @@ const getState = ({
                         }
                     );
                     const data = await resp.json();
-                    if (resp.status === 200) {
-                        console.log("Valoración guardada");
-                    } else if (resp.status === 404) {
+                    if (resp.status === 200) {} else if (resp.status === 404) {
                         Swal.fire({
                             toast: true,
                             color: "003566",

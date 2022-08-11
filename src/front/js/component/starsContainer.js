@@ -43,15 +43,15 @@ export const StarsContainer = ({ work_id, worker_id }) => {
               aria-describedby="button-addon2"
               onChange={(e) => setComment(e.target.value)}
             ></input>
-            <Link to={`/workerprofile/${worker_id}`}>
-              <button
-                type="submit"
-                id="button-addon2"
-                className="btn btn-send-comment"
-              >
-                <i className="far fa-paper-plane"></i>
-              </button>
-            </Link>
+            <button
+              type="submit"
+              id="button-addon2"
+              className="btn btn-send-comment"
+            >
+              {/* <Link to={`/workerprofile/${worker_id}`}> */}
+              <i className="far fa-paper-plane"></i>
+              {/* </Link> */}
+            </button>
           </div>
         </form>
       </div>

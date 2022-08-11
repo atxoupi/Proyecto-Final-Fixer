@@ -190,7 +190,7 @@ export const SignupForm = () => {
                                 type="password"
                                 id="examplePassword1"
                                 className="form-control form-control-signup form-control-lg"
-                                placeholder="Introduce un password entre 8 y 22 caracteres"
+                                placeholder="Introduce un password entre 8 y 22 caracteres, numeros y letras"
                                 required
                                 pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,22}$"
                                 onChange={(e) => setPassword1(e.target.value)}
@@ -342,7 +342,7 @@ export const SignupForm = () => {
                                 type="password"
                                 id="examplePassword3"
                                 className="form-control  form-control-signup form-control-lg"
-                                placeholder="Introduce un password entre 8 y 22 caracteres"
+                                placeholder="Introduce un password entre 8 y 22 caracteres, numeros y letras"
                                 required
                                 pattern="^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,22}$"
                                 onChange={(e) => setPassword1(e.target.value)}

@@ -149,13 +149,13 @@ def listworks():
         user = Worker_signup.query.filter_by(email=current_user).first()
         works = Work.query.filter_by(location=user.city).filter_by(sector=user.sector).all()
         sent_budgets = Budget.query.filter_by(worker_id=user.id).all()
-        print(sent_budgets)
         if sent_budgets==[] :
             result= list(map(lambda work: work.serialize(),works)) 
             return jsonify(result), 200  
         libres=[]    
         for budget in sent_budgets:
             libres=list(filter(lambda work: work.id != budget.work_id, works))
+            
         result= list(map(lambda libre: libre.serialize(),libres))
     
     else:

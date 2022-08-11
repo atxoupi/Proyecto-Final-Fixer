@@ -43,7 +43,7 @@ export const WorkPost = ({
 
   return (
     <>
-      <div>
+      <div className="m-2">
         <div className="post-box w-75 mx-auto">
           <div className="post-card">
             <div className="row">
