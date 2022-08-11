@@ -14,7 +14,7 @@ const PerfilWorker = () => {
   const [sector, setSector] = useState("");
   const [adress, setAdress] = useState("");
   const [postcode, setPostcode] = useState("");
-  const [tlf, setTlf] = useState("");
+  const [tlf_number, setTlf] = useState("");
   const [photoProfile, setPhotoProfile] = useState("");
 
   console.log("username " + username);
@@ -273,7 +273,7 @@ const PerfilWorker = () => {
                       type="text"
                       className="form-control form form-control-request"
                       id="recipient-name"
-                      defaultValue={tlf ? tlf : ""}
+                      defaultValue={tlf_number ? tlf_number : ""}
                       onChange={(e) => setTlf(e.target.value)}
                     />
                   </div>

@@ -278,9 +278,6 @@ def updateworker():
     adress=request.json.get("adress", None)
     postcode=request.json.get("postcode", None)
     worker=Worker_signup.query.filter_by(email=current_user).first()
-    
-
-    
     worker.name=name
     worker.tlf_number=tlf_number
     worker.adress=adress

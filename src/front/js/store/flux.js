@@ -540,7 +540,6 @@ const getState = ({
                                 tlf_number: tlf,
                                 adress: adress,
                                 postcode: postcode,
-                                pictures: pictures,
                             }),
                             headers: {
                                 "Content-Type": "application/json",
