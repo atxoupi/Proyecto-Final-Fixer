@@ -48,7 +48,7 @@ def wsignup():
     tlf_number=request.json.get("tlf_number", None)
 
     pw_hash = current_app.bcrypt.generate_password_hash(password).decode("utf-8")
-    user = Worker_signup(name=name, email=email, password=pw_hash, city=city, sector=sector)
+    user = Worker_signup(name=name, email=email, password=pw_hash, city=city, sector=sector, tlf_number=tlf_number)
     db.session.add(user)
     db.session.commit()
     
