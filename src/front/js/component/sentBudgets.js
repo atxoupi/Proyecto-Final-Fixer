@@ -13,10 +13,14 @@ export const SentBudgets = ({
   price,
   id,
   picture,
+  status,
 }) => {
   const { store, actions } = useContext(Context);
 
   //Traemos los datos del trabajador para obtener la foto de perfil
+  useEffect(() => {
+    if (store.viewRatings === true) actions.showbudget(work_id);
+  }, [store.viewRatings]);
   useEffect(() => {
     actions.getworker(worker_id);
   }, []);
@@ -55,7 +59,7 @@ export const SentBudgets = ({
           </div>
         </div>
 
-        {store.viewRatings === true ? (
+        {status ? (
           <div className="col-3">
             <StarsContainer work_id={work_id} worker_id={worker_id} />
           </div>

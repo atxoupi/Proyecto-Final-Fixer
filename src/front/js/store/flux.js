@@ -161,7 +161,6 @@ const getState = ({
                     );
 
                     const data = await resp.json();
-                    console.log(data);
 
                     return data;
                 } catch (error) {
@@ -196,7 +195,6 @@ const getState = ({
 
                         getActions().login(email, password);
                     }
-                    console.log(data);
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
@@ -243,7 +241,6 @@ const getState = ({
                     });
 
                     const data = await resp.json();
-                    console.log(data);
                     setStore({
                         work: data,
                     });
@@ -344,7 +341,6 @@ const getState = ({
                             });
                         }
                         getActions().showWork();
-                        console.log(data);
                     }
                 } catch (error) {
                     console.log("message", error);
@@ -388,7 +384,6 @@ const getState = ({
                     setStore({
                         workerprofile: data,
                     });
-                    console.log(data);
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
@@ -423,15 +418,6 @@ const getState = ({
                 tlf,
                 postcode
             ) => {
-                console.log(
-                    "flux " + name,
-                    email,
-                    city,
-                    sector,
-                    direccion,
-                    tlf,
-                    postcode
-                );
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(
@@ -472,7 +458,6 @@ const getState = ({
                     }
 
                     return data;
-                    console.log(data);
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
@@ -502,7 +487,6 @@ const getState = ({
                     setStore({
                         editWorkerGet: data,
                     });
-                    console.log(data);
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
@@ -518,15 +502,6 @@ const getState = ({
                 adress,
                 postcode
             ) => {
-                console.log(
-                    "flux " + name,
-                    lastname,
-                    email,
-                    city,
-                    tlf,
-                    adress,
-                    postcode
-                );
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(
@@ -564,8 +539,6 @@ const getState = ({
                         });
                         getActions().consultUserProfile();
                     }
-
-                    console.log(data);
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
@@ -590,7 +563,6 @@ const getState = ({
                     });
 
                     return data;
-                    // console.log(data);
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
@@ -609,6 +581,7 @@ const getState = ({
                     );
 
                     const data = await resp.json();
+
                     if (resp.status === 200) {
                         Swal.fire({
                             toast: true,
@@ -658,7 +631,6 @@ const getState = ({
                                 popup: "popup-border",
                             })
                         );
-                        // alert(data.message);
                     }
                     getActions().showbudget(id);
                     return data;
@@ -710,8 +682,6 @@ const getState = ({
                             getActions().consultUserProfile();
                             getActions().editWorkerGet();
                         }
-
-                        console.log(data);
                     }
                 } catch (error) {
                     console.log("message", error);
@@ -743,7 +713,6 @@ const getState = ({
             // Función que añade una valoración en forma numérica y un comentario a un trabajador.
             // Es necesario estar logueado y haberle aceptado un presupuesto para poder realizar la valoración
             addingRating: async (ratingNum, comment, worker_id, work_id) => {
-                console.log(ratingNum, worker_id, comment, work_id);
                 try {
                     const token = localStorage.getItem("token");
                     const resp = await fetch(
@@ -776,7 +745,6 @@ const getState = ({
                     }
 
                     return data;
-                    // console.log(data);
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
@@ -784,7 +752,6 @@ const getState = ({
 
             // Función que devuelve las valoraciones de un trabajador, se pasa el id del trabajador como parámetro
             getRating: async (id) => {
-                console.log(id);
                 try {
                     const resp = await fetch(
                         process.env.BACKEND_URL + `/api/worker/${id}/ratings`, {

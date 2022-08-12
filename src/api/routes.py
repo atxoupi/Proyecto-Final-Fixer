@@ -225,8 +225,9 @@ def sbudget():
     price = request.json.get("price", None)
     worker = Worker_signup.query.filter_by(email=current_user).first()
     tarea = Work.query.filter_by(id=id_work).first() 
+    status=False
 
-    budget = Budget(user_id=tarea.user_id , worker_id=worker.id, work_id=tarea.id, url=url, duration=duration, price=price)
+    budget = Budget(user_id=tarea.user_id , worker_id=worker.id, work_id=tarea.id, url=url, duration=duration, price=price,status=status)
     db.session.add(budget)
     db.session.commit()
     
@@ -430,6 +431,8 @@ def getRatings(id):
 def acept_budget(id):
     current_user = get_jwt_identity()
     budget = Budget.query.filter_by(id=id).first()
+    budget.status=True
+    db.session.commit()
     work = Work.query.filter_by(id=budget.work_id).first()
     user=User_signup.query.filter_by(id=budget.user_id).first()
     worker=Worker_signup.query.filter_by(id=budget.worker_id).first()

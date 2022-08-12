@@ -153,6 +153,7 @@ class Ratings(db.Model):
             "work_id":self.work_id,
             "rating":self.rating,
             "description":self.description,
+            "user":self.user_signup.serialize()
         }
 
 class Budget(db.Model):
@@ -164,6 +165,7 @@ class Budget(db.Model):
     url = db.Column(db.String(120), unique=False, nullable=False)
     duration = db.Column(db.String(120), nullable=False)
     price = db.Column(db.Float, unique=False, nullable=True)
+    status= db.Column(db.Boolean, unique=False, nullable=True)
 #  tener dos servicios uno de work(empresarios miran las ofertas ) y otro de budget(para personas q vean los presupuestos q le han enviado)
     def __repr__(self):
         return f'<Budget {self.id}>'
@@ -177,6 +179,7 @@ class Budget(db.Model):
             "url":self.url,
             "duration":self.duration,
             "price":self.price,
+            "status":self.status,
             "work": self.work.serialize(),
             "worker": self.worker_signup.serialize()
         }

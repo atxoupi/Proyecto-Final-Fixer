@@ -57,6 +57,7 @@ export const BudgetsView = () => {
                   id={item.id}
                   work_id={oneBudget[0]?.work.id}
                   picture={item.worker.pictures}
+                  status={item.status}
                 />
               ))}{" "}
             </div>

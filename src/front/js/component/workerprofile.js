@@ -127,9 +127,9 @@ export const Workerprofile = () => {
                       <div className="d-flex justify-content-between p-2 w-100 mt-1">
                         <img
                           src={
-                            store.consultUser.pictures == null
+                            item.user.pictures == null
                               ? imagenUser
-                              : store.consultUser.pictures
+                              : item.user.pictures
                           }
                           style={{
                             width: "4rem",
@@ -141,7 +141,7 @@ export const Workerprofile = () => {
                           alt="..."
                         />
                         <strong>
-                          <p>{store.consultUser.name}</p>
+                          <p>{item.user.name}</p>
                         </strong>
                         <Rating value={item.rating} color={activeStar} />
                       </div>
