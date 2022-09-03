@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Navigate } from "react-router-dom";
 
 import { Context } from "../store/appContext";
+import { auth, provider } from "../firebase";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,6 +12,10 @@ export const Login = () => {
   const handlesubmit = (e) => {
     e.preventDefault();
     actions.login(email, password);
+  };
+
+  const googlesignup = () => {
+    auth.signInWithPopup(provider);
   };
 
   return (
@@ -67,14 +72,21 @@ export const Login = () => {
                         value="Acceder"
                         id="submitButtonLogin"
                       />
-                    </div>{" "}
-                  </form>{" "}
-                </div>{" "}
-              </div>{" "}
-            </div>{" "}
-          </div>{" "}
+                    </div>
+                    <div className="d-flex justify-content-center pt-2">
+                      <input
+                        className="btn  btn-lg mail-button"
+                        value="log with google"
+                        onClick={googlesignup}
+                      />
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      )}{" "}
+      )}
     </>
   );
 };
