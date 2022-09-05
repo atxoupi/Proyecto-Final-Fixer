@@ -75,6 +75,7 @@ const getState = ({
             ratings: [],
             pictures: {},
             viewRatings: false,
+            routeMap: {}
         },
         actions: {
             // LOGIN
@@ -109,6 +110,7 @@ const getState = ({
                         localStorage.setItem("token", data.access_token);
                         localStorage.setItem("mail", email);
                         localStorage.setItem("tipo", data.tipo);
+                        getActions().ubication();
                     } else if (resp.status === 404) {
                         Swal.fire({
                             toast: true,
@@ -766,11 +768,77 @@ const getState = ({
                         ratings: data,
                     });
 
+
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
+                console.log(data)
             },
+
+            //Fetch para la ubicación
+            ubication: async () => {
+                const store = getStore();
+
+                try {
+                    const token = localStorage.getItem("token");
+                    // userType = store.usuario ? "user" : "work";
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + "/api/map", {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: "Bearer " + token,
+
+                            },
+                        },
+                    );
+
+                    const data = await resp.json();
+                    setStore({
+                        routeMap: data.url,
+                    });
+
+
+
+                    return data;
+
+
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
+            // pictureProfile: async (uploadImages) => {
+            //     const formData = new FormData();
+            //     formData.append("file", uploadImages);
+            //     formData.append("upload_preset", process.env.PRESET_CLOUDINARI);
+
+            //     try {
+            //         const response = await fetch(process.env.CLOUDINARY_URL, {
+            //             method: "POST",
+            //             body: formData,
+            //         });
+            //         if (response.ok) {
+            //             const store = getStore();
+            //             const data = await response.json();
+            //             const token = localStorage.getItem("token");
+            //             const response2 = await fetch(
+            //                 process.env.BACKEND_URL + "/api/profile_user", {
+            //                     method: "PUT",
+            //                     body: JSON.stringify({
+            //                         pictures: data.url,
+            //                         userType: store.usuario ? "user" : "work",
+            //                     }),
+            //                     headers: {
+            //                         "Content-Type": "application/json",
+            //                         Authorization: "Bearer " + token,
+            //                     },
+            //                 }
+            //             );
+
+
+
+
         },
     };
 };

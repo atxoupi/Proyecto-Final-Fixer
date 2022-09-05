@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import "../../styles/home.css";
 import { Header } from "../component/header";
 import { CentralIcons } from "../component/centralIcons";
+import Maps from "../component/maps";
 
 export const Home = () => {
   return (
@@ -11,6 +12,9 @@ export const Home = () => {
       </div>
       <div>
         <CentralIcons />
+      </div>
+      <div>
+        <Maps />
       </div>
     </div>
   );

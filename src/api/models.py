@@ -184,3 +184,23 @@ class Budget(db.Model):
             "worker": self.worker_signup.serialize()
         }
 
+# class Ubications(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     date = db.Column(db.DateTime)
+#     address = db.Column(db.String(500), unique=False, nullable=False)
+
+#     latitude = db.Column(db.String(80), unique=False, nullable=True)
+#     longitude = db.Column(db.String(80), unique=False, nullable=True)
+#     aditional_info = db.Column(db.String(500), unique=False, nullable=True)
+#     def __repr__(self):
+#         return f'<Ubications {self.id}>'
+
+#     def serialize(self):
+#         return {
+#             "id": self.id,
+#             "address": self.address,
+#             "date": self.date,
+#             "latitude": self.latitude,
+#             "longitude": self.longitude,
+#             "aditional_info": self.aditional_info
+#         }
