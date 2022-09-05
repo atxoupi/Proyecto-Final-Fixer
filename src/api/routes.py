@@ -9,6 +9,7 @@ from flask_bcrypt import Bcrypt
 from flask_mail import Mail
 from flask_mail import Message
 import datetime 
+from geopy.geocoders import Nominatim
 
 api = Blueprint('api', __name__)
 
@@ -511,4 +512,33 @@ def profileimage():
     
 
     return jsonify(response_body), 200
+
+#Ruta para la ubicación
+
+@api.route('/map', methods=['GET'])
+@jwt_required()
+def map():
+    
+    current_user = get_jwt_identity()
+
+    user = User_signup.query.filter_by(email=current_user).first()
+    if user:
+        adress = f"{user.adress} {user.city}"
+    else:
+        user = Worker_signup.query.filter_by(email=current_user).first()
+        adress = f"{user.adress} {user.city}"
+
+    geo = Nominatim(user_agent="MyApp")
+    
+    loc = geo.geocode(adress)
+    print(adress)
+    print(loc)
+    latitud = (loc.latitude)
+    longitud = (loc.longitude)
+    print (latitud, longitud)
+    
+    iframe = f"https://maps.google.com/?q={latitud},{longitud}&z=14&t=m&output=embed"
+    
+
+    return jsonify({"url":iframe})
 
