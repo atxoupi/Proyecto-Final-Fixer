@@ -512,3 +512,27 @@ def profileimage():
 
     return jsonify(response_body), 200
 
+
+@api.route("/login_google", methods=["POST"])
+def googlelogin():
+    name = request.json.get("name", None)
+    email = request.json.get("email", None)
+    photo = request.json.get("photo", None)
+    print(name)
+
+    missing = Login.query.filter_by(email=email).first()
+    if missing is None:
+        pw_hash = current_app.bcrypt.generate_password_hash("google").decode("utf-8")
+        user = User_signup(name=name, lastname="auto",  email=email, password=pw_hash, pictures=photo)
+        db.session.add(user)
+        db.session.commit()
+
+        id_user=User_signup.query.filter_by(email=email).first()
+        login = Login(email=email, password=pw_hash,id_user=id_user.id)
+        db.session.add(login)
+        db.session.commit()
+    
+
+
+    access_token = create_access_token(identity=email, expires_delta=datetime.timedelta(minutes=60))
+    return jsonify(access_token=access_token,tipo="usuario"),200

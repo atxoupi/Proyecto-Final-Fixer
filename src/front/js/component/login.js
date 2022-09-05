@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 import { auth, provider } from "../firebase";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,6 +15,7 @@ export const Login = () => {
   };
 
   const googlesignup = () => {
+    console.log("Vamos a ejecutar signWithPopup");
     signInWithPopup(auth, provider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
@@ -23,6 +24,7 @@ export const Login = () => {
         // The signed-in user info.
         const user = result.user;
         // ...
+        actions.loginwithgoogle(user);
       })
       .catch((error) => {
         // Handle Errors here.
