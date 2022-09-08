@@ -96,7 +96,7 @@ export const Login = () => {
                     <div className="d-flex justify-content-center pt-2">
                       <input
                         className="btn  btn-lg mail-button"
-                        value="log with google"
+                        value="Login con google"
                         onClick={googlesignup}
                       />
                     </div>
