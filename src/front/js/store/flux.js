@@ -164,7 +164,7 @@ const getState = ({
                         });
                         // según el tipo de usuario nos cambia el store.usuario, para renderizado condicional usuario-empresa
                         localStorage.setItem("token", data.access_token);
-                        localStorage.setItem("mail", email);
+                        localStorage.setItem("mail", data.email);
                         localStorage.setItem("tipo", data.tipo);
                     }
                     return data;

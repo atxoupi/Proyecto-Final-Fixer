@@ -535,4 +535,4 @@ def googlelogin():
 
 
     access_token = create_access_token(identity=email, expires_delta=datetime.timedelta(minutes=60))
-    return jsonify(access_token=access_token,tipo="usuario"),200
+    return jsonify(access_token=access_token,tipo="usuario", email=email),200
