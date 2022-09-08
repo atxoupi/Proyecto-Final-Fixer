@@ -73,7 +73,12 @@
 		]
 	},
 	"dependencies": {
+<<<<<<< HEAD
 		"firebase": "^9.9.4",
+=======
+		"@googlemaps/react-wrapper": "^1.1.35",
+		"@react-google-maps/api": "^2.12.2",
+>>>>>>> bdadf07c3eeae3059280d4de1cf64e1d651d8247
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",
 		"react-dom": "^16.8.4",

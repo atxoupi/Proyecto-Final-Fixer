@@ -89,7 +89,7 @@ export const Navbar = () => {
               >
                 <i className="fas fa-user"></i>
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
                   <Link
                     to="/perfil-user"
