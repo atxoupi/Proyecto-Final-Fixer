@@ -160,17 +160,9 @@ const getState = ({
                     if (resp.status === 200) {
                         setStore({
                             auth: true,
+                            usuario: true,
                         });
                         // según el tipo de usuario nos cambia el store.usuario, para renderizado condicional usuario-empresa
-                        if (data.tipo === "Usuario") {
-                            setStore({
-                                usuario: true,
-                            });
-                        } else {
-                            setStore({
-                                usuario: false,
-                            });
-                        }
                         localStorage.setItem("token", data.access_token);
                         localStorage.setItem("mail", email);
                         localStorage.setItem("tipo", data.tipo);
