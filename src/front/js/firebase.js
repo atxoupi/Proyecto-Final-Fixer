@@ -1,13 +1,18 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import {
+    initializeApp
+} from "firebase/app";
+import {
+    getAuth,
+    GoogleAuthProvider
+} from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAMKVJBMKH6HSrPBLFw92uyDzvRdYgNE3k",
-  authDomain: "fixerlogin-6e7c7.firebaseapp.com",
-  projectId: "fixerlogin-6e7c7",
-  storageBucket: "fixerlogin-6e7c7.appspot.com",
-  messagingSenderId: "852246192558",
-  appId: "1:852246192558:web:c1c79faf2ce0835957a83f",
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId,
+    appId: process.env.appId,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -16,4 +21,8 @@ const auth = getAuth();
 
 const provider = new GoogleAuthProvider();
 
-export { auth, provider, app };
+export {
+    auth,
+    provider,
+    app
+};
