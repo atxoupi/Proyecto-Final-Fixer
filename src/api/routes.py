@@ -542,3 +542,16 @@ def map():
 
     return jsonify({"url":iframe})
 
+##--WorkerListWork--
+##No recibe nada por parámetros y devuelve un array con:
+## -Las ofertas de trabajo en las que ha sido aceptado
+##Ruta sólo accesible si estás logueado
+@api.route("/workerlistwork", methods=["GET"])
+@jwt_required()
+def listworkerworks():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    user = Worker_signup.query.filter_by(email=current_user).first()
+    works = Work.query.filter_by(worker_id=user.id).all()
+    result= list(map(lambda work: work.serialize(),works)) 
+    return jsonify(result), 200  
