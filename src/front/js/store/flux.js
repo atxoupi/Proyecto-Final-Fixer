@@ -140,6 +140,40 @@ const getState = ({
                     console.log("Error loading message from backend", error);
                 }
             },
+            //Login auto con credenciales de google
+            loginwithgoogle: async (user) => {
+                try {
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + "/api/login_google", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Accept: "application/json",
+                            },
+                            body: JSON.stringify({
+                                name: user.displayName,
+                                email: user.email,
+                                photo: user.photoURL,
+                            }),
+                        }
+                    );
+
+                    const data = await resp.json();
+                    if (resp.status === 200) {
+                        setStore({
+                            auth: true,
+                            usuario: true,
+                        });
+                        // según el tipo de usuario nos cambia el store.usuario, para renderizado condicional usuario-empresa
+                        localStorage.setItem("token", data.access_token);
+                        localStorage.setItem("mail", data.email);
+                        localStorage.setItem("tipo", data.tipo);
+                    }
+                    return data;
+                } catch (error) {
+                    console.log("Error loading message from backend", error);
+                }
+            },
 
             //Crea una solicitud de trabajo y envía al backend información de ciudad, sector, título y descripción.
             // También email que coge del localStorage

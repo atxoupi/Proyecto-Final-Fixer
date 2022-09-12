@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { auth, provider } from "../firebase";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 export const SignupForm = () => {
   const { store, actions } = useContext(Context);
@@ -83,6 +85,30 @@ export const SignupForm = () => {
         timer: 4000,
       });
     }
+  };
+  const googlesignup = () => {
+    console.log("Vamos a ejecutar signWithPopup");
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // ...
+        actions.loginwithgoogle(user);
+        navigate("/login");
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
   };
 
   return (
@@ -215,11 +241,17 @@ export const SignupForm = () => {
 
                         <div className="d-flex justify-content-center pt-2">
                           <input
-                            className="btn mail-button btn-lg "
+                            className="btn mail-button btn-lg m-2 "
                             type="submit"
                             value="Registrarme"
                             id="submitButton1"
                           />
+                          <button
+                            className="btn  btn-lg mail-button m-2"
+                            onClick={googlesignup}
+                          >
+                            Regístrate con google
+                          </button>
                         </div>
 
                         <p className="text-center text-muted mt-4 mb-0">
