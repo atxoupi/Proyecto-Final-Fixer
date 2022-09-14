@@ -75,7 +75,7 @@ const getState = ({
             ratings: [],
             pictures: {},
             viewRatings: false,
-            routeMap: {}
+            routeMap: {},
         },
         actions: {
             // LOGIN
@@ -768,12 +768,11 @@ const getState = ({
                         ratings: data,
                     });
 
-
                     return data;
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
-                console.log(data)
+                console.log(data);
             },
 
             //Fetch para la ubicación
@@ -783,27 +782,20 @@ const getState = ({
                 try {
                     const token = localStorage.getItem("token");
                     // userType = store.usuario ? "user" : "work";
-                    const resp = await fetch(
-                        process.env.BACKEND_URL + "/api/map", {
-                            method: "GET",
-                            headers: {
-                                "Content-Type": "application/json",
-                                Authorization: "Bearer " + token,
-
-                            },
+                    const resp = await fetch(process.env.BACKEND_URL + "/api/map", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
                         },
-                    );
+                    });
 
                     const data = await resp.json();
                     setStore({
                         routeMap: data.url,
                     });
 
-
-
                     return data;
-
-
                 } catch (error) {
                     console.log("Error loading message from backend", error);
                 }
@@ -835,10 +827,6 @@ const getState = ({
             //                     },
             //                 }
             //             );
-
-
-
-
         },
     };
 };

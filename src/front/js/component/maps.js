@@ -11,7 +11,7 @@ const Maps = () => {
 
   return (
     <>
-      {store.routeMap === false ? (
+      {store.routeMap === undefined ? (
         <div className="py-2" style={{ width: "100%", borderRadius: "2rem" }}>
           <iframe
             style={{ borderRadius: "0.5rem", marginTop: "1rem" }}
@@ -24,7 +24,7 @@ const Maps = () => {
             // aqui traigo la el fetch
 
             src={
-              "https://maps.google.com/?q=38.904753,-3.9406584&z=14&t=m&output=embed"
+              "https://maps.google.com/?q=38.99613369,-1.85973121&z=14&t=m&output=embed"
             }
           ></iframe>
         </div>

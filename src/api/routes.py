@@ -263,7 +263,7 @@ def listbudgetsForWork(id):
     budgets_obj= Budget.query.filter_by(work_id=id).all()
     print(id)
     budgets=[budget.serialize() for budget in budgets_obj]
-    
+  
     return jsonify(budgets), 200
 
 #--Updateworker
@@ -528,15 +528,31 @@ def map():
         user = Worker_signup.query.filter_by(email=current_user).first()
         adress = f"{user.adress} {user.city}"
 
-    geo = Nominatim(user_agent="MyApp")
+    worker_geo = Nominatim(user_agent="MyApp")
     
-    loc = geo.geocode(adress)
-    print(adress)
+    workers=Worker_signup.query.all()
+    workers_list=[worker.serialize() for worker in workers]
+    for worker in workers_list:
+        print(worker)
+        worker_adress=(worker["adress"])+ " " + (worker["city"])
+        print("direccion tratada")
+        print(worker_adress)
+        worker_loc=worker_geo.geocode(worker_adress)
+        print(worker_loc)
+        latitud=(worker_loc.latitude)
+        longitud=(worker_loc.longitude)
+        print(latitud,longitud)
+        print(worker_loc)
+    
+    geo = Nominatim(user_agent="MyApp")
+   
+    loc = geo.geocode(adress) 
+    print(adress)  
     print(loc)
     latitud = (loc.latitude)
     longitud = (loc.longitude)
-    print (latitud, longitud)
-    
+    # print (latitud, longitud)
+   
     iframe = f"https://maps.google.com/?q={latitud},{longitud}&z=14&t=m&output=embed"
     
 
