@@ -6,12 +6,8 @@ import { CentralIcons } from "../component/centralIcons";
 export const Home = () => {
   return (
     <div className="container">
-      <div>
-        <Header />
-      </div>
-      <div>
-        <CentralIcons />
-      </div>
+      <Header />
+      <CentralIcons />
     </div>
   );
 };
