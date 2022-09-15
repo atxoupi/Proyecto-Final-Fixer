@@ -21,6 +21,10 @@
     width: 40%;
 }
 
+.responsive_header {
+    width: 25em;
+}
+
 .check_container_header_buttom {
     left: 71vw;
     transform: translateX(-50vw);

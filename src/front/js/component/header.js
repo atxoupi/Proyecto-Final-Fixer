@@ -22,21 +22,21 @@ export const Header = () => {
         >
           <h1> ¿Qué necesitas? </h1>
         </div>
-        <div className="check_container_header_buttom flex-column position-absolute me-60 p-3 ">
-          {" "}
-          <div
-            className="container-fluid d-flex column-xs
-           justify-content-center mb-3 px-3"
-          >
+        <div className="check_container_header_buttom flex-column position-absolute me-60">
+          <div className="responsive_header d-flex flex-column flex-md-row flex-xl-row flex-lg-row justify-content-between">
             <Link
               to="/workers-list"
               type="button"
-              className="btn mail-button mt-2"
+              className="btn mail-button m-2 w-50"
             >
               Busca profesional
             </Link>
 
-            <Link to="/request" type="button" className="btn mail-button mt-2">
+            <Link
+              to="/request"
+              type="button"
+              className="btn mail-button m-2 w-50"
+            >
               Publica un anuncio
             </Link>
           </div>
