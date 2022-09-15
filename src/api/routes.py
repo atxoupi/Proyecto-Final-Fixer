@@ -552,33 +552,35 @@ def map():
         user = Worker_signup.query.filter_by(email=current_user).first()
         adress = f"{user.adress} {user.city}"
 
-    worker_geo = Nominatim(user_agent="MyApp")
+    
     
     workers=Worker_signup.query.all()
-    workers_list=[worker.serialize() for worker in workers]
-    for worker in workers_list:
-        print(worker)
-        worker_adress=(worker["adress"])+ " " + (worker["city"])
-        print("direccion tratada")
-        print(worker_adress)
-        worker_loc=worker_geo.geocode(worker_adress)
-        print(worker_loc)
-        latitud=(worker_loc.latitude)
-        longitud=(worker_loc.longitude)
-        print(latitud,longitud)
-        print(worker_loc)
-    
+    workers_list=[worker.basic_info() for worker in workers]
+  
+
+    # for worker in worker_loc_data:
+    #     # print(worker)
+    #     latitud=worker["lat"]
+    #     print(latitud)
+    #     longitud=worker["lon"]
+    #     print(longitud)
+        # iframe=f"https://maps.google.com/?q={latitud},{longitud}&z=14&t=m&output=embed"    
+        
     geo = Nominatim(user_agent="MyApp")
    
     loc = geo.geocode(adress) 
-    print(adress)  
+    # print(adress)  
     print(loc)
     latitud = (loc.latitude)
     longitud = (loc.longitude)
     # print (latitud, longitud)
    
-    iframe = f"https://maps.google.com/?q={latitud},{longitud}&z=14&t=m&output=embed"
-    
+    user_location = f"https://maps.google.com/?q={latitud},{longitud}&z=14&t=m&output=embed"
 
-    return jsonify({"url":iframe})
+    response_body={
+    "data_workers":workers_list,
+    "user_location":user_location
+    }
+# hacer un serialize solo con los datos de worker que quiero mostrar en el models
+    return jsonify({"data":response_body})
 
