@@ -75,8 +75,8 @@ const getState = ({
             ratings: [],
             pictures: {},
             viewRatings: false,
-            routeMap: {},
-            userLoc: {},
+            routeMap: [],
+            userLoc: null,
         },
         actions: {
             // LOGIN
@@ -827,9 +827,10 @@ const getState = ({
 
                     const data = await resp.json();
                     console.log(data);
+
                     setStore({
-                        routeMap: data.data_workers,
-                        userLoc: data.user_location,
+                        routeMap: data.data.data_workers,
+                        userLoc: data.data.user_location,
                     });
 
                     return data;

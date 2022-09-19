@@ -2,7 +2,8 @@ import React, { useContext, useEffect } from "react";
 import "../../styles/home.css";
 import { Header } from "../component/header";
 import { CentralIcons } from "../component/centralIcons";
-import Maps from "../component/maps";
+
+import Maps from "../component/maps2.jsx";
 
 export const Home = () => {
   return (

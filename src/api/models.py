@@ -92,7 +92,8 @@ class Worker_signup(db.Model):
             "adress":self.adress,
             "city":self.city,
             "latitude":worker_loc.latitude,
-            "longitude":worker_loc.longitude
+            "longitude":worker_loc.longitude,
+            "coordinates":{"lat":worker_loc.latitude,"lng":worker_loc.longitude}
         }    
 
  # Login data  

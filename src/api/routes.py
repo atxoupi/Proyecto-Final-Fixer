@@ -551,21 +551,10 @@ def map():
     else:
         user = Worker_signup.query.filter_by(email=current_user).first()
         adress = f"{user.adress} {user.city}"
-
-    
-    
+      
     workers=Worker_signup.query.all()
     workers_list=[worker.basic_info() for worker in workers]
-  
-
-    # for worker in worker_loc_data:
-    #     # print(worker)
-    #     latitud=worker["lat"]
-    #     print(latitud)
-    #     longitud=worker["lon"]
-    #     print(longitud)
-        # iframe=f"https://maps.google.com/?q={latitud},{longitud}&z=14&t=m&output=embed"    
-        
+     
     geo = Nominatim(user_agent="MyApp")
    
     loc = geo.geocode(adress) 
@@ -575,7 +564,7 @@ def map():
     longitud = (loc.longitude)
     # print (latitud, longitud)
    
-    user_location = f"https://maps.google.com/?q={latitud},{longitud}&z=14&t=m&output=embed"
+    user_location = {"lat":latitud,"lng":longitud}
 
     response_body={
     "data_workers":workers_list,
