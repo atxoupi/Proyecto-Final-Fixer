@@ -9,6 +9,7 @@ from flask_bcrypt import Bcrypt
 from flask_mail import Mail
 from flask_mail import Message
 import datetime 
+from geopy.geocoders import Nominatim
 
 api = Blueprint('api', __name__)
 
@@ -511,4 +512,57 @@ def profileimage():
     
 
     return jsonify(response_body), 200
+
+
+@api.route("/login_google", methods=["POST"])
+def googlelogin():
+    name = request.json.get("name", None)
+    email = request.json.get("email", None)
+    photo = request.json.get("photo", None)
+    print(name)
+
+    missing = Login.query.filter_by(email=email).first()
+    if missing is None:
+        pw_hash = current_app.bcrypt.generate_password_hash("google").decode("utf-8")
+        user = User_signup(name=name, lastname="auto",  email=email, password=pw_hash, pictures=photo)
+        db.session.add(user)
+        db.session.commit()
+
+        id_user=User_signup.query.filter_by(email=email).first()
+        login = Login(email=email, password=pw_hash,id_user=id_user.id)
+        db.session.add(login)
+        db.session.commit()
+    
+
+
+    access_token = create_access_token(identity=email, expires_delta=datetime.timedelta(minutes=60))
+    return jsonify(access_token=access_token,tipo="usuario", email=email),200
+#Ruta para la ubicación
+
+@api.route('/map', methods=['GET'])
+@jwt_required()
+def map():
+    
+    current_user = get_jwt_identity()
+
+    user = User_signup.query.filter_by(email=current_user).first()
+    if user:
+        adress = f"{user.adress} {user.city}"
+    else:
+        user = Worker_signup.query.filter_by(email=current_user).first()
+        adress = f"{user.adress} {user.city}"
+
+    geo = Nominatim(user_agent="MyApp")
+    
+    loc = geo.geocode(adress)
+    print(adress)
+    print(loc)
+    latitud = (loc.latitude)
+    longitud = (loc.longitude)
+    print (latitud, longitud)
+    
+    iframe = f"https://maps.google.com/?q={latitud},{longitud}&z=14&t=m&output=embed"
+    
+
+    return jsonify({"url":iframe})
 
