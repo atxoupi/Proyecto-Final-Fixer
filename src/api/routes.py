@@ -423,7 +423,7 @@ def addRating():
 def getRatings(id):
     ratings = Ratings.query.filter_by(worker_id=id).all()
 
-    result= list(map(lambda rating: rating.serialize(),ratings))
+    result= [rating.serialize() for rating in ratings] 
     print(result)
     return jsonify(result), 200
 

@@ -10,42 +10,38 @@ export const Header = () => {
       <div className="header-title text-center my-3"></div>
 
       <div
-        className="container wraper-header position-relative rounded-3"
+        className="container wraper-header position-relative"
         style={{
           height: "60%",
           width: "100%",
         }}
       >
         <div
-          className="check_container_header_question hidden-xs flex-column position-absolute me-60 p-3 rounded-3"
+          className="check_container_header_question flex-column position-absolute me-60 p-3"
           style={{ Height: "60%", marginTop: "10px" }}
         >
-          <h1> ¿Qué necesitas ? </h1>
+          <h1> ¿Qué necesitas? </h1>
         </div>
-        <div className="check_container_header_buttom hidden-xs flex-column position-absolute me-60 p-3 rounded-3">
-          {" "}
-          <div className="container-fluid d-flex justify-content-center mb-3 px-3">
-            <div className="col">
-              <Link
-                to="/workers-list"
-                type="button"
-                className="btn mail-button mt-2"
-              >
-                Busca profesional
-              </Link>
-            </div>
-            <div className="col">
-              <Link
-                to="/request"
-                type="button"
-                className="btn mail-button mt-2"
-              >
-                Publica un anuncio
-              </Link>
-            </div>
+        <div className="check_container_header_buttom flex-column position-absolute me-60">
+          <div className="responsive_header d-flex flex-column flex-md-row flex-xl-row flex-lg-row justify-content-between">
+            <Link
+              to="/workers-list"
+              type="button"
+              className="btn mail-button m-2 w-50"
+            >
+              Busca profesional
+            </Link>
+
+            <Link
+              to="/request"
+              type="button"
+              className="btn mail-button m-2 w-50"
+            >
+              Publica un anuncio
+            </Link>
           </div>
         </div>
-        <div className="check_container_header hidden-xs flex-column w-50 position-absolute me-60 p-3 rounded-3">
+        <div className="check_container_header hidden-xs flex-column w-50 position-absolute me-60 p-3 ">
           <div className="text-container " style={{ Height: "60%" }}>
             <div>
               <img
