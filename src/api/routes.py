@@ -151,18 +151,17 @@ def listworks():
         works = Work.query.filter_by(location=user.city).filter_by(sector=user.sector).all()
         sent_budgets = Budget.query.filter_by(worker_id=user.id).all()
         if sent_budgets==[] :
-            result=[work.serialize() for work in works]
+            result= [work.serialize() for work in works]
             return jsonify(result), 200  
         libres=[]    
         for budget in sent_budgets:
             libres=list(filter(lambda work: work.id != budget.work_id, works))
             
-        result= [ libre.serialize() for libre in libres]
+        result= [libre.serialize() for libre in libres]
     
     else:
         user = User_signup.query.filter_by(email=current_user).first()
         works = Work.query.filter_by(user_id=user.id).all()
-
         result= [work.serialize() for work in works]
 
     
@@ -197,7 +196,7 @@ def fixers_zone():
     user = User_signup.query.filter_by(email=current_user).first()
     fixers = Worker_signup.query.filter_by(city=user.city).all()
 
-    result= [fixer.serialize()for fixer in fixers]
+    result= [fixer.serialize() for fixer in fixers] 
     
     return jsonify(result), 200
 
@@ -209,7 +208,7 @@ def get_workers():
     
     fixers = Worker_signup.query.order_by(Worker_signup.name).all()
 
-    result= [fixer.serialize()for fixer in fixers]
+    result= [fixer.serialize() for fixer in fixers]
     
     return jsonify(result), 200
 
@@ -250,7 +249,7 @@ def listbudgets():
     user = User_signup.query.filter_by(email=current_user).first()
     budgets = Budget.query.filter_by(user_id=user.id)
     
-    result= [budget.serialize for budget in budgets]
+    result= [budget.serialize() for budget in budgets]
     
     return jsonify(result), 200
 
@@ -424,7 +423,7 @@ def addRating():
 def getRatings(id):
     ratings = Ratings.query.filter_by(worker_id=id).all()
 
-    result= [ rating.serialize() for rating in ratings]
+    result= [rating.serialize() for rating in ratings] 
     print(result)
     return jsonify(result), 200
 
@@ -525,7 +524,7 @@ def googlelogin():
     missing = Login.query.filter_by(email=email).first()
     if missing is None:
         pw_hash = current_app.bcrypt.generate_password_hash("google").decode("utf-8")
-        user = User_signup(name=name, lastname="auto",  email=email, password=pw_hash, pictures=photo)
+        user = User_signup(name=name, lastname=" ",  email=email, password=pw_hash, pictures=photo)
         db.session.add(user)
         db.session.commit()
 
