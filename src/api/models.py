@@ -79,9 +79,11 @@ class Worker_signup(db.Model):
         }
 
     def basic_info(self):
-        worker_geo = Nominatim(user_agent="MyApp")
-        worker_adress=(self.adress)+ " " + (self.city)
-        worker_loc=worker_geo.geocode(worker_adress)
+        worker_loc=None
+        if self.adress and self.city:
+            worker_geo = Nominatim(user_agent="MyApp")
+            worker_adress=(self.adress)+ " " + (self.city)
+            worker_loc=worker_geo.geocode(worker_adress)
         
         return {
             "id": self.id,
@@ -91,9 +93,9 @@ class Worker_signup(db.Model):
             "sector": self.sector,
             "adress":self.adress,
             "city":self.city,
-            "latitude":worker_loc.latitude,
-            "longitude":worker_loc.longitude,
-            "coordinates":{"lat":worker_loc.latitude,"lng":worker_loc.longitude}
+            "latitude":worker_loc.latitude if worker_loc is not None else None,
+            "longitude":worker_loc.longitude if worker_loc is not None else None,
+            "coordinates":{"lat":worker_loc.latitude,"lng":worker_loc.longitude} if worker_loc is not None else None
         }    
 
  # Login data  

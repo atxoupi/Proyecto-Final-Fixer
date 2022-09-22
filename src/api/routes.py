@@ -151,18 +151,19 @@ def listworks():
         works = Work.query.filter_by(location=user.city).filter_by(sector=user.sector).all()
         sent_budgets = Budget.query.filter_by(worker_id=user.id).all()
         if sent_budgets==[] :
-            result= list(map(lambda work: work.serialize(),works)) 
+            result=[work.serialize() for work in works]
             return jsonify(result), 200  
         libres=[]    
         for budget in sent_budgets:
             libres=list(filter(lambda work: work.id != budget.work_id, works))
             
-        result= list(map(lambda libre: libre.serialize(),libres))
+        result= [ libre.serialize() for libre in libres]
     
     else:
         user = User_signup.query.filter_by(email=current_user).first()
         works = Work.query.filter_by(user_id=user.id).all()
-        result= list(map(lambda work: work.serialize(),works))
+
+        result= [work.serialize() for work in works]
 
     
     
@@ -180,7 +181,7 @@ def zonelistworks():
     user = Worker_signup.query.filter_by(email=current_user).first()
     works = Work.query.filter_by(city=user.city).filter_by(sector=user.sector).all()
 
-    result= list(map(lambda work: work.serialize(),works))
+    result= [work.serialize() for work in works]
     
     return jsonify(result), 200
 
@@ -196,7 +197,7 @@ def fixers_zone():
     user = User_signup.query.filter_by(email=current_user).first()
     fixers = Worker_signup.query.filter_by(city=user.city).all()
 
-    result= list(map(lambda fixer: fixer.serialize(),fixers))
+    result= [fixer.serialize()for fixer in fixers]
     
     return jsonify(result), 200
 
@@ -208,7 +209,7 @@ def get_workers():
     
     fixers = Worker_signup.query.order_by(Worker_signup.name).all()
 
-    result= list(map(lambda fixer: fixer.serialize(),fixers))
+    result= [fixer.serialize()for fixer in fixers]
     
     return jsonify(result), 200
 
@@ -249,7 +250,7 @@ def listbudgets():
     user = User_signup.query.filter_by(email=current_user).first()
     budgets = Budget.query.filter_by(user_id=user.id)
     
-    result= list(map(lambda budget: budget.serialize(),budgets))
+    result= [budget.serialize for budget in budgets]
     
     return jsonify(result), 200
 
@@ -423,7 +424,7 @@ def addRating():
 def getRatings(id):
     ratings = Ratings.query.filter_by(worker_id=id).all()
 
-    result= list(map(lambda rating: rating.serialize(),ratings))
+    result= [ rating.serialize() for rating in ratings]
     print(result)
     return jsonify(result), 200
 
