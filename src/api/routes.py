@@ -524,7 +524,7 @@ def googlelogin():
     missing = Login.query.filter_by(email=email).first()
     if missing is None:
         pw_hash = current_app.bcrypt.generate_password_hash("google").decode("utf-8")
-        user = User_signup(name=name, lastname="auto",  email=email, password=pw_hash, pictures=photo)
+        user = User_signup(name=name, lastname=" ",  email=email, password=pw_hash, pictures=photo)
         db.session.add(user)
         db.session.commit()
 

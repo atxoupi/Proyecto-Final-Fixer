@@ -128,8 +128,7 @@ class Work(db.Model):
             "cost":self.cost,
             "description":self.description,
             "title":self.title,
-            "pictures":self.pictures
-            
+            "pictures":self.pictures   
         }
 
  # Ratings data
