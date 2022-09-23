@@ -533,8 +533,6 @@ def googlelogin():
         db.session.add(login)
         db.session.commit()
     
-
-
     access_token = create_access_token(identity=email, expires_delta=datetime.timedelta(minutes=60))
     return jsonify(access_token=access_token,tipo="usuario", email=email),200
 #Ruta para la ubicación
@@ -542,34 +540,36 @@ def googlelogin():
 @api.route('/map', methods=['GET'])
 @jwt_required()
 def map():
-    
     current_user = get_jwt_identity()
-
     user = User_signup.query.filter_by(email=current_user).first()
+    adress = None
     if user:
         adress = f"{user.adress} {user.city}"
+       
     else:
         user = Worker_signup.query.filter_by(email=current_user).first()
         adress = f"{user.adress} {user.city}"
-      
+
     workers=Worker_signup.query.all()
     workers_list=[worker.basic_info() for worker in workers]
-     
+   
+   #Creamos el objeto para la geolocalización con Nominatim, del que extraeremos latitud y longitud
     geo = Nominatim(user_agent="MyApp")
-   
-    loc = geo.geocode(adress) 
-    # print(adress)  
-    print(loc)
-    latitud = (loc.latitude)
-    longitud = (loc.longitude)
-    # print (latitud, longitud)
-   
-    user_location = {"lat":latitud,"lng":longitud}
-
+    if adress == " ":
+        latitud= 41.3851
+        longitud= 2.1734    
+        user_location = {"lat":latitud,"lng":longitud} 
+       
+    else:
+        loc = geo.geocode(adress)
+        latitud = (loc.latitude)
+        longitud = (loc.longitude)
+        user_location = {"lat":latitud,"lng":longitud}
+        
     response_body={
     "data_workers":workers_list,
     "user_location":user_location
     }
-# hacer un serialize solo con los datos de worker que quiero mostrar en el models
+
     return jsonify({"data":response_body})
 

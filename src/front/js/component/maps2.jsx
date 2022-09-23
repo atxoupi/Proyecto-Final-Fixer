@@ -14,9 +14,9 @@ const MapContainer = () => {
 
   // Traemos todas las ubicaciones del backend
   useEffect(() => {
-    actions.ubication();
+    store.auth ? actions.ubication() : null;
   }, []);
-
+  console.log(store.userLoc);
   const mapStyles = {
     height: "100vh",
     width: "100%",
@@ -31,10 +31,10 @@ const MapContainer = () => {
     <LoadScript googleMapsApiKey={process.env.KEY_GOOGLE_MAPS}>
       {/* La variable userLoc contiene la ubicación del usuario, si esta existe muestra las ubicaciones de los trabajadores, 
       si no es está logueado o no está la dirección del usuario muestra un mapa por defecto */}
-      {store.userLoc !== null ? (
+      {store.auth && store.userLoc !== undefined ? (
         <GoogleMap
           mapContainerStyle={mapStyles}
-          zoom={13}
+          zoom={15}
           center={store.userLoc}
         >
           {store.routeMap.length > 0
@@ -65,21 +65,9 @@ const MapContainer = () => {
       ) : (
         <GoogleMap
           mapContainerStyle={mapStyles}
-          zoom={13}
+          zoom={15}
           center={defaultCenter}
-        >
-          {store.routeMap.length > 0
-            ? store.routeMap.map((item) => {
-                return (
-                  <Marker
-                    key={item.id}
-                    position={item.coordinates}
-                    onClick={() => onSelect(item)}
-                  />
-                );
-              })
-            : null}
-        </GoogleMap>
+        ></GoogleMap>
       )}
     </LoadScript>
   );
