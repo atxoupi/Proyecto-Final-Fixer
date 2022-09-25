@@ -54,8 +54,8 @@ export const Login = () => {
               >
                 <div className="card-body p-3 p-md-5">
                   <h3 className=" pb-2 pb-md-0 mb-md-5 text-center">
-                    Por favor, introduce tus datos{" "}
-                  </h3>{" "}
+                    Por favor, introduce tus datos
+                  </h3>
                   <form onSubmit={handlesubmit}>
                     <div className="row">
                       <div className="col-12 mb-3 pb-2">
@@ -67,10 +67,10 @@ export const Login = () => {
                             placeholder="email@email.com"
                             required
                             onChange={(e) => setEmail(e.target.value)}
-                          />{" "}
-                        </div>{" "}
-                      </div>{" "}
-                    </div>{" "}
+                          />
+                        </div>
+                      </div>
+                    </div>
                     <div className="row">
                       <div className="col-12 mb-3 pb-2">
                         <div className="form-outline">
@@ -81,22 +81,22 @@ export const Login = () => {
                             placeholder="Password"
                             required
                             onChange={(e) => setPassword(e.target.value)}
-                          />{" "}
-                        </div>{" "}
-                      </div>{" "}
-                    </div>{" "}
+                          />
+                        </div>
+                      </div>
+                    </div>
                     <div className="d-flex justify-content-center pt-2">
                       <input
                         className="btn  btn-lg mail-button"
                         type="submit"
-                        value="Acceder"
+                        defaultValue="Acceder"
                         id="submitButtonLogin"
                       />
                     </div>
                     <div className="d-flex justify-content-center pt-2">
                       <input
                         className="btn  btn-lg mail-button"
-                        value="Login con google"
+                        defaultValue="Login con google"
                         onClick={googlesignup}
                       />
                     </div>

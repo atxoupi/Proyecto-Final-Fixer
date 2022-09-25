@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
+from geopy.geocoders import Nominatim
 
 
 db = SQLAlchemy()
@@ -15,7 +16,7 @@ class User_signup(db.Model):
     password = db.Column(db.String(120), unique=False, nullable=False)
     city = db.Column(db.String(120), unique=False, nullable=True)
     adress = db.Column(db.String(120), unique=False, nullable=True)
-    postcode = db.Column(db.Integer, unique=False, nullable=True)
+    postcode = db.Column(db.String(5), unique=False, nullable=True)
     pictures = db.Column(db.String(), unique=False, nullable=True)
     works = db.relationship('Work', backref='user_signup', lazy=True)
     ratings = db.relationship('Ratings', backref='user_signup', lazy=True)
@@ -49,7 +50,7 @@ class Worker_signup(db.Model):
     city = db.Column(db.String(120), unique=False, nullable=True)
     sector = db.Column(db.String(120), unique=False, nullable=True)
     adress = db.Column(db.String(120), unique=False, nullable=True)
-    postcode = db.Column(db.Integer, unique=False, nullable=True)
+    postcode = db.Column(db.String(5), unique=False, nullable=True)
     cif = db.Column(db.Integer, unique=True, nullable=True)
     pictures = db.Column(db.String(500), unique=False, nullable=True)
     description = db.Column(db.String(1000), unique=False, nullable=True)
@@ -76,6 +77,26 @@ class Worker_signup(db.Model):
             "pictures":self.pictures,
             "description":self.description
         }
+
+    def basic_info(self):
+        worker_loc=None
+        if self.adress and self.city:
+            worker_geo = Nominatim(user_agent="MyApp")
+            worker_adress=(self.adress)+ " " + (self.city)
+            worker_loc=worker_geo.geocode(worker_adress)
+        
+        return {
+            "id": self.id,
+            "name":self.name,
+            "tlf_number":self.tlf_number,
+            "email": self.email,
+            "sector": self.sector,
+            "adress":self.adress,
+            "city":self.city,
+            "latitude":worker_loc.latitude if worker_loc is not None else None,
+            "longitude":worker_loc.longitude if worker_loc is not None else None,
+            "coordinates":{"lat":worker_loc.latitude,"lng":worker_loc.longitude} if worker_loc is not None else None
+        }    
 
  # Login data  
 class Login(db.Model):
